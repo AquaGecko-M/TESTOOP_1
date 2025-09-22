@@ -10,7 +10,7 @@ public class GameWorld extends World
 
         // Add the player's boat
         Boat playerBoat = new Boat();
-        addObject(playerBoat, getWidth() / 2, 50);
+        addObject(playerBoat, 300, 10);
 
         // Add some fish
         Fish fish1 = new Fish();
@@ -19,6 +19,7 @@ public class GameWorld extends World
         Fish fish2 = new Fish();
         addObject(fish2, 400, 320);
     }
+
     public void act()
     {
     if (Greenfoot.getRandomNumber(100) < 1) { // Roughly 1% chance each act cycle
