@@ -1,0 +1,19 @@
+# Greenfoot specific files
+greenfoot.log
+*.gfar
+*.gflog
+project.bluej
+
+# Java compiled files
+*.class
+
+# IDE specific files (if using other IDEs like IntelliJ or VSCode)
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Operating System generated files
+.DS_Store
+Thumbs.db
