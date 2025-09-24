@@ -22,10 +22,21 @@ public class GameWorld extends World
 
     public void act()
     {
-    if (Greenfoot.getRandomNumber(100) < 1) { // Roughly 1% chance each act cycle
+ // Peluang 1% untuk memunculkan ikan baru
+    if (Greenfoot.getRandomNumber(100) < 1) { 
+        
+        int minY = 150; // batas ikannya spawn
+        int maxY = 450; // Posisi Y paling bawah
+        
+        // Hitung rentang ketinggian tempat ikan bisa muncul
+        int spawnRangeY = maxY - minY;
+        
+        // Dapatkan posisi Y acak di dalam rentang tersebut
+        int randomY = Greenfoot.getRandomNumber(spawnRangeY) + minY;
+        
         Fish newFish = new Fish();
-        addObject(newFish, 0, Greenfoot.getRandomNumber(getHeight()));
-        }
+        addObject(newFish, 0, randomY); // Gunakan posisi Y yang baru
+    }
     }
 }
 
