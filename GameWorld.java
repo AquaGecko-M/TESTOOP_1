@@ -19,24 +19,26 @@ public class GameWorld extends World
         Fish fish2 = new Fish();
         addObject(fish2, 400, 320);
     }
-
-    public void act()
+    
+    public void limitFish()
     {
- // Peluang 1% untuk memunculkan ikan baru
-    if (Greenfoot.getRandomNumber(100) < 1) { 
+            if (Greenfoot.getRandomNumber(100) < 1) { 
         
-        int minY = 150; // batas ikannya spawn
-        int maxY = 450; // Posisi Y paling bawah
+        int minY = 150; // y limit the fish can spawn
+        int maxY = 450; // 
         
-        // Hitung rentang ketinggian tempat ikan bisa muncul
         int spawnRangeY = maxY - minY;
         
-        // Dapatkan posisi Y acak di dalam rentang tersebut
         int randomY = Greenfoot.getRandomNumber(spawnRangeY) + minY;
         
         Fish newFish = new Fish();
         addObject(newFish, 0, randomY); // Gunakan posisi Y yang baru
     }
+    }
+
+    public void act()
+    {
+         limitFish();
     }
 }
 
