@@ -6,11 +6,12 @@ public class GameWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1);
+
         setBackground("ocean_background.png");
 
         // Add the player's boat
         Boat playerBoat = new Boat();
-        addObject(playerBoat, getWidth() / 2, 50);
+        addObject(playerBoat, 300, 10);
 
         // Add some fish
         Fish fish1 = new Fish();
@@ -19,12 +20,26 @@ public class GameWorld extends World
         Fish fish2 = new Fish();
         addObject(fish2, 400, 320);
     }
+    
+    public void limitFish()
+    {
+            if (Greenfoot.getRandomNumber(100) < 1) { 
+        
+        int minY = 150; // y limit the fish can spawn
+        int maxY = 450; // 
+        
+        int spawnRangeY = maxY - minY;
+        
+        int randomY = Greenfoot.getRandomNumber(spawnRangeY) + minY;
+        
+        Fish newFish = new Fish();
+        addObject(newFish, 0, randomY); // Gunakan posisi Y yang baru
+    }
+    }
+
     public void act()
     {
-    if (Greenfoot.getRandomNumber(100) < 1) { // Roughly 1% chance each act cycle
-        Fish newFish = new Fish();
-        addObject(newFish, 0, Greenfoot.getRandomNumber(getHeight()));
-        }
+         limitFish();
     }
 }
 
