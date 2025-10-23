@@ -5,7 +5,7 @@ public class GameWorld extends World
     public GameWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+        super(1280, 720, 1);
         setBackground("ocean_background.png");
 
         // Add the player's boat
@@ -14,7 +14,7 @@ public class GameWorld extends World
 
         // Add some fish
         Fish fish1 = new Fish();
-        addObject(fish1, 100, 300);
+        addObject(fish1, 100, 100);
 
         Fish fish2 = new Fish();
         addObject(fish2, 400, 320);
