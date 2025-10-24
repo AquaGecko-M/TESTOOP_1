@@ -1,6 +1,5 @@
 #Greenfoot project file
 class.Boat.image=boat02-f.png
-class.Boatt.image=Boat.png
 class.BtnExit.image=BtnExit.png
 class.BtnStart.image=BtnStart.png
 class.BtnTutor.image=BtnTutorial.png
@@ -8,6 +7,7 @@ class.Fish.image=fish3.png
 class.GameWorld.image=ocean_background.png
 class.Hook.image=anchor.png
 class.Kail.image=Kail.png
+class.Kails.image=Kail.png
 class.Menu.image=menu.jpg
 class.fish2.image=fish2.png
 dependency1.from=GameWorld
@@ -16,26 +16,27 @@ dependency1.type=UsesDependency
 dependency2.from=GameWorld
 dependency2.to=Fish
 dependency2.type=UsesDependency
-dependency3.from=Hook
-dependency3.to=Fish
+dependency3.from=Menu
+dependency3.to=BtnTutor
 dependency3.type=UsesDependency
-dependency4.from=Boat
-dependency4.to=Hook
+dependency4.from=Menu
+dependency4.to=BtnStart
 dependency4.type=UsesDependency
+dependency5.from=Menu
+dependency5.to=BtnExit
+dependency5.type=UsesDependency
+dependency6.from=Hook
+dependency6.to=Fish
+dependency6.type=UsesDependency
+dependency7.from=Boat
+dependency7.to=Hook
+dependency7.type=UsesDependency
 editor.fx.0.height=737
 editor.fx.0.width=814
-editor.fx.0.x=232
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-editor.fx.0.y=-22
-height=686
-=======
-=======
->>>>>>> Stashed changes
-editor.fx.0.y=-6
+editor.fx.0.x=100
+editor.fx.0.y=100
 height=737
->>>>>>> Stashed changes
-package.numDependencies=4
+package.numDependencies=7
 package.numTargets=11
 project.charset=UTF-8
 publish.hasSource=false
@@ -73,14 +74,14 @@ target11.width=120
 target11.x=0
 target11.y=0
 target2.height=70
-target2.name=Boatt
+target2.name=fish2
 target2.showInterface=false
 target2.type=ClassTarget
 target2.width=120
 target2.x=0
 target2.y=0
 target3.height=70
-target3.name=fish2
+target3.name=Kails
 target3.showInterface=false
 target3.type=ClassTarget
 target3.width=120

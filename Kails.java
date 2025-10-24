@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Boatt here.
+ * Write a description of class Kails here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Boatt extends Actor
+public class Kails extends Actor
 {
     /**
-     * Act - do whatever the Boatt wants to do. This method is called whenever
+     * Act - do whatever the Kails wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
