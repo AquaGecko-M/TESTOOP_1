@@ -10,7 +10,7 @@ public class GameWorld extends World
 
         // Add the player's boat
         Boat playerBoat = new Boat();
-        addObject(playerBoat, 300, 10);
+        addObject(playerBoat, 300, 120);
 
         // Add some fish
         Fish fish1 = new Fish();
