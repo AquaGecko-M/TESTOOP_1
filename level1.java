@@ -1,58 +1,94 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class level1 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class level1 extends World
-{
+public class GameWorld extends World {
+    // --- HUD State ---
+    private int score = 0;
+    private int life  = 3;
+    private int timeLeft = 60;              // detik per level (ubah sesukamu)
+    private final SimpleTimer secondTimer = new SimpleTimer();
 
+    // --- Player ---
+    private Boat boat;
+    private Hook hook;
+    
+    // Fish
+    private final SimpleTimer fishSpawnTimer = new SimpleTimer();
 
-    public level1()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1270, 468, 1);
+    public GameWorld() {
+        super(648, 468, 1);
+        setPaintOrder(Hook.class, Boat.class); // hook di depan boat (opsional)
+        prepare();
+        updateHUD();
+        
+         // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
+
         // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
         GreenfootImage bg = new GreenfootImage("24.jpg"); 
-        
+
         // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
         bg.scale(648, 468);
-        
+
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
+    }
 
-        // Add the player's boat
-        Boat playerBoat = new Boat();
-        addObject(playerBoat, 300, 120);
+    private void prepare() {
+        // posisi boat (fix di “permukaan”)
+        int boatX = getWidth()/2;
+        int boatY = 120;
 
-        // Add some fish
-        Fish fish1 = new Fish();
-        addObject(fish1, 100, 300);
+        boat = new Boat();
+        addObject(boat, boatX, boatY);
 
-        Fish fish2 = new Fish();
-        addObject(fish2, 400, 320);
+        hook = new Hook(boat);              // hook “terikat” ke boat
+        addObject(hook, boatX, boatY + 60);
+
+        startTimer(300);                      // mulai timer 60s (ubah via Level nanti)
+    }
+
+    public void act() {
+        // Kurangi timer setiap 1000 ms
+        if (secondTimer.hasElapsed(1000)) {
+            timeLeft = Math.max(0, timeLeft - 1);
+            secondTimer.mark();
+            updateHUD();
+
+            if (timeLeft == 0) {
+                showText("Waktu Habis! Skor: " + score, getWidth()/2, getHeight()/2);
+                Greenfoot.stop();
+            }
+        }
+        // --- spawn ikan tiap ~0.9 detik ---
+        if (fishSpawnTimer.hasElapsed(900)) {
+        spawnFish();
+        fishSpawnTimer.mark();
+        }
+    }
+
+    // --- API kecil untuk dipakai kelas lain ---
+    public void addScore(int v) { score += v; updateHUD(); }
+    public void addLife(int v)  { life  += v; updateHUD(); }
+    public void startTimer(int seconds) {
+        timeLeft = seconds;
+        secondTimer.mark();
+        updateHUD();
+    }
+
+    private void updateHUD() {
+        showText("Score: " + score,   70, 20);
+        showText("Life: "  + life,   150, 20);
+        showText("Time: "  + timeLeft,230, 20);
     }
     
-    public void limitFish()
-    {
-            if (Greenfoot.getRandomNumber(100) < 1) { 
-        
-        int minY = 150; // y limit the fish can spawn
-        int maxY = 450; // 
-        
-        int spawnRangeY = maxY - minY;
-        
-        int randomY = Greenfoot.getRandomNumber(spawnRangeY) + minY;
-        
-        Fish newFish = new Fish();
-        addObject(newFish, 0, randomY); // Gunakan posisi Y yang baru
-    }
-    }
-    
-        public void act()
-    {
-         limitFish();
-    }
+    private void spawnFish() {
+    boolean rare = Greenfoot.getRandomNumber(100) < 15; // 15% rare
+    Fish f = new Fish(rare);
+
+    int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
+    int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
+    int x = (side == 0) ? -20 : getWidth() + 20;
+
+    addObject(f, x, y);
+}
+
 }
