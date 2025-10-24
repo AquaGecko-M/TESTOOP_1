@@ -22,7 +22,7 @@ public class Menu extends World
         // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
         
         // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
-        GreenfootImage bg = new GreenfootImage("menu.jpg"); 
+        GreenfootImage bg = new GreenfootImage("menu_ui_1.jpg"); 
         
         // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
         bg.scale(648, 468);
