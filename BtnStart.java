@@ -24,7 +24,7 @@ public class BtnStart extends Actor
         // Add your action code here.if (Greenfoot.mouseClicked(this)) {
             if (Greenfoot.mouseClicked(this)) 
         {
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new level1());
         }
     }
 }
