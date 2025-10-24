@@ -1,10 +1,11 @@
 #BlueJ class context
 comment0.target=Boat
-comment1.params=world
-comment1.target=void\ addedToWorld(greenfoot.World)
+comment1.params=
+comment1.target=Boat()
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
-comment3.target=void\ handleMovement()
-comment3.text=\r\n\ Mengatur\ semua\ pergerakan\ perahu,\ batas\ dunia,\ dan\ kail\r\n
-numComments=4
+comment3.target=void\ handleMove()
+comment4.params=
+comment4.target=void\ clampToWorld()
+numComments=5
