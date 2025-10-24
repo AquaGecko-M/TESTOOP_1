@@ -13,7 +13,7 @@ public class level1 extends World
     public level1()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(648, 468, 1);
+        super(1270, 468, 1);
         // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
         GreenfootImage bg = new GreenfootImage("24.jpg"); 
         
