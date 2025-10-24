@@ -8,12 +8,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BtnStart extends Actor
 {
-    /**
-     * Act - do whatever the BtnStart wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+      public BtnStart()
+    {
+        // 1. Ambil gambar asli dari tombolnya
+        GreenfootImage image = getImage();
+        
+        image.scale(200, 150); 
+        
+        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
+        setImage(image);
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        // Add your action code here.if (Greenfoot.mouseClicked(this)) {
+            if (Greenfoot.mouseClicked(this)) 
+        {
+            Greenfoot.setWorld(new GameWorld());
+        }
     }
 }
