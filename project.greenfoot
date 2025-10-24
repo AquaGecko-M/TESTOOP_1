@@ -16,6 +16,7 @@ class.level1.image=24.jpg
 class.level2.image=25.jpg
 class.level3.image=26.jpg
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 dependency1.from=GameWorld
 dependency1.to=Boat
 dependency1.type=UsesDependency
@@ -24,6 +25,13 @@ dependency10.to=Hook
 dependency10.type=UsesDependency
 dependency2.from=GameWorld
 dependency2.to=Fish
+=======
+dependency1.from=Menu
+dependency1.to=BtnTutor
+dependency1.type=UsesDependency
+dependency2.from=Menu
+dependency2.to=BtnStart
+>>>>>>> Stashed changes
 =======
 dependency1.from=Menu
 dependency1.to=BtnTutor
@@ -50,11 +58,15 @@ dependency7.to=Fish
 =======
 dependency7.from=BtnStart
 dependency7.to=level1
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 dependency7.type=UsesDependency
 dependency8.from=Hook
 dependency8.to=Fish
 dependency8.type=UsesDependency
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 dependency9.from=BtnStart
 dependency9.to=level1
@@ -67,6 +79,8 @@ height=686
 package.numDependencies=10
 package.numTargets=17
 =======
+=======
+>>>>>>> Stashed changes
 editor.fx.0.height=737
 editor.fx.0.width=814
 editor.fx.0.x=78
@@ -74,6 +88,9 @@ editor.fx.0.y=3
 height=686
 package.numDependencies=8
 package.numTargets=16
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 project.charset=UTF-8
 publish.hasSource=false
@@ -98,7 +115,11 @@ target1.x=0
 target1.y=0
 target10.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target10.name=Fish
+=======
+target10.name=Kail
+>>>>>>> Stashed changes
 =======
 target10.name=Kail
 >>>>>>> Stashed changes
@@ -123,7 +144,11 @@ target12.x=0
 target12.y=0
 target13.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target13.name=Menu
+=======
+target13.name=level1
+>>>>>>> Stashed changes
 =======
 target13.name=level1
 >>>>>>> Stashed changes
@@ -134,7 +159,11 @@ target13.x=0
 target13.y=0
 target14.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target14.name=level1
+=======
+target14.name=level3
+>>>>>>> Stashed changes
 =======
 target14.name=level3
 >>>>>>> Stashed changes
@@ -145,7 +174,11 @@ target14.x=0
 target14.y=0
 target15.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target15.name=level3
+=======
+target15.name=Boat
+>>>>>>> Stashed changes
 =======
 target15.name=Boat
 >>>>>>> Stashed changes
@@ -156,7 +189,11 @@ target15.x=0
 target15.y=0
 target16.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target16.name=Boat
+=======
+target16.name=level2
+>>>>>>> Stashed changes
 =======
 target16.name=level2
 >>>>>>> Stashed changes
@@ -166,6 +203,7 @@ target16.width=120
 target16.x=0
 target16.y=0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target17.height=70
 target17.name=level2
 target17.showInterface=false
@@ -173,6 +211,8 @@ target17.type=ClassTarget
 target17.width=120
 target17.x=0
 target17.y=0
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 target2.height=70
@@ -219,7 +259,11 @@ target7.x=0
 target7.y=0
 target8.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target8.name=Kails
+=======
+target8.name=BtnTutor
+>>>>>>> Stashed changes
 =======
 target8.name=BtnTutor
 >>>>>>> Stashed changes
@@ -230,7 +274,11 @@ target8.x=0
 target8.y=0
 target9.height=70
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 target9.name=BtnTutor
+=======
+target9.name=Fish
+>>>>>>> Stashed changes
 =======
 target9.name=Fish
 >>>>>>> Stashed changes
