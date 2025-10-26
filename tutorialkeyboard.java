@@ -29,5 +29,17 @@ public class tutorialkeyboard extends World
         
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
+        
+        Buttonnav();
+    }
+    
+    private void Buttonnav(){
+    nextbut prev = new nextbut();
+    prevbut next = new prevbut();
+    
+    addObject(prev, 103, 350); // (actor, x, y)
+    addObject(next,    305, 350); // (actor, x, y)
     }
 }
+    
+
