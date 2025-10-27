@@ -8,12 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class nextbut extends Actor
 {
-    /**
-     * Act - do whatever the nextbut wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
+       public nextbut()
+    {
+        // 1. Ambil gambar asli dari tombolnya
+        GreenfootImage image = getImage();
+        
+        image.scale(150, 100); 
+        
+        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
+        setImage(image);
+    }
+    
     public void act()
     {
-        // Add your action code here.
     }
 }

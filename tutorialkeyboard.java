@@ -34,11 +34,11 @@ public class tutorialkeyboard extends World
     }
     
     private void Buttonnav(){
-    nextbut prev = new nextbut();
-    prevbut next = new prevbut();
+    nextbut next = new nextbut();
+    prevbut prev = new prevbut();
     
-    addObject(prev, 103, 350); // (actor, x, y)
-    addObject(next,    305, 350); // (actor, x, y)
+    addObject(prev, 103, 399); // (actor, x, y)
+    addObject(next,    542, 399); // (actor, x, y)
     }
 }
     
