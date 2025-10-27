@@ -15,7 +15,7 @@ public class GameWorld extends World {
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
 
     public GameWorld() {
-        super(648, 468, 1);
+        super(960, 540, 1);
         setPaintOrder(Hook.class, Boat.class); // hook di depan boat (opsional)
         prepare();
         updateHUD();
@@ -26,7 +26,7 @@ public class GameWorld extends World {
         GreenfootImage bg = new GreenfootImage("24.jpg"); 
 
         // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
-        bg.scale(648, 468);
+        bg.scale(960, 540);
 
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
