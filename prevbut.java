@@ -1,14 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class BtnTutor here.
+ * Write a description of class prevbut here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnTutor extends Actor
+public class prevbut extends Actor
 {
-    public BtnTutor()
+       public prevbut()
     {
         // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = getImage();
@@ -20,9 +20,6 @@ public class BtnTutor extends Actor
     }
     public void act()
     {
-    if (Greenfoot.mouseClicked(this)) 
-        {
-            Greenfoot.setWorld(new tutorialkeyboard());
-        }
+        // Add your action code here.
     }
 }
