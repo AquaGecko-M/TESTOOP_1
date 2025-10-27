@@ -16,7 +16,7 @@ public class GameWorld extends World {
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
 
     public GameWorld() {
-        super(648, 468, 1);
+        super(960, 540, 1);
         setPaintOrder(Hook.class, Boat.class); // hook di depan boat (opsional)
         prepare();
         updateHUD();
@@ -29,7 +29,7 @@ public class GameWorld extends World {
 
 
         // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
-        bg.scale(648, 468);
+        bg.scale(960, 540);
 
 
         // 4. Atur gambar yang sudah dikecilkan
@@ -84,15 +84,15 @@ public class GameWorld extends World {
         showText("Time: "  + timeLeft,230, 20);
     }
     
-    private void spawnFish() {
-    boolean rare = Greenfoot.getRandomNumber(100) < 15; // 15% rare
-    Fish f = new Fish(rare);
-
-    int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
-    int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
-    int x = (side == 0) ? -20 : getWidth() + 20;
-
-    addObject(f, x, y);
-}
+        private void spawnFish() {
+        boolean rare = Greenfoot.getRandomNumber(100) < 15; // 15% rare
+        Fish f = new Fish(rare);
+    
+        int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
+        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
+        int x = (side == 0) ? -20 : getWidth() + 20;
+    
+        addObject(f, x, y);
+    }
 
 }
