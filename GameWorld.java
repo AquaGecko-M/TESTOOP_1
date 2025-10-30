@@ -115,8 +115,6 @@ public class GameWorld extends World {
         int x = (side == 0) ? -20 : getWidth() + 20;
     
         addObject(ikanBaru, x, y);
-
-        addObject(fish, x, y);
     }
 }
-}
+
