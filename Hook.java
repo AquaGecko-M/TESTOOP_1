@@ -25,11 +25,31 @@ public class Hook extends Actor {
         handleVertical();
         clampVertical();
         
-        Fish caught = (Fish) getOneIntersectingObject(Fish.class);
-        if (caught != null) {
-        ((GameWorld) getWorld()).addScore(caught.getValue());
-        getWorld().removeObject(caught);
-    }
+    CommonFish common = (CommonFish) getOneIntersectingObject(CommonFish.class);
+        if (common != null) {
+            // Ya, kena. Ambil nilainya, hapus ikannya.
+            ((GameWorld) getWorld()).addScore(common.getValue());
+            getWorld().removeObject(common);
+            return; // 'return' agar berhenti di sini & tidak tangkap 2 ikan sekaligus
+        }
+        
+        // Cek 2: Jika tidak kena CommonFish, apakah kena RareFish?
+        RareFish rare = (RareFish) getOneIntersectingObject(RareFish.class);
+        if (rare != null) {
+            // Ya, kena.
+            ((GameWorld) getWorld()).addScore(rare.getValue());
+            getWorld().removeObject(rare);
+            return;
+        }
+        
+        // Cek 3: Jika tidak kena Rare/Common, apakah kena EpicFish?
+        EpicFish epic = (EpicFish) getOneIntersectingObject(EpicFish.class);
+        if (epic != null) {
+            // Ya, kena.
+            ((GameWorld) getWorld()).addScore(epic.getValue());
+            getWorld().removeObject(epic);
+            return;
+        }
     }
 
     private void followBoatX() {

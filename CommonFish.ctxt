@@ -1,7 +1,12 @@
 #BlueJ class context
 comment0.target=CommonFish
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ CommonFish\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ CommonFish\ here.\r\n\ \r\n\ @author\ (Steven\ I)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=void\ act()
-comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ CommonFish\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=2
+comment1.target=CommonFish()
+comment2.params=
+comment2.target=int\ getValue()
+comment3.params=w
+comment3.target=void\ addedToWorld(greenfoot.World)
+comment4.params=
+comment4.target=void\ act()
+numComments=5
