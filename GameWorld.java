@@ -42,10 +42,10 @@ public class GameWorld extends World {
         int boatY = 120;
 
         boat = new Boat();
-        addObject(boat, boatX, boatY);
+        addObject(boat, boatX, 250);
 
         hook = new Hook(boat);              // hook “terikat” ke boat
-        addObject(hook, boatX, boatY + 60);
+        addObject(hook, boatX, boatY + 180);
 
         startTimer(300);                      // mulai timer 60s (ubah via Level nanti)
     }

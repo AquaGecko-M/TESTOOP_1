@@ -1,5 +1,5 @@
 #Greenfoot project file
-class.Boat.image=boat02-f.png
+class.Boat.image=Boat.png
 class.BtnBack.image=btnBack.png
 class.BtnEasy.image=btnEasy.png
 class.BtnExit.image=BtnExit.png
