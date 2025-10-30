@@ -74,10 +74,26 @@ public class GameWorld extends World {
         updateHUD();
     }
 
+    public void refreshHUD() {
+        updateHUD();
+    }
+
+    public void openPauseMenu() {
+        secondTimer.mark();
+        fishSpawnTimer.mark();
+        Greenfoot.setWorld(new bgMenu(this));
+    }
+
+    public void onResumeFromPause() {
+        refreshHUD();
+        secondTimer.mark();
+        fishSpawnTimer.mark();
+    }
+
     private void updateHUD() {
-        showText("Score: " + score,   70, 20);
-        showText("Life: "  + life,   150, 20);
-        showText("Time: "  + timeLeft,230, 20);
+        showText("Score: " + score, 70, 20);
+        showText("Life: " + life, 150, 20);
+        showText("Time: " + timeLeft, 230, 20);
     }
     
     private void spawnFish() {
