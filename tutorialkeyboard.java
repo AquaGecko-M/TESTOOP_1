@@ -17,7 +17,7 @@ public class tutorialkeyboard extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         // 1. Atur ukuran dunia agar SAMA dengan GameWorld
-        super(648, 468, 1); 
+        super(960, 540, 1); 
         
         // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
         
@@ -25,7 +25,7 @@ public class tutorialkeyboard extends World
         GreenfootImage bg = new GreenfootImage("4.jpg"); 
         
         // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
-        bg.scale(648, 468);
+        bg.scale(960, 540);
         
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
@@ -37,8 +37,7 @@ public class tutorialkeyboard extends World
     nextbut next = new nextbut();
     prevbut prev = new prevbut();
     
-    addObject(prev, 103, 399); // (actor, x, y)
-    addObject(next,    542, 399); // (actor, x, y)
+    addObject(next,    864, 467); // (actor, x, y)
     }
 }
     
