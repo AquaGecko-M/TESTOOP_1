@@ -1,15 +1,26 @@
 import greenfoot.*;
 
 public class Boat extends Actor {
+    private GreenfootImage[] right;
+    private GreenfootImage[] left;
+
+    private int frame = 0;
+    private int dir = 1; // 1 = kanan, -1 = kiri
+    private boolean moving = false;
+    private SimpleTimer animTimer = new SimpleTimer();
+    private int frameMs = 100;
     private int speed = 6;
 
     public Boat() {
+        right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
+        left = new GreenfootImage[4];
+
         loadRightFrames();
         // Pilih salah satu:
-        loadLeftFrames();       // <-- gunakan ini kalau kamu SUDAH punya file kiri
-        // buildLeftByMirror(); // <-- gunakan ini kalau BELUM punya file kiri (mirror otomatis)
+        loadLeftFrames();       // kalau punya file arah kiri
+        // buildLeftByMirror(); // kalau mau mirror otomatis
 
-        setImage(right[0]);     // idle awal
+        setImage(right[0]); // idle awal
     }
 
     public void act() {
@@ -23,14 +34,14 @@ public class Boat extends Actor {
     private void handleMove() {
         if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) {
             setLocation(getX() - speed, getY());
-            dir = -1;         // arah terakhir = kiri
+            dir = -1;
             moving = true;
         } else if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY());
-            dir = 1;          // arah terakhir = kanan
+            dir = 1;
             moving = true;
         } else {
-            moving = false;   // berhenti tapi dir tetap disimpan
+            moving = false;
         }
     }
 
@@ -43,46 +54,41 @@ public class Boat extends Actor {
     // ---------- Animation ----------
     private void animate() {
         if (moving) {
-            if (animTimer.hasElapsed(frameMs)) {
+            if (animTimer.millisElapsed() > frameMs) {
                 frame = (frame + 1) % right.length;
                 animTimer.mark();
             }
         } else {
-            frame = 0; // idle frame
-    }
+            frame = 0;
+        }
 
-    // gunakan arah terakhir yang disimpan di `dir`
-        if (dir > 0) { 
-            setImage(right[frame]); 
-        } else if (dir < 0) { 
-            setImage(left[frame]); 
+        if (dir > 0) {
+            setImage(right[frame]);
         } else {
-            // kalau belum pernah bergerak sama sekali (awal game)
-            setImage(right[0]);
-    }
+            setImage(left[frame]);
+        }
     }
 
     // ---------- Load frames ----------
     private void loadRightFrames() {
         for (int i = 0; i < right.length; i++) {
-            right[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
+            right[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
             right[i].scale(150, 150);
         }
     }
 
-    /** Gunakan ini jika kamu punyafile 'boat_left_i.png'. */
     private void loadLeftFrames() {
         for (int i = 0; i < left.length; i++) {
-            left[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
+            left[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
             left[i].scale(150, 150);
         }
     }
 
-    /** Alternatif: bikin frame kiri dari mirror kanan (kalau tidak punya file kiri). */
+    // ---------- Build mirror ----------
     @SuppressWarnings("unused")
     private void buildLeftByMirror() {
         for (int i = 0; i < left.length; i++) {
-            left[i] = new GreenfootImage(right[i]); // copy dulu
+            left[i] = new GreenfootImage(right[i]);
             left[i].mirrorHorizontally();
         }
     }
