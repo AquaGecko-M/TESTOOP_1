@@ -1,17 +1,7 @@
 import greenfoot.*;
 
 public class Boat extends Actor {
-    // --- Movement ---
-    private int speed = 3;
-    private int dir = 0;       // -1 = kiri, 0 = idle, 1 = kanan
-    private boolean moving = false;
-
-    // --- Animation ---
-    private GreenfootImage[] right = new GreenfootImage[4];
-    private GreenfootImage[] left  = new GreenfootImage[4];
-    private int frame = 0;
-    private int frameMs = 120;             // durasi tiap frame (ms)
-    private final SimpleTimer animTimer = new SimpleTimer();
+    private int speed = 6;
 
     public Boat() {
         loadRightFrames();
