@@ -1,44 +1,63 @@
 import greenfoot.*;
 
 public class Fish extends Actor {
-    private int dir;          // -1 = dari kanan ke kiri, 1 = kiri ke kanan
-    private int speed;        // kecepatan horizontal
-    private int bob = 0;      // buat efek naik-turun kecil
-    private int value;        // poin saat tertangkap
+    private int dir;                 // arah horizontal (-1 kiri, 1 kanan)
+    private int speed;
+    private int bob = 0;
+    private int value;
 
     public Fish(boolean rare) {
-        // atur gambar & nilai
         if (rare) {
-            setImage("fish2.png");   // ganti sesuai asetmu
+            setImage("fish2.png");
             value = 5;
-            speed = Greenfoot.getRandomNumber(2) + 3;  // 3–4
+            speed = Greenfoot.getRandomNumber(2) + 3; // 3–4
         } else {
-            setImage("fish3.png");        // ganti sesuai asetmu
+            setImage("fish3.png");
             value = 2;
-            speed = Greenfoot.getRandomNumber(2) + 2;  // 2–3
+            speed = Greenfoot.getRandomNumber(2) + 2; // 2–3
         }
     }
 
     public int getValue() { return value; }
 
+    @Override
     protected void addedToWorld(World w) {
-        // dir ditentukan dari posisi spawn (kiri/kanan)
-        dir = (getX() < w.getWidth()/2) ? 1 : -1;
-        if (dir < 0) getImage().mirrorHorizontally();
+        // tentukan arah otomatis dari posisi spawn
+        if (getX() < w.getWidth() / 2) {
+            dir = 1;  // dari kiri → kanan
+        } else {
+            dir = -1; // dari kanan → kiri
+            getImage().mirrorHorizontally(); // balik arah tampilan
+        }
     }
 
+    @Override
     public void act() {
-        // gerak horizontal
-        setLocation(getX() + dir * speed, getY());
+        move();
+        bobbing();
+        checkDespawn();
+    }
 
-        // bobbing kecil biar hidup
+    private void move() {
+        setLocation(getX() + dir * speed, getY());
+    }
+
+    private void bobbing() {
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
-        // hilang bila keluar layar
-        if (getX() < -40 || getX() > getWorld().getWidth() + 40) {
-            getWorld().removeObject(this);
+    private void checkDespawn() {
+        World w = getWorld();
+        if (w == null) return;
+
+        int rightEdge = w.getWidth() - 1;
+
+        // Greenfoot mengunci x di [0..rightEdge], jadi cek tepi + arah gerak
+        if ((dir < 0 && getX() <= 0) ||     // bergerak ke kiri & sudah di tepi kiri
+        (dir > 0 && getX() >= rightEdge)) { // bergerak ke kanan & sudah di tepi kanan
+        w.removeObject(this);
         }
     }
 }

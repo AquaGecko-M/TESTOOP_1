@@ -85,13 +85,13 @@ public class GameWorld extends World {
     }
     
         private void spawnFish() {
-        boolean rare = Greenfoot.getRandomNumber(100) < 15; // 15% rare
+        boolean rare = Greenfoot.getRandomNumber(100) < 15;
         Fish f = new Fish(rare);
-    
-        int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
-        int x = (side == 0) ? -20 : getWidth() + 20;
-    
+
+        int side = Greenfoot.getRandomNumber(2); // 0 = kiri, 1 = kanan
+        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200;
+        int x = (side == 0) ? -40 : getWidth() + 40; // spawn sedikit di luar layar
+
         addObject(f, x, y);
     }
 
