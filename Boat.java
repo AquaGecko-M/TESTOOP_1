@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class Boat extends Actor {
-    private int speed = 3;
+    private int speed = 6;
 
     public Boat() {
         // ganti bila perlu: setImage("boat.png");
