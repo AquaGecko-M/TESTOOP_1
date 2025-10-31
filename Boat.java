@@ -10,6 +10,9 @@ public class Boat extends Actor {
     private SimpleTimer animTimer = new SimpleTimer();
     private int frameMs = 100;
     private int speed = 6;
+    
+    private final SimpleTimer hurtTimer = new SimpleTimer();
+    private int invincibleMs = 900; // 0.9 detik
 
     public Boat() {
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
@@ -72,24 +75,46 @@ public class Boat extends Actor {
     // ---------- Load frames ----------
     private void loadRightFrames() {
         for (int i = 0; i < right.length; i++) {
-            right[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
+            right[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
             right[i].scale(150, 150);
         }
     }
 
     private void loadLeftFrames() {
         for (int i = 0; i < left.length; i++) {
-            left[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
+            left[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
             left[i].scale(150, 150);
         }
     }
-
-    // ---------- Build mirror ----------
-    @SuppressWarnings("unused")
-    private void buildLeftByMirror() {
-        for (int i = 0; i < left.length; i++) {
-            left[i] = new GreenfootImage(right[i]);
-            left[i].mirrorHorizontally();
-        }
+    
+    public boolean canBeHit() {
+        return hurtTimer.hasElapsed(invincibleMs);
     }
+    
+    private void flash() {
+        GreenfootImage img = getImage();
+        int old = img.getTransparency();
+        img.setTransparency(120);
+        Greenfoot.delay(2); // sebentar
+        img.setTransparency(old);
+    }
+    
+    public void takeDamage(int dmg) {
+        if (!canBeHit()) return;   // i-frame aktif → abaikan
+
+        GameWorld gw = (GameWorld) getWorld();
+        gw.addLife(-dmg);
+        hurtTimer.mark();
+
+        // knockback: arah berlawanan dari facing (dir)
+        int knockbackDist = 15;
+        int newX = getX() - dir * knockbackDist;  // dorong ke belakang
+        // clamp supaya tidak keluar layar
+        newX = Math.max(30, Math.min(newX, getWorld().getWidth() - 30));
+        setLocation(newX, getY());
+
+        // efek flash
+        flash();
+    }
+
 }

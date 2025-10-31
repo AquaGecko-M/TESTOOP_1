@@ -2,21 +2,26 @@ import greenfoot.*;
 
 public class GameWorld extends World {
     private int score = 0;
-    private int life = 3;
-    private int timeLeft = 60; // detik per level
-    private final SimpleTimer secondTimer = new SimpleTimer();
-
-    private Boat boat;
-    private Kail hook;
+    private int life  = 5;
+    private int timeLeft = 60;              // detik per level (ubah sesukamu)
     
+    private final SimpleTimer secondTimer = new SimpleTimer();
     // Fish
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
+    // --- Player ---
+    private Boat boat;
+    private Kail hook;
+    private Hud hud;
     private MenuGameplay menuButton;
-
+    
     public GameWorld() {
         super(960, 540, 1);
-        setPaintOrder(Kail.class, Boat.class); // Mengganti ke Kail.class
+        setPaintOrder(Hud.class, Kail.class, Boat.class, Fish.class); // hook di depan boat (opsional)
+        
         prepare();
+        
+        hud = new Hud(getWidth(), 36, 5);
+        addObject(hud, getWidth()/2, 20);
         updateHUD();
 
         GreenfootImage bg = new GreenfootImage("24.jpg");
@@ -51,9 +56,9 @@ public class GameWorld extends World {
             timeLeft = Math.max(0, timeLeft - 1);
             secondTimer.mark();
             updateHUD();
-
-            if (timeLeft == 0) {
-                showText("Waktu Habis! Skor: " + score, getWidth() / 2, getHeight() / 2);
+            if (timeLeft == 0 || life <= 0) {
+                showText((life <= 0 ? "You Died! " : "Time Up! ") + "Score: " 
+                + score, getWidth()/2, getHeight()/2);
                 Greenfoot.stop();
             }
         }
@@ -62,18 +67,17 @@ public class GameWorld extends World {
             spawnFish();
             fishSpawnTimer.mark();
         }
+        if (Greenfoot.isKeyDown("h")) { boat.takeDamage(1); Greenfoot.delay(5); }
+
     }
 
-    public void addScore(int value) {
-        score += value;
+    // --- API kecil untuk dipakai kelas lain ---
+    public void addScore(int v) { score += v; updateHUD(); }
+    public void addLife(int v)  {
+        life  = Math.max(0, Math.min(5, life + v)); 
         updateHUD();
     }
-
-    public void addLife(int value) {
-        life += value;
-        updateHUD();
-    }
-
+    
     public void startTimer(int seconds) {
         timeLeft = seconds;
         secondTimer.mark();
@@ -106,11 +110,17 @@ public class GameWorld extends World {
     timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
     updateHUD(); // Immediately show the change
     }
+
+    private void updateHUD() {
+        if (hud != null) {
+            hud.update(score, life, timeLeft);
+        }
+    }
     
     private void spawnFish() {
         Actor ikanBaru; 
         
-        int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
+        int roll = Greenfoot.getRandomNumber(100) < 15; // Acak angka 0-99
 
         if (roll < 10) { // 10% kemungkinan (angka 0-9)
             ikanBaru = new EpicFish();
@@ -122,8 +132,8 @@ public class GameWorld extends World {
         
         // Kode ini sama persis seperti kodemu sebelumnya
         int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
-        int x = (side == 0) ? -20 : getWidth() + 20;
+        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // area air
+        int x = (side == 0) ? -40 : getWidth() + 40;
     
         addObject(ikanBaru, x, y);
     }
