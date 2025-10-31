@@ -38,6 +38,12 @@ public class GameWorld extends World {
         addObject(menuButton, getWidth() - 60, 50);
 
         startTimer(300);
+        Treasure treasure = new Treasure();
+        addObject(treasure,914,507);
+        Treasure treasure2 = new Treasure();
+        addObject(treasure2,507,500);
+        Treasure treasure3 = new Treasure();
+        addObject(treasure3,58,496);
     }
 
     public void act() {
@@ -94,6 +100,11 @@ public class GameWorld extends World {
         showText("Score: " + score, 70, 20);
         showText("Life: " + life, 150, 20);
         showText("Time: " + timeLeft, 230, 20);
+    }
+    
+    public void reduceTimer(int seconds) {
+    timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
+    updateHUD(); // Immediately show the change
     }
     
     private void spawnFish() {
