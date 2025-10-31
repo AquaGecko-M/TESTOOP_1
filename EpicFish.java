@@ -1,25 +1,25 @@
 import greenfoot.*;
 
-public class EpicFish extends Actor // <-- extends Actor
-{
+public class EpicFish extends Actor {
     private int dir;
     private int speed;
     private int bob = 0;
     private int value;
 
     public EpicFish() {
-        setImage("EpicFish.png"); // Pastikan nama file gambar benar
-        value = 10; // Nilai lebih tinggi
-        speed = Greenfoot.getRandomNumber(2) + 4; // Kecepatan 4–5
-        
-        // 1. Ambil gambar yang sudah di-set
-        GreenfootImage image = getImage();
-        
-        // 2. Kecilkan gambar (Ubah 40 dan 30 sesuai keinginanmu)
-        image.scale(100, 120); // 40 = lebar baru, 30 = tinggi baru
-        
-        // 3. Set kembali gambar yang sudah dikecilkan
-        setImage(image);
+        setImage("EpicFish.png");
+        value = 10;
+        speed = Greenfoot.getRandomNumber(2) + 4; // 4–5);
+    }
+    
+    public void setSpeed(int s) {
+        speed = s;
+    }
+
+    public void setFishSize(int width, int height) {
+        GreenfootImage img = new GreenfootImage("EpicFish.png");
+        img.scale(width, height);
+        setImage(img);
     }
 
     public int getValue() {
@@ -27,21 +27,41 @@ public class EpicFish extends Actor // <-- extends Actor
     }
 
     protected void addedToWorld(World w) {
-        dir = (getX() < w.getWidth() / 2) ? 1 : -1;
-        if (dir < 0) {
+        int worldWidth = w.getWidth();
+
+        if (getX() <= 50) {
+            dir = 1;
+        } else if (getX() >= worldWidth - 50) {
+            dir = -1;
             getImage().mirrorHorizontally();
+        } else {
+            dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
     }
 
     public void act() {
+        moveFish();
+        checkBoundary();
+    }
+
+    private void moveFish() {
         setLocation(getX() + dir * speed, getY());
-        
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
-        if (getX() < -40 || getX() > getWorld().getWidth() + 40) {
-            getWorld().removeObject(this);
+    private void checkBoundary() {
+        World w = getWorld();
+        if (w == null) return;
+
+        int worldWidth = w.getWidth();
+        int half = getImage().getWidth() / 2;
+
+        if (dir < 0 && getX() - half <= 0) {
+            w.removeObject(this);
+        } else if (dir > 0 && getX() + half >= worldWidth) {
+            w.removeObject(this);
         }
     }
 }

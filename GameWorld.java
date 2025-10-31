@@ -3,11 +3,16 @@ import greenfoot.*;
 public class GameWorld extends World {
     private int score = 0;
     private int life = 3;
-    private int timeLeft = 60; // detik per level
+    private int timeLeft = 300; // detik per level
     private final SimpleTimer secondTimer = new SimpleTimer();
 
     private Boat boat;
     private Kail hook;
+
+    //variabel
+    private int[] currentFishSize = new int[2];
+    private int currentSpeed;
+    private int currentLevel = 0; // 0 = easy, 1 = medium, 2 = hard
     
     // Fish
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
@@ -15,7 +20,7 @@ public class GameWorld extends World {
 
     public GameWorld() {
         super(960, 540, 1);
-        setPaintOrder(Hook.class, Boat.class);
+        setPaintOrder(Kail.class, Boat.class);
         prepare();
         updateHUD();
 
@@ -37,7 +42,8 @@ public class GameWorld extends World {
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 60, 50);
 
-        startTimer(300);
+
+        updateLevelFromSettings();
     }
 
     public void act() {
@@ -57,6 +63,16 @@ public class GameWorld extends World {
             fishSpawnTimer.mark();
         }
     }
+    
+    private void updateLevelFromSettings() {
+    if (GameSettings.difficulty.equals("Medium")) {
+        currentLevel = 1;
+    } else if (GameSettings.difficulty.equals("Hard")) {
+        currentLevel = 2;
+    } else {
+        currentLevel = 0; // Easy
+    }
+    }   
 
     public void addScore(int value) {
         score += value;
@@ -101,20 +117,44 @@ public class GameWorld extends World {
         
         int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
 
-        if (roll < 10) { // 10% kemungkinan (angka 0-9)
-            ikanBaru = new EpicFish();
-        } else if (roll < 35) { // 25% kemungkinan (angka 10-34)
-            ikanBaru = new RareFish();
-        } else { // 65% sisanya (angka 35-99)
-            ikanBaru = new CommonFish();
-        }
+        if (roll < 10) { // Epic
+        ikanBaru = new EpicFish();
+        EpicFish e = (EpicFish) ikanBaru;
+
+        e.setFishSize(GameSettings.epicFishSize[currentLevel][0], GameSettings.epicFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.epicFishSpeed[currentLevel][1] - GameSettings.epicFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.epicFishSpeed[currentLevel][0];
+        e.setSpeed(speed);
+
+    } else if (roll < 35) { // Rare
+        ikanBaru = new RareFish();
+        RareFish r = (RareFish) ikanBaru;
+
+        r.setFishSize(GameSettings.rareFishSize[currentLevel][0], GameSettings.rareFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.rareFishSpeed[currentLevel][1] - GameSettings.rareFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.rareFishSpeed[currentLevel][0];
+        r.setSpeed(speed);
+
+    } else { // Common
+        ikanBaru = new CommonFish();
+        CommonFish c = (CommonFish) ikanBaru;
+
+        c.setFishSize(GameSettings.commonFishSize[currentLevel][0], GameSettings.commonFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.commonFishSpeed[currentLevel][1] - GameSettings.commonFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.commonFishSpeed[currentLevel][0];
+        c.setSpeed(speed);
+    }
         
         // Kode ini sama persis seperti kodemu sebelumnya
         int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
         int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200; // area air
-        int x = (side == 0) ? -20 : getWidth() + 20;
+        int x = (side == 0) ? -100 : getWidth() + 100;
     
         addObject(ikanBaru, x, y);
+        
     }
 }
 

@@ -1,12 +1,19 @@
 #BlueJ class context
 comment0.target=CommonFish
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ CommonFish\ here.\r\n\ \r\n\ @author\ (Steven\ I)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=CommonFish()
-comment2.params=
-comment2.target=int\ getValue()
-comment3.params=w
-comment3.target=void\ addedToWorld(greenfoot.World)
+comment2.params=s
+comment2.target=void\ setSpeed(int)
+comment3.params=width\ height
+comment3.target=void\ setFishSize(int,\ int)
 comment4.params=
-comment4.target=void\ act()
-numComments=5
+comment4.target=int\ getValue()
+comment5.params=w
+comment5.target=void\ addedToWorld(greenfoot.World)
+comment6.params=
+comment6.target=void\ act()
+comment7.params=
+comment7.target=void\ moveFish()
+comment8.params=
+comment8.target=void\ checkBoundary()
+numComments=9

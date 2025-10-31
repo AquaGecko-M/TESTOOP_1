@@ -1,28 +1,26 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class CommonFish here.
- * 
- * @author (Steven I)
- * @version (a version number or a date)
- */
-public class CommonFish extends Actor
-{
-    private int dir;        // -1 = dari kanan ke kiri, 1 = kiri ke kanan
-    private int speed;      // kecepatan horizontal
-    private int bob = 0;    // buat efek naik-turun kecil
-    private int value;      // poin saat tertangkap
-    private int halfWidth = 0;
+public class CommonFish extends Actor {
+    private int dir;
+    private int speed;
+    private int bob = 0;
+    private int value;
+    private int halfWidth;
 
     public CommonFish() {
         setImage("CFish.png");
         value = 2;
-        speed = Greenfoot.getRandomNumber(2) + 2;
+    }
 
-        GreenfootImage image = getImage();
-        image.scale(160, 180);
-        setImage(image);
-        this.halfWidth = image.getWidth() / 2;
+    public void setSpeed(int s) {
+        speed = s;
+    }
+
+    public void setFishSize(int width, int height) {
+        GreenfootImage img = new GreenfootImage("CFish.png");
+        img.scale(width, height);
+        setImage(img);
+        halfWidth = img.getWidth() / 2;
     }
 
     public int getValue() {
@@ -30,27 +28,40 @@ public class CommonFish extends Actor
     }
 
     protected void addedToWorld(World w) {
-        dir = (getX() < w.getWidth() / 2) ? 1 : -1;
-        if (dir < 0) {
+        int worldWidth = w.getWidth();
+        if (getX() <= 50) {
+            dir = 1;
+        } else if (getX() >= worldWidth - 50) {
+            dir = -1;
             getImage().mirrorHorizontally();
+        } else {
+            dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
     }
 
     public void act() {
-        setLocation(getX() + dir * speed, getY());
+        moveFish();
+        checkBoundary();
+    }
 
+    private void moveFish() {
+        setLocation(getX() + dir * speed, getY());
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
-        if (dir < 0) { 
-            if (getX() < 0 - halfWidth) {
-                getWorld().removeObject(this);
-            }
-        } else { 
-            if (getX() > getWorld().getWidth() + halfWidth) {
-                getWorld().removeObject(this);
-            }
+    private void checkBoundary() {
+        World w = getWorld();
+        if (w == null) return;
+
+        int worldWidth = w.getWidth();
+        int half = getImage().getWidth() / 2;
+
+        if (dir < 0 && getX() - half <= 0) {
+            w.removeObject(this);
+        } else if (dir > 0 && getX() + half >= worldWidth) {
+            w.removeObject(this);
         }
     }
 }

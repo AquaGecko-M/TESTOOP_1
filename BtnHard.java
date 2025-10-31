@@ -24,6 +24,7 @@ public class BtnHard extends Actor
         // Add your action code here.if (Greenfoot.mouseClicked(this)) {
             if (Greenfoot.mouseClicked(this)) 
         {
+            GameSettings.difficulty = "Hard";
             Greenfoot.setWorld(new GameWorld());
         }
     }
