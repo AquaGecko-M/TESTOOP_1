@@ -101,26 +101,20 @@ public class GameWorld extends World {
     }
 
     private void updateHUD() {
-        showText("Score: " + score, 70, 20);
-        showText("Life: " + life, 150, 20);
-        showText("Time: " + timeLeft, 230, 20);
-    }
-    
-    public void reduceTimer(int seconds) {
-    timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
-    updateHUD(); // Immediately show the change
-    }
-
-    private void updateHUD() {
         if (hud != null) {
             hud.update(score, life, timeLeft);
         }
     }
     
+    public void reduceTimer(int seconds) {
+        timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
+        updateHUD(); // Immediately show the change
+    }
+
     private void spawnFish() {
         Actor ikanBaru; 
         
-        int roll = Greenfoot.getRandomNumber(100) < 15; // Acak angka 0-99
+        int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
 
         if (roll < 10) { // 10% kemungkinan (angka 0-9)
             ikanBaru = new EpicFish();
