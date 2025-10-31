@@ -15,7 +15,7 @@ public class GameWorld extends World {
 
     public GameWorld() {
         super(960, 540, 1);
-        setPaintOrder(Hook.class, Boat.class);
+        setPaintOrder(Kail.class, Boat.class);
         prepare();
         updateHUD();
 
