@@ -15,7 +15,7 @@ public class GameWorld extends World {
 
     public GameWorld() {
         super(960, 540, 1);
-        setPaintOrder(Kail.class, Boat.class);
+        setPaintOrder(Kail.class, Boat.class); // Mengganti ke Kail.class
         prepare();
         updateHUD();
 
@@ -26,13 +26,13 @@ public class GameWorld extends World {
 
     private void prepare() {
         int boatX = getWidth() / 2;
-        int boatY = 120;
+        int boatY = 120; // Variabel ini tidak terpakai, tapi tidak apa-apa
 
         boat = new Boat();
         addObject(boat, boatX, 250);
 
-        hook = new Kail(boat);              // hook “terikat” ke boat
-        addObject(hook, boatX, boatY + 180);
+        hook = new Kail(boat);           // hook “terikat” ke boat
+        addObject(hook, boatX, 250 + 180); // Posisi kail di bawah boat
 
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 60, 50);
@@ -128,4 +128,3 @@ public class GameWorld extends World {
         addObject(ikanBaru, x, y);
     }
 }
-
