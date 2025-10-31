@@ -15,7 +15,7 @@ public class GameWorld extends World {
 
     public GameWorld() {
         super(960, 540, 1);
-        setPaintOrder(Hook.class, Boat.class);
+        setPaintOrder(Kail.class, Boat.class); // Mengganti ke Kail.class
         prepare();
         updateHUD();
 
@@ -26,18 +26,18 @@ public class GameWorld extends World {
 
     private void prepare() {
         int boatX = getWidth() / 2;
-        int boatY = 120;
+        int boatY = 120; // Variabel ini tidak terpakai, tapi tidak apa-apa
 
         boat = new Boat();
         addObject(boat, boatX, 250);
 
-        hook = new Kail(boat);              // hook “terikat” ke boat
-        addObject(hook, boatX, boatY + 180);
+        hook = new Kail(boat);           // hook “terikat” ke boat
+        addObject(hook, boatX, 250 + 180); // Posisi kail di bawah boat
 
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 60, 50);
 
-        startTimer(300);
+        startTimer(300); // Memulai timer 5 menit
     }
 
     public void act() {
@@ -115,34 +115,6 @@ public class GameWorld extends World {
         int x = (side == 0) ? -20 : getWidth() + 20;
     
         addObject(ikanBaru, x, y);
-
-    public void openPauseMenu() {
-        secondTimer.mark();
-        fishSpawnTimer.mark();
-        Greenfoot.setWorld(new bgMenu(this));
-    }
-
-    public void onResumeFromPause() {
-        refreshHUD();
-        secondTimer.mark();
-        fishSpawnTimer.mark();
-    }
-
-    private void updateHUD() {
-        showText("Score: " + score, 70, 20);
-        showText("Life: " + life, 150, 20);
-        showText("Time: " + timeLeft, 230, 20);
-    }
-
-    private void spawnFish() {
-        boolean rare = Greenfoot.getRandomNumber(100) < 15;
-        Fish fish = new Fish(rare);
-
-        int side = Greenfoot.getRandomNumber(2);
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 200;
-        int x = (side == 0) ? -20 : getWidth() + 20;
-
-        addObject(fish, x, y);
     }
 }
-}
+// <-- Pastikan hanya ada SATU kurung kurawal penutup di akhir
