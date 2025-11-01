@@ -11,9 +11,9 @@ public class GameSettings
     // Ukuran ikan berdasarkan level
     // [level][0] = lebar, [level][1] = tinggi
     public static final int[][] commonFishSize = {
-        {160, 180},
-        {150, 170},
-        {140, 160}
+        {160, 180}, //easy
+        {150, 170}, //medium
+        {140, 160} //hard
     };
 
     public static final int[][] rareFishSize = {
