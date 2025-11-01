@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Fish
+comment1.params=rare
+comment1.target=Fish(boolean)
+comment2.params=
+comment2.target=int\ getValue()
+comment3.params=w
+comment3.target=void\ addedToWorld(greenfoot.World)
+comment4.params=
+comment4.target=void\ act()
+comment5.params=
+comment5.target=void\ move()
+comment6.params=
+comment6.target=void\ bobbing()
+comment7.params=
+comment7.target=void\ checkDespawn()
+numComments=8
