@@ -8,10 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class prevbut extends Actor
 {
-       public prevbut()
+    public prevbut()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("prev.png");;
         
         image.scale(150, 100); 
         

@@ -9,10 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class nextbut extends Actor
 {
 
-       public nextbut()
+    public nextbut()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("next.png");;
         
         image.scale(150, 100); 
         

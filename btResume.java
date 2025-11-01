@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class btResume extends Actor {
     public btResume() {
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("btResume.png");
         if (image != null) {
         int newWidth = 150; 
         

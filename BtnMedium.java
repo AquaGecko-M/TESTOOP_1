@@ -11,7 +11,7 @@ public class BtnMedium extends Actor
       public BtnMedium()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("btnMedium.png");
         
         image.scale(150,150); 
         

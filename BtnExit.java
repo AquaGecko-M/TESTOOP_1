@@ -11,7 +11,7 @@ public class BtnExit extends Actor
     public BtnExit()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("BtnExit.png");
         
         image.scale(150, 100); 
         

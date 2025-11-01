@@ -4,7 +4,7 @@ public class btOption extends Actor {
     private boolean messageShown;
 
     public btOption() {
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("btOption.png");
         if (image != null) {
         int newWidth = 150; 
         
@@ -13,8 +13,8 @@ public class btOption extends Actor {
         
         image.scale(newWidth, newHeight); 
         setImage(image);
+        }
     }
-}
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
             World w = getWorld();

@@ -9,7 +9,7 @@ public class Boat extends Actor {
     private boolean moving = false;
     private SimpleTimer animTimer = new SimpleTimer();
     private int frameMs = 100;
-    private int speed = 6;
+    private int speed = 3;
 
     public Boat() {
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu

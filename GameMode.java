@@ -45,7 +45,6 @@ public class GameMode extends World
     {
         BtnBack btnBack = new BtnBack();
         addObject(btnBack,899,45);
-
         BtnEasy btnEasy = new BtnEasy();
         addObject(btnEasy,460,235);
         BtnMedium btnMedium = new BtnMedium();

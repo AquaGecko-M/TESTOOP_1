@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class MenuGameplay extends Actor {
     public MenuGameplay() {
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("MenuGameplay.png");
         if (image != null) {
             image.scale(80, 80);
             setImage(image);

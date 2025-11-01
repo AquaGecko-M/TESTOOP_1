@@ -5,6 +5,10 @@ public class GameWorld extends World {
     private int life = 3;
     private int timeLeft = 60; // detik per level
     private final SimpleTimer secondTimer = new SimpleTimer();
+    private int keyItems = 0;
+    private int keysNeeded = 5;
+    private GreenfootImage keyItemIcon;
+    private GreenfootImage originalBg; // To fix HUD overlapping
 
     private Boat boat;
     private Kail hook;
@@ -16,12 +20,16 @@ public class GameWorld extends World {
     public GameWorld() {
         super(960, 540, 1);
         setPaintOrder(Kail.class, Boat.class); // Mengganti ke Kail.class
+    
+        originalBg = new GreenfootImage("24.jpg");
+        originalBg.scale(960, 540);
+
+        keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
+        keyItemIcon.scale(30, 30); // Scale it for the HUD
+        
+        setBackground(new GreenfootImage(originalBg)); // Set the background to a *copy*
         prepare();
         updateHUD();
-
-        GreenfootImage bg = new GreenfootImage("24.jpg");
-        bg.scale(960, 540);
-        setBackground(bg);
     }
 
     private void prepare() {
@@ -97,14 +105,22 @@ public class GameWorld extends World {
     }
 
     private void updateHUD() {
+        // 1. Reset the background to its clean, original state
+        getBackground().drawImage(originalBg, 0, 0); 
+    
+        // 2. Show all HUD text
         showText("Score: " + score, 70, 20);
         showText("Life: " + life, 150, 20);
         showText("Time: " + timeLeft, 230, 20);
+        
+        // 3. Draw the Key Item icon and text
+        getBackground().drawImage(keyItemIcon, 310, 10);
+        showText(keyItems + " / " + keysNeeded, 370, 25);
     }
     
     public void reduceTimer(int seconds) {
-    timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
-    updateHUD(); // Immediately show the change
+        timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
+        updateHUD(); // Immediately show the change
     }
     
     private void spawnFish() {
@@ -126,5 +142,21 @@ public class GameWorld extends World {
         int x = (side == 0) ? -20 : getWidth() + 20;
     
         addObject(ikanBaru, x, y);
+    }
+    
+    public void addKeyItem() {
+        if (keyItems < keysNeeded) {
+            keyItems++;
+            updateHUD();
+        }    
+        // Check if the level is complete
+        if (keyItems >= keysNeeded) {
+            // Later, this will trigger the Stage Completion screen.
+            // For now, we can just log it to see that it works.
+            System.out.println("LEVEL COMPLETE! All keys collected.");
+            
+            // --- TODO: Go to StageCompleteWorld ---
+            // Greenfoot.setWorld(new StageCompleteWorld(this)); 
+        }
     }
 }
