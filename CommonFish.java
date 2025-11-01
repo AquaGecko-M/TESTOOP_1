@@ -5,6 +5,7 @@ public class CommonFish extends Actor {
     private int speed;      // kecepatan horizontal
     private int bob = 0;    // efek naik-turun kecil
     private int value = 2;
+    private int halfWidth;
 
     public CommonFish() {
         setImage("CFish.png");
@@ -13,6 +14,7 @@ public class CommonFish extends Actor {
         GreenfootImage img = getImage();
         img.scale(160, 180);
         setImage(img);
+        halfWidth = img.getWidth() / 2;
     }
 
     public int getValue() { return value; }
@@ -25,18 +27,29 @@ public class CommonFish extends Actor {
         } else {
             dir = -1; // dari kanan → kiri
             getImage().mirrorHorizontally();
+        } else {
+            dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
     }
 
     @Override
     public void act() {
         // gerak horizontal
+        moveFish();
+        checkBoundary();
+        
+        private void moveFish() {
         setLocation(getX() + dir * speed, getY());
+        bob = (bob + 1) % 40;
+        int offset = (bob < 20) ? 1 : -1;
+        setLocation(getX(), getY() + offset);
+        }
 
         // bobbing kecil
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
         // HAPUS DI TEPI: karena X dikunci, cek tepi + arah gerak
         World w = getWorld();

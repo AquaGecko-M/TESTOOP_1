@@ -1,7 +1,6 @@
 import greenfoot.*;
 
-public class EpicFish extends Actor // <-- extends Actor
-{
+public class EpicFish extends Actor {
     private int dir;
     private int speed;
     private int bob = 0;
@@ -31,16 +30,24 @@ public class EpicFish extends Actor // <-- extends Actor
         } else {
             dir = -1; // dari kanan → kiri
             getImage().mirrorHorizontally();
+        } else {
+            dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
     }
 
     public void act() {
+        moveFish();
+        checkBoundary();
+    }
+
+    private void moveFish() {
         setLocation(getX() + dir * speed, getY());
 
         // bobbing kecil
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
         // HAPUS DI TEPI: karena X dikunci, cek tepi + arah gerak
         World w = getWorld();

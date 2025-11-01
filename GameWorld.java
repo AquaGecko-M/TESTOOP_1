@@ -24,12 +24,9 @@ public class GameWorld extends World {
         super(960, 540, 1);
         setPaintOrder(Hud.class, Kail.class, Boat.class, Fish.class); // hook di depan boat (opsional)
         
-        
-        
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
         
-        GreenfootImage bg = new GreenfootImage("24.jpg");
         bg.scale(960, 540);
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
         keyItemIcon.scale(50, 50); // Scale it for the HUD
@@ -37,12 +34,6 @@ public class GameWorld extends World {
     
         prepare();
         updateHUD();
-    }
-
-    private void prepare() {
-        int boatX = getWidth() / 2;
-        int boatY = 120; // Variabel ini tidak terpakai, tapi tidak apa-apa
-
         boat = new Boat();
         addObject(boat, boatX + 20, 250);
 
@@ -59,6 +50,8 @@ public class GameWorld extends World {
         addObject(treasure2,507,500);
         Treasure treasure3 = new Treasure();
         addObject(treasure3,58,496);
+
+        updateLevelFromSettings();
     }
 
     public void act() {
@@ -80,6 +73,16 @@ public class GameWorld extends World {
         if (Greenfoot.isKeyDown("h")) { boat.takeDamage(1); Greenfoot.delay(5); }
 
     }
+    
+    private void updateLevelFromSettings() {
+    if (GameSettings.difficulty.equals("Medium")) {
+        currentLevel = 1;
+    } else if (GameSettings.difficulty.equals("Hard")) {
+        currentLevel = 2;
+    } else {
+        currentLevel = 0; // Easy
+    }
+    }   
 
     // --- API kecil untuk dipakai kelas lain ---
     public void addScore(int v) { score += v; updateHUD(); }
@@ -130,13 +133,36 @@ public class GameWorld extends World {
         
         int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
 
-        if (roll < 10) { // 10% kemungkinan (angka 0-9)
-            ikanBaru = new EpicFish();
-        } else if (roll < 35) { // 25% kemungkinan (angka 10-34)
-            ikanBaru = new RareFish();
-        } else { // 65% sisanya (angka 35-99)
-            ikanBaru = new CommonFish();
-        }
+        if (roll < 10) { // Epic
+        ikanBaru = new EpicFish();
+        EpicFish e = (EpicFish) ikanBaru;
+
+        e.setFishSize(GameSettings.epicFishSize[currentLevel][0], GameSettings.epicFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.epicFishSpeed[currentLevel][1] - GameSettings.epicFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.epicFishSpeed[currentLevel][0];
+        e.setSpeed(speed);
+
+    } else if (roll < 35) { // Rare
+        ikanBaru = new RareFish();
+        RareFish r = (RareFish) ikanBaru;
+
+        r.setFishSize(GameSettings.rareFishSize[currentLevel][0], GameSettings.rareFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.rareFishSpeed[currentLevel][1] - GameSettings.rareFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.rareFishSpeed[currentLevel][0];
+        r.setSpeed(speed);
+
+    } else { // Common
+        ikanBaru = new CommonFish();
+        CommonFish c = (CommonFish) ikanBaru;
+
+        c.setFishSize(GameSettings.commonFishSize[currentLevel][0], GameSettings.commonFishSize[currentLevel][1]);
+        int speed = Greenfoot.getRandomNumber(
+            GameSettings.commonFishSpeed[currentLevel][1] - GameSettings.commonFishSpeed[currentLevel][0] + 1
+        ) + GameSettings.commonFishSpeed[currentLevel][0];
+        c.setSpeed(speed);
+    }
         
         // Kode ini sama persis seperti kodemu sebelumnya
         int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
@@ -144,6 +170,7 @@ public class GameWorld extends World {
         int x = (side == 0) ? -40 : getWidth() + 40;
     
         addObject(ikanBaru, x, y);
+        
     }
     
     public void addKeyItem() {
