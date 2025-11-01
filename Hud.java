@@ -6,7 +6,7 @@ public class Hud extends Actor {
     // hearts
     private GreenfootImage heartFull = new GreenfootImage("heart2.png");
     private GreenfootImage heartEmpty;
-    private int heartSize = 22;        // tinggi hati (px) -> di-scale biar muat
+    private int heartSize = 30;        // tinggi hati (px) -> di-scale biar muat
     private int heartSpacing;          // dihitung dari lebar hati
 
     // text
@@ -49,7 +49,7 @@ public class Hud extends Actor {
         img.fillRect(0, 0, w, h);
 
         // hearts
-        int hx = 10;
+        int hx = 15;
         int hy = (h - heartFull.getHeight()) / 2; // center vertikal
         for (int i = 0; i < maxLife; i++) {
             img.drawImage(i < life ? heartFull : heartEmpty, hx + i * heartSpacing, hy);
@@ -62,12 +62,12 @@ public class Hud extends Actor {
 
         // shadow
         img.setColor(new Color(0,0,0,180));
-        img.drawString("Score: " + score, baseX + 1, textY + 1);
-        img.drawString("Time: "  + timeLeft, baseX + 160 + 1, textY + 1);
+        img.drawString("Score: " + score, baseX + 11, textY + 1);
+        img.drawString("Time: "  + timeLeft, baseX + 245 + 1, textY + 1);
 
         // white
         img.setColor(Color.WHITE);
-        img.drawString("Score: " + score, baseX, textY);
-        img.drawString("Time: "  + timeLeft, baseX + 160, textY);
+        img.drawString("Score: " + score, baseX + 10, textY);
+        img.drawString("Time: "  + timeLeft, baseX + 245, textY);
     }
 }

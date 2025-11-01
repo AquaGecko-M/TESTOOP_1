@@ -8,12 +8,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BtnHard extends Actor
 {
-    /**
-     * Act - do whatever the BtnHard wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+      public BtnHard()
+    {
+        // 1. Ambil gambar asli dari tombolnya
+        GreenfootImage image = new GreenfootImage("bntHard.png");
+        
+        image.scale(150,150); 
+        
+        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
+        setImage(image);
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        // Add your action code here.if (Greenfoot.mouseClicked(this)) {
+            if (Greenfoot.mouseClicked(this)) 
+        {
+            GameSettings.difficulty = "Hard";
+            Greenfoot.setWorld(new GameWorld());
+        }
     }
 }

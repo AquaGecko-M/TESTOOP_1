@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=Hook
+comment0.target=Kail
 comment1.params=owner
-comment1.target=Hook(Boat)
+comment1.target=Kail(Boat)
 comment2.params=w
 comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=
