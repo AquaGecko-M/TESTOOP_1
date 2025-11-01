@@ -1,30 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class BtnBack here.
+ * Write a description of class BtnTutor here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnBack extends Actor
+public class BtnTutor extends Actor
 {
-      public BtnBack()
+    public BtnTutor()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = new GreenfootImage("btnBack.png");
+        GreenfootImage image = new GreenfootImage("BtnTutorial.png");
         
-        image.scale(200,150); 
+        image.scale(150, 100); 
         
         // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
     }
-    
     public void act()
     {
-        // Add your action code here.if (Greenfoot.mouseClicked(this)) {
-            if (Greenfoot.mouseClicked(this)) 
+    if (Greenfoot.mouseClicked(this)) 
         {
-            Greenfoot.setWorld(new Menu());
+            Greenfoot.setWorld(new tutorialkeyboard());
         }
     }
 }

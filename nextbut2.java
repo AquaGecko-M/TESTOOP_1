@@ -11,7 +11,7 @@ public class nextbut2 extends Actor
     public nextbut2()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("next.png");
         
         image.scale(150, 100); 
         

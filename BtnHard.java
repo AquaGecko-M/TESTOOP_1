@@ -11,7 +11,7 @@ public class BtnHard extends Actor
       public BtnHard()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("bntHard.png");
         
         image.scale(150,150); 
         
