@@ -4,7 +4,7 @@ public class GameWorld extends World {
     private int score = 0;
     private int life  = 5;
     private int timeLeft = 60;              // detik per level (ubah sesukamu)
-    
+    private int currentLevel = 0;
     
     //Keys
     private int keyItems = 0;
@@ -27,13 +27,32 @@ public class GameWorld extends World {
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
         
+        GreenfootImage bg = new GreenfootImage("24.jpg");
         bg.scale(960, 540);
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
         keyItemIcon.scale(50, 50); // Scale it for the HUD
         setBackground(bg);
     
+        menuButton = new MenuGameplay();
+        addObject(menuButton, getWidth() - 55, 70);
+
+        startTimer(300);
+        Treasure treasure = new Treasure();
+        addObject(treasure,914,507);
+        Treasure treasure2 = new Treasure();
+        addObject(treasure2,507,500);
+        Treasure treasure3 = new Treasure();
+        addObject(treasure3,58,496);
+        
         prepare();
         updateHUD();
+        updateLevelFromSettings();
+    }
+    
+    private void prepare() {
+        int boatX = getWidth() / 2;
+        int boatY = 120; // Variabel ini tidak terpakai, tapi tidak apa-apa
+
         boat = new Boat();
         addObject(boat, boatX + 20, 250);
 
@@ -50,8 +69,6 @@ public class GameWorld extends World {
         addObject(treasure2,507,500);
         Treasure treasure3 = new Treasure();
         addObject(treasure3,58,496);
-
-        updateLevelFromSettings();
     }
 
     public void act() {
@@ -75,13 +92,13 @@ public class GameWorld extends World {
     }
     
     private void updateLevelFromSettings() {
-    if (GameSettings.difficulty.equals("Medium")) {
-        currentLevel = 1;
-    } else if (GameSettings.difficulty.equals("Hard")) {
-        currentLevel = 2;
-    } else {
-        currentLevel = 0; // Easy
-    }
+        if (GameSettings.difficulty.equals("Medium")) {
+            currentLevel = 1;
+        } else if (GameSettings.difficulty.equals("Hard")) {
+            currentLevel = 2;
+        } else {
+            currentLevel = 0; // Easy
+        }
     }   
 
     // --- API kecil untuk dipakai kelas lain ---
