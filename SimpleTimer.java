@@ -15,7 +15,7 @@ public class SimpleTimer
     }
 
     public boolean hasElapsed(int ms) {
-        return millisElapsed() >= ms;
+        return millisElapsed() >= ms;   
     }
 
     public void mark() {
