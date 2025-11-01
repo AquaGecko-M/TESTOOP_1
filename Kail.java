@@ -8,6 +8,8 @@ public class Kail extends Actor {
     // batas vertikal (atur sesuai layout air-mu)
     private int minY;  // dekat boat
     private int maxY;  // kedalaman maksimum
+    
+    private boolean mouseHolding = false;
 
     public Kail(Boat owner) {
         this.owner = owner;
@@ -31,6 +33,7 @@ public class Kail extends Actor {
         followBoatX();
         handleVertical();
         clampVertical();
+        updateMouseHoldState();
         
         // --- INI BAGIAN YANG DIPERBAIKI ---
         // Kita tidak bisa lagi mencari Fish.class.
@@ -41,6 +44,7 @@ public class Kail extends Actor {
         if (common != null) {
             // Ya, kena. Ambil nilainya, hapus ikannya.
             ((GameWorld) getWorld()).addScore(common.getValue());
+            ((GameWorld) getWorld()).addFishCollected(1);
             getWorld().removeObject(common);
             return; // 'return' agar berhenti di sini & tidak tangkap 2 ikan sekaligus
         }
@@ -50,6 +54,7 @@ public class Kail extends Actor {
         if (rare != null) {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(rare.getValue());
+            ((GameWorld) getWorld()).addFishCollected(1);
             getWorld().removeObject(rare);
             return;
         }
@@ -59,6 +64,7 @@ public class Kail extends Actor {
         if (epic != null) {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(epic.getValue());
+            ((GameWorld) getWorld()).addFishCollected(1);
             getWorld().removeObject(epic);
             return;
         }
@@ -82,11 +88,10 @@ public class Kail extends Actor {
     }
 
     private void handleVertical() {
+        MouseInfo mouse = Greenfoot.getMouseInfo();
         // Tombol: up/down atau w/s
-        if (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
+        if (mouseHolding) {
             setLocation(getX(), getY() + downSpeed);
-        } else if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) {
-            setLocation(getX(), getY() - upSpeed);
         } else {
             // idle: perlahan naik (rasa kail ditarik balik)
             if (getY() > minY) setLocation(getX(), getY() - 1);
@@ -97,4 +102,24 @@ public class Kail extends Actor {
         int y = Math.max(minY, Math.min(getY(), maxY));
         setLocation(getX(), y);
     }
+    
+    private void updateMouseHoldState() {
+        // Start hold saat klik kiri baru ditekan
+        if (Greenfoot.mousePressed(null)) {
+            mouseHolding = true;
+        }
+        // Akhiri hold saat klik dilepas (click end) atau drag selesai
+        if (Greenfoot.mouseClicked(null) || Greenfoot.mouseDragEnded(null)) {
+            mouseHolding = false;
+        }
+
+            // Safety: jika kursor keluar dari world dan tidak ada event release,
+            // anggap tidak menahan (mencegah "nyangkut")
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        if (mi == null && !Greenfoot.mousePressed(null) && !Greenfoot.mouseClicked(null)) {
+            // tidak memaksa false—biarkan saja; kalau mau lebih ketat:
+            // mouseHolding = false;
+        }
+    }
+    
 }

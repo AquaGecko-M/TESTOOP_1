@@ -1,62 +1,54 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-
+import greenfoot.*;
 
 /**
-
- * Write a description of class menuCompletion here.
-
- * 
-
- * @author (your name) 
-
- * @version (a version number or a date)
-
+ * The stage completion screen. It displays the player's stats
+ * and a star rating.
+ * (Image: menuCompletion.png)
  */
-
 public class menuCompletion extends World
-
 {
-
-
     /**
-
-     * Constructor for objects of class menuCompletion.
-
-     * 
-
+     * Constructor for the completion screen.
+     * @param finalScore The player's total score.
+     * @param finalTime The player's time left.
+     * @param totalFish The total fish collected.
      */
-
-    public menuCompletion()
-
+    public menuCompletion(int finalScore, int finalTime, int totalFish)
     {    
-
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-
-        // 1. Atur ukuran dunia agar SAMA dengan GameWorld
-
-        super(960, 540, 1); 
-
-        // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
-
-        // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
-
-        GreenfootImage bg = new GreenfootImage("menuCompletion.png"); 
-
-        // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
-        bg.scale(960, 540);
-
-        // 4. Atur gambar yang sudah dikecilkan
-
+        super(960, 540, 1); // Use your standard world size
+        
+        // Set the background
+        GreenfootImage bg = new GreenfootImage("menuCompletion.png");
+        bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        
+        // --- Add Buttons ---
+        addObject(new btnMainmenucomplete(), 200, 450); // Adjust X/Y as needed
+        addObject(new btnNextStage(), 760, 450);        // Adjust X/Y as needed
+        
+        // --- Display Stats ---
+        // You'll need to adjust the X/Y coordinates to match your background image
+        GreenfootImage textBg = getBackground();
+        textBg.setColor(greenfoot.Color.YELLOW); // Set text color
+        textBg.setFont(new Font("Arial", true, false, 38));
+        
+        textBg.drawString("" + totalFish, 660, 265);
+        textBg.drawString("" + finalTime, 510, 320);
+        textBg.drawString("" + finalScore, 563 , 375);
 
-        prepare();
+        // --- Display Stars based on Score ---
+        if (finalScore >= 200) {
+            addObject(new Star(), 375, 50); // Adjust X/Y for 1st star
+        }
+        if (finalScore >= 350) {
+            addObject(new Star(), 475, 50); // Adjust X/Y for 2nd star
+        }
+        if (finalScore >= 500) {
+            addObject(new Star(), 575, 50); // Adjust X/Y for 3rd star
+        }
     }
 
-    /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
-     */
+
     private void prepare()
     {
         btnMainmenucomplete btnMainmenucomplete = new btnMainmenucomplete();

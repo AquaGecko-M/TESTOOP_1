@@ -132,6 +132,12 @@ public class QuizWorld extends World
             bg.drawString("Correct! + " + treasureValue, getWidth() / 2 - 100, getHeight() / 2 - 50);
             originWorld.addScore(treasureValue); 
             originWorld.removeObject(this.treasure); 
+            boolean levelComplete = originWorld.addKeyItem();
+            // If the level is now complete, we must stop!
+            // Do not continue to set the world back to originWorld.
+            if (levelComplete) {
+                return; // Stop this method right now
+            }
             
         } else {
             bg.drawString("Incorrect! -20s", getWidth() / 2 - 80, getHeight() / 2 - 50);

@@ -5,7 +5,7 @@ public class GameWorld extends World {
     private int life  = 5;
     private int timeLeft = 60;              // detik per level (ubah sesukamu)
     private int currentLevel = 0;
-    
+
     //Keys
     private int keyItems = 0;
     private int keysNeeded = 5;
@@ -13,6 +13,7 @@ public class GameWorld extends World {
     private GreenfootImage originalBg; // To fix HUD overlapping
     private final SimpleTimer secondTimer = new SimpleTimer();
     // Fish
+    private int totalFish = 0;
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
     // --- Player ---
     private Boat boat;
@@ -36,7 +37,6 @@ public class GameWorld extends World {
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
 
-        startTimer(300);
         Treasure treasure = new Treasure();
         addObject(treasure,914,507);
         Treasure treasure2 = new Treasure();
@@ -59,16 +59,11 @@ public class GameWorld extends World {
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        menuButton = new MenuGameplay();
-        addObject(menuButton, getWidth() - 55, 70);
-
         startTimer(300);
         Treasure treasure = new Treasure();
-        addObject(treasure,914,507);
+        addObject(treasure,757,428);
         Treasure treasure2 = new Treasure();
-        addObject(treasure2,507,500);
-        Treasure treasure3 = new Treasure();
-        addObject(treasure3,58,496);
+        addObject(treasure2,230,421);
     }
 
     public void act() {
@@ -190,19 +185,29 @@ public class GameWorld extends World {
         
     }
     
-    public void addKeyItem() {
+        public boolean addKeyItem() { // <--- Changed from void to boolean
         if (keyItems < keysNeeded) {
             keyItems++;
             updateHUD();
-        }    
+        }
+    
         // Check if the level is complete
         if (keyItems >= keysNeeded) {
-            // Later, this will trigger the Stage Completion screen.
-            // For now, we can just log it to see that it works.
-            System.out.println("LEVEL COMPLETE! All keys collected.");
+            // We have all the keys! Time to end the level.
+            secondTimer.mark();
+            fishSpawnTimer.mark();
             
-            // --- TODO: Go to StageCompleteWorld ---
-            // Greenfoot.setWorld(new StageCompleteWorld(this)); 
+            // Go to the completion screen
+            Greenfoot.setWorld(new menuCompletion(score, timeLeft, totalFish));
+
+            return true; // Yes, the level is complete
         }
+    
+        // If we are here, the level is not complete
+        return false;
+    }
+    
+        public void addFishCollected(int amount) {
+        totalFish += amount;
     }
 }
