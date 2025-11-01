@@ -2,9 +2,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class btMainMenu extends Actor {
     public btMainMenu() {
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("btMainmenu.png");
         if (image != null) {
-            image.scale(200, 80);
+            int newWidth = 150; 
+            
+            double aspectRatio = (double) image.getHeight() / image.getWidth();
+            int newHeight = (int) (newWidth * aspectRatio);
+            
+            image.scale(newWidth, newHeight); 
             setImage(image);
         }
     }

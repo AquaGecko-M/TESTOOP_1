@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=QuizWorld
+comment0.text=\r\n\ An\ overlay\ world\ that\ pauses\ the\ game\ and\ displays\ a\ 10-second\ math\ quiz.\r\n
+comment1.params=originalGameWorld\ treasure
+comment1.target=QuizWorld(GameWorld,\ Treasure)
+comment1.text=\r\n\ Constructor\ for\ QuizWorld.\r\n\ Takes\ the\ original\ GameWorld\ instance\ and\ the\ Treasure\ object.\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ This\ method\ runs\ 60\ times/sec,\ checking\ the\ quiz\ timer.\r\n
+comment3.params=
+comment3.target=void\ updateQuizTimerDisplay()
+comment3.text=\r\n\ Draws\ the\ "Time\:\ X"\ text\ on\ the\ screen.\r\n
+comment4.params=
+comment4.target=void\ prepareQuiz()
+comment4.text=\r\n\ Generates\ the\ question,\ answers,\ and\ buttons.\r\n
+comment5.params=wasCorrect
+comment5.target=void\ checkAnswer(boolean)
+comment5.text=\r\n\ This\ method\ is\ called\ by\ the\ AnswerButton\ when\ one\ is\ clicked.\r\n
+numComments=6

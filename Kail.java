@@ -62,6 +62,19 @@ public class Kail extends Actor {
             getWorld().removeObject(epic);
             return;
         }
+        
+        Treasure treasure = (Treasure) getOneIntersectingObject(Treasure.class);
+
+        // NEW CHECK: Is the treasure not null AND is it interactable?
+        if (treasure != null && treasure.isInteractable()) {
+            
+            GameWorld currentWorld = (GameWorld) getWorld();
+            
+            // Pass the treasure object to the QuizWorld
+            Greenfoot.setWorld(new QuizWorld(currentWorld, treasure));
+            
+            return; // Stop processing this act cycle
+        }
     }
 
     private void followBoatX() {
