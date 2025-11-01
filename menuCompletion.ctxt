@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=menuCompletion
+comment0.text=\r\n\ The\ stage\ completion\ screen.\ It\ displays\ the\ player's\ stats\r\n\ and\ a\ star\ rating.\r\n\ (Image\:\ menuCompletion.png)\r\n
+comment1.params=finalScore\ finalTime\ totalFish
+comment1.target=menuCompletion(int,\ int,\ int)
+comment1.text=\r\n\ Constructor\ for\ the\ completion\ screen.\r\n\ @param\ finalScore\ The\ player's\ total\ score.\r\n\ @param\ finalTime\ The\ player's\ time\ left.\r\n\ @param\ totalFish\ The\ total\ fish\ collected.\r\n
+comment2.params=
+comment2.target=void\ prepare()
+numComments=3
