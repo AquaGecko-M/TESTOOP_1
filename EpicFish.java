@@ -5,11 +5,10 @@ public class EpicFish extends Actor // <-- extends Actor
     private int dir;
     private int speed;
     private int bob = 0;
-    private int value;
+    private int value = 10;
 
     public EpicFish() {
         setImage("EpicFish.png"); // Pastikan nama file gambar benar
-        value = 10; // Nilai lebih tinggi
         speed = Greenfoot.getRandomNumber(2) + 4; // Kecepatan 4–5
         
         // 1. Ambil gambar yang sudah di-set
@@ -27,21 +26,29 @@ public class EpicFish extends Actor // <-- extends Actor
     }
 
     protected void addedToWorld(World w) {
-        dir = (getX() < w.getWidth() / 2) ? 1 : -1;
-        if (dir < 0) {
+        if (getX() < w.getWidth() / 2) {
+            dir = 1; // dari kiri → kanan
+        } else {
+            dir = -1; // dari kanan → kiri
             getImage().mirrorHorizontally();
         }
     }
 
     public void act() {
         setLocation(getX() + dir * speed, getY());
-        
+
+        // bobbing kecil
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
 
-        if (getX() < -40 || getX() > getWorld().getWidth() + 40) {
-            getWorld().removeObject(this);
+        // HAPUS DI TEPI: karena X dikunci, cek tepi + arah gerak
+        World w = getWorld();
+        if (w == null) return;
+        int rightEdge = w.getWidth() - 1;
+
+        if ((dir < 0 && getX() <= 0) || (dir > 0 && getX() >= rightEdge)) {
+            w.removeObject(this);
         }
     }
 }
