@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BtnEasy extends Actor
 {
-      public BtnEasy()
+    public BtnEasy()
     {
         // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("btnEasy.png");
@@ -22,8 +22,9 @@ public class BtnEasy extends Actor
     public void act()
     {
         // Add your action code here.if (Greenfoot.mouseClicked(this)) {
-            if (Greenfoot.mouseClicked(this)) 
-        {
+        if (Greenfoot.mouseClicked(this)) 
+        {   
+            GameSettings.difficulty = "Easy";
             Greenfoot.setWorld(new GameWorld());
         }
     }

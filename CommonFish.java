@@ -1,49 +1,66 @@
 import greenfoot.*;
 
 public class CommonFish extends Actor {
-    private int dir;        // -1 = kanan→kiri, 1 = kiri→kanan
-    private int speed;      // kecepatan horizontal
-    private int bob = 0;    // efek naik-turun kecil
-    private int value = 2;
+    private int dir;
+    private int speed;
+    private int bob = 0;
+    private int value;
+    private int halfWidth;
 
     public CommonFish() {
         setImage("CFish.png");
-        speed = Greenfoot.getRandomNumber(2) + 2; // 2–3
-        // skala sesuai kebutuhanmu
-        GreenfootImage img = getImage();
-        img.scale(160, 180);
-        setImage(img);
+        value = 2;
     }
 
-    public int getValue() { return value; }
+    public void setSpeed(int s) {
+        speed = s;
+    }
 
-    @Override
+    public void setFishSize(int width, int height) {
+        GreenfootImage img = new GreenfootImage("CFish.png");
+        img.scale(width, height);
+        setImage(img);
+        halfWidth = img.getWidth() / 2;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
     protected void addedToWorld(World w) {
-        // arah otomatis dari sisi spawn
-        if (getX() < w.getWidth() / 2) {
-            dir = 1; // dari kiri → kanan
-        } else {
-            dir = -1; // dari kanan → kiri
+        int worldWidth = w.getWidth();
+        if (getX() <= 50) {
+            dir = 1;
+        } else if (getX() >= worldWidth - 50) {
+            dir = -1;
             getImage().mirrorHorizontally();
+        } else {
+            dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
     }
 
-    @Override
     public void act() {
-        // gerak horizontal
-        setLocation(getX() + dir * speed, getY());
+        moveFish();
+        checkBoundary();
+    }
 
-        // bobbing kecil
+    private void moveFish() {
+        setLocation(getX() + dir * speed, getY());
         bob = (bob + 1) % 40;
         int offset = (bob < 20) ? 1 : -1;
         setLocation(getX(), getY() + offset);
+    }
 
-        // HAPUS DI TEPI: karena X dikunci, cek tepi + arah gerak
+    private void checkBoundary() {
         World w = getWorld();
         if (w == null) return;
-        int rightEdge = w.getWidth() - 1;
 
-        if ((dir < 0 && getX() <= 0) || (dir > 0 && getX() >= rightEdge)) {
+        int worldWidth = w.getWidth();
+        int half = getImage().getWidth() / 2;
+
+        if (dir < 0 && getX() - half <= 0) {
+            w.removeObject(this);
+        } else if (dir > 0 && getX() + half >= worldWidth) {
             w.removeObject(this);
         }
     }
