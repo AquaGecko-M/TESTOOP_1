@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=Hud
-comment1.params=width\ height\ maxLife
-comment1.target=Hud(int,\ int,\ int)
-comment2.params=score\ life\ timeLeft
-comment2.target=void\ update(int,\ int,\ int)
-comment3.params=
-comment3.target=void\ redraw()
-numComments=4
