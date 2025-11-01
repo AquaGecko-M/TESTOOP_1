@@ -4,7 +4,7 @@ public class MenuGameplay extends Actor {
     public MenuGameplay() {
         GreenfootImage image = getImage();
         if (image != null) {
-            image.scale(80, 80);
+            image.scale(100, 100);
             setImage(image);
         }
     }
