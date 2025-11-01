@@ -63,11 +63,11 @@ public class Hud extends Actor {
         // shadow
         img.setColor(new Color(0,0,0,180));
         img.drawString("Score: " + score, baseX + 11, textY + 1);
-        img.drawString("Time: "  + timeLeft, baseX + 300 + 1, textY + 1);
+        img.drawString("Time: "  + timeLeft, baseX + 245 + 1, textY + 1);
 
         // white
         img.setColor(Color.WHITE);
         img.drawString("Score: " + score, baseX + 10, textY);
-        img.drawString("Time: "  + timeLeft, baseX + 300, textY);
+        img.drawString("Time: "  + timeLeft, baseX + 245, textY);
     }
 }

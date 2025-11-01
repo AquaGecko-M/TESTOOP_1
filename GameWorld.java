@@ -44,10 +44,10 @@ public class GameWorld extends World {
         int boatY = 120; // Variabel ini tidak terpakai, tapi tidak apa-apa
 
         boat = new Boat();
-        addObject(boat, boatX, 250);
+        addObject(boat, boatX + 20, 250);
 
         hook = new Kail(boat);           // hook “terikat” ke boat
-        addObject(hook, boatX, 250 + 180); // Posisi kail di bawah boat
+        addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
