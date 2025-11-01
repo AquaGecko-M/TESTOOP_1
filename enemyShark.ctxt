@@ -1,7 +1,19 @@
 #BlueJ class context
 comment0.target=enemyShark
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ enemyShark\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=void\ act()
-comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ enemyShark\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=2
+comment1.target=enemyShark()
+comment2.params=dir
+comment2.target=void\ setDirection(int)
+comment2.text=\r\n\ Mengatur\ arah\ gerak\ hiu.\r\n\ @param\ dir\ 1\ untuk\ bergerak\ ke\ kanan,\ -1\ untuk\ bergerak\ ke\ kiri.\r\n
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ move()
+comment4.text=\r\n\ Bergerak\ berdasarkan\ arah\ (direction).\r\n
+comment5.params=
+comment5.target=void\ checkHitBoat()
+comment5.text=\r\n\ Memeriksa\ tabrakan\ dengan\ Boat.\r\n
+comment6.params=
+comment6.target=void\ checkBoundary()
+comment6.text=\r\n\ Memeriksa\ apakah\ hiu\ sudah\ keluar\ dari\ layar.\r\n
+numComments=7

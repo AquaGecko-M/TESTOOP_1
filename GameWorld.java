@@ -57,18 +57,13 @@ public class GameWorld extends World {
         addObject(boat, boatX + 20, 250);
 
         hook = new Kail(boat);           // hook “terikat” ke boat
-        addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
+        addObject(hook, boatX + 20, 250 + 50); // Posisi kail di bawah boat
 
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
 
         startTimer(300);
-        Treasure treasure = new Treasure();
-        addObject(treasure,914,507);
-        Treasure treasure2 = new Treasure();
-        addObject(treasure2,507,500);
-        Treasure treasure3 = new Treasure();
-        addObject(treasure3,58,496);
+
     }
 
     public void act() {
@@ -149,6 +144,7 @@ public class GameWorld extends World {
         Actor ikanBaru; 
         
         int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
+        
 
         if (roll < 10) { // Epic
         ikanBaru = new EpicFish();
@@ -188,8 +184,28 @@ public class GameWorld extends World {
     
         addObject(ikanBaru, x, y);
         
+        int sharkRoll = Greenfoot.getRandomNumber(100);
+        
+        // 20% kemungkinan (jika angka 0-19)
+        if (sharkRoll < 5) { 
+            enemyShark shark = new enemyShark();
+            int yHiu = 273; // Ketinggian spesifik untuk hiu
+            
+            // Acak sisi (0 = kiri, 1 = kanan)
+            int sideHiu = Greenfoot.getRandomNumber(2); 
+
+            if (sideHiu == 0) {
+                // Muncul di KIRI, bergerak ke KANAN
+                shark.setDirection(1); // 1 = bergerak ke kanan
+                addObject(shark, -50, yHiu);
+            } else {
+                // Muncul di KANAN, bergerak ke KIRI
+                shark.setDirection(-1); // -1 = bergerak ke kiri
+                addObject(shark, getWidth() + 50, yHiu);
+            }
+        
     }
-    
+}
     public void addKeyItem() {
         if (keyItems < keysNeeded) {
             keyItems++;
