@@ -203,11 +203,20 @@ public class GameWorld extends World {
             addObject(shark, getWidth() + 50, yHiu);
             }
         }
+        int pufferRoll = Greenfoot.getRandomNumber(100);
+        
+        // 5% kemungkinan (jika angka 0-4)
+        if (pufferRoll < 5) { 
+                 int health = GameSettings.EnemyHealth[currentLevel][0];
+                 EnemyPuffer puffer = new EnemyPuffer(health);
+                 int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
+                 addObject(puffer, -50, yPuffer);
+            }   
     }
     public void addKeyItem() {
         if (keyItems < keysNeeded) {
             keyItems++;
-            updateHUD();
+            updateHUD();    
         }    
         // Check if the level is complete
         if (keyItems >= keysNeeded) {
