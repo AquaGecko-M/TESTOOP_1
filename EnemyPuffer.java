@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class EnemyPuffer extends Actor
+public class EnemyPuffer extends Actor implements Damageable
 {
     // --- Stats ---
     private int speed = 1; // Kecepatan normal
@@ -19,6 +19,9 @@ public class EnemyPuffer extends Actor
     // --- Gambar ---
     private GreenfootImage imgKempes;
     private GreenfootImage imgKembung;
+    
+    private final SimpleTimer hurtIFrame = new SimpleTimer();
+    private int hurtCooldownMs = 150; // jeda antar-hit (ms)
 
     /**
      * Constructor: Menerima health dari GameWorld/Map2
@@ -137,14 +140,6 @@ public class EnemyPuffer extends Actor
     /**
      * Dipanggil oleh Kail untuk mengurangi darah
      */
-    public void takeDamage(int amount) {
-        health = health - amount; 
-        if (health <= 0) {
-            addScoreToWorld(1);
-            getWorld().removeObject(this); 
-        }
-    }
-    
     private void addScoreToWorld(int score) {
         World world = getWorld(); 
         if (world instanceof GameWorld) {
@@ -200,5 +195,26 @@ public class EnemyPuffer extends Actor
         }
     }
     
-    // Method checkBoundary() TIDAK DIPERLUKAN LAGI
+    @Override
+    public void takeDamage(int amount) {
+        if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
+        hurtIFrame.mark();
+
+        health -= amount;
+        flash();
+
+        if (health <= 0) {
+            addScoreToWorld(5);    // ubah angka skor sesukamu
+            getWorld().removeObject(this);
+        }
+    }
+    
+    private void flash() {
+    GreenfootImage img = getImage();
+    int old = img.getTransparency();
+    img.setTransparency(140);
+    Greenfoot.delay(1);
+    if (getWorld() != null) img.setTransparency(old);
+    }
+
 }

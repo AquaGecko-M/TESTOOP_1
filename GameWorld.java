@@ -216,6 +216,7 @@ public class GameWorld extends World {
         if (pufferRoll < 5) { 
             int health = GameSettings.EnemyHealth[currentLevel][0];
             EnemyPuffer puffer = new EnemyPuffer(health);
+            
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
             addObject(puffer, -50, yPuffer);
         }

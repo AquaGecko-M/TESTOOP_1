@@ -126,9 +126,9 @@ public class Boat extends Actor {
     }
     
     private void handleAttack() {
-        if (Greenfoot.isKeyDown("space") && attackTimer.hasElapsed(attackCooldownMs)) {
-            performAttack();
-            attackTimer.mark();
+        if (Greenfoot.mouseClicked(null) && attackTimer.hasElapsed(attackCooldownMs)) {
+        performAttack();
+        attackTimer.mark();
         }
     }
     
@@ -154,6 +154,11 @@ public class Boat extends Actor {
         for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
         ((enemyShark)obj).takeDamage(attackDamage);
         }
+        
+        for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
+            ((EnemyPuffer)obj).takeDamage(attackDamage);
+        }
+
 
         // (opsional) sedikit efek recoil/flash seperti saat takeDamage
     }
