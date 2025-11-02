@@ -188,24 +188,22 @@ public class GameWorld extends World {
         
         // 20% kemungkinan (jika angka 0-19)
         if (sharkRoll < 5) { 
-            enemyShark shark = new enemyShark();
+            int health = GameSettings.EnemyHealth[currentLevel][0];
+            enemyShark shark = new enemyShark(health); // <-- Berikan health ke hiu;
             int yHiu = 273; // Ketinggian spesifik untuk hiu
             
             // Acak sisi (0 = kiri, 1 = kanan)
             int sideHiu = Greenfoot.getRandomNumber(2); 
-
             if (sideHiu == 0) {
-                // Muncul di KIRI, bergerak ke KANAN
-                shark.setDirection(1); // 1 = bergerak ke kanan
-                addObject(shark, -50, yHiu);
-            } else {
-                // Muncul di KANAN, bergerak ke KIRI
-                shark.setDirection(-1); // -1 = bergerak ke kiri
-                addObject(shark, getWidth() + 50, yHiu);
+            shark.setDirection(1); // <-- BENAR (memanggil Shark2.png)
+            addObject(shark, -50, yHiu);
+             } else {
+            // Muncul di KANAN, bergerak ke KIRI
+            shark.setDirection(-1); // <-- BENAR (memanggil Shark.png)
+            addObject(shark, getWidth() + 50, yHiu);
             }
-        
+        }
     }
-}
     public void addKeyItem() {
         if (keyItems < keysNeeded) {
             keyItems++;
