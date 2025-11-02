@@ -3,6 +3,8 @@ import greenfoot.*;
 public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
+    
+    private int attackDamage = 1;
 
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
@@ -13,6 +15,10 @@ public class Boat extends Actor {
     
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 900; // 0.9 detik
+    private final SimpleTimer attackTimer = new SimpleTimer();
+    private int attackCooldownMs = 1000;  // 1 detik
+    private int attackRadius     = 140;   // ukuran lingkaran
+    private int attackLifeFrames = 15;    // lama tampil ring
 
     public Boat() {
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
@@ -31,6 +37,7 @@ public class Boat extends Actor {
         handleMove();
         clampToWorld();
         animate();
+        handleAttack();
     }
 
     // ---------- Movement ----------
@@ -116,5 +123,40 @@ public class Boat extends Actor {
         // efek flash
         flash();
     }
+    
+    private void handleAttack() {
+        if (Greenfoot.mouseClicked(null) && attackTimer.hasElapsed(attackCooldownMs)) {
+        performAttack();
+        attackTimer.mark();
+        }
+    }
+    
+    private void performAttack() {
+        World w = getWorld();
+        if (w == null) return;
 
+        // 1) efek visual
+        AttackRing ring = new AttackRing(attackRadius, attackLifeFrames);
+        w.addObject(ring, getX(), getY());
+
+        // 2) logika hit (sementara: hapus ikan di radius).
+        // Nanti tinggal ganti ke Enemy: for (Enemy e : getObjectsInRange(attackRadius, Enemy.class)) e.takeDamage(1);
+        /*for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
+            ((Actor)obj).getWorld().removeObject((Actor)obj);
+        }
+        for (Object obj : getObjectsInRange(attackRadius, RareFish.class)) {
+            ((Actor)obj).getWorld().removeObject((Actor)obj);
+        }
+        for (Object obj : getObjectsInRange(attackRadius, EpicFish.class)) {
+            ((Actor)obj).getWorld().removeObject((Actor)obj);
+        }*/
+        for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
+        ((enemyShark)obj).takeDamage(attackDamage);
+        }
+        for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
+        ((EnemyPuffer)obj).takeDamage(attackDamage);
+        }
+
+        // (opsional) sedikit efek recoil/flash seperti saat takeDamage
+    }
 }

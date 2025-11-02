@@ -213,6 +213,19 @@ public class GameWorld extends World {
             triggerGameOver("Times Up!");
         }
     }
+    
+    private int difficultyIndex() {
+        String d = GameSettings.difficulty;
+        if ("Medium".equals(GameSettings.difficulty)) return 1;
+        if ("Hard".equals(GameSettings.difficulty)) return 2;
+        return 0; // Easy
+    }
+    
+    private int levelIndex() {
+        // kalau belum punya sistem level stage, untuk sekarang 0
+        return Math.max(0, Math.min(currentLevel, 
+        GameSettings.EnemyHealth[0].length - 1));
+    }
 
     private void spawnFish() {
         Actor ikanBaru; 
@@ -256,6 +269,37 @@ public class GameWorld extends World {
         int x = (side == 0) ? -40 : getWidth() + 40;
     
         addObject(ikanBaru, x, y);
+    
+        int sharkRoll = Greenfoot.getRandomNumber(100);
+        
+        // 10% kemungkinan (jika angka 0-9)
+        if (sharkRoll < 10) { 
+            int health = GameSettings.EnemyHealth[difficultyIndex()][levelIndex()];
+            enemyShark shark = new enemyShark(health);
+
+            int yHiu = 273; // Ketinggian spesifik untuk hiu
+            
+            // Acak sisi (0 = kiri, 1 = kanan)
+            int sideHiu = Greenfoot.getRandomNumber(2); 
+            if (sideHiu == 0) {
+            shark.setDirection(1); // <-- BENAR (memanggil Shark2.png)
+            addObject(shark, -50, yHiu);
+             } else {
+            // Muncul di KANAN, bergerak ke KIRI
+            shark.setDirection(-1); // <-- BENAR (memanggil Shark.png)
+            addObject(shark, getWidth() + 50, yHiu);
+            }
+        }
+        
+        int pufferRoll = Greenfoot.getRandomNumber(100);
+        
+        // 5% kemungkinan (jika angka 0-4)
+        if (pufferRoll < 5) { 
+            int health = GameSettings.EnemyHealth[currentLevel][0];
+            EnemyPuffer puffer = new EnemyPuffer(health);
+            int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
+            addObject(puffer, -50, yPuffer);
+        }
         
     }
     
