@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=itemHeart
+comment1.params=
+comment1.target=itemHeart()
+comment2.params=world
+comment2.target=void\ addedToWorld(greenfoot.World)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=java.lang.String\ getLabelText()
+numComments=5
