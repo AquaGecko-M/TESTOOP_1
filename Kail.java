@@ -22,6 +22,7 @@ public class Kail extends Actor {
     }
 
     protected void addedToWorld(World w) {
+
         // setel batas saat hook ditambahkan
         minY = owner.getY() + 40;
         maxY = w.getHeight() - 40;
@@ -67,7 +68,6 @@ public class Kail extends Actor {
 
         // NEW CHECK: Is the treasure not null AND is it interactable?
         if (treasure != null && treasure.isInteractable()) {
-            
             GameWorld currentWorld = (GameWorld) getWorld();
             
             // Pass the treasure object to the QuizWorld
@@ -83,12 +83,11 @@ public class Kail extends Actor {
 
     private void handleVertical() {
         // Tombol: up/down atau w/s
-        if (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")) {
+        if (Greenfoot.isKeyDown("Down") || (Greenfoot.isKeyDown("s"))) {
             setLocation(getX(), getY() + downSpeed);
-        } else if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) {
-            setLocation(getX(), getY() - upSpeed);
+        } else if (Greenfoot.isKeyDown("Up") || (Greenfoot.isKeyDown("w"))) {
+            setLocation(getX(), getY() - downSpeed);
         } else {
-            // idle: perlahan naik (rasa kail ditarik balik)
             if (getY() > minY) setLocation(getX(), getY() - 1);
         }
     }
@@ -97,4 +96,25 @@ public class Kail extends Actor {
         int y = Math.max(minY, Math.min(getY(), maxY));
         setLocation(getX(), y);
     }
+    
+    /* private void updateMouseHoldState() {
+        // Start hold saat klik kiri baru ditekan
+        if (Greenfoot.mousePressed(null)) {
+            mouseHolding = true;
+        }
+        // Akhiri hold saat klik dilepas (click end) atau drag selesai
+        if (Greenfoot.mouseClicked(null) || Greenfoot.mouseDragEnded(null)) {
+            mouseHolding = false;
+        }
+
+            // Safety: jika kursor keluar dari world dan tidak ada event release,
+            // anggap tidak menahan (mencegah "nyangkut")
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        if (mi == null && !Greenfoot.mousePressed(null) && !Greenfoot.mouseClicked(null)) {
+            // tidak memaksa false—biarkan saja; kalau mau lebih ketat:
+            // mouseHolding = false;
+        }
+    }
+    */
+
 }
