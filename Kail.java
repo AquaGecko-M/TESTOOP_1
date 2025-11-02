@@ -9,8 +9,6 @@ public class Kail extends Actor {
     private int minY;  // dekat boat
     private int maxY;  // kedalaman maksimum
     
-    private boolean mouseHolding = false;
-
     public Kail(Boat owner) {
         this.owner = owner;
         // 1. Set gambar dulu
@@ -33,11 +31,6 @@ public class Kail extends Actor {
         followBoatX();
         handleVertical();
         clampVertical();
-        updateMouseHoldState();
-        
-        // --- INI BAGIAN YANG DIPERBAIKI ---
-        // Kita tidak bisa lagi mencari Fish.class.
-        // Kita harus cek CommonFish, RareFish, dan EpicFish satu per satu.
         
         // Cek 1: Apakah kena CommonFish?
         CommonFish common = (CommonFish) getOneIntersectingObject(CommonFish.class);
@@ -45,6 +38,7 @@ public class Kail extends Actor {
             // Ya, kena. Ambil nilainya, hapus ikannya.
             ((GameWorld) getWorld()).addScore(common.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
+            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_COMMON);
             getWorld().removeObject(common);
             return; // 'return' agar berhenti di sini & tidak tangkap 2 ikan sekaligus
         }
@@ -55,6 +49,7 @@ public class Kail extends Actor {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(rare.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
+            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_RARE);
             getWorld().removeObject(rare);
             return;
         }
@@ -65,6 +60,7 @@ public class Kail extends Actor {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(epic.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
+            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_EPIC);
             getWorld().removeObject(epic);
             return;
         }
@@ -73,11 +69,11 @@ public class Kail extends Actor {
 
         // NEW CHECK: Is the treasure not null AND is it interactable?
         if (treasure != null && treasure.isInteractable()) {
-            
             GameWorld currentWorld = (GameWorld) getWorld();
-            
+            // You must *declare* and *get* the variable before you can use it.
+            int difficulty = currentWorld.getCurrentLevel();
             // Pass the treasure object to the QuizWorld
-            Greenfoot.setWorld(new QuizWorld(currentWorld, treasure));
+            Greenfoot.setWorld(new QuizWorld(currentWorld, treasure,difficulty));
             
             return; // Stop processing this act cycle
         }
@@ -88,12 +84,12 @@ public class Kail extends Actor {
     }
 
     private void handleVertical() {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
         // Tombol: up/down atau w/s
-        if (mouseHolding) {
+        if (Greenfoot.isKeyDown("Down") || (Greenfoot.isKeyDown("s"))) {
             setLocation(getX(), getY() + downSpeed);
+        } else if (Greenfoot.isKeyDown("Up") || (Greenfoot.isKeyDown("w"))) {
+            setLocation(getX(), getY() - downSpeed);
         } else {
-            // idle: perlahan naik (rasa kail ditarik balik)
             if (getY() > minY) setLocation(getX(), getY() - 1);
         }
     }
@@ -103,7 +99,7 @@ public class Kail extends Actor {
         setLocation(getX(), y);
     }
     
-    private void updateMouseHoldState() {
+    /*private void updateMouseHoldState() {
         // Start hold saat klik kiri baru ditekan
         if (Greenfoot.mousePressed(null)) {
             mouseHolding = true;
@@ -120,6 +116,6 @@ public class Kail extends Actor {
             // tidak memaksa false—biarkan saja; kalau mau lebih ketat:
             // mouseHolding = false;
         }
-    }
+    }*/
     
 }

@@ -1,34 +1,52 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
 
 /**
- * Write a description of class btnNextStage here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Button to save progress and proceed to the next stage.
+ * (UPDATED VERSION)
  */
 public class btnNextStage extends Actor
 {
-    private boolean readyToClick = false;
-    public btnNextStage() {
+    private int levelToUnlock;
+    
+    // Fix for click-through bug
+    private boolean mouseWasDown = true; 
+
+    /**
+     * --- CONSTRUCTOR IS UPDATED ---
+     * It now receives the level that was just beaten.
+     */
+    public btnNextStage(int stageJustCompleted) 
+    {
+        // We want to unlock the *next* level
+        this.levelToUnlock = stageJustCompleted; 
+        
         GreenfootImage img = new GreenfootImage("btnNextStage.png");
-        // You can scale it if you need to
-        img.scale(300, 250);
+        img.scale(300, 250); // Your scale code
         setImage(img);
     }
     
+    /**
+     * --- ACT METHOD IS UPDATED ---
+     */
     public void act() {
-        // --- ADD THESE 3 LINES ---
-        // This makes the button wait one frame before it can be clicked,
-        // which "consumes" the click from the QuizWorld.
-        if (!readyToClick) {
-            readyToClick = true;
-            return;
+        // Fix for click-through bug
+        if (mouseWasDown) {
+            if (Greenfoot.mousePressed(null)) {
+                return; // Wait for release
+            } else {
+                mouseWasDown = false; // Armed
+            }
         }
-        // For now, it just restarts the GameWorld.
-        // Later, this could be new GameWorld(level + 1)
+        
         if (Greenfoot.mouseClicked(this)) {
-            Greenfoot.setWorld(new GameWorld()); 
+            // --- THIS IS THE CORE LOGIC ---
+            
+            // 1. Save the new progress!
+            // This calls our "brain" class to save the next level
+            ProgressTracker.unlockNextLevel(levelToUnlock);
+            
+            // 2. Go back to the level select screen
+            Greenfoot.setWorld(new LevelSelectWorld()); 
         }
     }
 }
-

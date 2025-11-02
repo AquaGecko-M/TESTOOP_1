@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=btnNextStage
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ btnNextStage\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=btnNextStage()
+comment0.text=\r\n\ Button\ to\ save\ progress\ and\ proceed\ to\ the\ next\ stage.\r\n\ (UPDATED\ VERSION)\r\n
+comment1.params=stageJustCompleted
+comment1.target=btnNextStage(int)
+comment1.text=\r\n\ ---\ CONSTRUCTOR\ IS\ UPDATED\ ---\r\n\ It\ now\ receives\ the\ level\ that\ was\ just\ beaten.\r\n
 comment2.params=
 comment2.target=void\ act()
+comment2.text=\r\n\ ---\ ACT\ METHOD\ IS\ UPDATED\ ---\r\n
 numComments=3
