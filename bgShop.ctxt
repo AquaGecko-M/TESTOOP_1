@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=bgShop
+comment1.params=
+comment1.target=bgShop()
+comment2.params=pausedWorld
+comment2.target=bgShop(GameWorld)
+comment3.params=
+comment3.target=void\ drawBackground()
+comment4.params=
+comment4.target=void\ layoutItems()
+comment5.params=item\ x\ y\ labelX\ labelY
+comment5.target=void\ addItem(ShopItem,\ int,\ int,\ int,\ int)
+comment6.params=item\ x\ y\ text
+comment6.target=void\ updateItemLabel(ShopItem,\ int,\ int,\ java.lang.String)
+comment7.params=message
+comment7.target=void\ showMessage(java.lang.String)
+comment8.params=
+comment8.target=void\ resumeGame()
+numComments=9
