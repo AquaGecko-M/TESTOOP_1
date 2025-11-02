@@ -186,8 +186,8 @@ public class GameWorld extends World {
         
         int sharkRoll = Greenfoot.getRandomNumber(100);
         
-        // 20% kemungkinan (jika angka 0-19)
-        if (sharkRoll < 5) { 
+        // 10% kemungkinan (jika angka 0-9)
+        if (sharkRoll < 10) { 
             int health = GameSettings.EnemyHealth[currentLevel][0];
             enemyShark shark = new enemyShark(health); // <-- Berikan health ke hiu;
             int yHiu = 273; // Ketinggian spesifik untuk hiu

@@ -7,6 +7,7 @@ public class enemyShark extends Actor
     private int health;// Akan diatur oleh spawner (1 = kanan, -1 = kiri)
     private SimpleTimer hitCooldown = new SimpleTimer();
     private boolean canHit = true;
+    private int bob = 0;
 
     public enemyShark(int initialHealth)
     {
@@ -81,7 +82,21 @@ public class enemyShark extends Actor
      * Bergerak berdasarkan arah (direction).
      */
     private void move() {
-        setLocation(getX() + (speed * direction), getY());
+        // Gerakan horizontal
+        int x = getX() + (speed * direction);
+
+        // Logika bobbing (naik turun)
+        
+        // Siklus total 60 frame (30 turun, 30 naik)
+        bob = (bob + 1) % 250;
+        
+        // 30 frame pertama: offset = 1 (turun)
+        // 30 frame berikutnya: offset = -1 (naik)
+        int offset = (bob < 125) ? 1 : -1; 
+        
+        int y = getY() + offset;
+        
+        setLocation(x, y); // Atur lokasi baru
     }
 
     /**
