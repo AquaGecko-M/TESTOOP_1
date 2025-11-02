@@ -3,6 +3,8 @@ import greenfoot.*;
 public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
+    
+    private int attackDamage = 1;
 
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
@@ -140,7 +142,7 @@ public class Boat extends Actor {
 
         // 2) logika hit (sementara: hapus ikan di radius).
         // Nanti tinggal ganti ke Enemy: for (Enemy e : getObjectsInRange(attackRadius, Enemy.class)) e.takeDamage(1);
-        for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
+        /*for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
             ((Actor)obj).getWorld().removeObject((Actor)obj);
         }
         for (Object obj : getObjectsInRange(attackRadius, RareFish.class)) {
@@ -148,6 +150,9 @@ public class Boat extends Actor {
         }
         for (Object obj : getObjectsInRange(attackRadius, EpicFish.class)) {
             ((Actor)obj).getWorld().removeObject((Actor)obj);
+        }*/
+        for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
+        ((enemyShark)obj).takeDamage(attackDamage);
         }
 
         // (opsional) sedikit efek recoil/flash seperti saat takeDamage
