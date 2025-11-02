@@ -4,8 +4,9 @@ public class GameWorld extends World {
     private int score = 0;
     private int life = 5;
     private int timeLeft = 60; // detik per level (ubah sesukamu)
-    private int currentLevel = 0;
-
+    private int currentLevel = 0; // This is for DIFFICULTY (Easy=0, etc.)
+    private int stageNumber; // This is for the STAGE (Level 1, 2, etc.)
+    
     //Keys
     private int keyItems = 0;
     private int keysNeeded = 5;
@@ -20,20 +21,40 @@ public class GameWorld extends World {
     private Kail hook;
     private Hud hud;
     private MenuGameplay menuButton;
-    
     private btnShop shopButton;
+    private boolean gameOverTriggered = false;
     
-    public GameWorld() {
+    // Shop state
+    private int longSpearUpgrades = 0;
+    private int speedUpgrades = 0;
+    private int boostUpgrades = 0;
+    private int heartPurchases = 0;
+    private int coins = 0;
+    private Koin coinIcon;
+    
+    public static final int COIN_REWARD_COMMON = 5;
+    public static final int COIN_REWARD_RARE = 12;
+    public static final int COIN_REWARD_EPIC = 25;
+    public static final int COIN_REWARD_TREASURE = 40;
+
+    private static final int LONG_SPEAR_MAX_LEVEL = 3;
+    private static final int SPEED_MAX_LEVEL = 5;
+    private static final int BOOST_MAX_LEVEL = 5;
+    private static final int HEART_MAX_PURCHASE = 20;
+
+    private static final Color HUD_TEXT_COLOR = Color.WHITE;
+    private static final Color HUD_TEXT_BG = new Color(0, 0, 0, 0);
+    
+    
+    public GameWorld(int stageNum) {
         super(960, 540, 1);
-        setPaintOrder(Hud.class, Kail.class, Boat.class, Fish.class); // hook di depan boat (opsional)
-        
+        this.stageNumber = stageNum; // Store the stage number we were given
+        setPaintOrder(Hud.class, Koin.class, Kail.class, Boat.class, Fish.class); // HUD dan ikon tetap di depan 
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
-        
         GreenfootImage bg = new GreenfootImage("24.jpg");
         bg.scale(960, 540);
-        
- 
+
         originalBg = new GreenfootImage(bg); 
         
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
@@ -43,10 +64,11 @@ public class GameWorld extends World {
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
 
-
         shopButton = new btnShop();
         addObject(shopButton, getWidth() - 55, 120);
-        // -------------------------
+        
+        coinIcon = new Koin();
+        addObject(coinIcon, 50, 105);
 
         Treasure treasure = new Treasure();
         addObject(treasure,914,507);
@@ -78,14 +100,17 @@ public class GameWorld extends World {
     }
 
     public void act() {
+        if (gameOverTriggered) {
+            return;
+        }
+        
         if (secondTimer.hasElapsed(1000)) {
             timeLeft = Math.max(0, timeLeft - 1);
             secondTimer.mark();
             updateHUD();
-            if (timeLeft == 0 || life <= 0) {
-                showText((life <= 0 ? "You Died! " : "Time Up! ") + "Score: " 
-                + score, getWidth()/2, getHeight()/2);
-                Greenfoot.stop();
+            if (timeLeft == 0) {
+                triggerGameOver("Times Up!");
+                return;
             }
         }
 
@@ -94,7 +119,10 @@ public class GameWorld extends World {
             fishSpawnTimer.mark();
         }
         if (Greenfoot.isKeyDown("h")) { boat.takeDamage(1); Greenfoot.delay(5); }
-
+        
+        if (life <= 0) {
+            triggerGameOver("You Died!");
+        }
     }
     
     private void updateLevelFromSettings() {
@@ -125,6 +153,9 @@ public class GameWorld extends World {
     }
 
     public void openPauseMenu() {
+        if (gameOverTriggered) {
+            return;
+        }
         secondTimer.mark();
         fishSpawnTimer.mark();
         Greenfoot.setWorld(new bgMenu(this));
@@ -132,11 +163,26 @@ public class GameWorld extends World {
 
     // --- FITUR DARI VERSI 2 ---
     public void openShopMenu() {
+        if (gameOverTriggered) {
+            return;
+        }
         secondTimer.mark();
         fishSpawnTimer.mark();
         Greenfoot.setWorld(new bgShop(this)); 
     }
-    // -------------------------
+    
+    private void triggerGameOver(String reason) {
+        // 1. Set the flag so this only runs once
+        gameOverTriggered = true;
+        
+        // 2. Stop all game timers
+        secondTimer.mark();
+        fishSpawnTimer.mark();
+        
+        // 3. Go to the gameOver screen
+        // We pass the score, reason, AND the stageNumber so "Try Again" works
+        Greenfoot.setWorld(new gameOver(score, reason, stageNumber));
+    }
 
     public void onResumeFromPause() {
         refreshHUD();
@@ -153,12 +199,19 @@ public class GameWorld extends World {
         }
         
         getBackground().drawImage(keyItemIcon, 20, 40);
-        showText(keyItems + " / " + keysNeeded, 100, 65);
+        GreenfootImage keyLabel = new GreenfootImage(keyItems + " / " + keysNeeded, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
+        getBackground().drawImage(keyLabel, 80, 65 - keyLabel.getHeight() / 2);
+
+        GreenfootImage coinLabel = new GreenfootImage(coins + "$", 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
+        getBackground().drawImage(coinLabel, 80, 110 - coinLabel.getHeight() / 2);
     }
     
     public void reduceTimer(int seconds) {
         timeLeft = Math.max(0, timeLeft - seconds); // Ensure timer doesn't go below 0
         updateHUD(); 
+        if (timeLeft == 0) {
+            triggerGameOver("Times Up!");
+        }
     }
 
     private void spawnFish() {
@@ -219,7 +272,7 @@ public class GameWorld extends World {
             fishSpawnTimer.mark();
             
             // Go to the completion screen
-            Greenfoot.setWorld(new menuCompletion(score, timeLeft, totalFish));
+            Greenfoot.setWorld(new menuCompletion(score, timeLeft, totalFish, stageNumber));
 
             return true; // Yes, the level is complete
         }
@@ -230,5 +283,94 @@ public class GameWorld extends World {
     
     public void addFishCollected(int amount) {
         totalFish += amount;
+    }
+    // --- Shop state helpers ---
+    public int getLongSpearUpgrades() {
+        return longSpearUpgrades;
+    }
+
+    public ShopPurchaseResult tryPurchaseLongSpear(int cost) {
+        if (longSpearUpgrades >= LONG_SPEAR_MAX_LEVEL) {
+            return ShopPurchaseResult.MAXED_OUT;
+        }
+        if (!withdrawCoins(cost)) {
+            return ShopPurchaseResult.NOT_ENOUGH_COINS;
+        }
+        longSpearUpgrades++;
+        return ShopPurchaseResult.PURCHASED;
+    }
+
+    public int getSpeedUpgrades() {
+        return speedUpgrades;
+    }
+
+    public ShopPurchaseResult tryPurchaseSpeed(int cost) {
+        if (speedUpgrades >= SPEED_MAX_LEVEL) {
+            return ShopPurchaseResult.MAXED_OUT;
+        }
+        if (!withdrawCoins(cost)) {
+            return ShopPurchaseResult.NOT_ENOUGH_COINS;
+        }
+        speedUpgrades++;
+        return ShopPurchaseResult.PURCHASED;
+    }
+
+    public int getBoostUpgrades() {
+        return boostUpgrades;
+    }
+
+    public ShopPurchaseResult tryPurchaseBoost(int cost) {
+        if (boostUpgrades >= BOOST_MAX_LEVEL) {
+            return ShopPurchaseResult.MAXED_OUT;
+        }
+        if (!withdrawCoins(cost)) {
+            return ShopPurchaseResult.NOT_ENOUGH_COINS;
+        }
+        boostUpgrades++;
+        return ShopPurchaseResult.PURCHASED;
+    }
+
+    public int getHeartPurchases() {
+        return heartPurchases;
+    }
+
+    public ShopPurchaseResult tryPurchaseHeart(int cost) {
+        if (heartPurchases >= HEART_MAX_PURCHASE) {
+            return ShopPurchaseResult.MAXED_OUT;
+        }
+        if (!withdrawCoins(cost)) {
+            return ShopPurchaseResult.NOT_ENOUGH_COINS;
+        }
+        heartPurchases++;
+        addLife(2);
+        return ShopPurchaseResult.PURCHASED;
+    }
+    
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+    
+    public int getCoins() {
+        return coins;
+    }
+
+    public void addCoins(int amount) {
+        if (amount <= 0) {
+            return;
+        }
+        coins += amount;
+        updateHUD();
+    }
+
+    private boolean withdrawCoins(int cost) {
+        if (cost <= 0) {
+            return true;
+        }
+        if (coins < cost) {
+            return false;
+        }
+        coins -= cost;
+        updateHUD();
+        return true;
     }
 }

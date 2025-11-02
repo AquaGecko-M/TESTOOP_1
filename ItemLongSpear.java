@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class ItemLongSpear extends ShopItem {
-    private static final int BASE_COST = 100;
-    private static final int COST_INCREMENT = 75;
-    private int level;
+    private static final int BASE_COST = 500;
+    private static final int COST_INCREMENT = 250;
+    private static final int MAX_LEVEL = 3;
 
     public ItemLongSpear() {
         setImage(new GreenfootImage("btnItemLongSpear.png"));
@@ -18,19 +18,49 @@ public class ItemLongSpear extends ShopItem {
     @Override
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            int cost = nextCost();
-            level++;
-            showMessage("Upgrade Long Spear Lv " + level + " dibeli seharga $" + cost + " (dummy)");
+            GameWorld gw = getGameWorld();
+            if (gw == null) {
+                return;
+            }
+
+            if (gw.getLongSpearUpgrades() >= MAX_LEVEL) {
+                showMessage("Long Spear sudah MAX");
+                updateLabel();
+                return;
+            }
+
+            int cost = nextCost(gw);
+            ShopPurchaseResult result = gw.tryPurchaseLongSpear(cost);
+
+            if (result == ShopPurchaseResult.NOT_ENOUGH_COINS) {
+                showMessage("Koin tidak cukup (butuh $" + cost + ", saldo $" + gw.getCoins() + ")");
+            } else if (result == ShopPurchaseResult.MAXED_OUT) {
+                showMessage("Long Spear sudah MAX");
+            } else if (result == ShopPurchaseResult.PURCHASED) {
+                int newLevel = gw.getLongSpearUpgrades();
+                showMessage("Upgrade Long Spear Lv " + newLevel + " dibeli seharga $" + cost + " (saldo $" + gw.getCoins() + ")");
+            }
+
             updateLabel();
         }
     }
 
-    private int nextCost() {
-        return BASE_COST + (level * COST_INCREMENT);
+    private int nextCost(GameWorld gw) {
+        return BASE_COST + (gw.getLongSpearUpgrades() * COST_INCREMENT);
     }
 
     @Override
     protected String getLabelText() {
-        return "$" + nextCost() + " Long damage (Lv " + (level + 1) + ")";
+        GameWorld gw = getGameWorld();
+        if (gw == null) {
+            return "";
+        }
+
+        if (gw.getLongSpearUpgrades() >= MAX_LEVEL) {
+            return "MAX LEVEL";
+        }
+
+        int nextLevel = gw.getLongSpearUpgrades() + 1;
+        return "$" + nextCost(gw) + " Long damage\nLevel " + nextLevel;
     }
 }

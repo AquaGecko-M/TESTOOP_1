@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ProgressTracker
+comment0.text=\r\n\ This\ is\ a\ helper\ class,\ not\ an\ Actor.\r\n\ Its\ job\ is\ to\ save\ and\ load\ the\ player's\ progress.\r\n\r\n\ (CORRECTED\ VERSION\ 3\:\ Handles\ null\ *and*\ empty\ strings)\r\n
+comment1.params=
+comment1.target=int\ getHighestLevelUnlocked()
+comment1.text=\r\n\ Gets\ the\ highest\ level\ the\ player\ has\ currently\ unlocked.\r\n\ If\ no\ save\ file\ is\ found,\ it\ defaults\ to\ 1.\r\n
+comment2.params=completedLevel
+comment2.target=void\ unlockNextLevel(int)
+comment2.text=\r\n\ Call\ this\ when\ a\ player\ beats\ a\ level.\r\n\ (e.g.,\ if\ you\ beat\ level\ 1,\ call\ this\ with\ completedLevel\ \=\ 1)\r\n
+comment3.params=
+comment3.target=void\ resetProgress()
+comment3.text=\r\n\ Resets\ all\ game\ progress\ back\ to\ the\ default.\r\n\ Sets\ the\ highest\ level\ unlocked\ back\ to\ 1.\r\n
+numComments=4

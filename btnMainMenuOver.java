@@ -1,18 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class btnTryAgain here.
+ * Write a description of class btnMainMenuOver here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class btnTryAgain extends Actor {
+public class btnMainMenuOver extends Actor {
     private static final int TARGET_WIDTH = 260;
-    private int stageToRetry;
     private boolean mouseWasDown = true; // Click-fix
-    
-    public btnTryAgain(int stageNum) {
-        this.stageToRetry = stageNum;
+    public btnMainMenuOver() {
         applyImage();
     }
 
@@ -22,7 +19,7 @@ public class btnTryAgain extends Actor {
     }
 
     private void applyImage() {
-        GreenfootImage img = new GreenfootImage("TRY AGAIN.png");
+        GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
         int targetHeight = img.getHeight() * TARGET_WIDTH / img.getWidth();
         img.scale(TARGET_WIDTH, targetHeight);
         setImage(img);
@@ -36,7 +33,7 @@ public class btnTryAgain extends Actor {
         }
 
         if (Greenfoot.mouseClicked(this)) {
-            Greenfoot.setWorld(new GameWorld(stageToRetry));
+            Greenfoot.setWorld(new Menu());
         }
     }
 }

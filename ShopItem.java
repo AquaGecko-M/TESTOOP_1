@@ -30,6 +30,11 @@ public abstract class ShopItem extends Actor {
         return (w instanceof bgShop) ? (bgShop) w : null;
     }
 
+    protected GameWorld getGameWorld() {
+        bgShop shop = getShop();
+        return (shop != null) ? shop.getGameWorld() : null;
+    }
+
     protected void updateLabel() {
         bgShop shop = getShop();
         if (shop != null && labelPosition != null) {

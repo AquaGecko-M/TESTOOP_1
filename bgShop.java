@@ -17,6 +17,7 @@ public class bgShop extends World {
 
         drawBackground();
         layoutItems();
+        showMessage("Saldo: $" + (pausedWorld != null ? pausedWorld.getCoins() : 0));
     }
 
     private void drawBackground() {
@@ -72,6 +73,10 @@ public class bgShop extends World {
         item.setLabelPosition(labelX, labelY);
     }
 
+    GameWorld getGameWorld() {
+        return pausedWorld;
+    }
+
     void updateItemLabel(ShopItem item, int x, int y, String text) {
         showText("", x, y);
         showText("", x, y + 20);
@@ -95,7 +100,7 @@ public class bgShop extends World {
             Greenfoot.setWorld(pausedWorld);
             pausedWorld.onResumeFromPause();
         } else {
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new GameWorld(1));
         }
     }
 }
