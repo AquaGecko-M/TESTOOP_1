@@ -14,7 +14,7 @@ public class Boat extends Actor {
     private int speed = 6;
     
     private final SimpleTimer hurtTimer = new SimpleTimer();
-    private int invincibleMs = 900; // 0.9 detik
+    private int invincibleMs = 2000; // 2.0 detik
     private final SimpleTimer attackTimer = new SimpleTimer();
     private int attackCooldownMs = 1000;  // 1 detik
     private int attackRadius     = 140;   // ukuran lingkaran
@@ -102,7 +102,7 @@ public class Boat extends Actor {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(120);
-        Greenfoot.delay(2); // sebentar
+        Greenfoot.delay(30); // sebentar
         img.setTransparency(old);
     }
     
