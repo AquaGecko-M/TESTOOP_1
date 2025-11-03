@@ -45,6 +45,9 @@ public class GameWorld extends World {
     private static final Color HUD_TEXT_COLOR = Color.WHITE;
     private static final Color HUD_TEXT_BG = new Color(0, 0, 0, 0);
     
+    //Boss
+    private boolean bossHasSpawned = false;
+    private int bossSpawnTime = 120; // 300s - 180s = 120s left
     
     public GameWorld(int stageNum) {
         super(960, 540, 1);
@@ -127,7 +130,7 @@ public class GameWorld extends World {
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        startTimer(300);
+        startTimer(121);
     }
 
     public void act() {
@@ -135,6 +138,14 @@ public class GameWorld extends World {
             return;
         }
         
+        if (!bossHasSpawned && timeLeft <= bossSpawnTime) {
+                // Only spawn on Stage 2 or 3
+                if (stageNumber == 2 || stageNumber == 3) {
+                    spawnBoss();
+                    bossHasSpawned = true; // Set the switch so it only spawns once!
+                }
+        }
+            
         if (secondTimer.hasElapsed(1000)) {
             timeLeft = Math.max(0, timeLeft - 1);
             secondTimer.mark();
@@ -455,5 +466,32 @@ public class GameWorld extends World {
         coins -= cost;
         updateHUD();
         return true;
+    }
+    
+    private void spawnBoss() {
+        // Get the difficulty and stage indexes you already made!
+        int d_idx = difficultyIndex();
+        int s_idx = levelIndex(); // This will be 1 (for Stage 2) or 2 (for Stage 3)
+        
+        // Get the boss health from our new GameSettings array
+        int bossHealth = GameSettings.BossHealth[d_idx][s_idx];
+    
+        // We only spawn the Croc on Stage 2
+        if (stageNumber == 2) {
+            
+            // 1. Create the boss (it starts in its "ENTERING" state)
+            crocBoss croc = new crocBoss(bossHealth);
+            
+            // 2. Create the health bar and tell it to track the boss
+            BossHealthBar healthBar = new BossHealthBar(croc);
+            
+            // 3. Add the health bar to the top of the screen
+            addObject(healthBar, getWidth() / 2, 40);
+            
+            // 4. Add the boss off-screen to the left
+            addObject(croc, -100, 350); // (Adjust 350 Y-coordinate as needed)
+    
+        }
+        // (Later, you can add "else if (stageNumber == 3)" here for your nyiRoroBoss)
     }
 }
