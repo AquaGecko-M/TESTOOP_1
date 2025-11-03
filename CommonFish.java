@@ -4,12 +4,12 @@ public class CommonFish extends Actor {
     private int dir;
     private int speed;
     private int bob = 0;
-    private int value;
+    private int value; // Ini untuk SKOR
+    private int coinReward; // Ini untuk KOIN ($)
     private int halfWidth;
 
     public CommonFish() {
         setImage("CFish.png");
-        value = 2;
     }
 
     public void setSpeed(int s) {
@@ -22,9 +22,22 @@ public class CommonFish extends Actor {
         setImage(img);
         halfWidth = img.getWidth() / 2;
     }
+    
+    public void setValue(int score) {
+        this.value = score;
+    }
+    
+    public void setCoinReward(int amount) {
+        this.coinReward = amount;
+    }
 
+    // --- Method untuk mengambil SKOR dan KOIN ---
     public int getValue() {
         return value;
+    }
+    
+    public int getCoinReward() {
+        return coinReward;
     }
 
     protected void addedToWorld(World w) {

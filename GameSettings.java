@@ -17,21 +17,21 @@ public class GameSettings
     // Ukuran ikan berdasarkan level
     // [level][0] = lebar, [level][1] = tinggi
     public static final int[][] commonFishSize = {
-        {120, 150}, //easy
-        {130, 160}, //medium
-        {120, 150} //hard
+        {60, 75},   // Kecil
+        {90, 120},  // Normal
+        {120, 150}  //hard
     };
 
     public static final int[][] rareFishSize = {
-        {50, 65},
-        {100, 120},
-        {90, 110}
+        {50, 65},   // Kecil
+        {80, 100},  // Normal
+        {90, 120}
     };
 
     public static final int[][] epicFishSize = {
-        {100, 120},
-        {90, 110},
-        {80, 100}
+        {40, 55},   // Kecil
+        {60, 75},   // Normal
+        {75, 100}   //epic
     };
 
     public static final int[][] commonFishSpeed = {
