@@ -8,19 +8,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class btnMainmenucomplete extends Actor
 {
-    public btnMainmenucomplete()
-    {
-        // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
-        
-        image.scale(300, 200); 
-        
-        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
-        setImage(image);
+    private boolean readyToClick = false;
+    public btnMainmenucomplete() {
+        GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
+        // You can scale it if you need to
+        img.scale(300, 200);
+        setImage(img);
     }
     
-    public void act()
-    {
-        // Add your action code here.
+    public void act() {
+        if (!readyToClick) {
+            readyToClick = true;
+            return;
+        }
+        if (Greenfoot.mouseClicked(this)) {
+            Greenfoot.setWorld(new Menu()); // Assumes your main menu is 'Menu'
+        }
     }
 }

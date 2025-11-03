@@ -25,7 +25,7 @@ public class BtnEasy extends Actor
         if (Greenfoot.mouseClicked(this)) 
         {   
             GameSettings.difficulty = "Easy";
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new LevelSelectWorld());
         }
     }
 }

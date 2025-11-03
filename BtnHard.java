@@ -25,7 +25,7 @@ public class BtnHard extends Actor
             if (Greenfoot.mouseClicked(this)) 
         {
             GameSettings.difficulty = "Hard";
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new LevelSelectWorld());
         }
     }
 }

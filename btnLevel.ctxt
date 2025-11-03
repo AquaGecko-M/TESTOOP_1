@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=btnLevel
+comment0.text=\r\n\ A\ "smart"\ button\ for\ the\ level\ select\ screen.\r\n\ (SIMPLIFIED\ VERSION)\r\n\ It\ just\ knows\ its\ stage\ number\ and\ checks\ if\ it's\ locked.\r\n
+comment1.params=stageNum\ unlockedImg\ lockedImg
+comment1.target=btnLevel(int,\ java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Creates\ a\ new\ level\ button.\r\n\ @param\ stageNum\ The\ level\ this\ button\ leads\ to\ (e.g.,\ 1,\ 2,\ or\ 3).\r\n\ @param\ unlockedImg\ The\ filename\ for\ the\ "unlocked"\ button\ image.\r\n\ @param\ lockedImg\ The\ filename\ for\ the\ "locked"\ button\ image.\r\n
+comment2.params=
+comment2.target=void\ checkLockStatus()
+comment2.text=\r\n\ Checks\ if\ the\ button\ should\ be\ locked.\r\n
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Check\ for\ clicks.\ Only\ work\ if\ not\ locked.\r\n
+numComments=4

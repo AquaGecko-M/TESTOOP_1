@@ -8,18 +8,24 @@ public class GameSettings
 {
     public static String difficulty = "Easy";
     
+    public static final int[][] EnemyHealth = {
+        {3, 5, 7}, // Easy (Lvl 1=3, Lvl 2=5, Lvl 3=7)
+        {5, 7, 9}, // Medium (Lvl 1=5, Lvl 2=7, Lvl 3=9)
+        {7, 9, 11}  // Hard (Lvl 1=7, Lvl 2=9, Lvl 3=11)
+    };
+    
     // Ukuran ikan berdasarkan level
     // [level][0] = lebar, [level][1] = tinggi
     public static final int[][] commonFishSize = {
-        {160, 180}, //easy
-        {150, 170}, //medium
-        {140, 160} //hard
+        {120, 150}, //easy
+        {130, 160}, //medium
+        {120, 150} //hard
     };
 
     public static final int[][] rareFishSize = {
-        {120, 140},
-        {110, 130},
-        {100, 120}
+        {50, 65},
+        {100, 120},
+        {90, 110}
     };
 
     public static final int[][] epicFishSize = {

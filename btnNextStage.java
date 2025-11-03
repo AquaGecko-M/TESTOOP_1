@@ -1,26 +1,49 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
 
 /**
- * Write a description of class btnNextStage here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Button to save progress and proceed to the next stage.
  */
 public class btnNextStage extends Actor
 {
-        public btnNextStage()
+    private int levelToUnlock;
+    private boolean mouseWasDown = true; 
+
+    /**
+     * --- CONSTRUCTOR IS UPDATED ---
+     * It now receives the level that was just beaten.
+     */
+    public btnNextStage(int stageJustCompleted) 
     {
-        // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = getImage();
+        // We want to unlock the *next* level
+        this.levelToUnlock = stageJustCompleted; 
         
-        image.scale(300, 200); 
-        
-        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
-        setImage(image);
+        GreenfootImage img = new GreenfootImage("btnNextStage.png");
+        img.scale(300, 250); // Your scale code
+        setImage(img);
     }
     
-    public void act()
-    {
-        // Add your action code here.
+    /**
+     * --- ACT METHOD IS UPDATED ---
+     */
+    public void act() {
+        // Fix for click-through bug
+        if (mouseWasDown) {
+            if (Greenfoot.mousePressed(null)) {
+                return; // Wait for release
+            } else {
+                mouseWasDown = false; // Armed
+            }
+        }
+        
+        if (Greenfoot.mouseClicked(this)) {
+            // --- THIS IS THE CORE LOGIC ---
+            
+            // 1. Save the new progress!
+            // This calls our "brain" class to save the next level
+            ProgressTracker.unlockNextLevel(levelToUnlock);
+            
+            // 2. Go back to the level select screen
+            Greenfoot.setWorld(new LevelSelectWorld()); 
+        }
     }
 }

@@ -25,7 +25,7 @@ public class BtnMedium extends Actor
         if (Greenfoot.mouseClicked(this)) 
         {
             GameSettings.difficulty = "Medium";
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new LevelSelectWorld());
         }
     }
 }

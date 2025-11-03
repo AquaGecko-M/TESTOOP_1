@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=ShopItem
+comment0.text=\r\n\ Dasar\ untuk\ semua\ item\ di\ toko.\ Menangani\ label\ teks\ dan\ klik\ umum.\r\n
+comment1.params=width\ height
+comment1.target=void\ resizeImage(int,\ int)
+comment2.params=x\ y
+comment2.target=void\ setLabelPosition(int,\ int)
+comment3.params=
+comment3.target=java.awt.Point\ getLabelPosition()
+comment4.params=
+comment4.target=bgShop\ getShop()
+comment5.params=
+comment5.target=GameWorld\ getGameWorld()
+comment6.params=
+comment6.target=void\ updateLabel()
+comment7.params=message
+comment7.target=void\ showMessage(java.lang.String)
+comment8.params=
+comment8.target=java.lang.String\ getLabelText()
+numComments=9

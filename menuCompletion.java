@@ -1,74 +1,64 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-
+import greenfoot.*;
 
 /**
-
- * Write a description of class menuCompletion here.
-
- * 
-
- * @author (your name) 
-
- * @version (a version number or a date)
-
+ * The stage completion screen.
+ * (UPDATED VERSION)
  */
-
 public class menuCompletion extends World
-
 {
-
+    // --- ADD THIS VARIABLE ---
+    private int stageJustCompleted;
 
     /**
-
-     * Constructor for objects of class menuCompletion.
-
-     * 
-
+     * --- CONSTRUCTOR IS UPDATED ---
+     * Now accepts 4 variables, including the stageNumber.
      */
-
-    public menuCompletion()
-
+    public menuCompletion(int finalScore, int finalTime, int totalFish, int stageJustCompleted)
     {    
-
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-
-        // 1. Atur ukuran dunia agar SAMA dengan GameWorld
-
         super(960, 540, 1); 
-
-        // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
-
-        // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
-
-        GreenfootImage bg = new GreenfootImage("menuCompletion.png"); 
-
-        // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
-        bg.scale(960, 540);
-
-        // 4. Atur gambar yang sudah dikecilkan
-
+        
+        // Store the level we just beat
+        this.stageJustCompleted = stageJustCompleted; 
+        
+        // Set the background
+        GreenfootImage bg = new GreenfootImage("menuCompletion.png");
+        bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        
+        // --- Display Stats (Your code is perfect) ---
+        GreenfootImage textBg = getBackground();
+        textBg.setColor(greenfoot.Color.YELLOW); 
+        textBg.setFont(new Font("Arial", true, false, 38));
+        
+        textBg.drawString("" + totalFish, 660, 265);
+        textBg.drawString("" + finalTime, 510, 320);
+        textBg.drawString("" + finalScore, 563 , 375);
 
+        // --- Display Stars (Your code is perfect) ---
+        if (finalScore >= 200) {
+            addObject(new Star(), 375, 50); 
+        }
+        if (finalScore >= 350) {
+            addObject(new Star(), 475, 50); 
+        }
+        if (finalScore >= 500) {
+            addObject(new Star(), 575, 50); 
+        }
+        
+        // --- Call prepare() at the END ---
         prepare();
     }
 
     /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
+     * This method now correctly adds the buttons.
      */
     private void prepare()
     {
         btnMainmenucomplete btnMainmenucomplete = new btnMainmenucomplete();
-        addObject(btnMainmenucomplete,146,463);
-        btnMainmenucomplete.setLocation(170,482);
-        btnMainmenucomplete.setLocation(147,479);
-        btnNextStage btnNextStage = new btnNextStage();
-        addObject(btnNextStage,746,436);
-        btnNextStage.setLocation(818,479);
-        btnNextStage.setLocation(819,488);
-        btnNextStage.setLocation(806,464);
-        btnNextStage.setLocation(805,476);
-        btnNextStage.setLocation(812,485);
+        addObject(btnMainmenucomplete,147,479); // Using your coordinates
+        
+        // Create btnNextStage and pass it the level we just completed
+        btnNextStage btnNextStage = new btnNextStage(stageJustCompleted); 
+        addObject(btnNextStage,812,485); // Using your coordinates
     }
 }

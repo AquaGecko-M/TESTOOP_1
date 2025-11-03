@@ -14,6 +14,7 @@ public class MenuGameplay extends Actor {
             World world = getWorld();
             if (world instanceof GameWorld) {
                 ((GameWorld) world).openPauseMenu();
+
             }
         }
     }
