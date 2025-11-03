@@ -11,7 +11,11 @@ public class enemyShark extends Actor implements Damageable {
     // (opsional) i-frame saat DISERANG agar tidak tersedot multi-hit
     private final SimpleTimer hurtIFrame = new SimpleTimer();
     private int hurtCooldownMs = 150;
-
+    
+    public int getFacing() { 
+        return direction; 
+    } // -1 kiri, 1 kanan
+    
     public enemyShark(int initialHealth) {
         this.health = initialHealth;
     }

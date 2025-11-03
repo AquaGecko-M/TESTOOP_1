@@ -102,7 +102,7 @@ public class Boat extends Actor {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(120);
-        Greenfoot.delay(30); // sebentar
+        Greenfoot.delay(10); // sebentar
         img.setTransparency(old);
     }
     
@@ -138,24 +138,36 @@ public class Boat extends Actor {
         // 1) efek visual
         AttackRing ring = new AttackRing(attackRadius, attackLifeFrames);
         w.addObject(ring, getX(), getY());
-
-        // 2) logika hit (sementara: hapus ikan di radius).
-        // Nanti tinggal ganti ke Enemy: for (Enemy e : getObjectsInRange(attackRadius, Enemy.class)) e.takeDamage(1);
-        /*for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, RareFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, EpicFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }*/
+        
         for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
-        ((enemyShark)obj).takeDamage(attackDamage);
+        enemyShark t = (enemyShark) obj;
+        int oldX = t.getX();
+        int oldY = t.getY();
+        int facing = t.getFacing();
+
+        t.takeDamage(attackDamage);
+
+        if (t.getWorld() != null) {
+            SlashEffect fx = new SlashEffect(facing, 150, 150);
+            getWorld().addObject(fx, oldX, oldY);
+            }
         }
+        
+        //Puffer
         for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
-        ((EnemyPuffer)obj).takeDamage(attackDamage);
+        EnemyPuffer p = (EnemyPuffer) obj;
+        int oldX = p.getX();
+        int oldY = p.getY();
+        int facing = p.getFacing();
+
+        p.takeDamage(attackDamage);
+
+        if (p.getWorld() != null) {
+            SlashEffect fx = new SlashEffect(facing, 150, 150);
+            getWorld().addObject(fx, oldX, oldY);
+            }
         }
+
 
         // (opsional) sedikit efek recoil/flash seperti saat takeDamage
     }

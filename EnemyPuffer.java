@@ -22,6 +22,10 @@ public class EnemyPuffer extends Actor implements Damageable
     
     private final SimpleTimer hurtIFrame = new SimpleTimer();
     private int hurtCooldownMs = 150; // jeda antar-hit (ms)
+    
+    public int getFacing() { 
+        return direction; 
+    } // -1 kiri, 1 kanan
 
     /**
      * Constructor: Menerima health dari GameWorld/Map2
