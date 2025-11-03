@@ -4,7 +4,7 @@ public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
     
-    private int attackDamage = 1;
+    private int attackDamage = 10;
 
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
@@ -16,7 +16,7 @@ public class Boat extends Actor {
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 2000; // 2.0 detik
     private final SimpleTimer attackTimer = new SimpleTimer();
-    private int attackCooldownMs = 1000;  // 1 detik
+    private int attackCooldownMs = 500;  // 0.5 detik
     private int attackRadius     = 140;   // ukuran lingkaran
     private int attackLifeFrames = 15;    // lama tampil ring
 
@@ -156,7 +156,9 @@ public class Boat extends Actor {
         for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
         ((EnemyPuffer)obj).takeDamage(attackDamage);
         }
-
+        for (Object obj : getObjectsInRange(attackRadius, crocBoss.class)) {
+            ((crocBoss)obj).takeDamage(attackDamage);
+        }
         // (opsional) sedikit efek recoil/flash seperti saat takeDamage
     }
 }

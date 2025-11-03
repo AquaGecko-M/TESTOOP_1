@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=crocBoss
+comment0.text=\r\n\ The\ boss\ for\ Stage\ 2.\ A\ giant\ crocodile\ with\ a\ full\ AI\ state\ machine.\r\n\ (COMPLETE\ AND\ FIXED\ VERSION\ 4.0\ -\ Timer\ Fix)\r\n
+comment1.params=initialHealth
+comment1.target=crocBoss(int)
+comment2.params=world
+comment2.target=void\ addedToWorld(greenfoot.World)
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ ---\ THIS\ IS\ THE\ CORRECTED\ act()\ METHOD\ ---\r\n
+comment4.params=newState
+comment4.target=void\ setState(crocBoss.State)
+comment4.text=\r\n\ ---\ THIS\ IS\ THE\ CORRECTED\ setState()\ METHOD\ ---\r\n
+comment5.params=
+comment5.target=void\ performChompDamage()
+comment6.params=
+comment6.target=double\ getHealthPercentage()
+comment7.params=amount
+comment7.target=void\ takeDamage(int)
+comment8.params=
+comment8.target=void\ flash()
+numComments=9

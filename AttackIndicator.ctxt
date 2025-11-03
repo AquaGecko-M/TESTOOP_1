@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=AttackIndicator
+comment0.text=\r\n\ A\ visual\ warning\ indicator\ for\ the\ boss's\ attack.\r\n\ (UPDATED\ with\ circular\ hitbox)\r\n
+comment1.params=
+comment1.target=AttackIndicator()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=damage
+comment3.target=void\ dealDamage(int)
+comment3.text=\r\n\ Called\ by\ the\ crocBoss.\ This\ indicator\ will\ now\ check\ for\ a\ boat\r\n\ and\ deal\ damage\ to\ it\ using\ a\ circular\ radius.\r\n
+numComments=4
