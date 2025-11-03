@@ -25,7 +25,7 @@ public class enemyShark extends Actor implements Damageable {
             image = new GreenfootImage("Shark.png");
             image.mirrorHorizontally();
         }
-        image.scale(150, 75);
+        image.scale(120, 60);
         setImage(image);
     }
 
@@ -57,7 +57,7 @@ public class enemyShark extends Actor implements Damageable {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(140);
-        Greenfoot.delay(1);
+        Greenfoot.delay(8);
         if (getWorld() != null) { // world bisa null kalau sudah dihapus
             img.setTransparency(old);
         }
@@ -80,8 +80,13 @@ public class enemyShark extends Actor implements Damageable {
             if (hitCooldown.hasElapsed(2000)) canHit = true;
             return;
         }
-        Boat boat = (Boat) getOneIntersectingObject(Boat.class);
-        if (boat != null) {
+        
+        // Check for a boat within a 50-pixel radius (a circle)
+        // Adjust "50" to be smaller or larger.
+        if (!getObjectsInRange(80, Boat.class).isEmpty()) {
+            // We're touching the boat.
+            // Get the boat object to damage it.
+            Boat boat = (Boat) getObjectsInRange(80, Boat.class).get(0);
             boat.takeDamage(1);
             canHit = false;
             hitCooldown.mark();
