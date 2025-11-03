@@ -4,9 +4,9 @@ Tell the reader (someone who does not know anything about this project)
 all they need to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
-PROJECT TITLE:
+PROJECT TITLE: -
 PURPOSE OF PROJECT:
-VERSION or DATE:
+VERSION or DATE: 0.1
 HOW TO START THIS PROJECT:
-AUTHORS:
+AUTHORS: Michael Tandeas, Kristofer Ryan Giggs Eka Saputra, Gaddiel Abiyr Nesher Sitorus, Steven Iwan
 USER INSTRUCTIONS:
