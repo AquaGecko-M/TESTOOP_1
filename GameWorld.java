@@ -49,13 +49,55 @@ public class GameWorld extends World {
     public GameWorld(int stageNum) {
         super(960, 540, 1);
         this.stageNumber = stageNum; // Store the stage number we were given
+        GreenfootImage bg; // Create a temporary variable for the background
+        
+        if (stageNumber == 1) {
+            // --- STAGE 1 setup ---
+            bg = new GreenfootImage("24.jpg"); 
+            bg.scale(960, 540);
+            
+            // Add ALL treasures for Stage 1 HERE
+            addObject(new Treasure(), 30, 500);
+            addObject(new Treasure(), 200, 500);
+            addObject(new Treasure(), 400, 500);
+            addObject(new Treasure(), 600, 500);
+            addObject(new Treasure(), 850, 500);
+            
+        } else if (stageNumber == 2) {
+            // --- STAGE 2 setup ---
+            bg = new GreenfootImage("25.jpg"); 
+            bg.scale(960, 540);
+            
+            // Add ALL treasures for Stage 2 HERE
+            addObject(new Treasure(), 30, 500);
+            addObject(new Treasure(), 200, 500);
+            addObject(new Treasure(), 400, 500);
+            addObject(new Treasure(), 600, 500);
+            addObject(new Treasure(), 850, 500);
+        } else if (stageNumber == 3) {
+            // --- STAGE 3 setup ---
+            bg = new GreenfootImage("26.jpg"); 
+            bg.scale(960, 540);
+            
+            // Add ALL treasures for Stage 3 HERE
+            addObject(new Treasure(), 30, 500);
+            addObject(new Treasure(), 200, 500);
+            addObject(new Treasure(), 400, 500);
+            addObject(new Treasure(), 600, 500);
+            addObject(new Treasure(), 850, 500);
+
+        } else {
+            // Failsafe: Default to Stage 1
+            bg = new GreenfootImage("24.jpg"); 
+            bg.scale(960, 540);
+        }
         setPaintOrder(Hud.class, Koin.class, Kail.class, Boat.class, Fish.class); // HUD dan ikon tetap di depan 
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
-        GreenfootImage bg = new GreenfootImage("24.jpg");
         bg.scale(960, 540);
 
         originalBg = new GreenfootImage(bg); 
+        setBackground(bg);
         
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
         keyItemIcon.scale(50, 50); // Scale it for the HUD
@@ -69,13 +111,6 @@ public class GameWorld extends World {
         
         coinIcon = new Koin();
         addObject(coinIcon, 50, 105);
-
-        Treasure treasure = new Treasure();
-        addObject(treasure,914,507);
-        Treasure treasure2 = new Treasure();
-        addObject(treasure2,507,500);
-        Treasure treasure3 = new Treasure();
-        addObject(treasure3,58,496);
         
         prepare();
         updateHUD();
@@ -93,10 +128,6 @@ public class GameWorld extends World {
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
         startTimer(300);
-        Treasure treasure = new Treasure();
-        addObject(treasure,757,428);
-        Treasure treasure2 = new Treasure();
-        addObject(treasure2,230,421);
     }
 
     public void act() {
@@ -222,85 +253,93 @@ public class GameWorld extends World {
     }
     
     private int levelIndex() {
-        // kalau belum punya sistem level stage, untuk sekarang 0
-        return Math.max(0, Math.min(currentLevel, 
-        GameSettings.EnemyHealth[0].length - 1));
+        // We use stageNumber (which is 1, 2, or 3)
+        // and subtract 1 to get an array index (0, 1, or 2).
+        int index = stageNumber - 1; 
+        
+        // Safety check to make sure the index is valid
+        return Math.max(0, Math.min(index, GameSettings.EnemyHealth[0].length - 1));
     }
 
     private void spawnFish() {
         Actor ikanBaru; 
         
-        int roll = Greenfoot.getRandomNumber(100); // Acak angka 0-99
+        // --- Get your two indexes ONE time ---
+        int d_idx = difficultyIndex(); // 0, 1, or 2 (for Easy, Med, Hard)
+        int s_idx = levelIndex();      // 0, 1, or 2 (for Stage 1, 2, 3)
+        // ---
+        
+        int roll = Greenfoot.getRandomNumber(100);
 
         if (roll < 10) { // Epic
             ikanBaru = new EpicFish();
             EpicFish e = (EpicFish) ikanBaru;
 
-            e.setFishSize(GameSettings.epicFishSize[currentLevel][0], GameSettings.epicFishSize[currentLevel][1]);
+            // Use Difficulty for size
+            e.setFishSize(GameSettings.epicFishSize[d_idx][0], GameSettings.epicFishSize[d_idx][1]);
+            // Use Difficulty for speed
             int speed = Greenfoot.getRandomNumber(
-                GameSettings.epicFishSpeed[currentLevel][1] - GameSettings.epicFishSpeed[currentLevel][0] + 1
-            ) + GameSettings.epicFishSpeed[currentLevel][0];
+                GameSettings.epicFishSpeed[d_idx][1] - GameSettings.epicFishSpeed[d_idx][0] + 1
+            ) + GameSettings.epicFishSpeed[d_idx][0];
             e.setSpeed(speed);
 
         } else if (roll < 35) { // Rare
             ikanBaru = new RareFish();
             RareFish r = (RareFish) ikanBaru;
 
-            r.setFishSize(GameSettings.rareFishSize[currentLevel][0], GameSettings.rareFishSize[currentLevel][1]);
+            // Use Difficulty for size
+            r.setFishSize(GameSettings.rareFishSize[d_idx][0], GameSettings.rareFishSize[d_idx][1]);
+            // Use Difficulty for speed
             int speed = Greenfoot.getRandomNumber(
-                GameSettings.rareFishSpeed[currentLevel][1] - GameSettings.rareFishSpeed[currentLevel][0] + 1
-            ) + GameSettings.rareFishSpeed[currentLevel][0];
+                GameSettings.rareFishSpeed[d_idx][1] - GameSettings.rareFishSpeed[d_idx][0] + 1
+            ) + GameSettings.rareFishSpeed[d_idx][0];
             r.setSpeed(speed);
 
         } else { // Common
             ikanBaru = new CommonFish();
             CommonFish c = (CommonFish) ikanBaru;
 
-            c.setFishSize(GameSettings.commonFishSize[currentLevel][0], GameSettings.commonFishSize[currentLevel][1]);
+            // Use Difficulty for size
+            c.setFishSize(GameSettings.commonFishSize[d_idx][0], GameSettings.commonFishSize[d_idx][1]);
+            // Use Difficulty for speed
             int speed = Greenfoot.getRandomNumber(
-                GameSettings.commonFishSpeed[currentLevel][1] - GameSettings.commonFishSpeed[currentLevel][0] + 1
-            ) + GameSettings.commonFishSpeed[currentLevel][0];
+                GameSettings.commonFishSpeed[d_idx][1] - GameSettings.commonFishSpeed[d_idx][0] + 1
+            ) + GameSettings.commonFishSpeed[d_idx][0];
             c.setSpeed(speed);
         }
         
-        // Kode ini sama persis seperti kodemu sebelumnya
-        int side = Greenfoot.getRandomNumber(2); // 0 kiri, 1 kanan
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // area air
+        int side = Greenfoot.getRandomNumber(2); 
+        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300; 
         int x = (side == 0) ? -40 : getWidth() + 40;
-    
         addObject(ikanBaru, x, y);
-    
-        int sharkRoll = Greenfoot.getRandomNumber(100);
         
-        // 10% kemungkinan (jika angka 0-9)
-        if (sharkRoll < 10) { 
-            int health = GameSettings.EnemyHealth[difficultyIndex()][levelIndex()];
+        // --- SHARK SPAWNING (NOW CORRECT) ---
+        int sharkRoll = Greenfoot.getRandomNumber(1000);
+        if (sharkRoll < 75) { 
+            // Get health based on BOTH Difficulty and Stage
+            int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
 
-            int yHiu = 273; // Ketinggian spesifik untuk hiu
-            
-            // Acak sisi (0 = kiri, 1 = kanan)
+            int yHiu = 273;
             int sideHiu = Greenfoot.getRandomNumber(2); 
             if (sideHiu == 0) {
-            shark.setDirection(1); // <-- BENAR (memanggil Shark2.png)
-            addObject(shark, -50, yHiu);
-             } else {
-            // Muncul di KANAN, bergerak ke KIRI
-            shark.setDirection(-1); // <-- BENAR (memanggil Shark.png)
-            addObject(shark, getWidth() + 50, yHiu);
+               shark.setDirection(1); 
+               addObject(shark, -50, yHiu);
+            } else {
+               shark.setDirection(-1);
+               addObject(shark, getWidth() + 50, yHiu);
             }
         }
         
-        int pufferRoll = Greenfoot.getRandomNumber(100);
-        
-        // 5% kemungkinan (jika angka 0-4)
-        if (pufferRoll < 5) { 
-            int health = GameSettings.EnemyHealth[currentLevel][0];
+        // --- PUFFER SPAWNING (NOW CORRECT) ---
+        int pufferRoll = Greenfoot.getRandomNumber(1000);
+        if (pufferRoll < 50) { 
+            // Get health based on BOTH Difficulty and Stage
+            int health = GameSettings.EnemyHealth[d_idx][s_idx]; // (I am assuming this is your array name)
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
             addObject(puffer, -50, yPuffer);
         }
-        
     }
     
     public boolean addKeyItem() { // <--- Changed from void to boolean

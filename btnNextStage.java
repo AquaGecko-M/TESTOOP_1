@@ -2,13 +2,10 @@ import greenfoot.*;
 
 /**
  * Button to save progress and proceed to the next stage.
- * (UPDATED VERSION)
  */
 public class btnNextStage extends Actor
 {
     private int levelToUnlock;
-    
-    // Fix for click-through bug
     private boolean mouseWasDown = true; 
 
     /**

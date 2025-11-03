@@ -1,21 +1,21 @@
 import greenfoot.*;
 
 /**
- * The stage completion screen. It displays the player's stats
- * and a star rating.
+ * The stage completion screen.
  * (UPDATED VERSION)
  */
 public class menuCompletion extends World
 {
+    // --- ADD THIS VARIABLE ---
     private int stageJustCompleted;
 
     /**
-     * --- CONSTRUCTOR IS NOW CORRECT ---
-     * It now accepts all 4 variables from GameWorld.
+     * --- CONSTRUCTOR IS UPDATED ---
+     * Now accepts 4 variables, including the stageNumber.
      */
     public menuCompletion(int finalScore, int finalTime, int totalFish, int stageJustCompleted)
     {    
-        super(960, 540, 1); // Use your standard world size
+        super(960, 540, 1); 
         
         // Store the level we just beat
         this.stageJustCompleted = stageJustCompleted; 
@@ -45,7 +45,7 @@ public class menuCompletion extends World
             addObject(new Star(), 575, 50); 
         }
         
-        // --- NOW, call prepare() at the END ---
+        // --- Call prepare() at the END ---
         prepare();
     }
 

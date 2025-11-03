@@ -93,11 +93,13 @@ public class EnemyPuffer extends Actor implements Damageable
      * BARU: Method ini HANYA memberi damage jika kembung & menyentuh
      */
     private void checkHitBoat() {
-        // Hanya serang jika sedang KEMBUNG
         if (isKembung) {
-            Boat boat = (Boat) getOneIntersectingObject(Boat.class);
-            if (boat != null) {
-                // Serang terus-menerus (seperti hiu)
+            // Check for a boat within a 35-pixel radius (a circle)
+            // Adjust "35" to be smaller or larger as needed.
+            if (!getObjectsInRange(70, Boat.class).isEmpty()) { 
+                // We're touching the boat.
+                // We need to get the actual boat object to damage it.
+                Boat boat = (Boat) getObjectsInRange(70, Boat.class).get(0);
                 boat.takeDamage(1); 
             }
         }
@@ -213,7 +215,7 @@ public class EnemyPuffer extends Actor implements Damageable
     GreenfootImage img = getImage();
     int old = img.getTransparency();
     img.setTransparency(140);
-    Greenfoot.delay(1);
+    Greenfoot.delay(8);
     if (getWorld() != null) img.setTransparency(old);
     }
 
