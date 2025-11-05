@@ -123,6 +123,8 @@ public class GameWorld extends World {
 
         boat = new Boat();
         addObject(boat, boatX + 20, 250);
+        boat.syncWeaponFromStats();   // W A J I B
+
 
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat

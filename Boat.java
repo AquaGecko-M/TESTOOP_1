@@ -3,9 +3,29 @@ import greenfoot.*;
 public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
-    
-    private int attackDamage = 1;
 
+    // Stats yang dipakai performAttack()
+    private int attackRadius; // Ukuran Lingkaran
+    private int attackDamage;
+    private int attackCooldownMs; //Cooldown Attk
+    private int attackLifeFrames; //Lama Tampil Ring
+    private int slashW;
+    private int slashH;
+    
+    //Animation
+    // --- Attack animation (4 frame per tier) ---
+    private GreenfootImage[][] atkRight = new GreenfootImage[PlayerStats.MAX_WEAPON_TIER + 1][4];
+    private GreenfootImage[][] atkLeft  = new GreenfootImage[PlayerStats.MAX_WEAPON_TIER + 1][4];
+    private boolean attacking = false;
+    private int atkFrame = 0, atkTick = 0, atkDelay = 10; // ganti atkDelay untuk cepat/lambat anim
+    
+    //Patch
+    private int wOffXRight = 12;   // offset senjata saat hadap kanan
+    private int wOffXLeft  = 5; // offset saat hadap kiri (biasanya negatif)
+    private int wOffY      = 70;  // offset vertikal
+
+
+    
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
     private boolean moving = false;
@@ -16,9 +36,6 @@ public class Boat extends Actor {
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 2000; // 2.0 detik
     private final SimpleTimer attackTimer = new SimpleTimer();
-    private int attackCooldownMs = 1000;  // 1 detik
-    private int attackRadius     = 140;   // ukuran lingkaran
-    private int attackLifeFrames = 15;    // lama tampil ring
 
     public Boat() {
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
@@ -27,10 +44,26 @@ public class Boat extends Actor {
         loadRightFrames();
         // Pilih salah satu:
         loadLeftFrames();       // kalau punya file arah kiri
+        loadAttackFrames();   // muat 4 frame per tier (kanan + mirror kiri)
         // buildLeftByMirror(); // kalau mau mirror otomatis
 
         setImage(right[0]); // idle awal
     }
+    
+    private void loadAttackFrames() {
+        for (int t = 0; t <= PlayerStats.MAX_WEAPON_TIER; t++) {
+            for (int f = 0; f < 4; f++) {
+                GreenfootImage r = new GreenfootImage("atk_t" + t + "_" + f + ".png");
+                r.scale(100,100); // jika perlu samakan skala dengan boat
+                atkRight[t][f] = r;
+    
+                GreenfootImage l = new GreenfootImage(r);
+                l.mirrorHorizontally();
+                atkLeft[t][f] = l;
+            }
+        }
+    }
+
 
     public void act() {
         moving = false;
@@ -63,21 +96,40 @@ public class Boat extends Actor {
 
     // ---------- Animation ----------
     private void animate() {
-        if (moving) {
-            if (animTimer.millisElapsed() > frameMs) {
-                frame = (frame + 1) % right.length;
-                animTimer.mark();
-            }
-        } else {
-            frame = 0;
-        }
+    if (attacking) {
+        if (++atkTick >= atkDelay) { atkTick = 0; atkFrame++; }
+        if (atkFrame >= 4) { attacking = false; atkFrame = 0; }
 
-        if (dir > 0) {
-            setImage(right[frame]);
-        } else {
-            setImage(left[frame]);
-        }
+        int tier = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+
+        // 1) ambil frame boat (idle atau jalan)
+        GreenfootImage boatBase = (moving ? (dir > 0 ? right[frame] : left[frame])
+                                          : (dir > 0 ? right[0]   : left[0]));
+
+        // 2) copy dulu (JANGAN gambar langsung ke array sumber)
+        GreenfootImage composed = new GreenfootImage(boatBase);
+
+        // 3) ambil frame weapon sesuai arah
+        GreenfootImage weaponImg = (dir > 0) ? atkRight[tier][atkFrame] : atkLeft[tier][atkFrame];
+
+        // 4) gambar weapon di atas boat dengan offset
+        int offX = (dir > 0) ? wOffXRight : wOffXLeft;
+        composed.drawImage(weaponImg, offX, wOffY);
+
+        // 5) tampilkan
+        setImage(composed);
+        return;
     }
+
+    // …lanjutan anim jalan/idle seperti biasa…
+    if (moving) {
+        if (animTimer.millisElapsed() > frameMs) { frame = (frame + 1) % right.length; animTimer.mark(); }
+    } else frame = 0;
+
+    setImage((dir > 0) ? right[frame] : left[frame]);
+    }
+
+
 
     // ---------- Load frames ----------
     private void loadRightFrames() {
@@ -134,6 +186,9 @@ public class Boat extends Actor {
     private void performAttack() {
         World w = getWorld();
         if (w == null) return;
+        
+        attacking = true;
+        atkFrame = 0; atkTick = 0;
 
         // 1) efek visual
         AttackRing ring = new AttackRing(attackRadius, attackLifeFrames);
@@ -148,8 +203,8 @@ public class Boat extends Actor {
         t.takeDamage(attackDamage);
 
         if (t.getWorld() != null) {
-            SlashEffect fx = new SlashEffect(facing, 150, 150);
-            getWorld().addObject(fx, oldX, oldY);
+            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+            w.addObject(fx, oldX, oldY);
             }
         }
         
@@ -163,12 +218,19 @@ public class Boat extends Actor {
         p.takeDamage(attackDamage);
 
         if (p.getWorld() != null) {
-            SlashEffect fx = new SlashEffect(facing, 150, 150);
-            getWorld().addObject(fx, oldX, oldY);
+            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+            w.addObject(fx, oldX, oldY);
             }
         }
-
-
-        // (opsional) sedikit efek recoil/flash seperti saat takeDamage
+    }
+    
+    public void syncWeaponFromStats() {
+        int t = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+        attackRadius     = PlayerStats.WPN_RADIUS[t];
+        attackDamage     = PlayerStats.WPN_DAMAGE[t];
+        attackCooldownMs = PlayerStats.WPN_COOLDOWN[t];
+        attackLifeFrames = PlayerStats.WPN_RING_LIFE[t];
+        slashW           = PlayerStats.WPN_SLASH_W[t];
+        slashH           = PlayerStats.WPN_SLASH_H[t];
     }
 }
