@@ -26,7 +26,7 @@ public class AttackIndicator extends Actor
     public void act()
     {
         // This flashing logic is unchanged
-        if (flashTimer.hasElapsed(200)) {
+        if (flashTimer.hasElapsed(100)) {
             isVisible = !isVisible; // Toggle visibility
             
             if (isVisible) {

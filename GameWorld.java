@@ -12,6 +12,7 @@ public class GameWorld extends World {
     private int keysNeeded = 5;
     private GreenfootImage keyItemIcon;
     private GreenfootImage originalBg; // Untuk memperbaiki HUD overlapping
+    private GreenfootImage dashIcon;
     private final SimpleTimer secondTimer = new SimpleTimer();
     // Fish
     private int totalFish = 0;
@@ -29,8 +30,10 @@ public class GameWorld extends World {
     private int speedUpgrades = 0;
     private int boostUpgrades = 0;
     private int heartPurchases = 0;
-    private int coins = 0;
+    private int coins = 1000;
     private Koin coinIcon;
+    private int dashCapacity;
+    private int dashCharges;
     
     public static final int COIN_REWARD_COMMON = 5;
     public static final int COIN_REWARD_RARE = 12;
@@ -39,8 +42,10 @@ public class GameWorld extends World {
 
     private static final int LONG_SPEAR_MAX_LEVEL = 3;
     private static final int SPEED_MAX_LEVEL = 5;
-    private static final int BOOST_MAX_LEVEL = 5;
+    private static final int BOOST_MAX_LEVEL = 2;
     private static final int HEART_MAX_PURCHASE = 20;
+    private static final int[] SPEED_LEVEL_VALUES = {1, 2, 3, 4, 5, 7};
+    private static final int[] DASH_CAPACITY_VALUES = {3, 5, 7};
 
     private static final Color HUD_TEXT_COLOR = Color.WHITE;
     private static final Color HUD_TEXT_BG = new Color(0, 0, 0, 0);
@@ -50,8 +55,10 @@ public class GameWorld extends World {
     private int bossSpawnTime = 120; // 300s - 180s = 120s left
     
     public GameWorld(int stageNum) {
-        super(960, 540, 1);
+        super(960, 540, 1, false);
         this.stageNumber = stageNum; // Store the stage number we were given
+        dashCapacity = dashCapacityForLevel(boostUpgrades);
+        dashCharges = dashCapacity;
         GreenfootImage bg; // Create a temporary variable for the background
         
         if (stageNumber == 1) {
@@ -104,6 +111,8 @@ public class GameWorld extends World {
         
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
         keyItemIcon.scale(50, 50); // Scale it for the HUD
+        dashIcon = new GreenfootImage("key_item.png");
+        dashIcon.scale(50, 50);
         setBackground(bg);
     
         menuButton = new MenuGameplay();
@@ -124,8 +133,10 @@ public class GameWorld extends World {
         int boatX = getWidth() / 2;
         int boatY = 120; 
 
-        boat = new Boat();
+        boat = new Boat(this);
         addObject(boat, boatX + 20, 250);
+        applyBoatSpeed();
+        applyDashCapacity();    
 
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
@@ -246,6 +257,9 @@ public class GameWorld extends World {
 
         GreenfootImage coinLabel = new GreenfootImage(coins + "$", 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
         getBackground().drawImage(coinLabel, 80, 110 - coinLabel.getHeight() / 2);
+        
+        GreenfootImage dashLabel = new GreenfootImage("Sisa Dash: " + dashCharges + "/" + dashCapacity, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
+        getBackground().drawImage(dashLabel, 80, 145 - dashLabel.getHeight() / 2);
     }
     
     public void reduceTimer(int seconds) {
@@ -406,6 +420,7 @@ public class GameWorld extends World {
             return ShopPurchaseResult.NOT_ENOUGH_COINS;
         }
         speedUpgrades++;
+        applyBoatSpeed();
         return ShopPurchaseResult.PURCHASED;
     }
 
@@ -421,6 +436,7 @@ public class GameWorld extends World {
             return ShopPurchaseResult.NOT_ENOUGH_COINS;
         }
         boostUpgrades++;
+        applyDashCapacity();
         return ShopPurchaseResult.PURCHASED;
     }
 
@@ -493,5 +509,45 @@ public class GameWorld extends World {
     
         }
         // (Later, you can add "else if (stageNumber == 3)" here for your nyiRoroBoss)
+    }
+    
+    private void applyBoatSpeed() {
+        if (boat == null) {
+            return;
+        }
+        int index = Math.max(0, Math.min(speedUpgrades, SPEED_LEVEL_VALUES.length - 1));
+        boat.setSpeed(SPEED_LEVEL_VALUES[index]);
+    }
+    
+    public int getDashCharges() {
+        return dashCharges;
+    }
+
+    public int getDashCapacity() {
+        return dashCapacity;
+    }
+
+    public int getDashCapacityForLevel(int level) {
+        return dashCapacityForLevel(level);
+    }
+
+    public void notifyDashChanged(int charges, int capacity) {
+        dashCharges = charges;
+        dashCapacity = capacity;
+        updateHUD();
+    }
+
+    private void applyDashCapacity() {
+        dashCapacity = dashCapacityForLevel(boostUpgrades);
+        dashCharges = dashCapacity;
+        if (boat != null) {
+            boat.setDashCapacity(dashCapacity);
+            boat.restoreDashFull();
+        }
+    }
+
+    private int dashCapacityForLevel(int level) {
+        int index = Math.max(0, Math.min(level, DASH_CAPACITY_VALUES.length - 1));
+        return DASH_CAPACITY_VALUES[index];
     }
 }

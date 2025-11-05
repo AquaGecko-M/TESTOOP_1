@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class itemBoost extends ShopItem {
-    private static final int BASE_COST = 100;
-    private static final int COST_INCREMENT = 60;
-    private static final int MAX_LEVEL = 5;
+    private static final int BASE_COST = 150;
+    private static final int COST_INCREMENT = 100;
+    private static final int MAX_LEVEL = 2;
 
     public itemBoost() {
         setImage(new GreenfootImage("btnItemBoost.png"));
@@ -38,7 +38,7 @@ public class itemBoost extends ShopItem {
                 showMessage("Boost sudah MAX");
             } else if (result == ShopPurchaseResult.PURCHASED) {
                 int newLevel = gw.getBoostUpgrades();
-                showMessage("Upgrade Boost Lv " + newLevel + " dibeli seharga $" + cost + " (saldo $" + gw.getCoins() + ")");
+                showMessage("Dash max jadi " + gw.getDashCapacity() + " (upgrade Lv " + newLevel + ", bayar $" + cost + ", saldo $" + gw.getCoins() + ")");
             }
 
             updateLabel();
@@ -56,11 +56,13 @@ public class itemBoost extends ShopItem {
             return "";
         }
 
-        if (gw.getBoostUpgrades() >= MAX_LEVEL) {
+        int level = gw.getBoostUpgrades();
+        if (level >= MAX_LEVEL) {
             return "MAX LEVEL";
         }
 
-        int nextLevel = gw.getBoostUpgrades() + 1;
-        return "$" + nextCost(gw) + " +5 sec duration\nLevel " + nextLevel;
+        int nextLevel = level + 1;
+        int nextCapacity = gw.getDashCapacityForLevel(nextLevel);
+        return "$" + nextCost(gw) + " Dash cap -> " + nextCapacity;
     }
 }
