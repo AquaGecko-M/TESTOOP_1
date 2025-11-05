@@ -3,7 +3,7 @@ import java.util.List;
 
 /**
  * The boss for Stage 2. A giant crocodile with a full AI state machine.
- * (COMPLETE AND FIXED VERSION 4.0 - Timer Fix)
+ * (COMPLETE AND FIXED VERSION 3.0)
  */
 public class crocBoss extends Actor implements Damageable
 {
@@ -24,10 +24,9 @@ public class crocBoss extends Actor implements Damageable
     private int yPos;           // The Y-position the boss likes
     private int speed = 2;      // Movement speed
     
-    // --- TIMERS (THE FIX) ---
-    // We now have TWO timers, one for states, one for animation.
-    private SimpleTimer stateTimer = new SimpleTimer(); // For INDICATING and VULNERABLE
-    private SimpleTimer animTimer = new SimpleTimer();  // For ATTACKING
+    // --- Timers ---
+    private SimpleTimer stateTimer = new SimpleTimer(); // For timing states
+    private SimpleTimer animTimer = new SimpleTimer();  // For attack animation
     private int animFrame = 0;
     
     // --- Attack ---
@@ -42,6 +41,7 @@ public class crocBoss extends Actor implements Damageable
     private GreenfootImage imgRight;
     private GreenfootImage imgLeft;
     
+    // Animation frames for the chomp (NEEDS 4 IMAGES)
     private GreenfootImage[] chompAnimRight = new GreenfootImage[4];
     private GreenfootImage[] chompAnimLeft = new GreenfootImage[4];
 
@@ -49,11 +49,11 @@ public class crocBoss extends Actor implements Damageable
     {
         this.health = initialHealth;
         this.maxHealth = initialHealth;
-        this.yPos = 300; 
+        this.yPos = 300; // (Adjust this Y-coordinate to your liking)
         
         // --- Load ALL images ---
         imgRight = new GreenfootImage("crocClose.png");
-        // imgRight.scale(200, 150); 
+        // imgRight.scale(200, 150); // Scale as needed
         imgLeft = new GreenfootImage(imgRight);
         imgLeft.mirrorHorizontally();
         
@@ -63,6 +63,7 @@ public class crocBoss extends Actor implements Damageable
         chompAnimRight[3] = new GreenfootImage("crocClose.png");
         
         for (int i = 0; i < 4; i++) {
+            // (Scale them if needed)
             // chompAnimRight[i].scale(200, 150);
             chompAnimLeft[i] = new GreenfootImage(chompAnimRight[i]);
             chompAnimLeft[i].mirrorHorizontally();
@@ -70,6 +71,7 @@ public class crocBoss extends Actor implements Damageable
     }
 
     protected void addedToWorld(World world) {
+        // Start on the RIGHT side, moving LEFT, as requested.
         direction = -1;
         setLocation(world.getWidth() + 100, yPos); 
         setImage(imgLeft);
@@ -91,29 +93,33 @@ public class crocBoss extends Actor implements Damageable
                 // Move onto the screen
                 setLocation(getX() + (speed * direction), yPos);
                 
-                int stopX_Right = getWorld().getWidth() - 100;
-                int stopX_Left = 100;
+                // Define our "stop" positions
+                int stopX_Right = getWorld().getWidth() - 100; // 100px from right edge
+                int stopX_Left = 100;                       // 100px from left edge
                 
-                // --- This logic is correct ---
+                // --- THIS IS THE FIX ---
+                // The check MUST be specific to the direction
+                
+                // If we are moving LEFT (dir -1) and we pass our stop point
                 if ( direction == -1 && getX() <= stopX_Right ) {
-                    setLocation(stopX_Right, yPos); 
+                    setLocation(stopX_Right, yPos); // Lock position
                     setState(State.INDICATING);
                 } 
+                // If we are moving RIGHT (dir 1) and we pass our stop point
                 else if ( direction == 1 && getX() >= stopX_Left ) {
-                    setLocation(stopX_Left, yPos);
+                    setLocation(stopX_Left, yPos); // Lock position
                     setState(State.INDICATING);
                 }
+                // If neither is true, we just keep moving.
                 break;
                 
             case INDICATING:
-                // We are waiting for the 2-second STATE timer
-                if (stateTimer.hasElapsed(2000)) {
+                if (stateTimer.hasElapsed(500)) {
                     setState(State.ATTACKING);
                 }
                 break;
                 
             case ATTACKING:
-                // We are waiting for the 100ms ANIM timer
                 if (animTimer.hasElapsed(100)) { 
                     if (direction == 1) setImage(chompAnimRight[animFrame]);
                     else setImage(chompAnimLeft[animFrame]);
@@ -123,7 +129,7 @@ public class crocBoss extends Actor implements Damageable
                     }
                     
                     animFrame++; 
-                    animTimer.mark(); // Reset the ANIM timer
+                    animTimer.mark();
                 }
                 
                 if (animFrame >= 4) {
@@ -132,26 +138,25 @@ public class crocBoss extends Actor implements Damageable
                 break;
                 
             case VULNERABLE:
-                // We are waiting for the 5-second STATE timer
-                if (stateTimer.hasElapsed(5000)) {
+                if (stateTimer.hasElapsed(2000)) {
                     setState(State.LEAVING);
                 }
                 break;
                 
             case LEAVING:
-                // Move off-screen
+                // Move off-screen (direction was flipped in setState)
                 setLocation(getX() + (speed * direction), yPos);
                 
                 // Check if we are fully off-screen
                 if (getX() > getWorld().getWidth() + 100 || getX() < -100) {
                     // --- REPOSITION ---
                     if (Greenfoot.getRandomNumber(2) == 0) {
-                        direction = 1; 
-                        setLocation(-100, yPos); 
+                        direction = 1; // Go right
+                        setLocation(-300, yPos); // Start at left
                         setImage(imgRight);      
                     } else {
-                        direction = -1; 
-                        setLocation(getWorld().getWidth() + 100, yPos);
+                        direction = -1; // Go left
+                        setLocation(getWorld().getWidth() + 300, yPos); // Start at right
                         setImage(imgLeft);                           
                     }
                     setState(State.ENTERING); // Repeat the loop
@@ -160,9 +165,6 @@ public class crocBoss extends Actor implements Damageable
         }
     }
     
-    /**
-     * --- THIS IS THE CORRECTED setState() METHOD ---
-     */
     private void setState(State newState)
     {
         this.currentState = newState;
@@ -177,23 +179,19 @@ public class crocBoss extends Actor implements Damageable
                 setState(State.VULNERABLE);
                 return;
             }
-            // Start the STATE timer for 2 seconds
             stateTimer.mark();
         }
         else if (newState == State.ATTACKING) {
-            // Start the ANIM timer
             animFrame = 0;
             animTimer.mark();
         }
         else if (newState == State.VULNERABLE) {
             setImage(direction == 1 ? imgRight : imgLeft);
-            // Start the STATE timer for 5 seconds
             stateTimer.mark();
         }
         else if (newState == State.LEAVING) {
-            direction *= -1; 
-            setImage(direction == 1 ? imgRight : imgLeft);
-            // No timers are started here
+            direction *= -1; // Reverse direction
+            setImage(direction == 1 ? imgRight : imgLeft); // Flip image
         }
     }
     
@@ -231,7 +229,7 @@ public class crocBoss extends Actor implements Damageable
             gw.addScore(100); 
             gw.addKeyItem();
             
-            getWorld().removeObject(this);
+            getWorld().removeObject(this); // <-- THIS IS THE ONLY "DELETE"
         }
     }
     
