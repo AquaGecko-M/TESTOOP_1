@@ -35,9 +35,6 @@ public class GameWorld extends World {
     private int dashCapacity;
     private int dashCharges;
     
-    public static final int COIN_REWARD_COMMON = 5;
-    public static final int COIN_REWARD_RARE = 12;
-    public static final int COIN_REWARD_EPIC = 25;
     public static final int COIN_REWARD_TREASURE = 40;
 
     private static final int LONG_SPEAR_MAX_LEVEL = 3;
@@ -53,6 +50,7 @@ public class GameWorld extends World {
     //Boss
     private boolean bossHasSpawned = false;
     private int bossSpawnTime = 120; // 300s - 180s = 120s left
+    private boolean goldFishGuaranteedSpawn = false;
     
     public GameWorld(int stageNum) {
         super(960, 540, 1, false);
@@ -175,6 +173,11 @@ public class GameWorld extends World {
         
         if (life <= 0) {
             triggerGameOver("You Died!");
+        }
+        
+        if (!goldFishGuaranteedSpawn && timeLeft <= 60) {
+            spawnGoldFish();
+            goldFishGuaranteedSpawn = true; // Set flag agar tidak spawn lagi
         }
     }
     
@@ -385,7 +388,7 @@ public class GameWorld extends World {
                 c.setValue(4); // Skor 3
                 c.setCoinReward(5); // Koin 5
             }
-            // ---
+            // ---  
             
             int width = GameSettings.commonFishSize[category][0] - difficultyMod;
             int height = GameSettings.commonFishSize[category][1] - difficultyMod;
@@ -426,6 +429,31 @@ public class GameWorld extends World {
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
             addObject(puffer, -50, yPuffer);
+        }
+        
+        if (!goldFishGuaranteedSpawn) {
+        int goldRoll = Greenfoot.getRandomNumber(100); // 0-99
+        if (goldRoll == 0) { // Hanya jika angka 0 (1% chance)
+            spawnGoldFish();    goldFishGuaranteedSpawn = true; // Anggap ini juga memenuhi spawn
+        }
+        }
+    }
+    
+    private void spawnGoldFish() {
+    GoldFish goldie = new GoldFish();
+
+    int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air
+
+    // Acak sisi
+    int side = Greenfoot.getRandomNumber(2);
+    if (side == 5) {
+        // Muncul di KIRI, bergerak ke KANAN
+        goldie.setDirection(1); 
+        addObject(goldie, -50, yPos);
+    } else {
+        // Muncul di KANAN, bergerak ke KIRI
+        goldie.setDirection(-1); 
+        addObject(goldie, getWidth() + 50, yPos);
         }
     }
     

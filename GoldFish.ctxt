@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=GoldFish
+comment0.text=\r\n\ \ \ \ \r\n
+comment1.params=
+comment1.target=GoldFish()
+comment2.params=dir
+comment2.target=void\ setDirection(int)
+comment2.text=\r\n\ Dipanggil\ oleh\ GameWorld\ untuk\ menentukan\ arah\ gerak\r\n
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ move()
+comment4.text=\r\n\ Bergerak\ horizontal\ +\ bobbing\ (naik/turun)\r\n
+comment5.params=
+comment5.target=void\ checkBoundary()
+comment5.text=\r\n\ Hapus\ ikan\ jika\ sudah\ keluar\ layar\r\n
+numComments=6

@@ -38,7 +38,7 @@ public class Kail extends Actor {
             // Ya, kena. Ambil nilainya, hapus ikannya.
             ((GameWorld) getWorld()).addScore(common.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
-            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_COMMON);
+            addCoinsToWorld(common.getCoinReward());
             getWorld().removeObject(common);
             return; // 'return' agar berhenti di sini & tidak tangkap 2 ikan sekaligus
         }
@@ -49,7 +49,7 @@ public class Kail extends Actor {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(rare.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
-            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_RARE);
+            addCoinsToWorld(rare.getCoinReward());
             getWorld().removeObject(rare);
             return;
         }
@@ -60,10 +60,23 @@ public class Kail extends Actor {
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(epic.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
-            ((GameWorld) getWorld()).addCoins(GameWorld.COIN_REWARD_EPIC);
+            addCoinsToWorld(epic.getCoinReward());
             getWorld().removeObject(epic);
             return;
         }
+        
+        GoldFish gold = (GoldFish) getOneIntersectingObject(GoldFish.class);
+        if(gold != null) {
+            // Ambil nilai dari ikan (bukan hardcoded)
+        addScoreToWorld(gold.getValue());
+        addCoinsToWorld(gold.getCoinReward());
+            
+            // Kunci tetap bonus spesial dari Kail
+        addKeyItemToWorld();
+
+         getWorld().removeObject(gold);
+        return; // Penting!
+         }
         
         Treasure treasure = (Treasure) getOneIntersectingObject(Treasure.class);
 
@@ -78,6 +91,8 @@ public class Kail extends Actor {
             return; // Stop processing this act cycle
         }
     }
+    
+    
 
     private void followBoatX() {
         setLocation(owner.getX(), getY()); // selalu sejajar X dengan boat
@@ -118,5 +133,26 @@ public class Kail extends Actor {
             // mouseHolding = false;
         }
     }*/
+    private void addCoinsToWorld(int amount) {
+    // Karena Anda hanya pakai GameWorld, ini aman
+    ((GameWorld)getWorld()).addCoins(amount);
+    }
     
-}
+    private void addScoreToWorld(int score) {
+        // Ini method yang hilang untuk GoldFish
+        ((GameWorld)getWorld()).addScore(score);
+    }
+    
+    private void addFishCollectedToWorld(int amount) {
+        // Ini method yang hilang untuk ikan biasa
+        ((GameWorld)getWorld()).addFishCollected(amount);
+    }
+    private void addKeyItemToWorld() {
+        World world = getWorld(); 
+        if (world instanceof GameWorld) {
+            // addKeyItem() mengembalikan boolean, tapi kita tidak perlu menangkapnya di sini
+            ((GameWorld)world).addKeyItem();
+        }
+        // (Nanti tambahkan 'else if (world instanceof Map2)' di sini jika perlu)
+    }
+}   

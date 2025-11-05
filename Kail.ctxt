@@ -2,6 +2,8 @@
 comment0.target=Kail
 comment1.params=owner
 comment1.target=Kail(Boat)
+comment10.params=
+comment10.target=void\ addKeyItemToWorld()
 comment2.params=w
 comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=
@@ -12,10 +14,11 @@ comment5.params=
 comment5.target=void\ handleVertical()
 comment6.params=
 comment6.target=void\ clampVertical()
-comment7.params=score
-comment7.target=void\ addScoreToWorld(int)
-comment8.params=amount
-comment8.target=void\ addCoinsToWorld(int)
+comment7.params=amount
+comment7.target=void\ addCoinsToWorld(int)
+comment7.text=private\ void\ updateMouseHoldState()\ {\r\n\ \ \ \ \ \ \ \ //\ Start\ hold\ saat\ klik\ kiri\ baru\ ditekan\r\n\ \ \ \ \ \ \ \ if\ (Greenfoot.mousePressed(null))\ {\r\n\ \ \ \ \ \ \ \ \ \ \ \ mouseHolding\ \=\ true;\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ //\ Akhiri\ hold\ saat\ klik\ dilepas\ (click\ end)\ atau\ drag\ selesai\r\n\ \ \ \ \ \ \ \ if\ (Greenfoot.mouseClicked(null)\ ||\ Greenfoot.mouseDragEnded(null))\ {\r\n\ \ \ \ \ \ \ \ \ \ \ \ mouseHolding\ \=\ false;\r\n\ \ \ \ \ \ \ \ }\r\n\r\n\ \ \ \ \ \ \ \ \ \ \ \ //\ Safety\:\ jika\ kursor\ keluar\ dari\ world\ dan\ tidak\ ada\ event\ release,\r\n\ \ \ \ \ \ \ \ \ \ \ \ //\ anggap\ tidak\ menahan\ (mencegah\ "nyangkut")\r\n\ \ \ \ \ \ \ \ MouseInfo\ mi\ \=\ Greenfoot.getMouseInfo();\r\n\ \ \ \ \ \ \ \ if\ (mi\ \=\=\ null\ &&\ \!Greenfoot.mousePressed(null)\ &&\ \!Greenfoot.mouseClicked(null))\ {\r\n\ \ \ \ \ \ \ \ \ \ \ \ //\ tidak\ memaksa\ false\u2014biarkan\ saja;\ kalau\ mau\ lebih\ ketat\:\r\n\ \ \ \ \ \ \ \ \ \ \ \ //\ mouseHolding\ \=\ false;\r\n\ \ \ \ \ \ \ \ }\r\n}
+comment8.params=score
+comment8.target=void\ addScoreToWorld(int)
 comment9.params=amount
 comment9.target=void\ addFishCollectedToWorld(int)
-numComments=10
+numComments=11
