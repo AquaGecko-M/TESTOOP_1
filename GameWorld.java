@@ -371,12 +371,12 @@ public class GameWorld extends World {
             // --- LOGIKA UKURAN BARU (dengan penalti -10%) ---
             int category;
             int sizeRoll = Greenfoot.getRandomNumber(100);
-            // Baru: 40% Kecil, 37% Normal, 23% Besar
-            if (sizeRoll < 70) {
+            // Baru: 50% Kecil, 40% Normal, 10% Besar
+            if (sizeRoll < 50) {
                 category = 0; // Kecil
                 c.setValue(2); // Skor 2
                 c.setCoinReward(3); //koin 3
-            } else if (sizeRoll < 20) {
+            } else if (sizeRoll < 90) {
                 category = 1; // Normal
                 c.setValue(3); // Skor 3
                 c.setCoinReward(4); // Koin 4
