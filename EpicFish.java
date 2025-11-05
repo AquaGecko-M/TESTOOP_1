@@ -9,8 +9,6 @@ public class EpicFish extends Actor {
 
     public EpicFish() {
         setImage("EpicFish.png");
-        value = 10;
-        speed = Greenfoot.getRandomNumber(2) + 4; // 4–5);
     }
     
     public void setSpeed(int s) {

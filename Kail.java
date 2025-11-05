@@ -99,6 +99,7 @@ public class Kail extends Actor {
         setLocation(getX(), y);
     }
     
+    
     /*private void updateMouseHoldState() {
         // Start hold saat klik kiri baru ditekan
         if (Greenfoot.mousePressed(null)) {

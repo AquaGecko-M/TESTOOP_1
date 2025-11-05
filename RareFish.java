@@ -9,7 +9,6 @@ public class RareFish extends Actor {
 
     public RareFish() {
         setImage("RareFish.png");
-        speed = Greenfoot.getRandomNumber(2) + 3; // 3–4
     }
     
     public void setSpeed(int s) {
