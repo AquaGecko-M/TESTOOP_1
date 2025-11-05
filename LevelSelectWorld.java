@@ -30,15 +30,15 @@ public class LevelSelectWorld extends World
 
         // Level 1 Button (Stage 1)
         btnLevel button1 = new btnLevel(1, "btnLevelOne.png", "btnLevelOne_locked.png");
-        addObject(button1, 200, 270); 
+        addObject(button1, 261, 256); 
 
         // Level 2 Button (Stage 2)
         btnLevel button2 = new btnLevel(2, "btnLevelTwo.png", "btnLevelTwo_locked.png");
-        addObject(button2, 480, 270); 
+        addObject(button2, 462, 372); 
 
         // Level 3 Button (Stage 3)
         btnLevel button3 = new btnLevel(3, "btnLevelThree.png", "btnLevelThree_locked.png");
-        addObject(button3, 760, 270); 
+        addObject(button3, 735, 364); 
     }
     
     public void act()

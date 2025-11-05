@@ -53,7 +53,7 @@ public class crocBoss extends Actor implements Damageable
         
         // --- Load ALL images ---
         imgRight = new GreenfootImage("crocClose.png");
-        // imgRight.scale(200, 150); // Scale as needed
+        imgRight.scale(300, 250); // Scale as needed
         imgLeft = new GreenfootImage(imgRight);
         imgLeft.mirrorHorizontally();
         
@@ -114,13 +114,13 @@ public class crocBoss extends Actor implements Damageable
                 break;
                 
             case INDICATING:
-                if (stateTimer.hasElapsed(500)) {
+                if (stateTimer.hasElapsed(800)) {
                     setState(State.ATTACKING);
                 }
                 break;
                 
             case ATTACKING:
-                if (animTimer.hasElapsed(100)) { 
+                if (animTimer.hasElapsed(400)) { 
                     if (direction == 1) setImage(chompAnimRight[animFrame]);
                     else setImage(chompAnimLeft[animFrame]);
                     
@@ -138,7 +138,7 @@ public class crocBoss extends Actor implements Damageable
                 break;
                 
             case VULNERABLE:
-                if (stateTimer.hasElapsed(2000)) {
+                if (stateTimer.hasElapsed(3800)) {
                     setState(State.LEAVING);
                 }
                 break;

@@ -125,7 +125,7 @@ public class Boat extends Actor {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(120);
-        Greenfoot.delay(30); // sebentar
+        Greenfoot.delay(5); // sebentar
         img.setTransparency(old);
     }
     
