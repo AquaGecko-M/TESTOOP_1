@@ -28,9 +28,7 @@ public class RareFish extends Actor {
     public void setCoinReward(int amount) {
         this.coinReward = amount;
     }
-    // ---
-
-    // --- Method untuk mengambil SKOR dan KOIN ---
+    
     public int getValue() {
         return value;
     }

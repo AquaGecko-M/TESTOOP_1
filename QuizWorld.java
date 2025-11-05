@@ -236,8 +236,8 @@ public class QuizWorld extends World
         GreenfootImage bg = getBackground();
         bg.setFont(new Font("Arial", true, false, 48));
         int coinsEarned = 0;
-
         if (wasCorrect) {
+            coinsEarned = GameWorld.COIN_REWARD_TREASURE;
             bg.drawString("Correct! +" + treasureValue + " pts / +" + GameWorld.COIN_REWARD_TREASURE + "$", getWidth() / 2 - 200, getHeight() / 2 - 50);
             originWorld.addScore(treasureValue); 
             boolean levelComplete = originWorld.addKeyItem();
@@ -251,11 +251,11 @@ public class QuizWorld extends World
             originWorld.reduceTimer(20);
             treasure.startCooldown();
         }
-
-        Greenfoot.delay(60);
+        
+        Greenfoot.delay(60); 
         if (coinsEarned > 0) {
             originWorld.addCoins(coinsEarned);
-        }
+        }; 
         Greenfoot.setWorld(originWorld);
         originWorld.onResumeFromPause(); 
     }

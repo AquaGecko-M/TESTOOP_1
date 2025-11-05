@@ -6,7 +6,7 @@ public class CommonFish extends Actor {
     private int bob = 0;
     private int value; // Ini untuk SKOR
     private int coinReward; // Ini untuk KOIN ($)
-    private int halfWidth;
+    private int halfWidth; 
 
     public CommonFish() {
         setImage("CFish.png");
