@@ -394,10 +394,9 @@ public class GameWorld extends World {
             }
         }
         
-        // --- PUFFER SPAWNING (Kode ini sudah benar) ---
+
         int pufferRoll = Greenfoot.getRandomNumber(1000);
         if (pufferRoll < 50) { 
-            // PERBAIKAN: Gunakan 'pufferHealth'
             int health = GameSettings.EnemyHealth[d_idx][s_idx]; 
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
