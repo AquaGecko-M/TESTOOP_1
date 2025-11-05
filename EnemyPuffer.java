@@ -215,7 +215,7 @@ public class EnemyPuffer extends Actor implements Damageable
     GreenfootImage img = getImage();
     int old = img.getTransparency();
     img.setTransparency(140);
-    Greenfoot.delay(8);
+    Greenfoot.delay(5);
     if (getWorld() != null) img.setTransparency(old);
     }
 

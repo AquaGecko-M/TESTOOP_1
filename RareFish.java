@@ -5,6 +5,7 @@ public class RareFish extends Actor {
     private int speed;
     private int bob = 0;
     private int value;
+    private int coinReward;
 
     public RareFish() {
         setImage("RareFish.png");
@@ -22,8 +23,20 @@ public class RareFish extends Actor {
         setImage(img);
     }
 
+    public void setValue(int score) {
+        this.value = score;
+    }
+    
+    public void setCoinReward(int amount) {
+        this.coinReward = amount;
+    }
+    
     public int getValue() {
         return value;
+    }
+    
+    public int getCoinReward() {
+        return coinReward;
     }
 
     protected void addedToWorld(World w) {

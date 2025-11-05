@@ -289,10 +289,13 @@ public class GameWorld extends World {
     private void spawnFish() {
         Actor ikanBaru; 
         
-        // --- Get your two indexes ONE time ---
-        int d_idx = difficultyIndex(); // 0, 1, or 2 (for Easy, Med, Hard)
-        int s_idx = levelIndex();      // 0, 1, or 2 (for Stage 1, 2, 3)
-        // ---
+        // --- Ambil indeks satu kali ---
+        int d_idx = difficultyIndex(); // 0, 1, or 2 (Easy, Med, Hard)
+        int s_idx = levelIndex();      // 0, 1, or 2 (Stage 1, 2, 3)
+        
+        // --- Hitung pengurang ukuran berdasarkan difficulty ---
+        // Easy: 0, Medium: -10, Hard: -20
+        int difficultyMod = d_idx * 10; 
         
         int roll = Greenfoot.getRandomNumber(100);
 
@@ -300,9 +303,30 @@ public class GameWorld extends World {
             ikanBaru = new EpicFish();
             EpicFish e = (EpicFish) ikanBaru;
 
-            // Use Difficulty for size
-            e.setFishSize(GameSettings.epicFishSize[d_idx][0], GameSettings.epicFishSize[d_idx][1]);
-            // Use Difficulty for speed
+            // --- LOGIKA UKURAN BARU (dengan penalti -3%) ---
+            int category;
+            int sizeRoll = Greenfoot.getRandomNumber(100);
+            // Normal: 33% Kecil, 33% Normal, 33% Besar
+            // Baru: 35% Kecil, 35% Normal, 30% Besar
+            if (sizeRoll < 35) {
+                category = 0; // Kecil
+                e.setValue(15); // Skor 4
+                e.setCoinReward(25);
+            } else if (sizeRoll < 70) {
+                category = 1; // Normal
+                e.setValue(30); 
+                e.setCoinReward(30);
+            } else {
+                category = 2; // Besar (lebih jarang)
+                e.setValue(45); 
+                e.setCoinReward(50); //50
+            }
+            // ---
+            
+            int width = GameSettings.epicFishSize[category][0] - difficultyMod;
+            int height = GameSettings.epicFishSize[category][1] - difficultyMod;
+            e.setFishSize(width, height);
+            
             int speed = Greenfoot.getRandomNumber(
                 GameSettings.epicFishSpeed[d_idx][1] - GameSettings.epicFishSpeed[d_idx][0] + 1
             ) + GameSettings.epicFishSpeed[d_idx][0];
@@ -312,9 +336,29 @@ public class GameWorld extends World {
             ikanBaru = new RareFish();
             RareFish r = (RareFish) ikanBaru;
 
-            // Use Difficulty for size
-            r.setFishSize(GameSettings.rareFishSize[d_idx][0], GameSettings.rareFishSize[d_idx][1]);
-            // Use Difficulty for speed
+            // --- LOGIKA UKURAN BARU (dengan penalti -5%) ---
+            int category;
+            int sizeRoll = Greenfoot.getRandomNumber(100);
+            // Baru: 50% Kecil, 30% Normal, 20% Besar
+            if (sizeRoll < 50) {
+                category = 0; // Kecil
+                r.setValue(4); // Skor 4
+                r.setCoinReward(9); //koin 9
+            } else if (sizeRoll < 80) {
+                category = 1; // Normal
+                r.setValue(5); // Skor 4
+                r.setCoinReward(11);
+            } else {
+                category = 2; // Besar (lebih jarang)
+                r.setValue(6); // Skor 4
+                r.setCoinReward(13);
+            }
+            // ---
+            
+            int width = GameSettings.rareFishSize[category][0] - difficultyMod;
+            int height = GameSettings.rareFishSize[category][1] - difficultyMod;
+            r.setFishSize(width, height);
+            
             int speed = Greenfoot.getRandomNumber(
                 GameSettings.rareFishSpeed[d_idx][1] - GameSettings.rareFishSpeed[d_idx][0] + 1
             ) + GameSettings.rareFishSpeed[d_idx][0];
@@ -324,9 +368,29 @@ public class GameWorld extends World {
             ikanBaru = new CommonFish();
             CommonFish c = (CommonFish) ikanBaru;
 
-            // Use Difficulty for size
-            c.setFishSize(GameSettings.commonFishSize[d_idx][0], GameSettings.commonFishSize[d_idx][1]);
-            // Use Difficulty for speed
+            // --- LOGIKA UKURAN BARU (dengan penalti -10%) ---
+            int category;
+            int sizeRoll = Greenfoot.getRandomNumber(100);
+            // Baru: 40% Kecil, 37% Normal, 23% Besar
+            if (sizeRoll < 70) {
+                category = 0; // Kecil
+                c.setValue(2); // Skor 2
+                c.setCoinReward(3); //koin 3
+            } else if (sizeRoll < 20) {
+                category = 1; // Normal
+                c.setValue(3); // Skor 3
+                c.setCoinReward(4); // Koin 4
+            } else {
+                category = 2; // Besar (paling jarang)
+                c.setValue(4); // Skor 3
+                c.setCoinReward(5); // Koin 5
+            }
+            // ---
+            
+            int width = GameSettings.commonFishSize[category][0] - difficultyMod;
+            int height = GameSettings.commonFishSize[category][1] - difficultyMod;
+            c.setFishSize(width, height);
+            
             int speed = Greenfoot.getRandomNumber(
                 GameSettings.commonFishSpeed[d_idx][1] - GameSettings.commonFishSpeed[d_idx][0] + 1
             ) + GameSettings.commonFishSpeed[d_idx][0];
