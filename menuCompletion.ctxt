@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=menuCompletion
-comment0.text=
 comment1.params=finalScore\ finalTime\ totalFish\ stageJustCompleted
 comment1.target=menuCompletion(int,\ int,\ int,\ int)
 comment2.params=

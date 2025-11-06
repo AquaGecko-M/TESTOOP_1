@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=SimpleTimer
-comment0.text=
 comment1.params=
 comment1.target=int\ millisElapsed()
 comment2.params=ms

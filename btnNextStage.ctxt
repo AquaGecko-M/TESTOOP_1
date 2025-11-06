@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=btnNextStage
-comment0.text=
 comment1.params=stageJustCompleted
 comment1.target=btnNextStage(int)
 comment2.params=

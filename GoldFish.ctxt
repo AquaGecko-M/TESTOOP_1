@@ -1,18 +1,15 @@
 #BlueJ class context
 comment0.target=GoldFish
-comment0.text=
 comment1.params=
 comment1.target=GoldFish()
 comment2.params=dir
 comment2.target=void\ setDirection(int)
-comment2.text=
 comment3.params=
 comment3.target=void\ act()
 comment4.params=
 comment4.target=void\ moveHorizontally()
 comment5.params=world
 comment5.target=void\ bounceAtEdges(greenfoot.World)
-comment5.text=
 comment6.params=left
 comment6.target=void\ setFacing(boolean)
 comment7.params=

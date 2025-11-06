@@ -1,13 +1,9 @@
 #BlueJ class context
 comment0.target=ProgressTracker
-comment0.text=
 comment1.params=
 comment1.target=int\ getHighestLevelUnlocked()
-comment1.text=
 comment2.params=completedLevel
 comment2.target=void\ unlockNextLevel(int)
-comment2.text=
 comment3.params=
 comment3.target=void\ resetProgress()
-comment3.text=
 numComments=4

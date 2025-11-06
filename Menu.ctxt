@@ -1,12 +1,9 @@
 #BlueJ class context
 comment0.target=Menu
-comment0.text=
 comment1.params=
 comment1.target=Menu()
-comment1.text=
 comment2.params=
 comment2.target=void\ ButtonMenu()
 comment3.params=
 comment3.target=void\ prepare()
-comment3.text=
 numComments=4

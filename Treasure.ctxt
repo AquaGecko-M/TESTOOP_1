@@ -1,17 +1,13 @@
 #BlueJ class context
 comment0.target=Treasure
-comment0.text=
 comment1.params=
 comment1.target=Treasure()
 comment2.params=
 comment2.target=int\ getValue()
 comment3.params=
 comment3.target=void\ act()
-comment3.text=
 comment4.params=
 comment4.target=void\ startCooldown()
-comment4.text=
 comment5.params=
 comment5.target=boolean\ isInteractable()
-comment5.text=
 numComments=6

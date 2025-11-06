@@ -1,12 +1,9 @@
 #BlueJ class context
 comment0.target=BossHealthBar
-comment0.text=
 comment1.params=bossToTrack
 comment1.target=BossHealthBar(crocBoss)
-comment1.text=
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ updateBar()
-comment3.text=
 numComments=4

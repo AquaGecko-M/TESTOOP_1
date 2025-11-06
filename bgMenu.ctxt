@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=bgMenu
-comment0.text=
 comment1.params=pausedWorld
 comment1.target=bgMenu(GameWorld)
 comment2.params=

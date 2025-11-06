@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=btnTryAgain
-comment0.text=
 comment1.params=stageNum
 comment1.target=btnTryAgain(int)
 comment2.params=world
