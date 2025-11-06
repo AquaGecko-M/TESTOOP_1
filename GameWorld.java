@@ -3,7 +3,7 @@ import greenfoot.*;
 public class GameWorld extends World {
     private int score = 0;
     private int life = 5;
-    private int timeLeft = 60; // detik per level (ubah sesukamu)
+    private int timeLeft = 60; 
     private int currentLevel = 0; // This is for DIFFICULTY (Easy=0, etc.)
     private int stageNumber; // This is for the STAGE (Level 1, 2, etc.)
     
@@ -11,7 +11,7 @@ public class GameWorld extends World {
     private int keyItems = 0;
     private int keysNeeded = 5;
     private GreenfootImage keyItemIcon;
-    private GreenfootImage originalBg; // Untuk memperbaiki HUD overlapping
+    private GreenfootImage originalBg; 
     private GreenfootImage dashIcon;
     private final SimpleTimer secondTimer = new SimpleTimer();
     // Fish
@@ -57,17 +57,16 @@ public class GameWorld extends World {
     
     public GameWorld(int stageNum) {
         super(960, 540, 1, false);
-        this.stageNumber = stageNum; // Store the stage number we were given
+        this.stageNumber = stageNum; 
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
-        GreenfootImage bg; // Create a temporary variable for the background
+        GreenfootImage bg; 
         
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
             bg = new GreenfootImage("24.jpg"); 
             bg.scale(960, 540);
             
-            // Add ALL treasures for Stage 1 HERE
             addObject(new Treasure(), 30, 500);
             addObject(new Treasure(), 200, 500);
             addObject(new Treasure(), 400, 500);
@@ -79,7 +78,6 @@ public class GameWorld extends World {
             bg = new GreenfootImage("25.jpg"); 
             bg.scale(960, 540);
             
-            // Add ALL treasures for Stage 2 HERE
             addObject(new Treasure(), 30, 500);
             addObject(new Treasure(), 200, 500);
             addObject(new Treasure(), 400, 500);
@@ -90,7 +88,6 @@ public class GameWorld extends World {
             bg = new GreenfootImage("26.jpg"); 
             bg.scale(960, 540);
             
-            // Add ALL treasures for Stage 3 HERE
             addObject(new Treasure(), 30, 500);
             addObject(new Treasure(), 200, 500);
             addObject(new Treasure(), 400, 500);
@@ -98,7 +95,6 @@ public class GameWorld extends World {
             addObject(new Treasure(), 850, 500);
 
         } else {
-            // Failsafe: Default to Stage 1
             bg = new GreenfootImage("24.jpg"); 
             bg.scale(960, 540);
         }
@@ -110,8 +106,8 @@ public class GameWorld extends World {
         originalBg = new GreenfootImage(bg); 
         setBackground(bg);
         
-        keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
-        keyItemIcon.scale(50, 50); // Scale it for the HUD
+        keyItemIcon = new GreenfootImage("key_item.png"); 
+        keyItemIcon.scale(50, 50); 
         dashIcon = new GreenfootImage("key_item.png");
         dashIcon.scale(50, 50);
         setBackground(bg);
@@ -194,7 +190,6 @@ public class GameWorld extends World {
         }
     }    
 
-    // --- API kecil untuk dipakai kelas lain ---
     public void addScore(int v) { score += v; updateHUD(); }
     public void addLife(int v)  {
         life  = Math.max(0, Math.min(5, life + v)); 
@@ -220,7 +215,6 @@ public class GameWorld extends World {
         Greenfoot.setWorld(new bgMenu(this));
     }
 
-    // --- FITUR DARI VERSI 2 ---
     public void openShopMenu() {
         if (gameOverTriggered) {
             return;
@@ -309,7 +303,6 @@ public class GameWorld extends World {
             ikanBaru = new EpicFish();
             EpicFish e = (EpicFish) ikanBaru;
 
-            // --- LOGIKA UKURAN BARU (dengan penalti -3%) ---
             int category;
             int sizeRoll = Greenfoot.getRandomNumber(100);
             // Normal: 33% Kecil, 33% Normal, 33% Besar
@@ -342,7 +335,6 @@ public class GameWorld extends World {
             ikanBaru = new RareFish();
             RareFish r = (RareFish) ikanBaru;
 
-            // --- LOGIKA UKURAN BARU (dengan penalti -5%) ---
             int category;
             int sizeRoll = Greenfoot.getRandomNumber(100);
             // Baru: 50% Kecil, 30% Normal, 20% Besar
@@ -374,7 +366,6 @@ public class GameWorld extends World {
             ikanBaru = new CommonFish();
             CommonFish c = (CommonFish) ikanBaru;
 
-            // --- LOGIKA UKURAN BARU (dengan penalti -10%) ---
             int category;
             int sizeRoll = Greenfoot.getRandomNumber(100);
             // Baru: 50% Kecil, 40% Normal, 10% Besar
@@ -408,10 +399,8 @@ public class GameWorld extends World {
         int x = (side == 0) ? -40 : getWidth() + 40;
         addObject(ikanBaru, x, y);
         
-        // --- SHARK SPAWNING (NOW CORRECT) ---
         int sharkRoll = Greenfoot.getRandomNumber(100);
         if (sharkRoll < 1) { 
-            // Get health based on BOTH Difficulty and Stage
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
 
@@ -426,7 +415,6 @@ public class GameWorld extends World {
             }
         }
         
-        // --- PUFFER SPAWNING (NOW CORRECT) ---
         int pufferRoll = Greenfoot.getRandomNumber(100);
         if (pufferRoll < 1) { 
             // Get health based on BOTH Difficulty and Stage
@@ -437,7 +425,7 @@ public class GameWorld extends World {
         }
     }
     
-    public boolean addKeyItem() { // <--- Changed from void to boolean
+    public boolean addKeyItem() { 
         if (keyItems < keysNeeded) {
             keyItems++;
             updateHUD();
@@ -573,14 +561,11 @@ public class GameWorld extends World {
     }
     
     private void spawnBoss() {
-        // Get the difficulty and stage indexes you already made!
         int d_idx = difficultyIndex();
         int s_idx = levelIndex(); // This will be 1 (for Stage 2) or 2 (for Stage 3)
         
-        // Get the boss health from our new GameSettings array
         int bossHealth = GameSettings.BossHealth[d_idx][s_idx];
     
-        // We only spawn the Croc on Stage 2
         if (stageNumber == 2) {
             
             // 1. Create the boss (it starts in its "ENTERING" state)
@@ -596,7 +581,6 @@ public class GameWorld extends World {
             addObject(croc, -100, 230); // (Adjust 350 Y-coordinate as needed)
     
         }
-        // (Later, you can add "else if (stageNumber == 3)" here for your nyiRoroBoss)
     }
     
     private void applyBoatSpeed() {

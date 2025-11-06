@@ -6,7 +6,7 @@ import greenfoot.*;
 public class GoldFish extends Actor {
     private static final int EDGE_PADDING = 24;
 
-    private final int speed = 4; // Dia lebih cepat dari ikan biasa
+    private final int speed = 4; 
     private final int value = 100;
     private final int coinReward = 200;
 
@@ -37,14 +37,14 @@ public class GoldFish extends Actor {
 
     public void act() {
         World world = getWorld();
-        if (world == null) return; // Safety bila world null
+        if (world == null) return; 
         moveHorizontally();
         bounceAtEdges(world);
     }
 
     private void moveHorizontally() {
         int nextX = getX() + (speed * direction);
-        bob = (bob + 1) % 40; // Siklus 40 frame untuk efek bobbing ringan
+        bob = (bob + 1) % 40; 
         int offset = (bob < 20) ? 1 : -1;
         int nextY = getY() + offset;
         setLocation(nextX, nextY);

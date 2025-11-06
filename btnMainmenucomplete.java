@@ -11,7 +11,6 @@ public class btnMainmenucomplete extends Actor
     private boolean readyToClick = false;
     public btnMainmenucomplete() {
         GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
-        // You can scale it if you need to
         img.scale(300, 200);
         setImage(img);
     }
@@ -22,7 +21,7 @@ public class btnMainmenucomplete extends Actor
             return;
         }
         if (Greenfoot.mouseClicked(this)) {
-            Greenfoot.setWorld(new Menu()); // Assumes your main menu is 'Menu'
+            Greenfoot.setWorld(new Menu()); 
         }
     }
 }

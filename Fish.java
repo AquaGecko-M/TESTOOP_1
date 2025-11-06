@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class Fish extends Actor {
-    private int dir;                 // arah horizontal (-1 kiri, 1 kanan)
+    private int dir;                 
     private int speed;
     private int bob = 0;
     private int value;
@@ -22,7 +22,6 @@ public class Fish extends Actor {
 
     @Override
     protected void addedToWorld(World w) {
-        // tentukan arah otomatis dari posisi spawn
         if (getX() < w.getWidth() / 2) {
             dir = 1;  // dari kiri → kanan
         } else {
@@ -54,7 +53,6 @@ public class Fish extends Actor {
 
         int rightEdge = w.getWidth() - 1;
 
-        // Greenfoot mengunci x di [0..rightEdge], jadi cek tepi + arah gerak
         if ((dir < 0 && getX() <= 0) ||     // bergerak ke kiri & sudah di tepi kiri
         (dir > 0 && getX() >= rightEdge)) { // bergerak ke kanan & sudah di tepi kanan
         w.removeObject(this);

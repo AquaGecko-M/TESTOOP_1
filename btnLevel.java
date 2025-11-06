@@ -26,7 +26,6 @@ public class btnLevel extends Actor
         unlockedImage = new GreenfootImage(unlockedImg);
         lockedImage = new GreenfootImage(lockedImg);
         
-        // You can scale them here if you need to
         unlockedImage.scale(50, 50);
         lockedImage.scale(50, 50);
         
@@ -55,8 +54,7 @@ public class btnLevel extends Actor
     public void act()
     {
         if (Greenfoot.mouseClicked(this) && !isLocked) {
-            // It's unlocked! Load the GameWorld with this stage number.
-            // GameWorld will automatically read the difficulty from GameSettings.
+
             Greenfoot.setWorld(new GameWorld(this.stageNumber));
         }
     }

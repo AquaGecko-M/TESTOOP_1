@@ -10,12 +10,10 @@ public class BtnBack extends Actor
 {
       public BtnBack()
     {
-        // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("btnBack.png");
         
         image.scale(200,150); 
         
-        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
     }
     

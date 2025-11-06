@@ -31,7 +31,6 @@ public class EnemyPuffer extends Actor implements Damageable
         this.health = initialHealth;
         attackCooldown.mark(); 
         
-        // Muat dan skala gambar (Asumsi KEDUA gambar menghadap KANAN)
         imgKempes = new GreenfootImage("Kempes.png");
         imgKempes.scale(70, 70);
         imgKembung = new GreenfootImage("Kembung.png");
@@ -117,7 +116,7 @@ public class EnemyPuffer extends Actor implements Damageable
      */
     private void setKembung(boolean kembung) {
         this.isKembung = kembung;
-        updateImageDirection(); // Perbarui gambar
+        updateImageDirection(); 
     }
     
     /**
@@ -165,7 +164,6 @@ public class EnemyPuffer extends Actor implements Damageable
             int newX = getX();
             int newY = getY();
             
-            // Tentukan kecepatan (lebih cepat jika kembung)
             int currentSpeed = isKembung ? speed + 1 : speed;
 
             // 1. Gerak di sumbu X (menuju boat)
@@ -206,7 +204,7 @@ public class EnemyPuffer extends Actor implements Damageable
         flash();
 
         if (health <= 0) {
-            addScoreToWorld(5);    // ubah angka skor sesukamu
+            addScoreToWorld(5);   
             getWorld().removeObject(this);
         }
     }

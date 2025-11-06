@@ -5,20 +5,16 @@ public class Kail extends Actor {
     private int downSpeed = 3;
     private int upSpeed   = 3;
 
-    // batas vertikal (atur sesuai layout air-mu)
     private int minY;  // dekat boat
     private int maxY;  // kedalaman maksimum
     
     public Kail(Boat owner) {
         this.owner = owner;
-        // 1. Set gambar dulu
-        setImage("Kail.png"); // <--- Pastikan nama file gambarmu BENAR
+        setImage("Kail.png"); 
         
-        // 2. Kemudian, ubah ukurannya
         GreenfootImage image = getImage();
-        // Ubah angka 30 dan 60 sesuai ukuran yang kamu inginkan
-        image.scale(40, 50); // Contoh: Lebar 30 piksel, Tinggi 60 piksel
-        setImage(image); // Set gambar yang sudah diskalakan
+        image.scale(40, 50); 
+        setImage(image); 
     }
 
     protected void addedToWorld(World w) {
@@ -75,7 +71,7 @@ public class Kail extends Actor {
         addKeyItemToWorld();
 
          getWorld().removeObject(gold);
-        return; // Penting!
+        return; 
          }
         
         Treasure treasure = (Treasure) getOneIntersectingObject(Treasure.class);
@@ -113,23 +109,19 @@ public class Kail extends Actor {
     }
     
     private void addCoinsToWorld(int amount) {
-    // Karena Anda hanya pakai GameWorld, ini aman
     ((GameWorld)getWorld()).addCoins(amount);
     }
     
     private void addScoreToWorld(int score) {
-        // Ini method yang hilang untuk GoldFish
         ((GameWorld)getWorld()).addScore(score);
     }
     
     private void addFishCollectedToWorld(int amount) {
-        // Ini method yang hilang untuk ikan biasa
         ((GameWorld)getWorld()).addFishCollected(amount);
     }
     private void addKeyItemToWorld() {
         World world = getWorld(); 
         if (world instanceof GameWorld) {
-            // addKeyItem() mengembalikan boolean, tapi kita tidak perlu menangkapnya di sini
             ((GameWorld)world).addKeyItem();
         }
     

@@ -8,7 +8,6 @@ public class enemyShark extends Actor implements Damageable {
     private boolean canHit = true; // cooldown untuk MENYAKITI boat
     private int bob = 0;
 
-    // (opsional) i-frame saat DISERANG agar tidak tersedot multi-hit
     private final SimpleTimer hurtIFrame = new SimpleTimer();
     private int hurtCooldownMs = 150;
 
@@ -37,7 +36,6 @@ public class enemyShark extends Actor implements Damageable {
         
     }
 
-    // === Damageable ===
     @Override
     public void takeDamage(int amount) {
         // i-frame vs serangan supaya tidak “terbakar” multi hit dalam 1–2 frame

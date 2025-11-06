@@ -10,12 +10,10 @@ public class BtnHard extends Actor
 {
       public BtnHard()
     {
-        // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("bntHard.png");
         
         image.scale(150,150); 
         
-        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
     }
     

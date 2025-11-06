@@ -4,9 +4,7 @@ public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
     
-    // --- THIS IS THE FIX (Step 1) ---
-    // We create our own variable to store the GameWorld.
-    // We call it "gameWorld" to avoid the name conflict.
+
     private GameWorld gameWorld;
     
     private int attackDamage = 1;
@@ -39,13 +37,11 @@ public class Boat extends Actor {
     
     public Boat(GameWorld world) {
         this.gameWorld = world;
-        right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
+        right = new GreenfootImage[4]; 
         left = new GreenfootImage[4];
 
         loadRightFrames();
-        // Pilih salah satu:
-        loadLeftFrames();       // kalau punya file arah kiri
-        // buildLeftByMirror(); // kalau mau mirror otomatis
+        loadLeftFrames();     
 
         setImage(right[0]); // idle awal
     }
@@ -125,13 +121,12 @@ public class Boat extends Actor {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(120);
-        Greenfoot.delay(5); // sebentar
+        Greenfoot.delay(5); 
         img.setTransparency(old);
     }
     
     public void takeDamage(int dmg) {
-        if (!canBeHit()) return;   // i-frame aktif → abaikan
-
+        if (!canBeHit()) return;   
         GameWorld gw = (GameWorld) getWorld();
         gw.addLife(-dmg);
         hurtTimer.mark();
@@ -182,7 +177,6 @@ public class Boat extends Actor {
         for (Object obj : getObjectsInRange(attackRadius, crocBoss.class)) {
             ((crocBoss)obj).takeDamage(attackDamage);
         }
-        // (opsional) sedikit efek recoil/flash seperti saat takeDamage
     }
     
     private void handleDash() {

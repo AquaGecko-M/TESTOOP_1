@@ -19,7 +19,6 @@ public class ProgressTracker
             UserInfo storage = UserInfo.getMyInfo();
             String savedLevel = storage.getString(SAVE_KEY); 
             
-            // --- THIS IS THE FIX ---
             // Check if the saved value is null OR if it's an empty string ""
             if (savedLevel == null || savedLevel.isEmpty()) {
                 // No save file found, or save file is empty. Default to level 1.
@@ -57,7 +56,6 @@ public class ProgressTracker
     public static void resetProgress() {
         if (UserInfo.isStorageAvailable()) {
             UserInfo storage = UserInfo.getMyInfo();
-            // Set the saved value back to "1"
             storage.setString(SAVE_KEY, "1");
             storage.store();
         }

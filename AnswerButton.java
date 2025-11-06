@@ -11,9 +11,9 @@ public class AnswerButton extends Actor
         
         GreenfootImage img = new GreenfootImage(150, 50); 
         
-        img.setColor(new greenfoot.Color(100, 100, 255)); // Use greenfoot.Color
+        img.setColor(new greenfoot.Color(100, 100, 255)); 
         img.fill();
-        img.setColor(greenfoot.Color.WHITE); // Use greenfoot.Color
+        img.setColor(greenfoot.Color.WHITE); 
 
         img.setFont(new Font("Arial", true, false, 24)); 
         img.drawString(String.valueOf(answerValue), 

@@ -10,7 +10,7 @@ public abstract class ShopItem extends Actor {
     protected void resizeImage(int width, int height) {
         GreenfootImage img = getImage();
         if (img != null) {
-            img = new GreenfootImage(img); // copy biar tidak share referensi
+            img = new GreenfootImage(img); 
             img.scale(width, height);
             setImage(img);
         }

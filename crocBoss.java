@@ -30,14 +30,13 @@ public class crocBoss extends Actor implements Damageable
     private int animFrame = 0;
     
     // --- Attack ---
-    private AttackIndicator currentIndicator; // A reference to our indicator
+    private AttackIndicator currentIndicator; // A reference to indicator
     private int attackDamage = 1; // How much the chomp hurts
     
     // --- Invincibility ---
     private final SimpleTimer hurtIFrame = new SimpleTimer();
     private int hurtCooldownMs = 150; // 0.15s i-frame
     
-    // --- IMAGES (NEW) ---
     private GreenfootImage imgIdleRight;
     private GreenfootImage imgIdleLeft;
     private GreenfootImage imgTiredRight;
@@ -51,16 +50,16 @@ public class crocBoss extends Actor implements Damageable
     {
         this.health = initialHealth;
         this.maxHealth = initialHealth;
-        this.yPos = 230; // (Adjust this Y-coordinate to your liking)
+        this.yPos = 230; 
         
         // --- Load ALL images ---
         imgIdleRight = new GreenfootImage("crocClose.png");
-        imgIdleRight.scale(300, 250); // Your scale
+        imgIdleRight.scale(300, 250); 
         imgIdleLeft = new GreenfootImage(imgIdleRight);
         imgIdleLeft.mirrorHorizontally();
         
         imgTiredRight = new GreenfootImage("crocTired.png");
-        imgTiredRight.scale(300, 250); // Your scale
+        imgTiredRight.scale(300, 250); 
         imgTiredLeft = new GreenfootImage(imgTiredRight);
         imgTiredLeft.mirrorHorizontally();
 
@@ -78,7 +77,6 @@ public class crocBoss extends Actor implements Damageable
         
         // Create mirrored versions of walk and chomp
         for (int i = 0; i < 4; i++) {
-            // --- Apply your scale to ALL animations ---
             imgWalkRight[i].scale(300, 250);
             chompAnimRight[i].scale(400, 400);
             
@@ -91,14 +89,11 @@ public class crocBoss extends Actor implements Damageable
     }
 
     protected void addedToWorld(World world) {
-        // Start on the RIGHT side, moving LEFT, as requested.
         direction = -1;
         setLocation(world.getWidth() + 100, yPos); 
         
-        // --- SETSTATE FIX ---
-        // We must call setState *first* so the image is set correctly
+
         setState(State.ENTERING);
-        // setImage(imgLeft); // This line is now in setState
     }
 
     /**
@@ -123,7 +118,7 @@ public class crocBoss extends Actor implements Damageable
                 // --- 2. Move ---
                 setLocation(getX() + (speed * direction), yPos);
                 
-                // --- 3. Check for arrival (This is your correct logic) ---
+                // --- 3. Check for arrival  ---
                 int stopX_Right = getWorld().getWidth() - 100;
                 int stopX_Left = 100;
                 
@@ -136,13 +131,13 @@ public class crocBoss extends Actor implements Damageable
                 break;
                 
             case INDICATING:
-                if (stateTimer.hasElapsed(800)) { // Your timer
+                if (stateTimer.hasElapsed(800)) { 
                     setState(State.ATTACKING);
                 }
                 break;
                 
             case ATTACKING:
-                if (animTimer.hasElapsed(400)) { // Your timer
+                if (animTimer.hasElapsed(400)) { 
                     setImage(direction == 1 ? chompAnimRight[animFrame] : chompAnimLeft[animFrame]);
                     
                     if (animFrame == 2) { 
@@ -177,7 +172,7 @@ public class crocBoss extends Actor implements Damageable
                 // --- 2. Move ---
                 setLocation(getX() + (speed * direction), yPos);
                 
-                // --- 3. Check if fully off-screen (Using your coords) ---
+                // --- 3. Check if fully off-screen  ---
                 if (getX() > getWorld().getWidth() + 300 || getX() < -300) {
                     // --- REPOSITION ---
                     if (Greenfoot.getRandomNumber(2) == 0) {
@@ -243,7 +238,6 @@ public class crocBoss extends Actor implements Damageable
         }
     }
     
-    // --- The rest of your file is unchanged and correct ---
     
     private void performChompDamage() {
         if (currentIndicator != null && currentIndicator.getWorld() != null) {

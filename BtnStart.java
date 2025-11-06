@@ -10,12 +10,10 @@ public class BtnStart extends Actor
 {
       public BtnStart()
     {
-        // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = getImage();
         
         image.scale(200, 150); 
         
-        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
     }
     

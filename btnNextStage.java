@@ -14,11 +14,10 @@ public class btnNextStage extends Actor
      */
     public btnNextStage(int stageJustCompleted) 
     {
-        // We want to unlock the *next* level
         this.levelToUnlock = stageJustCompleted; 
         
         GreenfootImage img = new GreenfootImage("btnNextStage.png");
-        img.scale(300, 250); // Your scale code
+        img.scale(300, 250); 
         setImage(img);
     }
     
@@ -26,7 +25,6 @@ public class btnNextStage extends Actor
      * --- ACT METHOD IS UPDATED ---
      */
     public void act() {
-        // Fix for click-through bug
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) {
                 return; // Wait for release
@@ -36,7 +34,6 @@ public class btnNextStage extends Actor
         }
         
         if (Greenfoot.mouseClicked(this)) {
-            // --- THIS IS THE CORE LOGIC ---
             
             // 1. Save the new progress!
             // This calls our "brain" class to save the next level

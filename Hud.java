@@ -6,11 +6,11 @@ public class Hud extends Actor {
     // hearts
     private GreenfootImage heartFull = new GreenfootImage("heart2.png");
     private GreenfootImage heartEmpty;
-    private int heartSize = 30;        // tinggi hati (px) -> di-scale biar muat
-    private int heartSpacing;          // dihitung dari lebar hati
+    private int heartSize = 30;        
+    private int heartSpacing;         
 
     // text
-    private final Font font = new Font("Arial", true, false, 18); // sederhana & pasti ada
+    private final Font font = new Font("Arial", true, false, 18); 
 
     private int score = 0, life = 5, maxLife = 5, timeLeft = 0;
 
@@ -18,7 +18,6 @@ public class Hud extends Actor {
         this.w = width; this.h = Math.max(height, 40); // minimal 40 px biar muat
         this.maxLife = maxLife;
 
-        // --- scale hearts supaya pas ---
         double scale = heartSize / (double)heartFull.getHeight();
         int newW = (int)Math.max(1, Math.round(heartFull.getWidth() * scale));
         int newH = (int)Math.max(1, Math.round(heartFull.getHeight() * scale));
@@ -57,7 +56,7 @@ public class Hud extends Actor {
 
         // text
         img.setFont(font);
-        int textY = (h / 2) + 7; // kira2 baseline di tengah
+        int textY = (h / 2) + 7; 
         int baseX = hx + maxLife * heartSpacing + 16;
 
         // shadow

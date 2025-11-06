@@ -10,14 +10,12 @@ public class LevelSelectWorld extends World
      */
     public LevelSelectWorld()
     {    
-        super(960, 540, 1); // Using your game's standard size
+        super(960, 540, 1); 
         
-        // Set the background
         GreenfootImage bg = new GreenfootImage("background_level.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
         
-        // Call prepare to add the buttons
         prepare();
     }
     
@@ -26,9 +24,7 @@ public class LevelSelectWorld extends World
      */
     private void prepare()
     {
-        // --- THIS IS THE NEW, SIMPLER CODE ---
 
-        // Level 1 Button (Stage 1)
         btnLevel button1 = new btnLevel(1, "btnLevelOne.png", "btnLevelOne_locked.png");
         addObject(button1, 261, 256); 
 
@@ -43,14 +39,10 @@ public class LevelSelectWorld extends World
     
     public void act()
     {
-        // Check if the 'r' key is pressed
         if (Greenfoot.isKeyDown("r"))
         {
-            // 1. Call our "brain" to reset progress
             ProgressTracker.resetProgress();
             
-            // 2. Reload this world immediately
-            // This forces all buttons to re-check their lock status
             Greenfoot.setWorld(new LevelSelectWorld());
         }
     }
