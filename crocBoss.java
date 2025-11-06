@@ -3,7 +3,7 @@ import java.util.List;
 
 /**
  * The boss for Stage 2. A giant crocodile with a full AI state machine.
- * (COMPLETE AND FIXED VERSION 3.0)
+ * (UPDATED to include Walk and Tired animations)
  */
 public class crocBoss extends Actor implements Damageable
 {
@@ -26,7 +26,7 @@ public class crocBoss extends Actor implements Damageable
     
     // --- Timers ---
     private SimpleTimer stateTimer = new SimpleTimer(); // For timing states
-    private SimpleTimer animTimer = new SimpleTimer();  // For attack animation
+    private SimpleTimer animTimer = new SimpleTimer();  // For animations
     private int animFrame = 0;
     
     // --- Attack ---
@@ -37,11 +37,13 @@ public class crocBoss extends Actor implements Damageable
     private final SimpleTimer hurtIFrame = new SimpleTimer();
     private int hurtCooldownMs = 150; // 0.15s i-frame
     
-    // --- IMAGES ---
-    private GreenfootImage imgRight;
-    private GreenfootImage imgLeft;
-    
-    // Animation frames for the chomp (NEEDS 4 IMAGES)
+    // --- IMAGES (NEW) ---
+    private GreenfootImage imgIdleRight;
+    private GreenfootImage imgIdleLeft;
+    private GreenfootImage imgTiredRight;
+    private GreenfootImage imgTiredLeft;
+    private GreenfootImage[] imgWalkRight = new GreenfootImage[4];
+    private GreenfootImage[] imgWalkLeft = new GreenfootImage[4];
     private GreenfootImage[] chompAnimRight = new GreenfootImage[4];
     private GreenfootImage[] chompAnimLeft = new GreenfootImage[4];
 
@@ -49,22 +51,40 @@ public class crocBoss extends Actor implements Damageable
     {
         this.health = initialHealth;
         this.maxHealth = initialHealth;
-        this.yPos = 300; // (Adjust this Y-coordinate to your liking)
+        this.yPos = 230; // (Adjust this Y-coordinate to your liking)
         
         // --- Load ALL images ---
-        imgRight = new GreenfootImage("crocClose.png");
-        imgRight.scale(300, 250); // Scale as needed
-        imgLeft = new GreenfootImage(imgRight);
-        imgLeft.mirrorHorizontally();
+        imgIdleRight = new GreenfootImage("crocClose.png");
+        imgIdleRight.scale(300, 250); // Your scale
+        imgIdleLeft = new GreenfootImage(imgIdleRight);
+        imgIdleLeft.mirrorHorizontally();
         
+        imgTiredRight = new GreenfootImage("crocTired.png");
+        imgTiredRight.scale(300, 250); // Your scale
+        imgTiredLeft = new GreenfootImage(imgTiredRight);
+        imgTiredLeft.mirrorHorizontally();
+
+        // Load walk animation
+        imgWalkRight[0] = new GreenfootImage("crocWalk1.png");
+        imgWalkRight[1] = new GreenfootImage("crocWalk2.png");
+        imgWalkRight[2] = new GreenfootImage("crocWalk3.png");
+        imgWalkRight[3] = new GreenfootImage("crocWalk4.png");
+        
+        // Load chomp animation
         chompAnimRight[0] = new GreenfootImage("crocHalfOpen.png");
         chompAnimRight[1] = new GreenfootImage("crocOpen.png");
         chompAnimRight[2] = new GreenfootImage("crocHalfClose.png");
         chompAnimRight[3] = new GreenfootImage("crocClose.png");
         
+        // Create mirrored versions of walk and chomp
         for (int i = 0; i < 4; i++) {
-            // (Scale them if needed)
-            // chompAnimRight[i].scale(200, 150);
+            // --- Apply your scale to ALL animations ---
+            imgWalkRight[i].scale(300, 250);
+            chompAnimRight[i].scale(400, 400);
+            
+            imgWalkLeft[i] = new GreenfootImage(imgWalkRight[i]);
+            imgWalkLeft[i].mirrorHorizontally();
+            
             chompAnimLeft[i] = new GreenfootImage(chompAnimRight[i]);
             chompAnimLeft[i].mirrorHorizontally();
         }
@@ -74,12 +94,15 @@ public class crocBoss extends Actor implements Damageable
         // Start on the RIGHT side, moving LEFT, as requested.
         direction = -1;
         setLocation(world.getWidth() + 100, yPos); 
-        setImage(imgLeft);
+        
+        // --- SETSTATE FIX ---
+        // We must call setState *first* so the image is set correctly
         setState(State.ENTERING);
+        // setImage(imgLeft); // This line is now in setState
     }
 
     /**
-     * --- THIS IS THE CORRECTED act() METHOD ---
+     * --- act() METHOD IS UPDATED ---
      */
     public void act()
     {
@@ -90,39 +113,37 @@ public class crocBoss extends Actor implements Damageable
         switch (currentState)
         {
             case ENTERING:
-                // Move onto the screen
+                // --- 1. Animate Walking ---
+                if (animTimer.hasElapsed(150)) { // 150ms per walk frame
+                    animFrame = (animFrame + 1) % 4; // Loop frames 0-3
+                    setImage(direction == 1 ? imgWalkRight[animFrame] : imgWalkLeft[animFrame]);
+                    animTimer.mark();
+                }
+            
+                // --- 2. Move ---
                 setLocation(getX() + (speed * direction), yPos);
                 
-                // Define our "stop" positions
-                int stopX_Right = getWorld().getWidth() - 100; // 100px from right edge
-                int stopX_Left = 100;                       // 100px from left edge
+                // --- 3. Check for arrival (This is your correct logic) ---
+                int stopX_Right = getWorld().getWidth() - 100;
+                int stopX_Left = 100;
                 
-                // --- THIS IS THE FIX ---
-                // The check MUST be specific to the direction
-                
-                // If we are moving LEFT (dir -1) and we pass our stop point
-                if ( direction == -1 && getX() <= stopX_Right ) {
-                    setLocation(stopX_Right, yPos); // Lock position
-                    setState(State.INDICATING);
-                } 
-                // If we are moving RIGHT (dir 1) and we pass our stop point
-                else if ( direction == 1 && getX() >= stopX_Left ) {
-                    setLocation(stopX_Left, yPos); // Lock position
+                if ( (direction == -1 && getX() <= stopX_Right) || (direction == 1 && getX() >= stopX_Left) ) {
+                    // We've arrived. Stop moving.
+                    int finalX = (direction == -1) ? stopX_Right : stopX_Left;
+                    setLocation(finalX, yPos); 
                     setState(State.INDICATING);
                 }
-                // If neither is true, we just keep moving.
                 break;
                 
             case INDICATING:
-                if (stateTimer.hasElapsed(800)) {
+                if (stateTimer.hasElapsed(800)) { // Your timer
                     setState(State.ATTACKING);
                 }
                 break;
                 
             case ATTACKING:
-                if (animTimer.hasElapsed(400)) { 
-                    if (direction == 1) setImage(chompAnimRight[animFrame]);
-                    else setImage(chompAnimLeft[animFrame]);
+                if (animTimer.hasElapsed(400)) { // Your timer
+                    setImage(direction == 1 ? chompAnimRight[animFrame] : chompAnimLeft[animFrame]);
                     
                     if (animFrame == 2) { 
                         performChompDamage();
@@ -138,62 +159,91 @@ public class crocBoss extends Actor implements Damageable
                 break;
                 
             case VULNERABLE:
-                if (stateTimer.hasElapsed(3800)) {
+                // The image is already "crocTired.png"
+                // We are just waiting for the timer
+                if (stateTimer.hasElapsed(3800)) { // Your timer
                     setState(State.LEAVING);
                 }
                 break;
                 
             case LEAVING:
-                // Move off-screen (direction was flipped in setState)
+                // --- 1. Animate Walking ---
+                if (animTimer.hasElapsed(150)) { 
+                    animFrame = (animFrame + 1) % 4; 
+                    setImage(direction == 1 ? imgWalkRight[animFrame] : imgWalkLeft[animFrame]);
+                    animTimer.mark();
+                }
+
+                // --- 2. Move ---
                 setLocation(getX() + (speed * direction), yPos);
                 
-                // Check if we are fully off-screen
-                if (getX() > getWorld().getWidth() + 100 || getX() < -100) {
+                // --- 3. Check if fully off-screen (Using your coords) ---
+                if (getX() > getWorld().getWidth() + 300 || getX() < -300) {
                     // --- REPOSITION ---
                     if (Greenfoot.getRandomNumber(2) == 0) {
-                        direction = 1; // Go right
-                        setLocation(-300, yPos); // Start at left
-                        setImage(imgRight);      
+                        direction = 1; 
+                        setLocation(-300, yPos); 
                     } else {
-                        direction = -1; // Go left
-                        setLocation(getWorld().getWidth() + 300, yPos); // Start at right
-                        setImage(imgLeft);                           
+                        direction = -1; 
+                        setLocation(getWorld().getWidth() + 300, yPos);
                     }
-                    setState(State.ENTERING); // Repeat the loop
+                    setState(State.ENTERING); 
                 }
                 break;
         }
     }
     
+    /**
+     * --- setState() METHOD IS UPDATED ---
+     */
     private void setState(State newState)
     {
         this.currentState = newState;
+        animFrame = 0;     // Reset animation frame for all states
+        animTimer.mark();  // Reset animation timer
         
-        if (newState == State.INDICATING) {
+        if (newState == State.ENTERING) {
+            // Set first frame of walk animation
+            setImage(direction == 1 ? imgWalkRight[0] : imgWalkLeft[0]);
+        }
+        else if (newState == State.INDICATING) {
+            // Set idle image while indicating
+            setImage(direction == 1 ? imgIdleRight : imgIdleLeft);
+            
+            // Start the state timer
+            stateTimer.mark();
+            
+            // Spawn the indicator
             List<Boat> boats = getWorld().getObjects(Boat.class);
             if (!boats.isEmpty()) {
                 Boat boat = boats.get(0);
                 currentIndicator = new AttackIndicator();
                 getWorld().addObject(currentIndicator, boat.getX(), boat.getY());
             } else {
-                setState(State.VULNERABLE);
+                setState(State.VULNERABLE); // No boat? Skip attack
                 return;
             }
-            stateTimer.mark();
         }
         else if (newState == State.ATTACKING) {
-            animFrame = 0;
-            animTimer.mark();
+            // Set first frame of chomp animation
+            setImage(direction == 1 ? chompAnimRight[0] : chompAnimLeft[0]);
         }
         else if (newState == State.VULNERABLE) {
-            setImage(direction == 1 ? imgRight : imgLeft);
+            // --- SET TIRED IMAGE ---
+            setImage(direction == 1 ? imgTiredRight : imgTiredLeft);
+            
+            // Start the vulnerable timer
             stateTimer.mark();
         }
         else if (newState == State.LEAVING) {
             direction *= -1; // Reverse direction
-            setImage(direction == 1 ? imgRight : imgLeft); // Flip image
+            
+            // Set first frame of walk animation
+            setImage(direction == 1 ? imgWalkRight[0] : imgWalkLeft[0]);
         }
     }
+    
+    // --- The rest of your file is unchanged and correct ---
     
     private void performChompDamage() {
         if (currentIndicator != null && currentIndicator.getWorld() != null) {
@@ -229,7 +279,7 @@ public class crocBoss extends Actor implements Damageable
             gw.addScore(100); 
             gw.addKeyItem();
             
-            getWorld().removeObject(this); // <-- THIS IS THE ONLY "DELETE"
+            getWorld().removeObject(this);
         }
     }
     
@@ -241,4 +291,3 @@ public class crocBoss extends Actor implements Damageable
         if (getWorld() != null) img.setTransparency(old);
     }
 }
-
