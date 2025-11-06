@@ -99,7 +99,7 @@ public class GameWorld extends World {
             bg = new GreenfootImage("24.jpg"); 
             bg.scale(960, 540);
         }
-        setPaintOrder(Hud.class, Koin.class, Kail.class, Boat.class, Fish.class); // HUD dan ikon tetap di depan 
+        setPaintOrder(Hud.class, Koin.class, Kail.class, Boat.class); // HUD dan ikon tetap di depan 
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
         bg.scale(960, 540);
@@ -627,7 +627,7 @@ public class GameWorld extends World {
         updateHUD();
     }
 
-    private void applyDashCapacity() {
+    private void applyDashCapacity() {  
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
         if (boat != null) {
