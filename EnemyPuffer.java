@@ -2,30 +2,28 @@ import greenfoot.*;
 
 public class EnemyPuffer extends Actor implements Damageable
 {
-    // --- Stats ---
-    private int speed = 1; // Kecepatan normal
+    
+    private int speed = 1; 
     private int direction;
     private int health;
     private int bob = 0;
     
-    // --- Logika Serangan ---
-    private int attackRange = 200; // Jarak untuk mulai mengisi daya
-    private SimpleTimer chargeTimer = new SimpleTimer();   // Timer 2 detik
-    private SimpleTimer attackCooldown = new SimpleTimer(); // Timer 3 detik
+    
+    private int attackRange = 200; 
+    private SimpleTimer chargeTimer = new SimpleTimer();   
+    private SimpleTimer attackCooldown = new SimpleTimer(); 
     private boolean isCharging = false;
     private boolean isKembung = false;
     private boolean canAttack = true;
     
-    // --- Gambar ---
+    
     private GreenfootImage imgKempes;
     private GreenfootImage imgKembung;
     
     private final SimpleTimer hurtIFrame = new SimpleTimer();
-    private int hurtCooldownMs = 150; // jeda antar-hit (ms)
+    private int hurtCooldownMs = 150; 
 
-    /**
-     * Constructor: Menerima health dari GameWorld/Map2
-     */
+    
     public EnemyPuffer(int initialHealth)
     {
         this.health = initialHealth;
@@ -36,92 +34,82 @@ public class EnemyPuffer extends Actor implements Damageable
         imgKembung = new GreenfootImage("Kembung.png");
         imgKembung.scale(70, 70);
         
-        setImage(imgKempes); // Mulai dengan kempes
-        direction = 1; // Asumsi mulai menghadap kanan
+        setImage(imgKempes); 
+        direction = 1; 
     }
 
     public void act()
     {
         if (getWorld() == null) return;
         
-        move(); // Selalu kejar boat
-        handleAttackLogic(); // Kontrol status kembung/kempes
-        checkHitBoat(); // Serang jika kembung & menyentuh
+        move(); 
+        handleAttackLogic(); 
+        checkHitBoat(); 
     }
     
-    /**
-     * Method ini HANYA mengontrol status kembung/kempes
-     */
+    
     private void handleAttackLogic() {
-        // 1. Cek jika sedang Cooldown
+        
         if (!canAttack) {
-            if (attackCooldown.hasElapsed(3000)) { // Cooldown 3 detik
+            if (attackCooldown.hasElapsed(3000)) { 
                 canAttack = true;
-                setKembung(false); // Kempes lagi
+                setKembung(false); 
             }
             return; 
         }
         
-        // 2. Cek jika sedang Mengisi Daya (Charging)
+        
         if (isCharging) {
-            if (chargeTimer.hasElapsed(2000)) { // 2 detik berlalu
-                // Cek lagi apakah boat MASIH dalam jangkauan
+            if (chargeTimer.hasElapsed(2000)) { 
+                
                 if (isBoatInRange()) {
-                    // JADI KEMBUNG!
+                    
                     setKembung(true); 
-                    canAttack = false; // Mulai cooldown
+                    canAttack = false; 
                     attackCooldown.mark();
-                    // TIDAK ADA 'attackBoat()' DI SINI
+                    
                 }
-                isCharging = false; // Berhenti mengisi daya
+                isCharging = false; 
             }
             return; 
         }
         
-        // 3. Jika bisa menyerang dan tidak sedang mengisi daya
+        
         if (canAttack && !isCharging) {
             if (isBoatInRange()) {
-                // Boat terdeteksi! Mulai mengisi daya
+                
                 isCharging = true;
                 chargeTimer.mark();
             }
         }
     }
     
-    /**
-     * BARU: Method ini HANYA memberi damage jika kembung & menyentuh
-     */
+    
     private void checkHitBoat() {
         if (isKembung) {
-            // Check for a boat within a 35-pixel radius (a circle)
-            // Adjust "35" to be smaller or larger as needed.
+            
+            
             if (!getObjectsInRange(70, Boat.class).isEmpty()) { 
-                // We're touching the boat.
-                // We need to get the actual boat object to damage it.
+                
+                
                 Boat boat = (Boat) getObjectsInRange(70, Boat.class).get(0);
                 boat.takeDamage(1); 
             }
         }
     }
     
-    /**
-     * Helper untuk mengecek jarak boat
-     */
+    
     private boolean isBoatInRange() {
         return !getObjectsInRange(attackRange, Boat.class).isEmpty();
     }
     
-    /**
-     * Helper untuk mengubah gambar (kembung/kempes)
-     */
+    
     private void setKembung(boolean kembung) {
         this.isKembung = kembung;
         updateImageDirection(); 
     }
     
-    /**
-     * Helper untuk mengatur gambar + arah
-     */
+    
     private void updateImageDirection() {
         GreenfootImage img;
         
@@ -131,16 +119,14 @@ public class EnemyPuffer extends Actor implements Damageable
             img = new GreenfootImage(imgKempes);
         }
         
-        if (direction == -1) { // Bergerak ke KIRI
+        if (direction == -1) { 
             img.mirrorHorizontally(); 
         }
         
         setImage(img);
     }
 
-    /**
-     * Dipanggil oleh Kail untuk mengurangi darah
-     */
+    
     private void addScoreToWorld(int score) {
         World world = getWorld(); 
         if (world instanceof GameWorld) {
@@ -148,9 +134,7 @@ public class EnemyPuffer extends Actor implements Damageable
         }
     }
     
-    /**
-     * DIPERBARUI: Method ini SELALU mengejar boat
-     */
+    
     private void move() {
         World world = getWorld();
         if (world == null) return;
@@ -166,22 +150,22 @@ public class EnemyPuffer extends Actor implements Damageable
             
             int currentSpeed = isKembung ? speed + 1 : speed;
 
-            // 1. Gerak di sumbu X (menuju boat)
-            if (boatX > getX() + 5) { // +5 agar tidak goyang-goyang
+            
+            if (boatX > getX() + 5) { 
                 newX += currentSpeed;
                 if (direction != 1) { 
                     direction = 1;
-                    updateImageDirection(); // Balik gambar
+                    updateImageDirection(); 
                 }
-            } else if (boatX < getX() - 5) { // -5 agar tidak goyang-goyang
+            } else if (boatX < getX() - 5) { 
                 newX -= currentSpeed;
                 if (direction != -1) {
                     direction = -1;
-                    updateImageDirection(); // Balik gambar
+                    updateImageDirection(); 
                 }
             }
             
-            // 2. Gerak di sumbu Y (menuju boat) + bobbing
+            
             bob = (bob + 1) % 80; 
             int offset = (bob < 40) ? 1 : -1; 
             
@@ -191,7 +175,7 @@ public class EnemyPuffer extends Actor implements Damageable
                 newY -= currentSpeed;
             }
             
-            setLocation(newX, newY + offset); // Terapkan gerakan Y + bobbing
+            setLocation(newX, newY + offset); 
         }
     }
     

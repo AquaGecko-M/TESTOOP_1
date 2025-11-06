@@ -1,37 +1,32 @@
-/**
- * Write a description of class GameSettings here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class GameSettings  
 {
     public static String difficulty = "Easy";
     
     public static final int[][] EnemyHealth = {
-        {3, 5, 7}, // Easy (Lvl 1=3, Lvl 2=5, Lvl 3=7)
-        {5, 7, 9}, // Medium (Lvl 1=5, Lvl 2=7, Lvl 3=9)
-        {7, 9, 11}  // Hard (Lvl 1=7, Lvl 2=9, Lvl 3=11)
+        {3, 5, 7}, 
+        {5, 7, 9}, 
+        {7, 9, 11}  
     };
     
-    // Ukuran ikan berdasarkan level
-    // [level][0] = lebar, [level][1] = tinggi
+    
+    
     public static final int[][] commonFishSize = {
-        {60, 75},   // Kecil
-        {90, 120},  // Normal
-        {120, 150}  //hard
+        {60, 75},   
+        {90, 120},  
+        {120, 150}  
     };
 
     public static final int[][] rareFishSize = {
-        {50, 65},   // Kecil
-        {80, 100},  // Normal
+        {50, 65},   
+        {80, 100},  
         {90, 120}
     };
 
     public static final int[][] epicFishSize = {
-        {40, 55},   // Kecil
-        {60, 75},   // Normal
-        {75, 100}   //epic
+        {40, 55},   
+        {60, 75},   
+        {75, 100}   
     };
 
     public static final int[][] commonFishSpeed = {
@@ -53,23 +48,16 @@ public class GameSettings
     };
     
     public static int[][] BossHealth = {
-      // Stage 1, Stage 2, Stage 3
-        { 0,        20,    200 }, // Easy (Stage 1 has no boss, so 0 health)
-        { 0,        30,    300 }, // Medium
-        { 0,        50,    400 }  // Hard
+      
+        { 0,        20,    200 }, 
+        { 0,        30,    300 }, 
+        { 0,        50,    400 }  
     };
 
-    /**
-     * Constructor for objects of class GameSettings
-     */
+    
     public GameSettings()
     {
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
+    
 }

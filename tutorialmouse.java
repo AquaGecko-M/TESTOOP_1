@@ -1,18 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class tutorialmouse here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class tutorialmouse extends World
 {
 
-    /**
-     * Constructor for objects of class tutorialmouse.
-     * 
-     */
+    
     public tutorialmouse()
     {    
  
@@ -32,8 +24,8 @@ public class tutorialmouse extends World
     nextbut2 next2 = new nextbut2();
     prevbut2 prev2 = new prevbut2();
     
-    addObject(prev2, 103, 467); // (actor, x, y)
-    addObject(next2,    864, 467); // (actor, x, y)
+    addObject(prev2, 103, 467); 
+    addObject(next2,    864, 467); 
     }
     
 }

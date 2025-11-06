@@ -4,8 +4,8 @@ public class CommonFish extends Actor {
     private int dir;
     private int speed;
     private int bob = 0;
-    private int value; // Ini untuk SKOR
-    private int coinReward; // Ini untuk KOIN ($)
+    private int value; 
+    private int coinReward; 
     private int halfWidth;
 
     public CommonFish() {

@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=LevelSelectWorld
-comment0.text=\r\n\ The\ world\ that\ holds\ the\ level\ selection\ buttons.\r\n
+comment0.text=
 comment1.params=
 comment1.target=LevelSelectWorld()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ LevelSelectWorld.\r\n
+comment1.text=
 comment2.params=
 comment2.target=void\ prepare()
-comment2.text=\r\n\ Prepare\ the\ world\ by\ adding\ the\ level\ buttons.\r\n
+comment2.text=
 comment3.params=
 comment3.target=void\ act()
 numComments=4

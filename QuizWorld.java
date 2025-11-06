@@ -2,17 +2,14 @@ import greenfoot.*;
 import java.util.Collections;
 import java.util.ArrayList;
 
-/**
- * An overlay world that pauses the game and displays a 10-second math quiz.
- * (NOW WITH FULL DIFFICULTY LOGIC)
- */
+
 public class QuizWorld extends World
 {
     private GameWorld originWorld; 
     private Treasure treasure;     
     private int treasureValue;     
     private int correctAnswer;     
-    private int difficultyLevel; // 0=Easy, 1=Medium, 2=Hard
+    private int difficultyLevel; 
     
  
     private String questionString; 
@@ -20,9 +17,7 @@ public class QuizWorld extends World
     private SimpleTimer quizTimer = new SimpleTimer();
     private int quizTimeLeft = 10; 
 
-    /**
-     * Constructor (This should be the same as your current one)
-     */
+    
     public QuizWorld(GameWorld originalGameWorld, Treasure treasure, int difficulty)
     {    
         super(originalGameWorld.getWidth(), originalGameWorld.getHeight(), 1); 
@@ -45,23 +40,20 @@ public class QuizWorld extends World
         updateQuizTimerDisplay(); 
     }
 
-    /**
-     * Prepares the quiz by calling the correct helper method
-     * based on the difficulty level.
-     */
+    
     private void prepareQuiz()
     {
         switch (difficultyLevel) {
-            case 0: // Easy
+            case 0: 
                 generateEasyQuestion();
                 break;
-            case 1: // Medium
+            case 1: 
                 generateMediumQuestion();
                 break;
-            case 2: // Hard
+            case 2: 
                 generateHardQuestion();
                 break;
-            default: // Failsafe, just do Easy
+            default: 
                 generateEasyQuestion();
                 break;
         }
@@ -75,7 +67,7 @@ public class QuizWorld extends World
         ArrayList<Integer> answers = new ArrayList<>();
         answers.add(correctAnswer);
 
-        int answerRange = (difficultyLevel == 0) ? 21 : 101; // 0-20 for Easy, 0-100 for Med/Hard
+        int answerRange = (difficultyLevel == 0) ? 21 : 101; 
         
         while (answers.size() < 4) {
             int wrongAnswer = Greenfoot.getRandomNumber(answerRange); 
@@ -83,7 +75,7 @@ public class QuizWorld extends World
                 answers.add(wrongAnswer);
             }
         }
-        Collections.shuffle(answers); // Randomize the order
+        Collections.shuffle(answers); 
 
         int yPos = getHeight() / 2 + 50; 
         int xOffset = getWidth() / 5; 
@@ -94,21 +86,18 @@ public class QuizWorld extends World
     }
     
 
-    /**
-     * Generates an Addition (+) or Subtraction (-) problem.
-     * (Rubric: Easy)
-     */
+    
     private void generateEasyQuestion() {
-        int num1 = Greenfoot.getRandomNumber(10) + 1; // 1-10
-        int num2 = Greenfoot.getRandomNumber(10) + 1; // 1-10
+        int num1 = Greenfoot.getRandomNumber(10) + 1; 
+        int num2 = Greenfoot.getRandomNumber(10) + 1; 
 
         if (Greenfoot.getRandomNumber(2) == 0) {
-            // Addition
+            
             questionString = num1 + " + " + num2 + " = ?";
             correctAnswer = num1 + num2;
         } else {
-            // Subtraction (no negatives)
-            if (num1 < num2) { // Swap them
+            
+            if (num1 < num2) { 
                 int temp = num1;
                 num1 = num2;
                 num2 = temp;
@@ -118,21 +107,18 @@ public class QuizWorld extends World
         }
     }
 
-    /**
-     * Generates a Multiplication (*) or Division (/) problem.
-     * (Rubric: Medium)
-     */
+    
     private void generateMediumQuestion() {
         if (Greenfoot.getRandomNumber(2) == 0) {
-            // Multiplication
-            int num1 = Greenfoot.getRandomNumber(9) + 2; // 2-10
-            int num2 = Greenfoot.getRandomNumber(9) + 2; // 2-10
+            
+            int num1 = Greenfoot.getRandomNumber(9) + 2; 
+            int num2 = Greenfoot.getRandomNumber(9) + 2; 
             questionString = num1 + " * " + num2 + " = ?";
             correctAnswer = num1 * num2;
         } else {
-            // Division 
-            int answer = Greenfoot.getRandomNumber(9) + 2; // 2-10
-            int divisor = Greenfoot.getRandomNumber(9) + 2; // 2-10
+            
+            int answer = Greenfoot.getRandomNumber(9) + 2; 
+            int divisor = Greenfoot.getRandomNumber(9) + 2; 
             int dividend = answer * divisor; 
             
             questionString = dividend + " / " + divisor + " = ?";
@@ -140,26 +126,23 @@ public class QuizWorld extends World
         }
     }
 
-    /**
-     * Generates a mix of Addition (+) and Multiplication (*) problems.
-     * (Rubric: Hard)
-     */
+    
     private void generateHardQuestion() {
-        // Get a random number from 0 to 3
-        // 0 = Add, 1 = Subtract, 2 = Multiply, 3 = Divide
+        
+        
         int operationType = Greenfoot.getRandomNumber(4); 
     
         if (operationType == 0) {
-            // --- (Addition) ---
-            int num1 = Greenfoot.getRandomNumber(20) + 1; // 1-20
-            int num2 = Greenfoot.getRandomNumber(20) + 1; // 1-20
+            
+            int num1 = Greenfoot.getRandomNumber(20) + 1; 
+            int num2 = Greenfoot.getRandomNumber(20) + 1; 
             questionString = num1 + " + " + num2 + " = ?";
             correctAnswer = num1 + num2;
             
         } else if (operationType == 1) {
-            // --- (Subtraction) ---
-            int num1 = Greenfoot.getRandomNumber(20) + 1; // 1-20
-            int num2 = Greenfoot.getRandomNumber(20) + 1; // 1-20
+            
+            int num1 = Greenfoot.getRandomNumber(20) + 1; 
+            int num2 = Greenfoot.getRandomNumber(20) + 1; 
             
             if (num1 < num2) { 
                 int temp = num1;
@@ -170,17 +153,17 @@ public class QuizWorld extends World
             correctAnswer = num1 - num2;
             
         } else if (operationType == 2) {
-            // --- (Multiplication) ---
-            int num1 = Greenfoot.getRandomNumber(11) + 2; // 2-12
-            int num2 = Greenfoot.getRandomNumber(11) + 2; // 2-12
+            
+            int num1 = Greenfoot.getRandomNumber(11) + 2; 
+            int num2 = Greenfoot.getRandomNumber(11) + 2; 
             questionString = num1 + " * " + num2 + " = ?";
             correctAnswer = num1 * num2;
             
         } else {
-            // --- (Division) ---
-            int answer = Greenfoot.getRandomNumber(9) + 2; // 2-10
-            int divisor = Greenfoot.getRandomNumber(9) + 2; // 2-10
-            int dividend = answer * divisor; // The big number
+            
+            int answer = Greenfoot.getRandomNumber(9) + 2; 
+            int divisor = Greenfoot.getRandomNumber(9) + 2; 
+            int dividend = answer * divisor; 
             
             questionString = dividend + " / " + divisor + " = ?";
             correctAnswer = answer;

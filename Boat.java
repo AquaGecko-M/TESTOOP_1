@@ -10,20 +10,20 @@ public class Boat extends Actor {
     private int attackDamage = 1;
 
     private int frame = 0;
-    private int dir = 1; // 1 = kanan, -1 = kiri
+    private int dir = 1; 
     private boolean moving = false;
     private SimpleTimer animTimer = new SimpleTimer();
     private int frameMs = 100;
     private int speed = 1;
     
     private final SimpleTimer hurtTimer = new SimpleTimer();
-    private int invincibleMs = 2000; // 2.0 detik
+    private int invincibleMs = 2000; 
     private final SimpleTimer attackTimer = new SimpleTimer();
-    private int attackCooldownMs = 500;  // 0.5 detik
-    private int attackRadius     = 140;   // ukuran lingkaran
-    private int attackLifeFrames = 15;    // lama tampil ring
+    private int attackCooldownMs = 500;  
+    private int attackRadius     = 140;   
+    private int attackLifeFrames = 15;    
     
-    // --- Dash ---
+    
     private int dashCapacity = 3;
     private int dashCharges = 3;
     private boolean isDashing = false;
@@ -43,7 +43,7 @@ public class Boat extends Actor {
         loadRightFrames();
         loadLeftFrames();     
 
-        setImage(right[0]); // idle awal
+        setImage(right[0]); 
     }
 
     public void act() {
@@ -59,7 +59,7 @@ public class Boat extends Actor {
         handleAttack();
     }
 
-    // ---------- Movement ----------
+    
     private void handleMove() {
         if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) {
             setLocation(getX() - speed, getY());
@@ -80,7 +80,7 @@ public class Boat extends Actor {
         setLocation(x, getY());
     }
 
-    // ---------- Animation ----------
+    
     private void animate() {
         if (moving) {
             if (animTimer.millisElapsed() > frameMs) {
@@ -98,7 +98,7 @@ public class Boat extends Actor {
         }
     }
 
-    // ---------- Load frames ----------
+    
     private void loadRightFrames() {
         for (int i = 0; i < right.length; i++) {
             right[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
@@ -131,14 +131,14 @@ public class Boat extends Actor {
         gw.addLife(-dmg);
         hurtTimer.mark();
 
-        // knockback: arah berlawanan dari facing (dir)
+        
         int knockbackDist = 15;
-        int newX = getX() - dir * knockbackDist;  // dorong ke belakang
-        // clamp supaya tidak keluar layar
+        int newX = getX() - dir * knockbackDist;  
+        
         newX = Math.max(30, Math.min(newX, getWorld().getWidth() - 30));
         setLocation(newX, getY());
 
-        // efek flash
+        
         flash();
     }
     
@@ -153,21 +153,13 @@ public class Boat extends Actor {
         World w = getWorld();
         if (w == null) return;
 
-        // 1) efek visual
+        
         AttackRing ring = new AttackRing(attackRadius, attackLifeFrames);
         w.addObject(ring, getX(), getY());
 
-        // 2) logika hit (sementara: hapus ikan di radius).
-        // Nanti tinggal ganti ke Enemy: for (Enemy e : getObjectsInRange(attackRadius, Enemy.class)) e.takeDamage(1);
-        /*for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, RareFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, EpicFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }*/
+        
+        
+        
         for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
         ((enemyShark)obj).takeDamage(attackDamage);
         }

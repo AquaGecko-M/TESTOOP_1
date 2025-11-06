@@ -1,11 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class BtnTutor here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class BtnTutor extends Actor
 {
     public BtnTutor()

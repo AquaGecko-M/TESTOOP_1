@@ -1,8 +1,6 @@
 import greenfoot.*;
 
-/**
- * GoldFish bergerak bolak-balik tanpa pernah hilang saat menyentuh border.
- */
+
 public class GoldFish extends Actor {
     private static final int EDGE_PADDING = 24;
 
@@ -27,9 +25,7 @@ public class GoldFish extends Actor {
         facingLeft = false;
     }
     
-    /**
-     * Dipanggil oleh GameWorld untuk menentukan arah gerak awal.
-     */
+    
     public void setDirection(int dir) {
         direction = (dir < 0) ? -1 : 1;
         setFacing(direction < 0);
@@ -50,9 +46,7 @@ public class GoldFish extends Actor {
         setLocation(nextX, nextY);
     }
 
-    /**
-     * Jika menyentuh border horizontal, balik arah tanpa naik ke permukaan.
-     */
+    
     private void bounceAtEdges(World world) {
         int halfW = getImage().getWidth() / 2;
         int leftBound = EDGE_PADDING + halfW;

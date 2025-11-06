@@ -1,8 +1,6 @@
 import greenfoot.*;
 
-/**
- * The stage completion screen.
- */
+
 public class menuCompletion extends World
 {
     private int stageJustCompleted;
@@ -13,12 +11,12 @@ public class menuCompletion extends World
         
         this.stageJustCompleted = stageJustCompleted; 
         
-        // Set the background
+        
         GreenfootImage bg = new GreenfootImage("menuCompletion.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
         
-        // --- Display Stats  ---
+        
         GreenfootImage textBg = getBackground();
         textBg.setColor(greenfoot.Color.YELLOW); 
         textBg.setFont(new Font("Arial", true, false, 38));
@@ -27,7 +25,7 @@ public class menuCompletion extends World
         textBg.drawString("" + finalTime, 510, 320);
         textBg.drawString("" + finalScore, 563 , 375);
 
-        // --- Display Stars  ---
+        
         if (finalScore >= 200) {
             addObject(new Star(), 375, 50); 
         }

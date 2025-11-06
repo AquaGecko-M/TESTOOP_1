@@ -24,7 +24,7 @@ public class AnswerButton extends Actor
     
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            // Tell the QuizWorld to check this button's answer
+            
             ((QuizWorld)getWorld()).checkAnswer(isCorrect);
         }
     }

@@ -1,18 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class Menu here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class Menu extends World
 {
 
-    /**
-     * Constructor for objects of class Menu.
-     * 
-     */
+    
     public Menu()
     {    
 
@@ -35,15 +27,12 @@ public class Menu extends World
         BtnStart Start = new BtnStart();
         BtnExit Exit = new BtnExit();
 
-        addObject(Tutorial, 220, 445); // (actor, x, y)
-        addObject(Start,    475, 440); // (actor, x, y)
-        addObject(Exit,     740, 450); // (actor, x, y)
+        addObject(Tutorial, 220, 445); 
+        addObject(Start,    475, 440); 
+        addObject(Exit,     740, 450); 
     }
     
-    /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
-     */
+    
     private void prepare()
     {
     }

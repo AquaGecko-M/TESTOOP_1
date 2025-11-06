@@ -1,18 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class tutorialkeyboard here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class tutorialkeyboard extends World
 {
 
-    /**
-     * Constructor for objects of class tutorialkeyboard.
-     * 
-     */
+    
     public tutorialkeyboard()
     {    
 
@@ -34,7 +26,7 @@ public class tutorialkeyboard extends World
     nextbut next = new nextbut();
     prevbut prev = new prevbut();
     
-    addObject(next,    864, 467); // (actor, x, y)
+    addObject(next,    864, 467); 
     }
 }
     

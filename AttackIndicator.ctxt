@@ -6,5 +6,5 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=damage
 comment3.target=void\ dealDamage(int)
-comment3.text=\r\n\ Called\ by\ the\ crocBoss.\ This\ indicator\ will\ now\ check\ for\ a\ boat\r\n\ and\ deal\ damage\ to\ it\ using\ a\ circular\ radius.\r\n
+comment3.text=
 numComments=4

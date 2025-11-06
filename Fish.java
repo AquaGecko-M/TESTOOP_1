@@ -10,11 +10,11 @@ public class Fish extends Actor {
         if (rare) {
             setImage("fish2.png");
             value = 5;
-            speed = Greenfoot.getRandomNumber(2) + 3; // 3–4
+            speed = Greenfoot.getRandomNumber(2) + 3; 
         } else {
             setImage("fish3.png");
             value = 2;
-            speed = Greenfoot.getRandomNumber(2) + 2; // 2–3
+            speed = Greenfoot.getRandomNumber(2) + 2; 
         }
     }
 
@@ -23,10 +23,10 @@ public class Fish extends Actor {
     @Override
     protected void addedToWorld(World w) {
         if (getX() < w.getWidth() / 2) {
-            dir = 1;  // dari kiri → kanan
+            dir = 1;  
         } else {
-            dir = -1; // dari kanan → kiri
-            getImage().mirrorHorizontally(); // balik arah tampilan
+            dir = -1; 
+            getImage().mirrorHorizontally(); 
         }
     }
 
@@ -53,8 +53,8 @@ public class Fish extends Actor {
 
         int rightEdge = w.getWidth() - 1;
 
-        if ((dir < 0 && getX() <= 0) ||     // bergerak ke kiri & sudah di tepi kiri
-        (dir > 0 && getX() >= rightEdge)) { // bergerak ke kanan & sudah di tepi kanan
+        if ((dir < 0 && getX() <= 0) ||     
+        (dir > 0 && getX() >= rightEdge)) { 
         w.removeObject(this);
         }
     }

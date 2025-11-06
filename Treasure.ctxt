@@ -1,17 +1,17 @@
 #BlueJ class context
 comment0.target=Treasure
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Treasure\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=
 comment1.params=
 comment1.target=Treasure()
 comment2.params=
 comment2.target=int\ getValue()
 comment3.params=
 comment3.target=void\ act()
-comment3.text=\r\n\ This\ method\ runs\ continuously.\ We\ use\ it\ to\ check\ if\ the\r\n\ cooldown\ has\ finished.\r\n
+comment3.text=
 comment4.params=
 comment4.target=void\ startCooldown()
-comment4.text=\r\n\ This\ will\ be\ called\ by\ the\ QuizWorld\ when\ the\ answer\ is\ wrong.\r\n\ It\ starts\ the\ 2-second\ cooldown.\r\n
+comment4.text=
 comment5.params=
 comment5.target=boolean\ isInteractable()
-comment5.text=\r\n\ The\ hook\ will\ ask\ the\ treasure\ if\ it's\ "ready"\ before\r\n\ starting\ the\ quiz.\r\n
+comment5.text=
 numComments=6

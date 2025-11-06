@@ -10,7 +10,7 @@ public class RareFish extends Actor {
     public RareFish() {
         setImage("RareFish.png");
         value = 5;
-        speed = Greenfoot.getRandomNumber(2) + 3; // 3–4
+        speed = Greenfoot.getRandomNumber(2) + 3; 
     }
     
     public void setSpeed(int s) {
@@ -42,16 +42,16 @@ public class RareFish extends Actor {
     protected void addedToWorld(World w) {
         int worldWidth = w.getWidth();
 
-        // Kalau di kiri layar → jalan ke kanan
+        
         if (getX() <= 50) {
             dir = 1;
         }
-        // Kalau di kanan layar → jalan ke kiri
+        
         else if (getX() >= worldWidth - 50) {
             dir = -1;
             getImage().mirrorHorizontally();
         }
-        // Kalau entah di tengah (jarang)
+        
         else {
             dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }

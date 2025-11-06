@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class itemResume extends Actor {
-    private static final int TARGET_WIDTH = 200; // ubah sesuai selera
+    private static final int TARGET_WIDTH = 200; 
 
     public itemResume() {
         setSizedImage();

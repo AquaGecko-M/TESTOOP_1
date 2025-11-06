@@ -1,9 +1,7 @@
 import greenfoot.*;
 import java.awt.Point;
 
-/**
- * Dasar untuk semua item di toko. Menangani label teks dan klik umum.
- */
+
 public abstract class ShopItem extends Actor {
     private Point labelPosition;
 

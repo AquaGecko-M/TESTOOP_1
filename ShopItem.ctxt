@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ShopItem
-comment0.text=\r\n\ Dasar\ untuk\ semua\ item\ di\ toko.\ Menangani\ label\ teks\ dan\ klik\ umum.\r\n
+comment0.text=
 comment1.params=width\ height
 comment1.target=void\ resizeImage(int,\ int)
 comment2.params=x\ y

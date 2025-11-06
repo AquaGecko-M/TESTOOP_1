@@ -1,11 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class prevbut2 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class prevbut2 extends Actor
 {
     public prevbut2()
@@ -21,6 +16,6 @@ public class prevbut2 extends Actor
         if (Greenfoot.mouseClicked(this)) 
         {
             Greenfoot.setWorld(new tutorialkeyboard());
-        }// Add your action code here.
+        }
     }
 }

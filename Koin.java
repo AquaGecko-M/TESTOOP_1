@@ -1,11 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class Koin here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class Koin extends Actor {
     private static final int ICON_SIZE = 42;
 

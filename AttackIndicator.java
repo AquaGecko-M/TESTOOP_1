@@ -19,22 +19,19 @@ public class AttackIndicator extends Actor
     public void act()
     {
         if (flashTimer.hasElapsed(100)) {
-            isVisible = !isVisible; // Toggle visibility
+            isVisible = !isVisible; 
             
             if (isVisible) {
-                getImage().setTransparency(255); // Solid
+                getImage().setTransparency(255); 
             } else {
-                getImage().setTransparency(100); // Faded
+                getImage().setTransparency(100); 
             }
             
             flashTimer.mark();
         }
     }
     
-    /**
-     * Called by the crocBoss. This indicator will now check for a boat
-     * and deal damage to it using a circular radius.
-     */
+    
     public void dealDamage(int damage)
     {
 

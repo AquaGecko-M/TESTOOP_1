@@ -1,11 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class btnMainMenuOver here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class btnMainMenuOver extends Actor {
     private static final int TARGET_WIDTH = 260;
     private boolean mouseWasDown = true; 

@@ -1,13 +1,8 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 import greenfoot.GreenfootImage;
 import greenfoot.Color;
 import greenfoot.Font;
-/**
- * Write a description of class bgGameOver here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class gameOver extends World {
     private final int finalScore;
     private final String reasonText;
@@ -32,7 +27,7 @@ public class gameOver extends World {
         GreenfootImage bg = getBackground();
         
         
-        Font reasonFont = new Font("Arial", true, false, 48); // 48pt, bold
+        Font reasonFont = new Font("Arial", true, false, 48); 
         
         bg.setFont(reasonFont);
         bg.setColor(greenfoot.Color.RED); 

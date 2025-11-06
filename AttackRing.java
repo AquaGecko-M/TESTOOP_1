@@ -32,5 +32,5 @@ public class AttackRing extends Actor {
         if (life <= 0) getWorld().removeObject(this);
     }
 
-    public int getRadius() { return radius; } // kalau mau dicek di luar
+    public int getRadius() { return radius; } 
 }

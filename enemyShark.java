@@ -5,7 +5,7 @@ public class enemyShark extends Actor implements Damageable {
     private int direction;
     private int health;
     private SimpleTimer hitCooldown = new SimpleTimer();
-    private boolean canHit = true; // cooldown untuk MENYAKITI boat
+    private boolean canHit = true; 
     private int bob = 0;
 
     private final SimpleTimer hurtIFrame = new SimpleTimer();
@@ -18,9 +18,9 @@ public class enemyShark extends Actor implements Damageable {
     public void setDirection(int dir) {
         this.direction = dir;
         GreenfootImage image;
-        if (dir == 1) { // ke kanan = pakai Shark2
+        if (dir == 1) { 
             image = new GreenfootImage("Shark2.png");
-        } else {        // ke kiri = pakai Shark, lalu mirror
+        } else {        
             image = new GreenfootImage("Shark.png");
             image.mirrorHorizontally();
         }
@@ -38,7 +38,7 @@ public class enemyShark extends Actor implements Damageable {
 
     @Override
     public void takeDamage(int amount) {
-        // i-frame vs serangan supaya tidak “terbakar” multi hit dalam 1–2 frame
+        
         if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
         hurtIFrame.mark();
 
@@ -56,7 +56,7 @@ public class enemyShark extends Actor implements Damageable {
         int old = img.getTransparency();
         img.setTransparency(140);
         Greenfoot.delay(5);
-        if (getWorld() != null) { // world bisa null kalau sudah dihapus
+        if (getWorld() != null) { 
             img.setTransparency(old);
         }
     }
@@ -79,11 +79,11 @@ public class enemyShark extends Actor implements Damageable {
             return;
         }
         
-        // Check for a boat within a 50-pixel radius (a circle)
-        // Adjust "50" to be smaller or larger.
+        
+        
         if (!getObjectsInRange(80, Boat.class).isEmpty()) {
-            // We're touching the boat.
-            // Get the boat object to damage it.
+            
+            
             Boat boat = (Boat) getObjectsInRange(80, Boat.class).get(0);
             boat.takeDamage(1);
             canHit = false;

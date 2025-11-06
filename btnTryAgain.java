@@ -1,15 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
-/**
- * Write a description of class btnTryAgain here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class btnTryAgain extends Actor {
     private static final int TARGET_WIDTH = 260;
     private int stageToRetry;
-    private boolean mouseWasDown = true; // Click-fix
+    private boolean mouseWasDown = true; 
     
     public btnTryAgain(int stageNum) {
         this.stageToRetry = stageNum;
