@@ -1,9 +1,5 @@
 import greenfoot.*;
 import java.util.List; 
-/**
- * A visual warning indicator for the boss's attack.
- * (UPDATED with circular hitbox)
- */
 public class AttackIndicator extends Actor
 {
     private SimpleTimer flashTimer = new SimpleTimer();

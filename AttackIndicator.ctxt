@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=AttackIndicator
-comment0.text=\r\n\ A\ visual\ warning\ indicator\ for\ the\ boss's\ attack.\r\n\ (UPDATED\ with\ circular\ hitbox)\r\n
 comment1.params=
 comment1.target=AttackIndicator()
 comment2.params=

@@ -2,16 +2,11 @@ import greenfoot.*;
 
 /**
  * The stage completion screen.
- * (UPDATED VERSION)
  */
 public class menuCompletion extends World
 {
     private int stageJustCompleted;
 
-    /**
-     * --- CONSTRUCTOR IS UPDATED ---
-     * Now accepts 4 variables, including the stageNumber.
-     */
     public menuCompletion(int finalScore, int finalTime, int totalFish, int stageJustCompleted)
     {    
         super(960, 540, 1); 
@@ -46,9 +41,6 @@ public class menuCompletion extends World
         prepare();
     }
 
-    /**
-     * This method now correctly adds the buttons.
-     */
     private void prepare()
     {
         btnMainmenucomplete btnMainmenucomplete = new btnMainmenucomplete();

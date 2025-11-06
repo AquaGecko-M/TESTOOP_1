@@ -1,10 +1,5 @@
 import greenfoot.*;
 import java.util.List;
-
-/**
- * The boss for Stage 2. A giant crocodile with a full AI state machine.
- * (UPDATED to include Walk and Tired animations)
- */
 public class crocBoss extends Actor implements Damageable
 {
     // --- Health ---
@@ -96,9 +91,6 @@ public class crocBoss extends Actor implements Damageable
         setState(State.ENTERING);
     }
 
-    /**
-     * --- act() METHOD IS UPDATED ---
-     */
     public void act()
     {
         if (getWorld() == null) {
@@ -188,9 +180,6 @@ public class crocBoss extends Actor implements Damageable
         }
     }
     
-    /**
-     * --- setState() METHOD IS UPDATED ---
-     */
     private void setState(State newState)
     {
         this.currentState = newState;

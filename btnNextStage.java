@@ -8,10 +8,6 @@ public class btnNextStage extends Actor
     private int levelToUnlock;
     private boolean mouseWasDown = true; 
 
-    /**
-     * --- CONSTRUCTOR IS UPDATED ---
-     * It now receives the level that was just beaten.
-     */
     public btnNextStage(int stageJustCompleted) 
     {
         this.levelToUnlock = stageJustCompleted; 
@@ -21,9 +17,6 @@ public class btnNextStage extends Actor
         setImage(img);
     }
     
-    /**
-     * --- ACT METHOD IS UPDATED ---
-     */
     public void act() {
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) {
