@@ -139,7 +139,7 @@ public class GameWorld extends World {
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        startTimer(121);
+        startTimer(181);
     }
 
     public void act() {
@@ -175,7 +175,7 @@ public class GameWorld extends World {
             triggerGameOver("You Died!");
         }
         
-        if (!goldFishGuaranteedSpawn && timeLeft <= 60) {
+        if (!goldFishGuaranteedSpawn && timeLeft <= 180) {
             spawnGoldFish();
             goldFishGuaranteedSpawn = true; // Set flag agar tidak spawn lagi
         }
@@ -446,7 +446,7 @@ public class GameWorld extends World {
 
     // Acak sisi
     int side = Greenfoot.getRandomNumber(2);
-    if (side == 5) {
+    if (side == 0) {
         // Muncul di KIRI, bergerak ke KANAN
         goldie.setDirection(1); 
         addObject(goldie, -50, yPos);
