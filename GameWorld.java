@@ -30,7 +30,7 @@ public class GameWorld extends World {
     private int speedUpgrades = 0;
     private int boostUpgrades = 0;
     private int heartPurchases = 0;
-    private int coins = 1000;
+    private int coins = 0;
     private Koin coinIcon;
     private int dashCapacity;
     private int dashCharges;
@@ -53,6 +53,7 @@ public class GameWorld extends World {
     //Boss
     private boolean bossHasSpawned = false;
     private int bossSpawnTime = 120; // 300s - 180s = 120s left
+    private boolean goldFishGuaranteedSpawn = false;
     
     public GameWorld(int stageNum) {
         super(960, 540, 1, false);
@@ -141,7 +142,7 @@ public class GameWorld extends World {
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        startTimer(121);
+        startTimer(130);
     }
 
     public void act() {
@@ -175,6 +176,11 @@ public class GameWorld extends World {
         
         if (life <= 0) {
             triggerGameOver("You Died!");
+        }
+        
+        if (!goldFishGuaranteedSpawn && timeLeft <= 180) {
+            spawnGoldFish();
+            goldFishGuaranteedSpawn = true; // Set flag agar tidak spawn lagi
         }
     }
     
@@ -403,8 +409,8 @@ public class GameWorld extends World {
         addObject(ikanBaru, x, y);
         
         // --- SHARK SPAWNING (NOW CORRECT) ---
-        int sharkRoll = Greenfoot.getRandomNumber(1000);
-        if (sharkRoll < 75) { 
+        int sharkRoll = Greenfoot.getRandomNumber(100);
+        if (sharkRoll < 1) { 
             // Get health based on BOTH Difficulty and Stage
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
@@ -421,8 +427,8 @@ public class GameWorld extends World {
         }
         
         // --- PUFFER SPAWNING (NOW CORRECT) ---
-        int pufferRoll = Greenfoot.getRandomNumber(1000);
-        if (pufferRoll < 50) { 
+        int pufferRoll = Greenfoot.getRandomNumber(100);
+        if (pufferRoll < 1) { 
             // Get health based on BOTH Difficulty and Stage
             int health = GameSettings.EnemyHealth[d_idx][s_idx]; // (I am assuming this is your array name)
             EnemyPuffer puffer = new EnemyPuffer(health);
@@ -451,6 +457,24 @@ public class GameWorld extends World {
     
         // If we are here, the level is not complete
         return false;
+    }
+    
+    private void spawnGoldFish() {
+        GoldFish goldie = new GoldFish();
+    
+        int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air
+    
+        // Acak sisi
+        int side = Greenfoot.getRandomNumber(2);
+        if (side == 0) {
+            // Muncul di KIRI, bergerak ke KANAN
+            goldie.setDirection(1); 
+            addObject(goldie, -50, yPos);
+        } else {
+            // Muncul di KANAN, bergerak ke KIRI
+            goldie.setDirection(-1); 
+            addObject(goldie, getWidth() + 50, yPos);
+        }
     }
     
     public void addFishCollected(int amount) {
@@ -569,7 +593,7 @@ public class GameWorld extends World {
             addObject(healthBar, getWidth() / 2, 40);
             
             // 4. Add the boss off-screen to the left
-            addObject(croc, -100, 350); // (Adjust 350 Y-coordinate as needed)
+            addObject(croc, -100, 230); // (Adjust 350 Y-coordinate as needed)
     
         }
         // (Later, you can add "else if (stageNumber == 3)" here for your nyiRoroBoss)
