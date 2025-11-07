@@ -38,13 +38,14 @@ public class ItemLongSpear extends ShopItem {
                 showMessage("Long Spear sudah MAX");
             } else if (result == ShopPurchaseResult.PURCHASED) {
                 int newLevel = gw.getLongSpearUpgrades();
-                showMessage("Upgrade Long Spear Lv " + newLevel + " dibeli seharga $" + cost + " (saldo $" + gw.getCoins() + ")");
-            }
+                showMessage("Upgrade Long Spear Lv " + newLevel + " dibeli sebesar $" + cost + " (saldo $" + gw.getCoins() + ")");
 
             updateLabel();
+            gw.applyLongSpearToPlayer();
+            }
         }
     }
-
+    
     private int nextCost(GameWorld gw) {
         return BASE_COST + (gw.getLongSpearUpgrades() * COST_INCREMENT);
     }

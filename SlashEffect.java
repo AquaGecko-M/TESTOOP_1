@@ -5,8 +5,8 @@ public class SlashEffect extends Actor {
     private int alphaStep = 18;     // kecepatan fade (0..255)
 
     public SlashEffect(int dir, int scaleW, int scaleH) {
-        GreenfootImage img = new GreenfootImage("Slash.png");
-        if (scaleW > 0 && scaleH > 0) img.scale(scaleW, scaleH);
+        GreenfootImage img = new GreenfootImage("Blood.png");
+        if (scaleW > 10 && scaleH > 10) img.scale(100, 100);
         if (dir < 0) img.mirrorHorizontally();   // dir: -1 kiri, 1 kanan
         setImage(img);
     }

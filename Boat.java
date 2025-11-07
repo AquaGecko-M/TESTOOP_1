@@ -20,9 +20,9 @@ public class Boat extends Actor {
     private int atkFrame = 0, atkTick = 0, atkDelay = 10; // ganti atkDelay untuk cepat/lambat anim
     
     //Patch
-    private int wOffXRight = 12;   // offset senjata saat hadap kanan
-    private int wOffXLeft  = 5; // offset saat hadap kiri (biasanya negatif)
-    private int wOffY      = 70;  // offset vertikal
+    private int wOffXRight = -5;   // offset senjata saat hadap kanan
+    private int wOffXLeft  = -40; // offset saat hadap kiri (biasanya negatif)
+    private int wOffY = 5;  // offset vertikal
 
 
     
@@ -54,7 +54,7 @@ public class Boat extends Actor {
         for (int t = 0; t <= PlayerStats.MAX_WEAPON_TIER; t++) {
             for (int f = 0; f < 4; f++) {
                 GreenfootImage r = new GreenfootImage("atk_t" + t + "_" + f + ".png");
-                r.scale(100,100); // jika perlu samakan skala dengan boat
+                // r.scale(200,200); // jika perlu samakan skala dengan boat
                 atkRight[t][f] = r;
     
                 GreenfootImage l = new GreenfootImage(r);

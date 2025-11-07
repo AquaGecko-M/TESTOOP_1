@@ -29,7 +29,7 @@ public class GameWorld extends World {
     private int speedUpgrades = 0;
     private int boostUpgrades = 0;
     private int heartPurchases = 0;
-    private int coins = 0;
+    private int coins = 5000;
     private Koin coinIcon;
     
     public static final int COIN_REWARD_COMMON = 5;
@@ -383,6 +383,15 @@ public class GameWorld extends World {
         }
         longSpearUpgrades++;
         return ShopPurchaseResult.PURCHASED;
+    }
+    
+    public void applyLongSpearToPlayer() {
+        // Map jumlah upgrade ke weaponTier (clamp ke max tier)
+        PlayerStats.weaponTier = Math.max(0, Math.min(longSpearUpgrades, PlayerStats.MAX_WEAPON_TIER));
+        // Jika boat sudah dibuat, sinkronkan stat ke boat sekarang juga
+        if (boat != null) {
+            boat.syncWeaponFromStats();
+        }
     }
 
     public int getSpeedUpgrades() {
