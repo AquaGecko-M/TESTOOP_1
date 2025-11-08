@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=GoldFish
-comment0.text=\r\n\ GoldFish\ bergerak\ bolak-balik\ tanpa\ pernah\ hilang\ saat\ menyentuh\ border.\r\n
+comment0.text=\r\n\ GoldFish\ bergerak\ horizontal\ dan\ memantul\ setelah\ sedikit\ menembus\ border.\r\n
 comment1.params=
 comment1.target=GoldFish()
 comment2.params=dir
@@ -12,7 +12,7 @@ comment4.params=
 comment4.target=void\ moveHorizontally()
 comment5.params=world
 comment5.target=void\ bounceAtEdges(greenfoot.World)
-comment5.text=\r\n\ Jika\ menyentuh\ border\ horizontal,\ balik\ arah\ tanpa\ naik\ ke\ permukaan.\r\n
+comment5.text=\r\n\ Memantul\ setelah\ maju\ sedikit\ melewati\ border\ agar\ terlihat\ natural.\r\n
 comment6.params=left
 comment6.target=void\ setFacing(boolean)
 comment7.params=

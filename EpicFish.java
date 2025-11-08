@@ -6,13 +6,12 @@ public class EpicFish extends Actor {
     private int bob = 0;
     private int value;
     private int coinReward;
+    private int halfWidth;
 
     public EpicFish() {
         setImage("EpicFish.png");
-        value = 10;
-        speed = Greenfoot.getRandomNumber(2) + 4; // 4–5);
     }
-    
+
     public void setSpeed(int s) {
         speed = s;
     }
@@ -21,20 +20,21 @@ public class EpicFish extends Actor {
         GreenfootImage img = new GreenfootImage("EpicFish.png");
         img.scale(width, height);
         setImage(img);
+        halfWidth = img.getWidth() / 2;
     }
 
     public void setValue(int score) {
         this.value = score;
     }
-    
+
     public void setCoinReward(int amount) {
         this.coinReward = amount;
     }
-    
+
     public int getValue() {
         return value;
     }
-    
+
     public int getCoinReward() {
         return coinReward;
     }
@@ -44,9 +44,9 @@ public class EpicFish extends Actor {
 
         if (getX() <= 50) {
             dir = 1;
+            getImage().mirrorHorizontally();
         } else if (getX() >= worldWidth - 50) {
             dir = -1;
-            getImage().mirrorHorizontally();
         } else {
             dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
@@ -69,11 +69,11 @@ public class EpicFish extends Actor {
         if (w == null) return;
 
         int worldWidth = w.getWidth();
-        int half = getImage().getWidth() / 2;
 
-        if (dir < 0 && getX() - half <= 0) {
+        // Hilangkan setelah benar-benar keluar layar
+        if (dir < 0 && getX() + halfWidth < 0) {
             w.removeObject(this);
-        } else if (dir > 0 && getX() + half >= worldWidth) {
+        } else if (dir > 0 && getX() - halfWidth > worldWidth) {
             w.removeObject(this);
         }
     }

@@ -43,9 +43,9 @@ public class CommonFish extends Actor {
         int worldWidth = w.getWidth();
         if (getX() <= 50) {
             dir = 1;
+            getImage().mirrorHorizontally();
         } else if (getX() >= worldWidth - 50) {
             dir = -1;
-            getImage().mirrorHorizontally();
         } else {
             dir = (Greenfoot.getRandomNumber(2) == 0) ? 1 : -1;
         }
@@ -68,12 +68,14 @@ public class CommonFish extends Actor {
         if (w == null) return;
 
         int worldWidth = w.getWidth();
-        int half = getImage().getWidth() / 2;
 
-        if (dir < 0 && getX() - half <= 0) {
-            w.removeObject(this);
-        } else if (dir > 0 && getX() + half >= worldWidth) {
-            w.removeObject(this);
+        // Kalau keluar kiri → muncul dari kanan
+        if (dir < 0 && getX() + halfWidth < 0) {
+            setLocation(worldWidth + halfWidth, getY());
+        } 
+        // Kalau keluar kanan → muncul dari kiri
+        else if (dir > 0 && getX() - halfWidth > worldWidth) {
+            setLocation(-halfWidth, getY());
         }
     }
     

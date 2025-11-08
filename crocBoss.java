@@ -290,4 +290,8 @@ public class crocBoss extends Actor implements Damageable
         Greenfoot.delay(2); 
         if (getWorld() != null) img.setTransparency(old);
     }
+    
+    public int getFacing() { 
+        return direction; 
+    }
 }

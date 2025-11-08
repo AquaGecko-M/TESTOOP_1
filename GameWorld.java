@@ -30,7 +30,7 @@ public class GameWorld extends World {
     private int speedUpgrades = 0;
     private int boostUpgrades = 0;
     private int heartPurchases = 0;
-    private int coins = 0;
+    private int coins = 2000;
     private Koin coinIcon;
     private int dashCapacity;
     private int dashCharges;
@@ -138,11 +138,13 @@ public class GameWorld extends World {
         addObject(boat, boatX + 20, 250);
         applyBoatSpeed();
         applyDashCapacity();    
-
+        boat.syncWeaponFromStats();
+        applyLongSpearToPlayer();
+        
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        startTimer(130);
+        startTimer(121);
     }
 
     public void act() {
@@ -409,32 +411,39 @@ public class GameWorld extends World {
         addObject(ikanBaru, x, y);
         
         // --- SHARK SPAWNING (NOW CORRECT) ---
-        int sharkRoll = Greenfoot.getRandomNumber(100);
-        if (sharkRoll < 1) { 
-            // Get health based on BOTH Difficulty and Stage
+        int sharkRoll = Greenfoot.getRandomNumber(1000);
+        if (sharkRoll < 75) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
-
             int yHiu = 273;
             int sideHiu = Greenfoot.getRandomNumber(2); 
+
             if (sideHiu == 0) {
-               shark.setDirection(1); 
-               addObject(shark, -50, yHiu);
-            } else {
-               shark.setDirection(-1);
-               addObject(shark, getWidth() + 50, yHiu);
+                // spawn dari kiri, jalan ke kanan
+                shark.setDirection(1); 
+                addObject(shark, -50, yHiu);
+            }   else {
+                // spawn dari kanan, jalan ke kiri
+                shark.setDirection(-1);
+                addObject(shark, getWidth() + 50, yHiu);
             }
         }
         
         // --- PUFFER SPAWNING (NOW CORRECT) ---
         int pufferRoll = Greenfoot.getRandomNumber(100);
-        if (pufferRoll < 1) { 
-            // Get health based on BOTH Difficulty and Stage
-            int health = GameSettings.EnemyHealth[d_idx][s_idx]; // (I am assuming this is your array name)
+        if (pufferRoll < 5) { 
+            int health = GameSettings.EnemyHealth[d_idx][s_idx]; 
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
-            addObject(puffer, -50, yPuffer);
-        }
+
+            if (Greenfoot.getRandomNumber(2) == 0) {
+                // Spawn kiri
+                addObject(puffer, -50, yPuffer);
+            } else {
+                // Spawn kanan
+                addObject(puffer, getWidth() + 50, yPuffer);
+            }
+        } 
     }
     
     public boolean addKeyItem() { // <--- Changed from void to boolean
@@ -461,9 +470,12 @@ public class GameWorld extends World {
     
     private void spawnGoldFish() {
         GoldFish goldie = new GoldFish();
-    
+
+        int waterTop = 280; // Supaya tidak spawn di atas HUD/boat
+        int waterBottom = getHeight() - 60; // Hindari spawn terlalu bawah sampai tidak terlihat
+        int range = Math.max(1, waterBottom - waterTop);
         int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air
-    
+
         // Acak sisi
         int side = Greenfoot.getRandomNumber(2);
         if (side == 0) {
@@ -495,7 +507,16 @@ public class GameWorld extends World {
         longSpearUpgrades++;
         return ShopPurchaseResult.PURCHASED;
     }
-
+    
+    public void applyLongSpearToPlayer() {
+        // Map jumlah upgrade ke weaponTier (clamp ke max tier)
+        PlayerStats.weaponTier = Math.max(0, Math.min(longSpearUpgrades, PlayerStats.MAX_WEAPON_TIER));
+        // Jika boat sudah dibuat, sinkronkan stat ke boat sekarang juga
+        if (boat != null) {
+            boat.syncWeaponFromStats();
+        }
+    }
+    
     public int getSpeedUpgrades() {
         return speedUpgrades;
     }
@@ -638,4 +659,5 @@ public class GameWorld extends World {
         int index = Math.max(0, Math.min(level, DASH_CAPACITY_VALUES.length - 1));
         return DASH_CAPACITY_VALUES[index];
     }
+    
 }
