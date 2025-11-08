@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 /**
- * GoldFish bergerak bolak-balik tanpa pernah hilang saat menyentuh border.
+ * GoldFish bergerak horizontal dan memantul setelah sedikit menembus border.
  */
 public class GoldFish extends Actor {
-    private static final int EDGE_PADDING = 24;
+    private static final int EDGE_OVERSHOOT = 18; // Jumlah piksel yang boleh lewat sebelum memantul
 
     private final int speed = 4; // Dia lebih cepat dari ikan biasa
     private final int value = 100;
@@ -51,19 +51,19 @@ public class GoldFish extends Actor {
     }
 
     /**
-     * Jika menyentuh border horizontal, balik arah tanpa naik ke permukaan.
+     * Memantul setelah maju sedikit melewati border agar terlihat natural.
      */
     private void bounceAtEdges(World world) {
         int halfW = getImage().getWidth() / 2;
-        int leftBound = EDGE_PADDING + halfW;
-        int rightBound = world.getWidth() - EDGE_PADDING - halfW;
+        int leftTrigger = Math.max(halfW - EDGE_OVERSHOOT, 0);
+        int rightTrigger = Math.min(world.getWidth() - halfW + EDGE_OVERSHOOT, world.getWidth());
 
-        if (getX() <= leftBound && direction < 0) {
-            setLocation(leftBound, getY());
+        if (direction < 0 && getX() <= leftTrigger) {
+            setLocation(leftTrigger, getY());
             direction = 1;
             setFacing(false);
-        } else if (getX() >= rightBound && direction > 0) {
-            setLocation(rightBound, getY());
+        } else if (direction > 0 && getX() >= rightTrigger) {
+            setLocation(rightTrigger, getY());
             direction = -1;
             setFacing(true);
         }

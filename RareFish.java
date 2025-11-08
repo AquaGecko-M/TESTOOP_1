@@ -6,6 +6,7 @@ public class RareFish extends Actor {
     private int bob = 0;
     private int value;
     private int coinReward;
+    private int halfWidth;
 
     public RareFish() {
         setImage("RareFish.png");
@@ -21,8 +22,9 @@ public class RareFish extends Actor {
         GreenfootImage img = new GreenfootImage("RareFish.png");
         img.scale(width, height);
         setImage(img);
+        halfWidth = img.getWidth() / 2;
     }
-
+    
     public void setValue(int score) {
         this.value = score;
     }
@@ -74,11 +76,11 @@ public class RareFish extends Actor {
         if (w == null) return;
 
         int worldWidth = w.getWidth();
-        int half = getImage().getWidth() / 2;
 
-        if (dir < 0 && getX() - half <= 0) {
+        // Hilangkan setelah benar-benar keluar layar
+        if (dir < 0 && getX() + halfWidth < 0) {
             w.removeObject(this);
-        } else if (dir > 0 && getX() + half >= worldWidth) {
+        } else if (dir > 0 && getX() - halfWidth > worldWidth) {
             w.removeObject(this);
         }
     }

@@ -17,18 +17,19 @@ public class enemyShark extends Actor implements Damageable {
     }
 
     public void setDirection(int dir) {
-        this.direction = dir;
-        GreenfootImage image;
-        if (dir == 1) { // ke kanan = pakai Shark2
-            image = new GreenfootImage("Shark2.png");
-        } else {        // ke kiri = pakai Shark, lalu mirror
-            image = new GreenfootImage("Shark.png");
-            image.mirrorHorizontally();
-        }
-        image.scale(120, 60);
-        setImage(image);
-    }
+    this.direction = dir;
+    GreenfootImage image = new GreenfootImage("Shark.png");
 
+    if (dir == 1) {
+        // ke kanan → mirror supaya menghadap kanan
+        image.mirrorHorizontally();
+    }
+    // ke kiri tidak di-mirror (aslinya menghadap kiri)
+    
+    image.scale(120, 60);
+    setImage(image);
+    }
+    
     public void act() {
         if (getWorld() == null) return;
         move();
@@ -74,7 +75,7 @@ public class enemyShark extends Actor implements Damageable {
         int y = getY() + ((bob < 125) ? 1 : -1);
         setLocation(x, y);
     }
-
+    
     private void checkHitBoat() {
         if (!canHit) {
             if (hitCooldown.hasElapsed(2000)) canHit = true;
@@ -101,5 +102,9 @@ public class enemyShark extends Actor implements Damageable {
         } else if (direction == 1 && getX() >= w.getWidth() - 50) {
             setDirection(-1);
         }
+    }
+    
+    public int getFacing() { 
+        return direction; 
     }
 }

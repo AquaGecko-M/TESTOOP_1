@@ -3,13 +3,7 @@ import greenfoot.*;
 public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
-    
-    // --- THIS IS THE FIX (Step 1) ---
-    // We create our own variable to store the GameWorld.
-    // We call it "gameWorld" to avoid the name conflict.
     private GameWorld gameWorld;
-    
-    private int attackDamage = 1;
 
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
@@ -21,9 +15,6 @@ public class Boat extends Actor {
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 2000; // 2.0 detik
     private final SimpleTimer attackTimer = new SimpleTimer();
-    private int attackCooldownMs = 500;  // 0.5 detik
-    private int attackRadius     = 140;   // ukuran lingkaran
-    private int attackLifeFrames = 15;    // lama tampil ring
     
     // --- Dash ---
     private int dashCapacity = 3;
@@ -37,6 +28,27 @@ public class Boat extends Actor {
     private boolean dashKeyHeld = false;
     private boolean dashCooldownReady = true;
     
+    // Stats yang dipakai performAttack()
+    private int attackRadius; // Ukuran Lingkaran
+    private int attackDamage;
+    private int attackCooldownMs; //Cooldown Attk
+    private int attackLifeFrames; //Lama Tampil Ring
+    private int slashW;
+    private int slashH;
+    
+    //Patch
+    private int wOffXRight = -5;   // offset senjata saat hadap kanan
+    private int wOffXLeft  = -40; // offset saat hadap kiri (biasanya negatif)
+    private int wOffY = 5;  // offset vertikal
+    
+    //Animation
+    // --- Attack animation (4 frame per tier) ---
+    private GreenfootImage[][] atkRight = new GreenfootImage[PlayerStats.MAX_WEAPON_TIER + 1][4];
+    private GreenfootImage[][] atkLeft  = new GreenfootImage[PlayerStats.MAX_WEAPON_TIER + 1][4];
+    private boolean attacking = false;
+    private int atkFrame = 0, atkTick = 0, atkDelay = 10; // ganti atkDelay untuk cepat/lambat anim
+    
+    
     public Boat(GameWorld world) {
         this.gameWorld = world;
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
@@ -46,7 +58,7 @@ public class Boat extends Actor {
         // Pilih salah satu:
         loadLeftFrames();       // kalau punya file arah kiri
         // buildLeftByMirror(); // kalau mau mirror otomatis
-
+        loadAttackFrames();   // muat 4 frame per tier (kanan + mirror kiri)
         setImage(right[0]); // idle awal
     }
 
@@ -86,20 +98,37 @@ public class Boat extends Actor {
 
     // ---------- Animation ----------
     private void animate() {
-        if (moving) {
-            if (animTimer.millisElapsed() > frameMs) {
-                frame = (frame + 1) % right.length;
-                animTimer.mark();
-            }
-        } else {
-            frame = 0;
-        }
+    if (attacking) {
+        if (++atkTick >= atkDelay) { atkTick = 0; atkFrame++; }
+        if (atkFrame >= 4) { attacking = false; atkFrame = 0; }
 
-        if (dir > 0) {
-            setImage(right[frame]);
-        } else {
-            setImage(left[frame]);
-        }
+        int tier = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+
+        // 1) ambil frame boat (idle atau jalan)
+        GreenfootImage boatBase = (moving ? (dir > 0 ? right[frame] : left[frame])
+                                          : (dir > 0 ? right[0]   : left[0]));
+
+        // 2) copy dulu (JANGAN gambar langsung ke array sumber)
+        GreenfootImage composed = new GreenfootImage(boatBase);
+
+        // 3) ambil frame weapon sesuai arah
+        GreenfootImage weaponImg = (dir > 0) ? atkRight[tier][atkFrame] : atkLeft[tier][atkFrame];
+
+        // 4) gambar weapon di atas boat dengan offset
+        int offX = (dir > 0) ? wOffXRight : wOffXLeft;
+        composed.drawImage(weaponImg, offX, wOffY);
+
+        // 5) tampilkan
+        setImage(composed);
+        return;
+    }
+
+    // …lanjutan anim jalan/idle seperti biasa…
+    if (moving) {
+        if (animTimer.millisElapsed() > frameMs) { frame = (frame + 1) % right.length; animTimer.mark(); }
+    } else frame = 0;
+
+    setImage((dir > 0) ? right[frame] : left[frame]);
     }
 
     // ---------- Load frames ----------
@@ -157,32 +186,57 @@ public class Boat extends Actor {
     private void performAttack() {
         World w = getWorld();
         if (w == null) return;
+        
+        attacking = true;
+        atkFrame = 0; atkTick = 0;
 
         // 1) efek visual
         AttackRing ring = new AttackRing(attackRadius, attackLifeFrames);
         w.addObject(ring, getX(), getY());
-
-        // 2) logika hit (sementara: hapus ikan di radius).
-        // Nanti tinggal ganti ke Enemy: for (Enemy e : getObjectsInRange(attackRadius, Enemy.class)) e.takeDamage(1);
-        /*for (Object obj : getObjectsInRange(attackRadius, CommonFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, RareFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }
-        for (Object obj : getObjectsInRange(attackRadius, EpicFish.class)) {
-            ((Actor)obj).getWorld().removeObject((Actor)obj);
-        }*/
+        
         for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
-        ((enemyShark)obj).takeDamage(attackDamage);
+        enemyShark t = (enemyShark) obj;
+        int oldX = t.getX();
+        int oldY = t.getY();
+        int facing = t.getFacing();
+
+        t.takeDamage(attackDamage);
+
+        if (t.getWorld() != null) {
+            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+            w.addObject(fx, oldX, oldY);
+            }
         }
+        
+        //Puffer
         for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
-        ((EnemyPuffer)obj).takeDamage(attackDamage);
+        EnemyPuffer p = (EnemyPuffer) obj;
+        int oldX = p.getX();
+        int oldY = p.getY();
+        int facing = p.getFacing();
+
+        p.takeDamage(attackDamage);
+
+        if (p.getWorld() != null) {
+            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+            w.addObject(fx, oldX, oldY);
+            }
         }
+        
+        //Croc
         for (Object obj : getObjectsInRange(attackRadius, crocBoss.class)) {
-            ((crocBoss)obj).takeDamage(attackDamage);
+        crocBoss c = (crocBoss) obj;
+        int oldX = c.getX();
+        int oldY = c.getY();
+        int facing = c.getFacing();
+
+        c.takeDamage(attackDamage);
+
+        if (c.getWorld() != null) {
+            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+            w.addObject(fx, oldX, oldY);
+            }
         }
-        // (opsional) sedikit efek recoil/flash seperti saat takeDamage
     }
     
     private void handleDash() {
@@ -240,5 +294,29 @@ public class Boat extends Actor {
 
     public int getDashCapacity() {
         return dashCapacity;
+    }
+    
+    private void loadAttackFrames() {
+        for (int t = 0; t <= PlayerStats.MAX_WEAPON_TIER; t++) {
+            for (int f = 0; f < 4; f++) {
+                GreenfootImage r = new GreenfootImage("atk_t" + t + "_" + f + ".png");
+                // r.scale(200,200); // jika perlu samakan skala dengan boat
+                atkRight[t][f] = r;
+    
+                GreenfootImage l = new GreenfootImage(r);
+                l.mirrorHorizontally();
+                atkLeft[t][f] = l;
+            }
+        }
+    }
+    
+    public void syncWeaponFromStats() {
+        int t = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+        attackRadius     = PlayerStats.WPN_RADIUS[t];
+        attackDamage     = PlayerStats.WPN_DAMAGE[t];
+        attackCooldownMs = PlayerStats.WPN_COOLDOWN[t];
+        attackLifeFrames = PlayerStats.WPN_RING_LIFE[t];
+        slashW           = PlayerStats.WPN_SLASH_W[t];
+        slashH           = PlayerStats.WPN_SLASH_H[t];
     }
 }
