@@ -5,7 +5,7 @@ import java.util.List;
  * The boss for Stage 2. A giant crocodile with a full AI state machine.
  * (UPDATED to include Walk and Tired animations)
  */
-public class crocBoss extends Actor implements Damageable
+public class crocBoss extends Actor implements IBoss
 {
     // --- Health ---
     private int health;
@@ -287,11 +287,15 @@ public class crocBoss extends Actor implements Damageable
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(140);
-        Greenfoot.delay(2); 
         if (getWorld() != null) img.setTransparency(old);
     }
     
     public int getFacing() { 
         return direction; 
+    }
+    
+    public boolean isAlive() {
+        // If the actor is in a world, it is alive.
+        return getWorld() != null;
     }
 }
