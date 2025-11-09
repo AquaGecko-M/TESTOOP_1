@@ -164,7 +164,7 @@ public class Boat extends Actor {
         GameWorld gw = (GameWorld) getWorld();
         gw.addLife(-dmg);
         hurtTimer.mark();
-
+        Greenfoot.playSound("hit.mp3");
         // knockback: arah berlawanan dari facing (dir)
         int knockbackDist = 15;
         int newX = getX() - dir * knockbackDist;  // dorong ke belakang

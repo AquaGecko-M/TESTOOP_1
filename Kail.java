@@ -36,6 +36,7 @@ public class Kail extends Actor {
         CommonFish common = (CommonFish) getOneIntersectingObject(CommonFish.class);
         if (common != null) {
             // Ya, kena. Ambil nilainya, hapus ikannya.
+            Greenfoot.playSound("splash.mp3");
             ((GameWorld) getWorld()).addScore(common.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
             addCoinsToWorld(common.getCoinReward());
@@ -47,6 +48,7 @@ public class Kail extends Actor {
         RareFish rare = (RareFish) getOneIntersectingObject(RareFish.class);
         if (rare != null) {
             // Ya, kena.
+            Greenfoot.playSound("splash.mp3");
             ((GameWorld) getWorld()).addScore(rare.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
             addCoinsToWorld(rare.getCoinReward());
@@ -58,6 +60,7 @@ public class Kail extends Actor {
         EpicFish epic = (EpicFish) getOneIntersectingObject(EpicFish.class);
         if (epic != null) {
             // Ya, kena.
+            Greenfoot.playSound("splash.mp3");
             ((GameWorld) getWorld()).addScore(epic.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
             addCoinsToWorld(epic.getCoinReward());
@@ -68,6 +71,7 @@ public class Kail extends Actor {
         GoldFish gold = (GoldFish) getOneIntersectingObject(GoldFish.class);
         if(gold != null) {
             // Ambil nilai dari ikan (bukan hardcoded)
+        Greenfoot.playSound("splash.mp3");  
         addScoreToWorld(gold.getValue());
         addCoinsToWorld(gold.getCoinReward());
             
@@ -82,6 +86,7 @@ public class Kail extends Actor {
 
         // NEW CHECK: Is the treasure not null AND is it interactable?
         if (treasure != null && treasure.isInteractable()) {
+            Greenfoot.playSound("Chest.mp3"); 
             GameWorld currentWorld = (GameWorld) getWorld();
             // You must *declare* and *get* the variable before you can use it.
             int difficulty = currentWorld.getCurrentLevel();

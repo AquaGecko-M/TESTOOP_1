@@ -47,7 +47,7 @@ public class enemyShark extends Actor implements Damageable {
 
         health -= amount;
         flash();
-
+        Greenfoot.playSound("Attack.mp3");
         if (health <= 0) {
             addScoreToWorld(10);
             getWorld().removeObject(this);

@@ -1,23 +1,17 @@
 #BlueJ class context
 comment0.target=QuizWorld
-comment0.text=\r\n\ An\ overlay\ world\ that\ pauses\ the\ game\ and\ displays\ a\ 10-second\ math\ quiz.\r\n\ (NOW\ WITH\ FULL\ DIFFICULTY\ LOGIC)\r\n
 comment1.params=originalGameWorld\ treasure\ difficulty
 comment1.target=QuizWorld(GameWorld,\ Treasure,\ int)
-comment1.text=\r\n\ Constructor\ (This\ should\ be\ the\ same\ as\ your\ current\ one)\r\n
 comment2.params=
 comment2.target=void\ prepareQuiz()
-comment2.text=\r\n\ Prepares\ the\ quiz\ by\ calling\ the\ correct\ helper\ method\r\n\ based\ on\ the\ difficulty\ level.\r\n
 comment3.params=
-comment3.target=void\ generateEasyQuestion()
-comment3.text=\r\n\ Generates\ an\ Addition\ (+)\ or\ Subtraction\ (-)\ problem.\r\n\ (Rubric\:\ Easy)\r\n
+comment3.target=void\ act()
 comment4.params=
-comment4.target=void\ generateMediumQuestion()
-comment4.text=\r\n\ Generates\ a\ Multiplication\ (*)\ or\ Division\ (/)\ problem.\r\n\ (Rubric\:\ Medium)\r\n
+comment4.target=void\ generateEasyQuestion()
 comment5.params=
-comment5.target=void\ generateHardQuestion()
-comment5.text=\r\n\ Generates\ a\ mix\ of\ Addition\ (+)\ and\ Multiplication\ (*)\ problems.\r\n\ (Rubric\:\ Hard)\r\n
+comment5.target=void\ generateMediumQuestion()
 comment6.params=
-comment6.target=void\ act()
+comment6.target=void\ generateHardQuestion()
 comment7.params=
 comment7.target=void\ updateQuizTimerDisplay()
 comment8.params=wasCorrect

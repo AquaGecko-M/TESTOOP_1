@@ -155,6 +155,7 @@ public class EnemyPuffer extends Actor implements Damageable {
         hurtIFrame.mark();
         health -= amount;
         flash();
+        Greenfoot.playSound("Attack.mp3");
         if (health <= 0) {
             addScoreToWorld(5);
             getWorld().removeObject(this);
