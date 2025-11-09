@@ -1,5 +1,8 @@
 import greenfoot.*;
 
+/**
+ * Boat actor - menampilkan boat + attack animation (slash) tanpa memotong gambar.
+ */
 public class Boat extends Actor {
     private GreenfootImage[] right;
     private GreenfootImage[] left;
@@ -19,13 +22,11 @@ public class Boat extends Actor {
     private boolean attacking = false;
     private int atkFrame = 0, atkTick = 0, atkDelay = 10; // ganti atkDelay untuk cepat/lambat anim
     
-    //Patch
+    //Patch offsets (bisa disesuaikan)
     private int wOffXRight = -5;   // offset senjata saat hadap kanan
     private int wOffXLeft  = -40; // offset saat hadap kiri (biasanya negatif)
     private int wOffY = 5;  // offset vertikal
 
-
-    
     private int frame = 0;
     private int dir = 1; // 1 = kanan, -1 = kiri
     private boolean moving = false;
@@ -96,37 +97,75 @@ public class Boat extends Actor {
 
     // ---------- Animation ----------
     private void animate() {
-    if (attacking) {
-        if (++atkTick >= atkDelay) { atkTick = 0; atkFrame++; }
-        if (atkFrame >= 4) { attacking = false; atkFrame = 0; }
+        if (attacking) {
+            if (++atkTick >= atkDelay) { atkTick = 0; atkFrame++; }
+            if (atkFrame >= 4) { attacking = false; atkFrame = 0; }
+    
+            int tier = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+    
+            // 1) ambil frame boat (idle atau jalan)
+            GreenfootImage boatBase = (moving ? (dir > 0 ? right[frame] : left[frame])
+                                              : (dir > 0 ? right[0]   : left[0]));
+    
+            // 2) ambil frame weapon sesuai arah
+            GreenfootImage weaponImg = (dir > 0) ? atkRight[tier][atkFrame] : atkLeft[tier][atkFrame];
+    
+            // --- compose into a larger canvas so weapon doesn't get clipped ---
+            // boatBase dimensi
+            int bW = boatBase.getWidth();
+            int bH = boatBase.getHeight();
 
-        int tier = Math.max(0, Math.min(PlayerStats.weaponTier, PlayerStats.MAX_WEAPON_TIER));
+            // weapon dimensi
+            int wW = weaponImg.getWidth();
+            int wH = weaponImg.getHeight();
 
-        // 1) ambil frame boat (idle atau jalan)
-        GreenfootImage boatBase = (moving ? (dir > 0 ? right[frame] : left[frame])
-                                          : (dir > 0 ? right[0]   : left[0]));
+            // offsets saat menggambar weapon relatif terhadap boatBase origin
+            int offX = (dir > 0) ? wOffXRight : wOffXLeft;
+            int offY = wOffY;
 
-        // 2) copy dulu (JANGAN gambar langsung ke array sumber)
-        GreenfootImage composed = new GreenfootImage(boatBase);
+            // Hitung bounding box relatif (boatBase akan digambar di pos (bx, by) pada canvas)
+            int minX = Math.min(0, offX);
+            int minY = Math.min(0, offY);
+            int maxX = Math.max(bW, offX + wW);
+            int maxY = Math.max(bH, offY + wH);
 
-        // 3) ambil frame weapon sesuai arah
-        GreenfootImage weaponImg = (dir > 0) ? atkRight[tier][atkFrame] : atkLeft[tier][atkFrame];
+            int canvasW = maxX - minX;
+            int canvasH = maxY - minY;
 
-        // 4) gambar weapon di atas boat dengan offset
-        int offX = (dir > 0) ? wOffXRight : wOffXLeft;
-        composed.drawImage(weaponImg, offX, wOffY);
+            // Tambahkan sedikit padding agar tidak terlalu pas sekali (opsional)
+            int PAD = 6;
+            canvasW += PAD * 2;
+            canvasH += PAD * 2;
 
-        // 5) tampilkan
-        setImage(composed);
-        return;
-    }
+            // Buat canvas kosong yang cukup besar
+            GreenfootImage composed = new GreenfootImage(canvasW, canvasH);
 
-    // …lanjutan anim jalan/idle seperti biasa…
-    if (moving) {
-        if (animTimer.millisElapsed() > frameMs) { frame = (frame + 1) % right.length; animTimer.mark(); }
-    } else frame = 0;
+            // Posisi di mana boatBase akan digambar di canvas
+            int boatDrawX = (canvasW - bW) / 2;
+            int boatDrawY = (canvasH - bH) / 2;
 
-    setImage((dir > 0) ? right[frame] : left[frame]);
+            // gambar boat
+            composed.drawImage(boatBase, boatDrawX, boatDrawY);
+
+            // Posisi weapon relatif ke canvas
+            int weaponDrawX = boatDrawX + offX;
+            int weaponDrawY = boatDrawY + offY;
+
+            // gambar weapon (akan tidak terpotong karena canvas lebih besar)
+            composed.drawImage(weaponImg, weaponDrawX, weaponDrawY);
+
+            // terakhir setImage; perlu dipertimbangkan anchor world (Boat actor akan
+            // tetap menggunakan center/bounds image sebagai ukuran actor)
+            setImage(composed);
+            return;
+        }
+
+        // …lanjutan anim jalan/idle seperti biasa…
+        if (moving) {
+            if (animTimer.millisElapsed() > frameMs) { frame = (frame + 1) % right.length; animTimer.mark(); }
+        } else frame = 0;
+
+        setImage((dir > 0) ? right[frame] : left[frame]);
     }
 
 
@@ -178,8 +217,8 @@ public class Boat extends Actor {
     
     private void handleAttack() {
         if (Greenfoot.mouseClicked(null) && attackTimer.hasElapsed(attackCooldownMs)) {
-        performAttack();
-        attackTimer.mark();
+            performAttack();
+            attackTimer.mark();
         }
     }
     
@@ -195,31 +234,31 @@ public class Boat extends Actor {
         w.addObject(ring, getX(), getY());
         
         for (Object obj : getObjectsInRange(attackRadius, enemyShark.class)) {
-        enemyShark t = (enemyShark) obj;
-        int oldX = t.getX();
-        int oldY = t.getY();
-        int facing = t.getFacing();
+            enemyShark t = (enemyShark) obj;
+            int oldX = t.getX();
+            int oldY = t.getY();
+            int facing = t.getFacing();
 
-        t.takeDamage(attackDamage);
+            t.takeDamage(attackDamage);
 
-        if (t.getWorld() != null) {
-            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
-            w.addObject(fx, oldX, oldY);
+            if (t.getWorld() != null) {
+                SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+                w.addObject(fx, oldX, oldY);
             }
         }
         
         //Puffer
         for (Object obj : getObjectsInRange(attackRadius, EnemyPuffer.class)) {
-        EnemyPuffer p = (EnemyPuffer) obj;
-        int oldX = p.getX();
-        int oldY = p.getY();
-        int facing = p.getFacing();
+            EnemyPuffer p = (EnemyPuffer) obj;
+            int oldX = p.getX();
+            int oldY = p.getY();
+            int facing = p.getFacing();
 
-        p.takeDamage(attackDamage);
+            p.takeDamage(attackDamage);
 
-        if (p.getWorld() != null) {
-            SlashEffect fx = new SlashEffect(facing, slashW, slashH);
-            w.addObject(fx, oldX, oldY);
+            if (p.getWorld() != null) {
+                SlashEffect fx = new SlashEffect(facing, slashW, slashH);
+                w.addObject(fx, oldX, oldY);
             }
         }
     }

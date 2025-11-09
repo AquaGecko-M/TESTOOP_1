@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=Boat
+comment0.text=\r\n\ Boat\ actor\ -\ menampilkan\ boat\ +\ attack\ animation\ (slash)\ tanpa\ memotong\ gambar.\r\n
 comment1.params=
 comment1.target=Boat()
 comment10.params=

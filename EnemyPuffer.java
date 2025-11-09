@@ -216,11 +216,11 @@ public class EnemyPuffer extends Actor implements Damageable
     }
     
     private void flash() {
-    GreenfootImage img = getImage();
-    int old = img.getTransparency();
-    img.setTransparency(140);
-    Greenfoot.delay(8);
-    if (getWorld() != null) img.setTransparency(old);
+        GreenfootImage img = getImage();
+        int old = img.getTransparency();
+        img.setTransparency(140);
+        Greenfoot.delay(8);
+        if (getWorld() != null) img.setTransparency(old);
     }
 
 }

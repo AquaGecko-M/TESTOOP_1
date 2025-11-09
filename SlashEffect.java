@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class SlashEffect extends Actor {
     private int life = 12;          // durasi frame
-    private int alphaStep = 18;     // kecepatan fade (0..255)
+    private int alphaStep = 25;     // kecepatan fade (0..255)
 
     public SlashEffect(int dir, int scaleW, int scaleH) {
         GreenfootImage img = new GreenfootImage("Blood.png");

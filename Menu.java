@@ -1,38 +1,40 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Menu here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Menu utama dengan musik latar.
  */
 public class Menu extends World
 {
+    // Gunakan static agar musik dapat dihentikan dari class lain (misalnya BtnStart)
+    private static GreenfootSound menuMusic;
 
     /**
-     * Constructor for objects of class Menu.
-     * 
+     * Constructor untuk objek Menu.
      */
     public Menu()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        // 1. Atur ukuran dunia agar SAMA dengan GameWorld
+        // Buat world ukuran 960x540
         super(960, 540, 1); 
 
-        // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
-
-        // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
+        // --- LATAR BELAKANG MENU ---
         GreenfootImage bg = new GreenfootImage("menu_ui_1.jpg"); 
-
-        // 3. Paksa gambar untuk pas dengan ukuran dunia (648x468)
         bg.scale(960, 540);
-
-        // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
+        // --- AKHIR LATAR BELAKANG ---
 
-        // --- AKHIR DARI PERUBAHAN ---
+        // --- MUSIK MENU ---
+        // Pastikan file "menu_music.mp3" ada di folder "sounds"
+        try {
+            if (menuMusic == null) {
+                menuMusic = new GreenfootSound("glory.mp3");
+            }
+            menuMusic.playLoop();
+        } catch (Exception e) {
+            System.out.println("Gagal memutar musik menu: " + e.getMessage());
+        }
+        // --- AKHIR MUSIK MENU ---
 
-        // Panggil method untuk menambahkan tombol
+        // Tambahkan tombol-tombol menu
         ButtonMenu();
         prepare();
     }
@@ -42,15 +44,27 @@ public class Menu extends World
         BtnStart Start = new BtnStart();
         BtnExit Exit = new BtnExit();
 
-        addObject(Tutorial, 220, 445); // (actor, x, y)
-        addObject(Start,    475, 440); // (actor, x, y)
-        addObject(Exit,     740, 450); // (actor, x, y)
+        addObject(Tutorial, 220, 445);
+        addObject(Start,    475, 440);
+        addObject(Exit,     740, 450);
     }
-    
+
     /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
+     * Berhentikan musik menu (dipanggil oleh BtnStart sebelum ganti world)
      */
+    public static void stopMenuMusic() {
+        if (menuMusic != null) {
+            menuMusic.stop();
+        }
+    }
+
+    /**
+     * Jika simulasi dihentikan (Stop di Greenfoot), hentikan musik juga.
+     */
+    public void stopped() {
+        stopMenuMusic();
+    }
+
     private void prepare()
     {
     }
