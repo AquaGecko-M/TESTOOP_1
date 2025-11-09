@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnStart extends Actor
+public class BtnStart extends BtnAnima
 {
       public BtnStart()
     {
@@ -21,6 +21,7 @@ public class BtnStart extends Actor
     
     public void act()
     {
+        super.act();
         // Add your action code here.if (Greenfoot.mouseClicked(this)) {
             if (Greenfoot.mouseClicked(this)) 
         {

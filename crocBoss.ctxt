@@ -19,4 +19,6 @@ comment7.params=amount
 comment7.target=void\ takeDamage(int)
 comment8.params=
 comment8.target=void\ flash()
-numComments=9
+comment9.params=
+comment9.target=int\ getFacing()
+numComments=10

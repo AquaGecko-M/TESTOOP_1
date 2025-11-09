@@ -43,7 +43,7 @@ public class Menu extends World
         BtnExit Exit = new BtnExit();
 
         addObject(Tutorial, 220, 445); // (actor, x, y)
-        addObject(Start,    475, 440); // (actor, x, y)
+        addObject(Start,    475, 440); // (actor, x, y) 
         addObject(Exit,     740, 450); // (actor, x, y)
     }
     
