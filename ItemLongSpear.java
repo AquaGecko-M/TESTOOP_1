@@ -3,7 +3,7 @@ import greenfoot.*;
 public class ItemLongSpear extends ShopItem {
     private static final int BASE_COST = 500;
     private static final int COST_INCREMENT = 250;
-    private static final int MAX_LEVEL = 3;
+    private static final int MAX_LEVEL = 2;
 
     public ItemLongSpear() {
         setImage(new GreenfootImage("btnItemLongSpear.png"));

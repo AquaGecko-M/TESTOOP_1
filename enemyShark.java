@@ -58,7 +58,6 @@ public class enemyShark extends Actor implements Damageable {
         GreenfootImage img = getImage();
         int old = img.getTransparency();
         img.setTransparency(140);
-        Greenfoot.delay(5);
         if (getWorld() != null) { // world bisa null kalau sudah dihapus
             img.setTransparency(old);
         }

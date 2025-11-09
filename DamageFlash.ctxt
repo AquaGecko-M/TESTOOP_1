@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=DamageFlash
+comment0.text=\r\n\ An\ actor\ that\ covers\ the\ screen\ with\ a\ red\ tint\ and\ fades\ out.\r\n\ (UPDATED\ to\ accept\ width\ and\ height)\r\n
+comment1.params=width\ height
+comment1.target=DamageFlash(int,\ int)
+comment1.text=\r\n\ ---\ CONSTRUCTOR\ IS\ UPDATED\ ---\r\n\ It\ now\ receives\ the\ world's\ width\ and\ height\ from\r\n\ whatever\ created\ it\ (the\ Boat).\r\n
+comment2.params=
+comment2.target=void\ act()
+numComments=3

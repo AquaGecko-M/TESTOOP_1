@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=BossProjectile
+comment0.text=\r\n\ A\ projectile\ summoned\ by\ nyiRoroBoss.\r\n\ It\ moves\ from\ the\ bottom\ of\ the\ screen\ to\ the\ top.\r\n
+comment1.params=
+comment1.target=BossProjectile()
+comment2.params=
+comment2.target=void\ act()
+numComments=3

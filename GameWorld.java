@@ -56,7 +56,7 @@ public class GameWorld extends World {
     private boolean goldFishGuaranteedSpawn = false;
     
     public GameWorld(int stageNum) {
-        super(960, 540, 1, false);
+        super(1280, 720, 1, false);
         this.stageNumber = stageNum; // Store the stage number we were given
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
@@ -65,7 +65,7 @@ public class GameWorld extends World {
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
             bg = new GreenfootImage("24.jpg"); 
-            bg.scale(960, 540);
+            bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 1 HERE
             addObject(new Treasure(), 30, 500);
@@ -77,7 +77,7 @@ public class GameWorld extends World {
         } else if (stageNumber == 2) {
             // --- STAGE 2 setup ---
             bg = new GreenfootImage("25.jpg"); 
-            bg.scale(960, 540);
+            bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 2 HERE
             addObject(new Treasure(), 30, 500);
@@ -88,7 +88,7 @@ public class GameWorld extends World {
         } else if (stageNumber == 3) {
             // --- STAGE 3 setup ---
             bg = new GreenfootImage("26.jpg"); 
-            bg.scale(960, 540);
+            bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 3 HERE
             addObject(new Treasure(), 30, 500);
@@ -100,12 +100,12 @@ public class GameWorld extends World {
         } else {
             // Failsafe: Default to Stage 1
             bg = new GreenfootImage("24.jpg"); 
-            bg.scale(960, 540);
+            bg.scale(1280, 720);
         }
-        setPaintOrder(Hud.class, Koin.class, Kail.class, Boat.class, Fish.class); // HUD dan ikon tetap di depan 
+        setPaintOrder(Hud.class, DamageFlash.class, Koin.class, Kail.class,  Fish.class,Boat.class); // HUD dan ikon tetap di depan 
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
-        bg.scale(960, 540);
+        bg.scale(1280, 720);
 
         originalBg = new GreenfootImage(bg); 
         setBackground(bg);
@@ -170,7 +170,7 @@ public class GameWorld extends World {
             }
         }
 
-        if (fishSpawnTimer.hasElapsed(900)) {
+        if (fishSpawnTimer.hasElapsed(1200)) {
             spawnFish();
             fishSpawnTimer.mark();
         }
@@ -617,7 +617,20 @@ public class GameWorld extends World {
             addObject(croc, -100, 230); // (Adjust 350 Y-coordinate as needed)
     
         }
-        // (Later, you can add "else if (stageNumber == 3)" here for your nyiRoroBoss)
+        else if (stageNumber == 3) {
+            
+            // 1. Create the Nyi Roro boss
+            nyiRoroBoss roro = new nyiRoroBoss(bossHealth);
+            
+            // 2. Create the health bar and tell it to track her
+            // This also works because 'nyiRoroBoss' will implement 'IBoss'
+            BossHealthBar healthBar = new BossHealthBar(roro);
+            
+            // 3. Add them to the world
+            addObject(healthBar, getWidth() / 2, 40);
+            addObject(roro, 100, 300); // (Her addedToWorld will handle positioning)
+        }
+        
     }
     
     private void applyBoatSpeed() {

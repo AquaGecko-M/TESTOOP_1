@@ -1,13 +1,14 @@
 import greenfoot.*;
 
 /**
- * A health bar that VISUALLY TRACKS the crocBoss.
- * It is NOT the boss itself.
- * It must be given the boss object to track.
+ * A GENERIC health bar that can track ANY boss.
+ * It now tracks an 'IBoss' instead of just a 'crocBoss'.
  */
 public class BossHealthBar extends Actor
 {
-    private crocBoss boss; // The boss we are tracking
+    // --- THIS IS THE MAIN CHANGE ---
+    private IBoss boss; // It now holds any object that is an IBoss
+    
     private int barWidth = 400;  // Total width of the health bar
     private int barHeight = 20;  // Total height
     
@@ -15,39 +16,48 @@ public class BossHealthBar extends Actor
     private GreenfootImage barImage = new GreenfootImage(barWidth, barHeight);
 
     /**
-     * Constructor.
-     * @param bossToTrack The crocBoss object this health bar should follow.
+     * The constructor now accepts any object that implements IBoss.
      */
-    public BossHealthBar(crocBoss bossToTrack)
+    public BossHealthBar(IBoss bossToTrack)
     {
+        // We must cast the object to an Actor to store it
+        Actor bossActor = (Actor) bossToTrack;
+        if (bossActor == null) {
+            // Safety check
+            if (getWorld() != null) {
+                getWorld().removeObject(this);
+            }
+            return;
+        }
+        
         this.boss = bossToTrack;
         updateBar(); // Draw the bar for the first time
     }
 
     public void act()
     {
-        // Check if the boss is dead or has been removed from the world
-        if (boss.getWorld() == null) {
+        // Check if the boss is dead or has been removed
+        if (!boss.isAlive()) { // We call the interface method
             getWorld().removeObject(this); // Remove the health bar
             return;
         }
         
-        // Redraw the health bar every frame to show damage
+        // Redraw the health bar every frame
         updateBar();
     }
     
     /**
-     * Redraws the health bar based on the boss's current health percentage.
+     * Redraws the health bar based on the boss's current health.
      */
     private void updateBar()
     {
-        // 1. Get the boss's health percentage (a number from 0.0 to 1.0)
+        // 1. Get the boss's health percentage (from the interface)
         double healthPct = boss.getHealthPercentage();
         
         // 2. Clear the old bar
         barImage.clear();
         
-        // 3. Draw the red "background" of the bar
+        // 3. Draw the red "background"
         barImage.setColor(greenfoot.Color.RED);
         barImage.fillRect(0, 0, barWidth, barHeight);
         
