@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=GameTitle
+comment0.text=\r\n\ An\ animated\ game\ title.\r\n\ 1.\ It\ scales\ up\ and\ fades\ in.\r\n\ 2.\ It\ pulses\ slowly.\r\n
+comment1.params=world
+comment1.target=void\ addedToWorld(greenfoot.World)
+comment1.text=\r\n\ This\ runs\ once\ when\ the\ actor\ is\ added\ to\ the\ world.\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ The\ main\ animation\ loop\r\n
+comment3.params=
+comment3.target=void\ runEnteringAnimation()
+comment3.text=\r\n\ This\ method\ runs\ every\ frame\ while\ the\ title\ is\ scaling\ in.\r\n
+comment4.params=
+comment4.target=void\ runIdlingAnimation()
+comment4.text=\r\n\ This\ method\ runs\ every\ frame\ *after*\ the\ title\ has\ entered.\r\n\ It\ creates\ the\ slow,\ pulsing\ fade\ effect.\r\n
+comment5.params=newState
+comment5.target=void\ setState(GameTitle.AnimState)
+comment5.text=\r\n\ A\ helper\ method\ to\ cleanly\ switch\ states\r\n
+numComments=6

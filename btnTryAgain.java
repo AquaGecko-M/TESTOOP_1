@@ -29,7 +29,7 @@ public class btnTryAgain extends Actor {
     }
 
     public void act() {
-        // ... (click-fix logic) ...
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

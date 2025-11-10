@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=btnTutorialT
+comment0.text=\r\n\ Button\ for\ the\ "Tutorial"\ section.\r\n\ Opens\ the\ slideshow\ from\ slide\ 1\ to\ 5.\r\n
+comment1.params=
+comment1.target=btnTutorialT()
+comment2.params=
+comment2.target=void\ act()
+numComments=3

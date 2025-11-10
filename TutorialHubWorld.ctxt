@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=TutorialHubWorld
+comment0.text=\r\n\ The\ main\ "Information"\ screen.\r\n\ This\ is\ the\ hub\ that\ holds\ the\ 4\ tutorial\ category\ buttons.\r\n
+comment1.params=
+comment1.target=TutorialHubWorld()
+comment2.params=
+comment2.target=void\ prepare()
+comment2.text=\r\n\ Prepare\ the\ world\ by\ adding\ the\ buttons.\r\n
+numComments=3

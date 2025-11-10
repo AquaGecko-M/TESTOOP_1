@@ -5,7 +5,7 @@ import greenfoot.*;
  * (SIMPLIFIED VERSION)
  * It just knows its stage number and checks if it's locked.
  */
-public class btnLevel extends Actor
+public class btnLevel extends btnAnimation
 {
     private int stageNumber; // The stage this button loads (1, 2, 3...)
     private boolean isLocked = true;
@@ -53,7 +53,8 @@ public class btnLevel extends Actor
      * Check for clicks. Only work if not locked.
      */
     public void act()
-    {
+    {   
+        super.act();
         if (Greenfoot.mouseClicked(this) && !isLocked) {
             // It's unlocked! Load the GameWorld with this stage number.
             // GameWorld will automatically read the difficulty from GameSettings.
