@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnTutor extends Actor
+public class BtnTutor extends btnAnimation
 {
     public BtnTutor()
     {
@@ -20,9 +20,10 @@ public class BtnTutor extends Actor
     }
     public void act()
     {
-    if (Greenfoot.mouseClicked(this)) 
+        super.act();
+        if (Greenfoot.mouseClicked(this)) 
         {
-            Greenfoot.setWorld(new tutorialkeyboard());
+            Greenfoot.setWorld(new TutorialHubWorld());
         }
     }
 }

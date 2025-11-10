@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=btnTutorialPrev
+comment0.text=\r\n\ The\ "Previous"\ button\ for\ the\ tutorial\ slideshow.\r\n\ Calls\ the\ prevSlide()\ method\ in\ the\ world.\r\n
+comment1.params=
+comment1.target=btnTutorialPrev()
+comment2.params=
+comment2.target=void\ act()
+numComments=3

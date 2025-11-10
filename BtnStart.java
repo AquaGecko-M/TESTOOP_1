@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnStart extends Actor
+public class BtnStart extends btnAnimation
 {
       public BtnStart()
     {
@@ -21,7 +21,7 @@ public class BtnStart extends Actor
     
     public void act()
     {
-        // Add your action code here.if (Greenfoot.mouseClicked(this)) {
+        super.act();
             if (Greenfoot.mouseClicked(this)) 
         {
             Greenfoot.setWorld(new GameMode());

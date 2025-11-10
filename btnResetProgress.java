@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 // Your "Reset Progress" button
-public class btnResetProgress extends Actor
+public class btnResetProgress extends btnAnimation
 {
     private boolean clickedOnce = false;
     private GreenfootImage imgDefault = new GreenfootImage("Reset Progress", 24, Color.RED, new Color(0,0,0,0));
@@ -13,6 +13,7 @@ public class btnResetProgress extends Actor
     }
     
     public void act() {
+        super.act();
         if (Greenfoot.mouseClicked(this)) {
             if (clickedOnce) {
                 // 2. Clicked a second time: Reset and show confirmation

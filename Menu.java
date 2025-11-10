@@ -29,7 +29,7 @@ public class Menu extends World
 
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
-
+        addObject(new GameTitle(), getWidth() / 2, 200);
         // --- AKHIR DARI PERUBAHAN ---
 
         // Panggil method untuk menambahkan tombol

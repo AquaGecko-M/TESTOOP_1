@@ -56,7 +56,7 @@ public class GameWorld extends World {
     private boolean goldFishGuaranteedSpawn = false;
     
     public GameWorld(int stageNum) {
-        super(1280, 720, 1, false);
+        super(1152, 648, 1, false);
         this.stageNumber = stageNum; // Store the stage number we were given
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
@@ -65,40 +65,40 @@ public class GameWorld extends World {
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
             bg = new GreenfootImage("24.jpg"); 
-            bg.scale(1280, 720);
+            bg.scale(1152, 648);
             
             // Add ALL treasures for Stage 1 HERE
-            addObject(new Treasure(), 30, 700);
-            addObject(new Treasure(), 890, 700);
-            addObject(new Treasure(), 1123, 700);
+            addObject(new Treasure(), 30, 630);
+            addObject(new Treasure(), 690, 630);
+            addObject(new Treasure(), 1000, 630);
         } else if (stageNumber == 2) {
             // --- STAGE 2 setup ---
             bg = new GreenfootImage("25.jpg"); 
-            bg.scale(1280, 720);
+            bg.scale(1152, 648);
             
             // Add ALL treasures for Stage 2 HERE
-            addObject(new Treasure(), 30, 700);
-            addObject(new Treasure(), 456, 700);
-            addObject(new Treasure(), 1130, 700);
+            addObject(new Treasure(), 30, 630);
+            addObject(new Treasure(), 456, 630);
+            addObject(new Treasure(), 1100, 630);
         } else if (stageNumber == 3) {
             // --- STAGE 3 setup ---
             bg = new GreenfootImage("26.jpg"); 
-            bg.scale(1280, 720);
+            bg.scale(1152, 648);
             
             // Add ALL treasures for Stage 3 HERE
-            addObject(new Treasure(), 30, 700);
-            addObject(new Treasure(), 300, 700);
-            addObject(new Treasure(), 1200, 700);
+            addObject(new Treasure(), 30, 630);
+            addObject(new Treasure(), 300, 630);
+            addObject(new Treasure(), 1140, 630);
 
         } else {
             // Failsafe: Default to Stage 1
             bg = new GreenfootImage("24.jpg"); 
-            bg.scale(1280, 720);
+            bg.scale(1152 , 648);
         }
         setPaintOrder(Hud.class, DamageFlash.class, Koin.class, Kail.class,  Fish.class,Boat.class); // HUD dan ikon tetap di depan 
         hud = new Hud(getWidth(), 36, 5);
         addObject(hud, getWidth()/2, 20);
-        bg.scale(1280, 720);
+        bg.scale(1152, 648);
 
         originalBg = new GreenfootImage(bg); 
         setBackground(bg);
@@ -405,8 +405,8 @@ public class GameWorld extends World {
         addObject(ikanBaru, x, y);
         
         // --- SHARK SPAWNING (NOW CORRECT) ---
-        int sharkRoll = Greenfoot.getRandomNumber(1000);
-        if (sharkRoll < 75) { 
+        int sharkRoll = Greenfoot.getRandomNumber(100);
+        if (sharkRoll < 8) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
             int yHiu = 320;

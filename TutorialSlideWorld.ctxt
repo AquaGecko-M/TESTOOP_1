@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=TutorialSlideWorld
+comment0.text=\r\n\ A\ "smart"\ slideshow\ world.\r\n\ It\ can\ be\ told\ which\ images\ to\ load\ in\ a\ sequence.\r\n
+comment1.params=start\ end
+comment1.target=TutorialSlideWorld(int,\ int)
+comment1.text=\r\n\ Constructor\ for\ our\ "smart"\ slideshow.\r\n\ @param\ start\ The\ number\ of\ the\ first\ image\ (e.g.,\ 1)\r\n\ @param\ end\ The\ number\ of\ the\ last\ image\ (e.g.,\ 5)\r\n
+comment2.params=
+comment2.target=void\ prepare()
+comment2.text=\r\n\ Adds\ the\ Next,\ Previous,\ and\ Back\ buttons\ to\ the\ world.\r\n
+comment3.params=slideIndex
+comment3.target=void\ showSlide(int)
+comment3.text=\r\n\ This\ is\ the\ main\ method\ to\ change\ the\ background\ image.\r\n
+comment4.params=
+comment4.target=void\ nextSlide()
+comment4.text=\r\n\ This\ method\ is\ called\ by\ the\ "Next"\ button.\r\n
+comment5.params=
+comment5.target=void\ prevSlide()
+comment5.text=\r\n\ This\ method\ is\ called\ by\ the\ "Previous"\ button.\r\n
+numComments=6

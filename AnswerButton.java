@@ -4,7 +4,7 @@ import greenfoot.*;
  * Tombol jawaban untuk QuizWorld.
  * Tombol ini menggunakan BtnGreen.png dan menuliskan angka jawaban di atasnya.
  */
-public class AnswerButton extends Actor
+public class AnswerButton extends btnAnimation
 {
     private boolean isCorrect;
     private int answerValue;
@@ -20,7 +20,7 @@ public class AnswerButton extends Actor
         GreenfootImage bg = new GreenfootImage("BtnGreen.png");
         
         // 2. Atur ukuran tombol (sesuaikan jika perlu)
-        bg.scale(1, 70); 
+        bg.scale(150, 70); 
         
         // 3. Tulis teks jawaban di atas tombol
         String text = "" + answerValue;
@@ -43,7 +43,7 @@ public class AnswerButton extends Actor
     
     public void act()
     {
-        // Saat tombol ini diklik
+        super.act();
         if (Greenfoot.mouseClicked(this))
         {
             // Panggil method checkAnswer di QuizWorld

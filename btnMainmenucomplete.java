@@ -17,6 +17,7 @@ public class btnMainmenucomplete extends Actor
     }
     
     public void act() {
+        super.act();
         if (!readyToClick) {
             readyToClick = true;
             return;

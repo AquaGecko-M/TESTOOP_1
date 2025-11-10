@@ -16,6 +16,7 @@ public class btnBackToWorld extends Actor
     }
     
     public void act() {
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;
