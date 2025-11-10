@@ -35,7 +35,7 @@ public class Menu extends World
         // 3. Putar musiknya secara berulang (loop)
 
         backgroundMusic = new GreenfootSound("Menu_Awal.mp3");
-        backgroundMusic.setVolume(10); // <-- Volume di sini 50
+        backgroundMusic.setVolume(80); // <-- Volume di sini 50
         backgroundMusic.playLoop();
         // Panggil method untuk menambahkan tombol
         ButtonMenu();
