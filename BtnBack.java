@@ -8,22 +8,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BtnBack extends BtnAnima
 {
-      public BtnBack()
+    public BtnBack()
     {
         // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("btnBack.png");
-        
+
         image.scale(200,150); 
-        
+
         // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
     }
-    
-    public void act()
+
+    public void act()   
     {
         super.act();
         // Add your action code here.if (Greenfoot.mouseClicked(this)) {
-            if (Greenfoot.mouseClicked(this)) 
+        if (Greenfoot.mouseClicked(this)) 
         {
             Greenfoot.setWorld(new Menu());
         }

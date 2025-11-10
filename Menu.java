@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Menu extends World
 {
-
+    
     /**
      * Constructor for objects of class Menu.
      * 
@@ -34,9 +34,9 @@ public class Menu extends World
         // --- AKHIR DARI PERUBAHAN ---
         backgroundMusic = new GreenfootSound("Menu_Awal.mp3");
         // 2. Atur volume (opsional, 50 adalah setengah volume)
-        backgroundMusic.setVolume(50);
+        backgroundMusic.setVolume(0);
         // 3. Putar musiknya secara berulang (loop)
-        backgroundMusic.playLoop();
+        backgroundMusic.playLoop(); 
         // Panggil method untuk menambahkan tombol
         ButtonMenu();
         prepare();

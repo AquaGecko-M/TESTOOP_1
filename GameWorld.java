@@ -56,7 +56,7 @@ public class GameWorld extends World {
     private boolean goldFishGuaranteedSpawn = false;
     
     public GameWorld(int stageNum) {
-        super(960, 540, 1, false);
+        super(960, 720, 1, false);
         this.stageNumber = stageNum; // Store the stage number we were given
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
@@ -405,8 +405,12 @@ public class GameWorld extends World {
             c.setSpeed(speed);
         }
         
-        int side = Greenfoot.getRandomNumber(2); 
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300; 
+        int side = Greenfoot.getRandomNumber(2);
+        //int spawnMinY = 30;
+        //int spawnMaxY = 360;
+        //int y = Greenfoot.getRandomNumber(spawnMaxY - spawnMinY) + spawnMinY;
+        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
+        
         int x = (side == 0) ? -40 : getWidth() + 40;
         addObject(ikanBaru, x, y);
         

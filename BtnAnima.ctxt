@@ -2,8 +2,7 @@
 comment0.target=BtnAnima
 comment1.params=world
 comment1.target=void\ addedToWorld(greenfoot.World)
-comment1.text=\r\n\ Berjalan\ satu\ kali\ saat\ tombol\ ditambahkan\ ke\ dunia.\r\n
+comment1.text=\r\n\ Berjalan\ satu\ kali\ SETELAH\ constructor\ child\ (BtnHard)\ selesai.\r\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Logika\ act()\ baru\ yang\ tidak\ akan\ bergetar\r\n
 numComments=3
