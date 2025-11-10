@@ -13,7 +13,7 @@ public class BtnTutor extends Actor
         // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("BtnTutorial.png");
         
-        image.scale(150, 100); 
+        image.scale(145, 92); 
         
         // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);

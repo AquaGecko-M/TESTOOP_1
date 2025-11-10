@@ -19,7 +19,7 @@ public class GoldFish extends Actor {
 
     public GoldFish() {
         GreenfootImage base = new GreenfootImage("goldFish.png");
-        base.scale(80, 60);
+        base.scale(50, 35);
         facingRightImage = base;
         facingLeftImage = new GreenfootImage(base);
         facingLeftImage.mirrorHorizontally();

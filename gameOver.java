@@ -23,7 +23,7 @@ public class gameOver extends World {
     }
 
     private void setupBackground() {
-        GreenfootImage bg = new GreenfootImage("gameOverScreen.png");
+        GreenfootImage bg = new GreenfootImage("gameOverScreen.jpeg");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
     }
@@ -67,7 +67,7 @@ public class gameOver extends World {
         btnTryAgain tryAgain = new btnTryAgain(stageToRetry);
         btnMainMenuOver toMenu = new btnMainMenuOver();
     
-        addObject(tryAgain, getWidth() - 120, getHeight() - 70);
-        addObject(toMenu, 120, getHeight() - 70);
+        addObject(tryAgain, getWidth() - 160, getHeight() - 75);
+        addObject(toMenu, 160, getHeight() - 75);
     }
 }

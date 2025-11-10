@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=AnswerButton
-comment1.params=value\ correct
+comment0.text=\r\n\ Tombol\ jawaban\ untuk\ QuizWorld.\r\n\ Tombol\ ini\ menggunakan\ BtnGreen.png\ dan\ menuliskan\ angka\ jawaban\ di\ atasnya.\r\n
+comment1.params=answer\ correct
 comment1.target=AnswerButton(int,\ boolean)
 comment2.params=
 comment2.target=void\ act()

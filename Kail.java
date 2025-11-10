@@ -17,7 +17,7 @@ public class Kail extends Actor {
         // 2. Kemudian, ubah ukurannya
         GreenfootImage image = getImage();
         // Ubah angka 30 dan 60 sesuai ukuran yang kamu inginkan
-        image.scale(40, 50); // Contoh: Lebar 30 piksel, Tinggi 60 piksel
+        image.scale(30, 50); // Contoh: Lebar 30 piksel, Tinggi 60 piksel
         setImage(image); // Set gambar yang sudah diskalakan
     }
 

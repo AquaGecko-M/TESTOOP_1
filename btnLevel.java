@@ -27,8 +27,8 @@ public class btnLevel extends Actor
         lockedImage = new GreenfootImage(lockedImg);
         
         // You can scale them here if you need to
-        unlockedImage.scale(50, 50);
-        lockedImage.scale(50, 50);
+        unlockedImage.scale(65, 65);
+        lockedImage.scale(65, 65);
         
         checkLockStatus();
     }

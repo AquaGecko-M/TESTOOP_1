@@ -12,7 +12,7 @@ public class btnMainmenucomplete extends Actor
     public btnMainmenucomplete() {
         GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
         // You can scale it if you need to
-        img.scale(300, 200);
+        img.scale(200, 120);
         setImage(img);
     }
     

@@ -10,7 +10,7 @@ public class Boat extends Actor {
     private boolean moving = false;
     private SimpleTimer animTimer = new SimpleTimer();
     private int frameMs = 100;
-    private int speed = 1;
+    private int speed = 3;
     
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 2000; // 2.0 detik
@@ -173,14 +173,14 @@ public class Boat extends Actor {
     private void loadRightFrames() {
         for (int i = 0; i < right.length; i++) {
             right[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
-            right[i].scale(150, 150);
+            right[i].scale(120, 100);
         }
     }
 
     private void loadLeftFrames() {
         for (int i = 0; i < left.length; i++) {
             left[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
-            left[i].scale(150, 150);
+            left[i].scale(120, 100);
         }
     }
     
