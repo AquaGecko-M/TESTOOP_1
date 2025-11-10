@@ -260,6 +260,7 @@ public class crocBoss extends Actor implements IBoss
     @Override
     public void takeDamage(int amount)
     {
+        Greenfoot.playSound("hit.mp3");
         if (currentState != State.VULNERABLE) {
             return;
         }

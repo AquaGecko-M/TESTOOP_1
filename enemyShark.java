@@ -41,6 +41,7 @@ public class enemyShark extends Actor implements Damageable {
     // === Damageable ===
     @Override
     public void takeDamage(int amount) {
+        Greenfoot.playSound("hit.mp3");
         // i-frame vs serangan supaya tidak “terbakar” multi hit dalam 1–2 frame
         if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
         hurtIFrame.mark();
