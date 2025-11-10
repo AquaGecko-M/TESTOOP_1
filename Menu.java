@@ -12,7 +12,7 @@ public class Menu extends World
     /**
      * Constructor for objects of class Menu.
      * 
-     */
+     */private GreenfootSound backgroundMusic;
     public Menu()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -31,6 +31,8 @@ public class Menu extends World
         setBackground(bg);
 
         // --- AKHIR DARI PERUBAHAN ---
+        // 2. Atur volume (opsional, 50 adalah setengah volume)
+        // 3. Putar musiknya secara berulang (loop)
 
         // Panggil method untuk menambahkan tombol
         ButtonMenu();

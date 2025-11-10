@@ -35,6 +35,7 @@ public class Kail extends Actor {
         // Cek 1: Apakah kena CommonFish?
         CommonFish common = (CommonFish) getOneIntersectingObject(CommonFish.class);
         if (common != null) {
+            Greenfoot.playSound("fr.mp3");
             // Ya, kena. Ambil nilainya, hapus ikannya.
             ((GameWorld) getWorld()).addScore(common.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -46,6 +47,7 @@ public class Kail extends Actor {
         // Cek 2: Jika tidak kena CommonFish, apakah kena RareFish?
         RareFish rare = (RareFish) getOneIntersectingObject(RareFish.class);
         if (rare != null) {
+        Greenfoot.playSound("fr.mp3");
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(rare.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -57,6 +59,7 @@ public class Kail extends Actor {
         // Cek 3: Jika tidak kena Rare/Common, apakah kena EpicFish?
         EpicFish epic = (EpicFish) getOneIntersectingObject(EpicFish.class);
         if (epic != null) {
+        Greenfoot.playSound("fr.mp3");
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(epic.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -67,6 +70,7 @@ public class Kail extends Actor {
         
         GoldFish gold = (GoldFish) getOneIntersectingObject(GoldFish.class);
         if(gold != null) {
+        Greenfoot.playSound("fr.mp3");
             // Ambil nilai dari ikan (bukan hardcoded)
         addScoreToWorld(gold.getValue());
         addCoinsToWorld(gold.getCoinReward());
@@ -82,6 +86,7 @@ public class Kail extends Actor {
 
         // NEW CHECK: Is the treasure not null AND is it interactable?
         if (treasure != null && treasure.isInteractable()) {
+            Greenfoot.playSound("Chest.mp3");
             GameWorld currentWorld = (GameWorld) getWorld();
             // You must *declare* and *get* the variable before you can use it.
             int difficulty = currentWorld.getCurrentLevel();

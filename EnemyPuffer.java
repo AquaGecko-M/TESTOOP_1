@@ -151,6 +151,7 @@ public class EnemyPuffer extends Actor implements Damageable {
 
     @Override
     public void takeDamage(int amount) {
+        Greenfoot.playSound("hit.mp3");
         if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
         hurtIFrame.mark();
         health -= amount;

@@ -62,6 +62,8 @@ public class GameWorld extends World {
         dashCharges = dashCapacity;
         GreenfootImage bg; // Create a temporary variable for the background
         
+        String musicFile = "level1_music.mp3";
+        
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
             bg = new GreenfootImage("24.jpg"); 

@@ -20,7 +20,7 @@ public class AnswerButton extends Actor
         GreenfootImage bg = new GreenfootImage("BtnGreen.png");
         
         // 2. Atur ukuran tombol (sesuaikan jika perlu)
-        bg.scale(1, 70); 
+        bg.scale(150, 70); 
         
         // 3. Tulis teks jawaban di atas tombol
         String text = "" + answerValue;
