@@ -29,7 +29,7 @@ public class Menu extends World
 
         // 4. Atur gambar yang sudah dikecilkan
         setBackground(bg);
-
+        addObject(new GameTitle(), getWidth() / 2, 200);
         // --- AKHIR DARI PERUBAHAN ---
         // 2. Atur volume (opsional, 50 adalah setengah volume)
         // 3. Putar musiknya secara berulang (loop)
@@ -57,5 +57,6 @@ public class Menu extends World
      */
     private void prepare()
     {
+        
     }
 }

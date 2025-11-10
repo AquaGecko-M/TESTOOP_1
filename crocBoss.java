@@ -267,7 +267,7 @@ public class crocBoss extends Actor implements IBoss
         
         if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
         hurtIFrame.mark();
-
+        Greenfoot.playSound("hit.mp3");
         health -= amount;
         flash(); 
 

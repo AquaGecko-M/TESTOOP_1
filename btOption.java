@@ -1,6 +1,6 @@
 import greenfoot.*; 
 
-public class btOption extends Actor {
+public class btOption extends btnAnimation {
 
     public btOption() {
         GreenfootImage image = new GreenfootImage("btOption.png");
@@ -14,6 +14,7 @@ public class btOption extends Actor {
     }
     
     public void act() {
+        super.act();
         if (Greenfoot.mouseClicked(this)) {
             // Get the world we are currently in (e.g., bgMenu)
             World currentWorld = getWorld();

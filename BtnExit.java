@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnExit extends Actor
+public class BtnExit extends btnAnimation
 {
     public BtnExit()
     {
@@ -21,6 +21,7 @@ public class BtnExit extends Actor
     
     public void act()
     {
+        super.act();
         if(Greenfoot.mouseClicked(this)){
             Greenfoot.stop();
         }

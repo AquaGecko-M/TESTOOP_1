@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class btResume extends Actor {
+public class btResume extends btnAnimation {
     public btResume() {
         GreenfootImage image = new GreenfootImage("btResume.png");
         if (image != null) {
@@ -15,6 +15,7 @@ public class btResume extends Actor {
     }
 
     public void act() {
+        super.act();
         if (Greenfoot.mouseClicked(this)) {
             World world = getWorld();
             if (world instanceof bgMenu) {

@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class btMainMenu extends Actor {
+public class btMainMenu extends btnAnimation {
     public btMainMenu() {
         GreenfootImage image = new GreenfootImage("btMainmenu.png");
         if (image != null) {
@@ -15,6 +15,7 @@ public class btMainMenu extends Actor {
     }
 
     public void act() {
+        super.act();
         if (Greenfoot.mouseClicked(this)) {
             Greenfoot.setWorld(new Menu());
         }

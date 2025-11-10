@@ -198,7 +198,6 @@ public class Boat extends Actor {
     public void takeDamage(int dmg) {
         if (!canBeHit()) return;   // i-frame aktif → abaikan
         Greenfoot.playSound("Takedamage.mp3");
-
         GameWorld gw = (GameWorld) getWorld();
         gw.addLife(-dmg);
         hurtTimer.mark();

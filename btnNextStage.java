@@ -26,7 +26,7 @@ public class btnNextStage extends Actor
      * --- ACT METHOD IS UPDATED ---
      */
     public void act() {
-        // Fix for click-through bug
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) {
                 return; // Wait for release
