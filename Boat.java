@@ -197,7 +197,7 @@ public class Boat extends Actor {
     
     public void takeDamage(int dmg) {
         if (!canBeHit()) return;   // i-frame aktif → abaikan
-
+        Greenfoot.playSound("Takedamage.mp3");
         GameWorld gw = (GameWorld) getWorld();
         gw.addLife(-dmg);
         hurtTimer.mark();
@@ -224,6 +224,7 @@ public class Boat extends Actor {
     private void performAttack() {
         World w = getWorld();
         if (w == null) return;
+        Greenfoot.playSound("hit.mp3");
         
         attacking = true;
         atkFrame = 0; atkTick = 0;
@@ -312,6 +313,7 @@ public class Boat extends Actor {
         dashCharges = Math.max(0, dashCharges - 1);
         dashCooldownReady = false;
         dashCooldownTimer.mark();
+        Greenfoot.playSound("Dash.mp3");
         gameWorld.notifyDashChanged(dashCharges, dashCapacity);
     }
 

@@ -35,6 +35,7 @@ public class Kail extends Actor {
         // Cek 1: Apakah kena CommonFish?
         CommonFish common = (CommonFish) getOneIntersectingObject(CommonFish.class);
         if (common != null) {
+            Greenfoot.playSound("fr.mp3");
             // Ya, kena. Ambil nilainya, hapus ikannya.
             ((GameWorld) getWorld()).addScore(common.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -46,6 +47,7 @@ public class Kail extends Actor {
         // Cek 2: Jika tidak kena CommonFish, apakah kena RareFish?
         RareFish rare = (RareFish) getOneIntersectingObject(RareFish.class);
         if (rare != null) {
+            Greenfoot.playSound("fr.mp3");
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(rare.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -57,6 +59,7 @@ public class Kail extends Actor {
         // Cek 3: Jika tidak kena Rare/Common, apakah kena EpicFish?
         EpicFish epic = (EpicFish) getOneIntersectingObject(EpicFish.class);
         if (epic != null) {
+            Greenfoot.playSound("fr.mp3");
             // Ya, kena.
             ((GameWorld) getWorld()).addScore(epic.getValue());
             ((GameWorld) getWorld()).addFishCollected(1);
@@ -66,27 +69,29 @@ public class Kail extends Actor {
         }
         
         GoldFish gold = (GoldFish) getOneIntersectingObject(GoldFish.class);
-        if(gold != null) {
+        if (gold != null) {
+            Greenfoot.playSound("fr.mp3");
             // Ambil nilai dari ikan (bukan hardcoded)
-        addScoreToWorld(gold.getValue());
-        addCoinsToWorld(gold.getCoinReward());
+            addScoreToWorld(gold.getValue());
+            addCoinsToWorld(gold.getCoinReward());
             
             // Kunci tetap bonus spesial dari Kail
-        addKeyItemToWorld();
+            addKeyItemToWorld();
 
-         getWorld().removeObject(gold);
-        return; // Penting!
-         }
+            getWorld().removeObject(gold);
+            return; // Penting!
+        }
         
         Treasure treasure = (Treasure) getOneIntersectingObject(Treasure.class);
 
         // NEW CHECK: Is the treasure not null AND is it interactable?
         if (treasure != null && treasure.isInteractable()) {
+            Greenfoot.playSound("Chest.mp3");
             GameWorld currentWorld = (GameWorld) getWorld();
             // You must *declare* and *get* the variable before you can use it.
             int difficulty = currentWorld.getCurrentLevel();
             // Pass the treasure object to the QuizWorld
-            Greenfoot.setWorld(new QuizWorld(currentWorld, treasure,difficulty));
+            Greenfoot.setWorld(new QuizWorld(currentWorld, treasure, difficulty));
             
             return; // Stop processing this act cycle
         }
@@ -113,8 +118,8 @@ public class Kail extends Actor {
     }
     
     private void addCoinsToWorld(int amount) {
-    // Karena Anda hanya pakai GameWorld, ini aman
-    ((GameWorld)getWorld()).addCoins(amount);
+        // Karena Anda hanya pakai GameWorld, ini aman
+        ((GameWorld)getWorld()).addCoins(amount);
     }
     
     private void addScoreToWorld(int score) {
@@ -126,12 +131,12 @@ public class Kail extends Actor {
         // Ini method yang hilang untuk ikan biasa
         ((GameWorld)getWorld()).addFishCollected(amount);
     }
+
     private void addKeyItemToWorld() {
         World world = getWorld(); 
         if (world instanceof GameWorld) {
             // addKeyItem() mengembalikan boolean, tapi kita tidak perlu menangkapnya di sini
             ((GameWorld)world).addKeyItem();
         }
-    
     }
 }

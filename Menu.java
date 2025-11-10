@@ -32,7 +32,7 @@ public class Menu extends World
         addObject(new GameTitle(), getWidth() / 2, 200);
         // --- AKHIR DARI PERUBAHAN ---
 
-        // Panggil method untuk menambahkan tombol
+        SoundManager.play("Menu_Awal.mp3", 70);
         ButtonMenu();
         prepare();
     }
@@ -53,5 +53,6 @@ public class Menu extends World
      */
     private void prepare()
     {
+        
     }
 }

@@ -283,14 +283,13 @@ public class nyiRoroBoss extends Actor implements IBoss
     @Override
     public void takeDamage(int amount)
     {
-        // --- UPDATED: Vulnerable while WALKING, ENTERING, or VULNERABLE ---
+        Greenfoot.playSound("Takedamage.mp3");
         if (currentState == State.ATTACKING || currentState == State.SHIELDING) {
             return; // Invincible!
         }
         
         if (!hurtIFrame.hasElapsed(hurtCooldownMs)) return;
         hurtIFrame.mark();
-
         health -= amount;
         flash(); 
 

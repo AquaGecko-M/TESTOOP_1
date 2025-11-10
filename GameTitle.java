@@ -37,7 +37,7 @@ public class GameTitle extends Actor
         // ---------------------------------
         
         // You can scale the original image here if it's too big
-        originalImage.scale(450, 350); 
+        originalImage.scale(500, 350); 
         
         // Start the animation
         setState(AnimState.ENTERING);

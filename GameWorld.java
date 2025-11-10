@@ -61,11 +61,15 @@ public class GameWorld extends World {
         dashCapacity = dashCapacityForLevel(boostUpgrades);
         dashCharges = dashCapacity;
         GreenfootImage bg; // Create a temporary variable for the background
+        String musicFile;
         
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
             bg = new GreenfootImage("24.jpg"); 
             bg.scale(1152, 648);
+            musicFile = "level1.mp3";
+            SoundManager.stop();
+            SoundManager.play(musicFile, 40);
             
             // Add ALL treasures for Stage 1 HERE
             addObject(new Treasure(), 30, 630);
@@ -75,6 +79,9 @@ public class GameWorld extends World {
             // --- STAGE 2 setup ---
             bg = new GreenfootImage("25.jpg"); 
             bg.scale(1152, 648);
+            musicFile = "level2.mp3";
+            SoundManager.stop();
+            SoundManager.play(musicFile, 40);
             
             // Add ALL treasures for Stage 2 HERE
             addObject(new Treasure(), 30, 630);
@@ -84,6 +91,9 @@ public class GameWorld extends World {
             // --- STAGE 3 setup ---
             bg = new GreenfootImage("26.jpg"); 
             bg.scale(1152, 648);
+            musicFile = "level3.mp3";
+            SoundManager.stop();
+            SoundManager.play(musicFile, 40);
             
             // Add ALL treasures for Stage 3 HERE
             addObject(new Treasure(), 30, 630);
