@@ -68,34 +68,27 @@ public class GameWorld extends World {
             bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 1 HERE
-            addObject(new Treasure(), 30, 500);
-            addObject(new Treasure(), 200, 500);
-            addObject(new Treasure(), 400, 500);
-            addObject(new Treasure(), 600, 500);
-            addObject(new Treasure(), 850, 500);
-            
+            addObject(new Treasure(), 30, 700);
+            addObject(new Treasure(), 890, 700);
+            addObject(new Treasure(), 1123, 700);
         } else if (stageNumber == 2) {
             // --- STAGE 2 setup ---
             bg = new GreenfootImage("25.jpg"); 
             bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 2 HERE
-            addObject(new Treasure(), 30, 500);
-            addObject(new Treasure(), 200, 500);
-            addObject(new Treasure(), 400, 500);
-            addObject(new Treasure(), 600, 500);
-            addObject(new Treasure(), 850, 500);
+            addObject(new Treasure(), 30, 700);
+            addObject(new Treasure(), 456, 700);
+            addObject(new Treasure(), 1130, 700);
         } else if (stageNumber == 3) {
             // --- STAGE 3 setup ---
             bg = new GreenfootImage("26.jpg"); 
             bg.scale(1280, 720);
             
             // Add ALL treasures for Stage 3 HERE
-            addObject(new Treasure(), 30, 500);
-            addObject(new Treasure(), 200, 500);
-            addObject(new Treasure(), 400, 500);
-            addObject(new Treasure(), 600, 500);
-            addObject(new Treasure(), 850, 500);
+            addObject(new Treasure(), 30, 700);
+            addObject(new Treasure(), 300, 700);
+            addObject(new Treasure(), 1200, 700);
 
         } else {
             // Failsafe: Default to Stage 1
@@ -111,19 +104,19 @@ public class GameWorld extends World {
         setBackground(bg);
         
         keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
-        keyItemIcon.scale(50, 50); // Scale it for the HUD
+        keyItemIcon.scale(50, 25); // Scale it for the HUD
         dashIcon = new GreenfootImage("key_item.png");
-        dashIcon.scale(50, 50);
+        dashIcon.scale(50, 25);
         setBackground(bg);
     
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
 
         shopButton = new btnShop();
-        addObject(shopButton, getWidth() - 55, 120);
+        addObject(shopButton, getWidth() - 55, 135);
         
         coinIcon = new Koin();
-        addObject(coinIcon, 50, 105);
+        addObject(coinIcon, 43, 110);
         
         prepare();
         updateHUD();
@@ -132,10 +125,10 @@ public class GameWorld extends World {
     
     private void prepare() {
         int boatX = getWidth() / 2;
-        int boatY = 120; 
+        int boatY = 250; 
 
         boat = new Boat(this);
-        addObject(boat, boatX + 20, 250);
+        addObject(boat, boatX + 20, 320);
         applyBoatSpeed();
         applyDashCapacity();    
         boat.syncWeaponFromStats();
@@ -259,15 +252,16 @@ public class GameWorld extends World {
             hud.update(score, life, timeLeft);
         }
         
-        getBackground().drawImage(keyItemIcon, 20, 40);
+        getBackground().drawImage(keyItemIcon, 20, 50);
         GreenfootImage keyLabel = new GreenfootImage(keyItems + " / " + keysNeeded, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
         getBackground().drawImage(keyLabel, 80, 65 - keyLabel.getHeight() / 2);
 
         GreenfootImage coinLabel = new GreenfootImage(coins + "$", 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
-        getBackground().drawImage(coinLabel, 80, 110 - coinLabel.getHeight() / 2);
+        getBackground().drawImage(coinLabel, 80, 115 - coinLabel.getHeight() / 2);
         
+        getBackground().drawImage(dashIcon, 20, 145);
         GreenfootImage dashLabel = new GreenfootImage("Sisa Dash: " + dashCharges + "/" + dashCapacity, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
-        getBackground().drawImage(dashLabel, 80, 145 - dashLabel.getHeight() / 2);
+        getBackground().drawImage(dashLabel, 80, 165 - dashLabel.getHeight() / 2);
     }
     
     public void reduceTimer(int seconds) {
@@ -307,7 +301,7 @@ public class GameWorld extends World {
         
         int roll = Greenfoot.getRandomNumber(100);
 
-        if (roll < 10) { // Epic
+        if (roll < 20) { // Epic
             ikanBaru = new EpicFish();
             EpicFish e = (EpicFish) ikanBaru;
 
@@ -340,7 +334,7 @@ public class GameWorld extends World {
             ) + GameSettings.epicFishSpeed[d_idx][0];
             e.setSpeed(speed);
 
-        } else if (roll < 35) { // Rare
+        } else if (roll < 55) { // Rare
             ikanBaru = new RareFish();
             RareFish r = (RareFish) ikanBaru;
 
@@ -384,7 +378,7 @@ public class GameWorld extends World {
                 category = 0; // Kecil
                 c.setValue(2); // Skor 2
                 c.setCoinReward(3); //koin 3
-            } else if (sizeRoll < 90) {
+            } else if (sizeRoll < 80) {
                 category = 1; // Normal
                 c.setValue(3); // Skor 3
                 c.setCoinReward(4); // Koin 4
@@ -415,7 +409,7 @@ public class GameWorld extends World {
         if (sharkRoll < 75) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
-            int yHiu = 273;
+            int yHiu = 320;
             int sideHiu = Greenfoot.getRandomNumber(2); 
 
             if (sideHiu == 0) {
@@ -471,7 +465,7 @@ public class GameWorld extends World {
     private void spawnGoldFish() {
         GoldFish goldie = new GoldFish();
 
-        int waterTop = 280; // Supaya tidak spawn di atas HUD/boat
+        int waterTop = 300; // Supaya tidak spawn di atas HUD/boat
         int waterBottom = getHeight() - 60; // Hindari spawn terlalu bawah sampai tidak terlihat
         int range = Math.max(1, waterBottom - waterTop);
         int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air

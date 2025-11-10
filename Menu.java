@@ -18,9 +18,9 @@ public class Menu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         // 1. Atur ukuran dunia agar SAMA dengan GameWorld
         super(960, 540, 1); 
-
-        // --- KODE UNTUK MEMPERBAIKI LATAR BELAKANG ---
-
+        
+        // 1. Load saved settings and apply them
+        
         // 2. Ambil gambar asli (GANTI "nama_background_menu.png" DENGAN NAMA FILE ANDA)
         GreenfootImage bg = new GreenfootImage("menu_ui_1.jpg"); 
 
@@ -42,9 +42,9 @@ public class Menu extends World
         BtnStart Start = new BtnStart();
         BtnExit Exit = new BtnExit();
 
-        addObject(Tutorial, 220, 445); // (actor, x, y)
-        addObject(Start,    475, 440); // (actor, x, y)
-        addObject(Exit,     740, 450); // (actor, x, y)
+        addObject(Tutorial, 250, 445); // (actor, x, y)
+        addObject(Start,    480, 440); // (actor, x, y)
+        addObject(Exit,     710, 450); // (actor, x, y)
     }
     
     /**

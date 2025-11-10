@@ -5,7 +5,7 @@ public class btnShop extends Actor {
         GreenfootImage image = getImage();
         if (image != null) {
             image = new GreenfootImage(image);
-            image.scale(80, 80);
+            image.scale(80, 65);
             setImage(image);
         }
     }

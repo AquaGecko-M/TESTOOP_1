@@ -6,14 +6,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BtnBack extends Actor
+public class BtnBack extends btnAnimation
 {
       public BtnBack()
     {
         // 1. Ambil gambar asli dari tombolnya
         GreenfootImage image = new GreenfootImage("btnBack.png");
         
-        image.scale(200,150); 
+        image.scale(150,90); 
         
         // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
@@ -21,7 +21,7 @@ public class BtnBack extends Actor
     
     public void act()
     {
-        // Add your action code here.if (Greenfoot.mouseClicked(this)) {
+        super.act();
             if (Greenfoot.mouseClicked(this)) 
         {
             Greenfoot.setWorld(new Menu());
