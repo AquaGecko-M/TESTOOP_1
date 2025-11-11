@@ -10,7 +10,12 @@ public class btnTutorialBack extends Actor
     
     public btnTutorialBack()
     {
-        setImage("btnTutorialBack.png");
+        GreenfootImage image = new GreenfootImage("btnTutorialBack.png");
+        
+        image.scale(150,90); 
+        
+        // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
+        setImage(image);
     }
     
     public void act() 
