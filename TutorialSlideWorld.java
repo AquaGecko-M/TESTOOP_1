@@ -44,7 +44,7 @@ public class TutorialSlideWorld extends World
         addObject(new btnTutorialBack(), 80, 500); 
         
         // Add "Previous" button
-        addObject(new btnTutorialPrev(), 800, 500); 
+        addObject(new btnTutorialPrev(), 700, 500); 
         
         // Add "Next" button
         addObject(new btnTutorialNext(), 880, 500);

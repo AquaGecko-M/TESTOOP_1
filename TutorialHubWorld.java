@@ -29,10 +29,10 @@ public class TutorialHubWorld extends World
     private void prepare()
     {
         // Add your 4 tutorial buttons
-        addObject(new btnTutorialT(), 250, 300);
-        addObject(new btnTutorialEconomy(), 250, 420);
-        addObject(new btnTutorialFish(), 710, 300);
-        addObject(new btnTutorialMore(), 710, 420);
+        addObject(new btnTutorialT(), 250, 200);
+        addObject(new btnTutorialEconomy(), 250, 360);
+        addObject(new btnTutorialFish(), 710, 200);
+        addObject(new btnTutorialMore(), 710, 360);
         
         // Add a "Back" button to return to the main menu
         addObject(new BtnBack(), 80, 500); 
