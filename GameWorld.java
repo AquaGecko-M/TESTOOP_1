@@ -237,7 +237,7 @@ public class GameWorld extends World {
             fishSpawnTimer.mark();
         }
         if (Greenfoot.isKeyDown("h")) { boat.takeDamage(1); Greenfoot.delay(5); }
-
+        if (Greenfoot.isKeyDown("k")) { addKeyItem();}
         if (life <= 0) {
             triggerGameOver("You Died!");
         }
@@ -526,8 +526,23 @@ public class GameWorld extends World {
             fishSpawnTimer.mark();
 
             // Go to the completion screen
-            Greenfoot.setWorld(new menuCompletion(score, timeLeft, totalFish, stageNumber));
-
+            if (stageNumber == 3) {
+                // If Level 3 is done, update progress and load the Story World.
+                // NOTE: You must still call the ProgressTracker.levelFinished(3) 
+                // somewhere (e.g., inside menuCompletion or here) 
+                // to unlock Level 4. I will assume progress is handled 
+                // implicitly elsewhere, but if not, add it here.
+                
+                String difficulty = GameSettings.difficulty;
+                
+                // Load StoryWorld4. We pass a dummy next stage number (e.g., 99) 
+                // since StoryWorld4 will now go straight to the Menu.
+                Greenfoot.setWorld(new StoryWorld4(difficulty, 99)); 
+                
+            } else {
+                // For all other levels, go to the standard completion screen.
+                Greenfoot.setWorld(new menuCompletion(score, timeLeft, totalFish, stageNumber));
+            }
             return true; // Yes, the level is complete
         }
 

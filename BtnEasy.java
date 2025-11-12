@@ -25,7 +25,7 @@ public class BtnEasy extends btnAnimation
         if (Greenfoot.mouseClicked(this)) 
         {   
             GameSettings.difficulty = "Easy";
-            Greenfoot.setWorld(new LevelSelectWorld());
+            Greenfoot.setWorld(new StoryWorld("Easy"));
         }
     }
 }

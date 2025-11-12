@@ -54,9 +54,9 @@ public class GameSettings
     
     public static int[][] BossHealth = {
       // Stage 1, Stage 2, Stage 3
-        { 0,        20,    200 }, // Easy (Stage 1 has no boss, so 0 health)
-        { 0,        30,    300 }, // Medium
-        { 0,        50,    400 }  // Hard
+        { 0,        20,    1 }, // Easy (Stage 1 has no boss, so 0 health)
+        { 0,        30,    1 }, // Medium
+        { 0,        50,    1 }  // Hard
     };
 
     /**
