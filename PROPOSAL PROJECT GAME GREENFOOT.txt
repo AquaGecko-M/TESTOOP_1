@@ -1,0 +1,166 @@
+﻿PROPOSAL PROJECT GAME GREENFOOT
+Dendam Nelayan Laut Selatan
+Dosen Pengampu : Rita Wiryasaputra, ST., M. Cs.
+
+
+
+
+Disusun Oleh :
+				
+          412024005 - Kristofer Ryan Giggs Eka Saputra
+412024008 - Steven Iwan
+412024021 - Michael Tandeas ( KETUA)
+412024032 - Gaddiel Abiyr Nesher Sitorus
+
+
+
+
+
+FAKULTAS TEKNOLOGI CERDAS
+ PROGRAM STUDI TEKNIK INFORMATIKA
+SEMESTER GANJIL TAHUN AJARAN 2025/2026
+
+
+KATA PENGANTAR
+
+Puji dan syukur kami panjatkan kehadirat Tuhan Yang Maha Esa, karena atas limpahan rahmat dan karunia-Nya, kami dapat menyelesaikan penyusunan laporan proyek game Greenfoot ini dengan baik dan tepat waktu.
+Laporan ini disusun untuk memenuhi salah satu tugas mata kuliah Konsep Pemrograman Berorientasi Objek yang dibimbing oleh Ibu Rita Wiryasaputra S.T., M.Cs., Ph.D. selaku dosen pengampu. Tujuan dari pembuatan proyek game ini adalah untuk melatih kemampuan kami dalam menerapkan konsep-konsep pemrograman berorientasi objek yang telah dipelajari ke dalam sebuah aplikasi interaktif.
+Kami sadar sepenuhnya bahwa masih ada kekurangan baik dari segi susunan kalimat maupun tata bahasanya. Oleh karenanya kami dengan lapang dada menerima segala saran dan kritik dari pembaca agar kami dapat memperbaiki proposal ini. Akhir kata kami berharap semoga proposal tentang Pembuatan Game dengan Aplikasi Greenfoot ini dapat memberikan manfaat maupun inspirasi untuk pembaca.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BAB I
+PENDAHULUAN
+
+Latar Belakang
+Perkembangan teknologi perangkat lunak yang pesat telah menjadikan game interaktif sebagai salah satu media hiburan yang paling diminati. Lebih dari sekadar hiburan, game juga telah berkembang menjadi sarana edukasi yang efektif, atau yang dikenal dengan istilah edutainment (edukasi dan hiburan). Media ini mampu menyajikan materi pembelajaran yang kompleks menjadi lebih menarik dan mudah dipahami.
+Proyek ini dibuat untuk memenuhi tugas mata kuliah Konsep Pemrograman Berorientasi Objek. Software yang digunakan adalah Greenfoot, sebuah lingkungan pengembangan interaktif berbasis Java yang dirancang khusus untuk tujuan edukasi. Greenfoot sangat ideal untuk menerapkan konsep-konsep inti dari Pemrograman Berorientasi Objek (OOP) secara visual dan praktis.
+Kami memutuskan untuk merancang sebuah game 2D bergenre petualangan memancing dengan judul Dendam Nelayan Laut Selatan. Game ini tidak hanya menantang pemain dari segi ketangkasan (memancing dan melawan monster), tetapi juga menguji wawasan melalui mekanik kuis aritmatika yang diintegrasikan sebagai syarat untuk membuka harta karun (treasure). Dengan memadukan elemen aksi, strategi ekonomi (melalui shop), dan edukasi, kami berharap dapat menciptakan sebuah game yang tidak hanya seru untuk dimainkan tetapi juga memenuhi semua kriteria teknis yang ditugaskan.
+Rumusan Masalah
+Berdasarkan latar belakang tersebut, beberapa rumusan masalah yang akan diselesaikan dalam proyek ini adalah:
+Bagaimana merancang dan membangun sebuah game 2D bergenre petualangan memancing di Greenfoot dengan mekanik utama seperti pergerakan kapal, memancing, dan sistem pertarungan sederhana?
+Bagaimana cara mengimplementasikan sistem kuis aritmatika sebagai mekanisme inti untuk membuka treasure dan melanjutkan progres permainan?
+
+
+
+
+
+
+Tujuan Proyek
+Adapun tujuan dari pengembangan proyek game ini adalah sebagai berikut:
+Memenuhi salah satu syarat kelulusan mata kuliah konsep Pemrograman Berorientasi Objek.
+Menerapkan konsep Pemrograman Berorientasi Objek (OOP) secara praktis dalam pengembangan sebuah game 2D yang fungsional.
+Menghasilkan sebuah game edutainment yang dapat dimainkan, menggabungkan mekanik memancing, aksi, dan kuis aritmatika.
+Menyusun dokumentasi teknis yang merinci proses pembuatan dan cara memainkan aplikasi, sesuai dengan komponen yang diminta.
+
+Batasan Masalah
+Untuk menjaga agar pengerjaan proyek tetap fokus dan sesuai dengan target, kami menetapkan beberapa batasan masalah sebagai berikut:
+Game dikembangkan khusus menggunakan platform Greenfoot dan bahasa pemrograman Java.
+Mekanik inti berfokus pada pergerakan kapal, memancing, kuis aritmatika, pertarungan monster, serta dua pertarungan bos (Stage 2 dan Stage 3).
+Fitur shop (toko) diimplementasikan secara sederhana untuk membeli upgrade dasar.
+Laporan ini berfokus pada penjelasan modul pembuatan dan dokumentasi teknis cara bermain aplikasi.
+
+
+
+
+
+
+
+
+
+
+BAB II
+ISI
+
+Modul Pembuatan
+Adapun Software/perangkat lunak dari pengembangan proyek game ini adalah sebagai berikut:
+Greenfoot: Greenfoot adalah Integrated Development Environment (IDE) utama yang kami gunakan untuk membangun game ini. Platform ini berbasis Java dan dirancang khusus untuk edukasi, sehingga sangat ideal dalam menerapkan konsep Pemrograman Berorientasi Objek (OOP). Seluruh logika permainan, interaksi antar objek (Actor), dan manajemen dunia (World) dikodekan dan dijalankan di dalam lingkungan Greenfoot.’
+GitHub: Untuk manajemen kode dan kolaborasi tim, kami menggunakan GitHub sebagai platform hosting repository Git. GitHub berfungsi sebagai sistem kontrol versi (version control) terpusat yang memungkinkan setiap anggota tim bekerja pada bagian kode yang berbeda secara bersamaan. Ini sangat membantu kami dalam melacak perubahan, menggabungkan kode (merge conflict), dan memastikan kami selalu memiliki cadangan (backup) proyek yang aman.
+Gemini dan ChatGPT (Referensi kode dan design): 
+Paint dan Canva:
+
+Dokumentasi Teknis Cara Memainkan Aplikasi
+Tujuan Permainan (Objective)
+Tujuan utama pemain dalam game Dendam Nelayan Laut Selatan adalah mengumpulkan 5 Kunci Emas di setiap stage. Stage 3 menjadi tahap terakhir: setelah lima kunci Stage 3 terkumpul dan bos di stage tersebut dikalahkan, permainan dinyatakan tamat.
+Game ini terdiri dari tiga stage utama yang harus dijelajahi. Kelima Kunci Emas tersebut tersebar di ketiga stage ini dan dapat diperoleh melalui tiga cara yang berbeda:
+Membuka Peti Harta Karun (Treasure): Pemain harus menemukan peti yang tersembunyi di dasar laut. Untuk membukanya, pemain wajib menjawab kuis aritmatika dengan benar.
+Menangkap GoldFish (ikan emas langka): Ikan bonus yang jarang muncul ini akan memberikan satu Kunci Emas saat berhasil ditangkap.
+Mengalahkan Bos Stage: Stage 2 dan 3 (Buaya putih dan Nyi Roro Kidul) akan dijaga oleh satu bos. Pemain harus mengalahkan bos tersebut untuk mendapatkan kunci sebagai reward.
+Alur Permainan (Game Flow)
+1. Pemain memulai dari Main Menu (`Menu`) dan dapat memilih Tutorial untuk membaca petunjuk, Start untuk mulai bermain, atau Exit untuk menutup aplikasi. Menekan Start mengirim pemain ke layar pemilihan mode (`GameMode`).
+
+2. Pada `GameMode`, pemain memilih tingkat kesulitan (Easy, Medium, atau Hard). Pilihan ini menyetel parameter `GameSettings` (kecepatan ikan, HP musuh, dan variasi kuis) yang akan dipakai seluruh stage.
+
+3. Setelah mode ditentukan, pemain masuk ke `LevelSelectWorld`. Stage 1 terbuka sejak awal, sedangkan Stage 2 dan Stage 3 baru terbuka setelah tombol Next Stage pada layar kemenangan ditekan (data progres disimpan lewat `ProgressTracker`). Tombol R dapat dipakai untuk mereset progres.
+
+4. Memilih sebuah stage memuat `GameWorld` dengan latar sesuai stage. Boat, kail, HUD skor/waktu/coin, tombol Pause (`MenuGameplay`) dan Shop muncul otomatis. Pemain menggerakkan boat/kail untuk menangkap ikan, mengumpulkan koin, serta menghindari musuh seperti hiu maupun puffer.
+5. Saat kail menyentuh Treasure, permainan berhenti sementara dan pemain diarahkan ke `QuizWorld`. Menjawab kuis aritmatika dengan benar membuka peti dan menghadiahkan kunci + koin. GoldFish yang jarang muncul juga dapat ditangkap untuk memperoleh kunci instan. Pemain bisa sewaktu-waktu membuka toko (`bgShop`) untuk membeli upgrade dengan koin yang sudah dikumpulkan.
+6. Stage 1 selesai setelah 5 Kunci Emas terkumpul. Pada Stage 2 dan Stage 3, bos (buaya putih dan Nyi Roro Kidul) akan muncul sebagai bagian dari progres stage, kemenangannya juga memberikan kunci. Setelah kunci kelima diperoleh dan bos stage tersebut dikalahkan, layar kemenangan akan muncul.
+
+7. Layar kemenangan (`menuCompletion`) menampilkan statistik skor, waktu, total ikan, dan jumlah bintang. Tombol `btnNextStage` menyimpan progres serta kembali ke `LevelSelectWorld`; `btnMainmenucomplete` membawa pemain ke main menu. Ketika Stage 3 selesai, permainan dianggap tamat walaupun pemain tetap dapat mengulang stage mana pun dari layar pemilihan stage.
+
+8. Jika timer habis atau nyawa boat turun menjadi nol sebelum target tercapai, permainan akan memunculkan layar `gameOver`. Di sana pemain bisa memilih `Try Again` untuk mengulang stage terakhir atau `Main Menu` untuk kembali ke menu utama.
+
+ Penjelasan Kontrol
+1. `A / Left Arrow`: Menggerakkan boat ke kiri.
+2. `D / Right Arrow`: Menggerakkan boat ke kanan.
+3.  `W / Up Arrow`: Menarik kail ke atas (lebih dekat ke boat).
+4.  `S / Down Arrow`: Menurunkan kail ke kedalaman yang lebih dalam.
+5.  `Space`: Melakukan dash singkat sesuai arah boat selama masih memiliki charge dash.
+6. `Klik Kiri Mouse`: Menyerang musuh di sekitar boat (serangan area) dan juga digunakan untuk interaksi tombol di menu.
+Untuk Development:
+7. `R` (saat di LevelSelectWorld): Mereset progres stage yang sudah terbuka.
+Penjelasan Mekanik Gameplay:
+1. Memancing & Koleksi Ikan: Pemain menjatuhkan kail untuk menangkap CommonFish, RareFish, dan EpicFish. Semua ikan memberi skor serta koin berbeda yang dapat dipakai di shop. EpicFish bergerak lebih cepat dan memberi reward tertinggi.
+2. GoldFish: GoldFish adalah ikan emas langka yang muncul sesekali. Ia bergerak cepat, memberi nilai tinggi, koin besar, dan langsung menambah 1 Kunci Emas ketika tertangkap.
+3. Treasure & Kuis Aritmatika: Saat kail menyentuh Treasure, dunia dipause dan `QuizWorld` tampil. Pemain wajib menjawab soal hitungan sesuai tingkat kesulitan untuk membuka peti, memperoleh koin tambahan, dan mendapat kunci.
+4. Musuh Laut & Pertahanan Boat: enemyShark, EnemyPuffer, dan bos menyerang boat. Kontak langsung mengurangi nyawa; pemain dapat menghindar menggunakan dash atau menyerang dengan klik kiri (serangan area). Jika health boat habis, permainan berakhir.
+5. Shop & Upgrade: Melalui tombol shop, pemain masuk `bgShop` untuk membeli peningkatan (kecepatan boat, tombak panjang, kapasitas dash, tambahan nyawa) menggunakan koin hasil memancing/kuis.
+6. Bos Stage: Stage 2 dan Stage 3 masing‑masing menghadirkan bos (Buaya Putih, Nyi Roro Kidul). Mengalahkan bos memberikan kunci tambahan dan menjadi syarat menyelesaikan stage. Pada Stage 3, game baru tamat setelah bos terakhir jatuh dan total lima kunci terkumpul.
+
+
+Penjelasan UI/HUD
+1. Bar Atas: Panel semi-transparan di tengah atas menampilkan deretan hati (jumlah nyawa), skor total, dan timer mundur-ini menjadi referensi utama pemain untuk memantau kondisi boat serta waktu tersisa.
+2. Indikator Kunci & Koin Pojok kiri atas memuat ikon kunci dan koin; angka di sampingnya menunjukkan progres kunci `x / 5` serta total koin yang dikumpulkan.
+3. Status Dash: Tepat di bawah indikator koin terdapat teks "Sisa Dash: X/Y" yang memperlihatkan jumlah dash charge aktif dibanding kapasitas maksimum.
+4. Tombol Pause & Shop: Pojok kanan atas berisi ikon Menu (pause) dan Shop. Klik Menu membuka layar pause (`bgMenu`), sedangkan ikon Shop membawa ke `bgShop` untuk melakukan upgrade.
+5. Bar HP Bos: Saat bos Stage 2 atau 3 muncul, bar HP hijau panjang diatas (`BossHealthBar`) akan tampil di bagian atas untuk menunjukkan sisa kesehatan bos.
+
+Struktur Kelas (Class Structure)
+GameWorld: Panggung utama yang mengatur skor, timer, spawn ikan/musuh, HUD, serta transisi world (pause, shop, game over, completion).
+Boat: Aktor yang dikendalikan pemain; mengurus pergerakan, dash, serangan area, dan menerima damage.
+Kail: Kait pancing yang mengikuti Boat; mendeteksi tabrakan dengan ikan, GoldFish, treasure, dan memicu QuizWorld/kunci.
+CommonFish, RareFish, EpicFish, GoldFish: Hierarki ikan dengan nilai skor/koin berbeda; GoldFish juga memberikan bonus kunci.
+enemyShark, EnemyPuffer, crocBoss, nyiRoroBoss: Musuh dan bos yang menyerang Boat; bos memanfaatkan `BossHealthBar` dan memberi kunci saat dikalahkan.
+QuizWorld & AnswerButton: Overlay kuis yang tampil ketika treasure diakses, lengkap dengan timer dan pilihan jawaban.
+Menu, GameMode, LevelSelectWorld, menuCompletion, gameOver: World UI yang mengatur alur menu utama, pemilihan mode/stage, layar kemenangan, dan layar kekalahan.
+bgShop, ShopItem, PlayerStats: Mengelola toko dalam game, daftar upgrade (speed, spear, dash, heart), dan status pembelian pemain.
+ProgressTracker, GameSettings, SimpleTimer: Kelas utilitas untuk menyimpan progres level, konfigurasi difficulty, dan timer sederhana yang dipakai di berbagai world.
+
+
+
+
+
+BAB III
+PENUTUP
+
+Kesimpulan
+
+Saran
+
+Daftar Pustaka
+
