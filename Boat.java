@@ -21,7 +21,7 @@ public class Boat extends Actor {
     private int dashCharges = 3;
     private boolean isDashing = false;
     private int dashFramesRemaining = 0;
-    private final int dashDurationFrames = 15;
+    private final int dashDurationFrames = 14;
     private final int dashSpeed = 14;
     private final SimpleTimer dashCooldownTimer = new SimpleTimer();
     private int dashCooldownMs = 500;
@@ -325,6 +325,7 @@ public class Boat extends Actor {
         dashFramesRemaining--;
         if (dashFramesRemaining <= 0) {
             isDashing = false;
+            hurtTimer.mark();
         }
     }
 
