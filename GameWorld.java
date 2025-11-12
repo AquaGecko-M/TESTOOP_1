@@ -445,15 +445,15 @@ public class GameWorld extends World {
             if (sizeRoll < 50) {
                 category = 0; // Kecil
                 c.setValue(2); // Skor 2
-                c.setCoinReward(3); //koin 3
+                c.setCoinReward(5); //koin 3
             } else if (sizeRoll < 80) {
                 category = 1; // Normal
                 c.setValue(3); // Skor 3
-                c.setCoinReward(4); // Koin 4
+                c.setCoinReward(7); // Koin 4
             } else {
                 category = 2; // Besar (paling jarang)
                 c.setValue(4); // Skor 3
-                c.setCoinReward(5); // Koin 5
+                c.setCoinReward(8); // Koin 5
             }
             // ---
 
@@ -468,13 +468,16 @@ public class GameWorld extends World {
         }
 
         int side = Greenfoot.getRandomNumber(2); 
-        int y = Greenfoot.getRandomNumber(getHeight() - 200) + 300; 
+        int waterTop = 330;                 // batas minimum Y (atur sesuai layout air)
+        int waterBottom = getHeight() - 70; // batas maksimum supaya tidak terkubur
+        int y = Greenfoot.getRandomNumber(waterBottom - waterTop) + waterTop;
+ 
         int x = (side == 0) ? -40 : getWidth() + 40;
         addObject(ikanBaru, x, y);
 
         // --- SHARK SPAWNING (NOW CORRECT) ---
         int sharkRoll = Greenfoot.getRandomNumber(100);
-        if (sharkRoll < 10) { 
+        if (sharkRoll < 8) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
             int yHiu = 320;
@@ -493,7 +496,7 @@ public class GameWorld extends World {
 
         // --- PUFFER SPAWNING (NOW CORRECT) ---
         int pufferRoll = Greenfoot.getRandomNumber(100);
-        if (pufferRoll < 6) { 
+        if (pufferRoll < 5) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx]; 
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
@@ -507,8 +510,8 @@ public class GameWorld extends World {
             }
         } 
         
-        int goldFishRoll = Greenfoot.getRandomNumber(100);
-        if (goldFishRoll < 1) { // 1 out of 100 chance (1% probability)
+        int goldFishRoll = Greenfoot.getRandomNumber(500);
+        if (goldFishRoll < 2) { // 1 out of 100 chance (1% probability)
             spawnGoldFish();
         }
     }
@@ -556,7 +559,7 @@ public class GameWorld extends World {
         int waterTop = 300; // Supaya tidak spawn di atas HUD/boat
         int waterBottom = getHeight() - 70; // Hindari spawn terlalu bawah sampai tidak terlihat
         int range = Math.max(1, waterBottom - waterTop);
-        int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air
+        int yPos = Greenfoot.getRandomNumber(range) + waterTop;
 
         // Acak sisi
         int side = Greenfoot.getRandomNumber(2);

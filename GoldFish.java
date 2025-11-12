@@ -8,7 +8,7 @@ public class GoldFish extends Actor {
 
     private final int speed = 4; // Dia lebih cepat dari ikan biasa
     private final int value = 100;
-    private final int coinReward = 200;
+    private final int coinReward = 175;
     private int framesSinceSpawn = 0;
 
     private GreenfootImage facingRightImage;
