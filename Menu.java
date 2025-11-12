@@ -1,9 +1,8 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Write a description of class Menu here.
- * 
- * @author (your name) 
+ * * @author (your name) 
  * @version (a version number or a date)
  */
 public class Menu extends World
@@ -11,8 +10,7 @@ public class Menu extends World
 
     /**
      * Constructor for objects of class Menu.
-     * 
-     * 
+     * *
      */
     private GreenfootSound backgroundMusic;
     private GreenfootImage[] bgFrames = new GreenfootImage[4];
@@ -45,7 +43,14 @@ public class Menu extends World
         // 2. Atur volume (opsional, 50 adalah setengah volume)
         // 3. Putar musiknya secara berulang (loop)
 
-        SoundManager.play("Menu_Awal.mp3", 10);
+        // --- THIS IS THE FIX ---
+        // You were missing the line to add the GameTitle
+        addObject(new GameTitle(), getWidth() / 2, 200); // (Adjust the 200 Y-position)
+        // --- END FIX ---
+        
+        // (This line is from your project, it should be SettingsManager)
+        SoundManager.play("Menu_Awal.mp3", 60);
+        
         // Panggil method untuk menambahkan tombol
         ButtonMenu();
         prepare();
@@ -57,8 +62,8 @@ public class Menu extends World
         BtnExit Exit = new BtnExit();
 
         addObject(Tutorial, 250, 445); // (actor, x, y)
-        addObject(Start,    480, 440); // (actor, x, y)
-        addObject(Exit,     710, 450); // (actor, x, y)
+        addObject(Start,     480, 440); // (actor, x, y)
+        addObject(Exit,      710, 450); // (actor, x, y)
     }
 
     public void act()

@@ -35,13 +35,13 @@ public class menuCompletion extends World
         textBg.drawString("" + finalScore, 563 , 375);
 
         // --- Display Stars (Your code is perfect) ---
-        if (finalScore >= 200) {
+        if (finalScore >= 400) {
             addObject(new Star(), 375, 50); 
         }
-        if (finalScore >= 350) {
+        if (finalScore >= 600) {
             addObject(new Star(), 475, 50); 
         }
-        if (finalScore >= 500) {
+        if (finalScore >= 800) {
             addObject(new Star(), 575, 50); 
         }
         
@@ -55,10 +55,10 @@ public class menuCompletion extends World
     private void prepare()
     {
         btnMainmenucomplete btnMainmenucomplete = new btnMainmenucomplete();
-        addObject(btnMainmenucomplete,147,479); // Using your coordinates
+        addObject(btnMainmenucomplete,200,460); // Using your coordinates
         
         // Create btnNextStage and pass it the level we just completed
         btnNextStage btnNextStage = new btnNextStage(stageJustCompleted); 
-        addObject(btnNextStage,812,485); // Using your coordinates
+        addObject(btnNextStage,800,460); // Using your coordinates
     }
 }

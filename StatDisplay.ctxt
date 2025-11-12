@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=StatDisplay
+comment0.text=\r\n\ A\ dedicated\ Actor\ to\ display\ stats\ like\ Keys,\ Coins,\ and\ Dash.\r\n\ This\ fixes\ the\ "blurry\ text"\ bug\ by\ drawing\ all\ stats\ on\ its\r\n\ own\ transparent\ image,\ NOT\ on\ the\ world's\ background.\r\n
+comment1.params=
+comment1.target=StatDisplay()
+comment2.params=keys\ keysNeeded\ coins\ dashCharges\ dashCapacity
+comment2.target=void\ update(int,\ int,\ int,\ int,\ int)
+comment2.text=\r\n\ This\ is\ the\ new\ "update"\ method\ that\ GameWorld\ will\ call.\r\n\ It\ clears\ and\ redraws\ all\ stats.\r\n
+numComments=3

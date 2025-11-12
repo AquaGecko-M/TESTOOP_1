@@ -4,7 +4,7 @@ import greenfoot.*;
  * The "Back" button for the tutorial slideshow.
  * Returns to the main TutorialHubWorld.
  */
-public class btnTutorialBack extends Actor
+public class btnTutorialBack extends btnAnimation
 {
     private boolean mouseWasDown = true; // Fixes click-through
     
@@ -12,7 +12,7 @@ public class btnTutorialBack extends Actor
     {
         GreenfootImage image = new GreenfootImage("btnTutorialBack.png");
         
-        image.scale(150,90); 
+        image.scale(150, 75); 
         
         // 3. Atur gambar yang sudah dikecilkan kembali ke aktor
         setImage(image);
@@ -20,7 +20,7 @@ public class btnTutorialBack extends Actor
     
     public void act() 
     {
-        // Fix for click-through bug
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

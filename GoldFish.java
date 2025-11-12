@@ -9,6 +9,7 @@ public class GoldFish extends Actor {
     private final int speed = 4; // Dia lebih cepat dari ikan biasa
     private final int value = 100;
     private final int coinReward = 200;
+    private int framesSinceSpawn = 0;
 
     private GreenfootImage facingRightImage;
     private GreenfootImage facingLeftImage;
@@ -37,6 +38,11 @@ public class GoldFish extends Actor {
 
     public void act() {
         World world = getWorld();
+        framesSinceSpawn++;
+        if (framesSinceSpawn < 30) { // ignore edge detection for first half second
+        moveHorizontally();
+        return;
+        }
         if (world == null) return; // Safety bila world null
         moveHorizontally();
         bounceAtEdges(world);

@@ -13,12 +13,12 @@ public class AttackIndicator extends Actor
     // --- THIS IS YOUR NEW HITBOX SIZE ---
     // Change this number until it "feels" right.
     // This is a 500-pixel radius circle.
-    private int attackRadius = 160; 
+    private int attackRadius = 200; 
 
     public AttackIndicator()
     {
         setImage("attack_indicator.png"); 
-        getImage().scale(500, 500);
+        getImage().scale(300, 300);
         
         flashTimer.mark();
     }

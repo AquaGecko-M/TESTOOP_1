@@ -41,13 +41,13 @@ public class TutorialSlideWorld extends World
     private void prepare()
     {
         // Add "Back" button (goes back to the Tutorial Hub)
-        addObject(new btnTutorialBack(), 80, 500); 
+        addObject(new btnTutorialBack(), 870, 50); 
         
         // Add "Previous" button
-        addObject(new btnTutorialPrev(), 700, 500); 
+        addObject(new btnTutorialPrev(), 75, 50); 
         
         // Add "Next" button
-        addObject(new btnTutorialNext(), 880, 500);
+        addObject(new btnTutorialNext(), 225, 50);
     }
     
     /**

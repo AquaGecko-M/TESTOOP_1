@@ -14,6 +14,7 @@ public class GameWorld extends World {
     private GreenfootImage originalBg; // Untuk memperbaiki HUD overlapping
     private GreenfootImage dashIcon;
     private final SimpleTimer secondTimer = new SimpleTimer();
+    private StatDisplay statDisplay;
     // Fish
     private int totalFish = 0;
     private final SimpleTimer fishSpawnTimer = new SimpleTimer();
@@ -30,7 +31,7 @@ public class GameWorld extends World {
     private int speedUpgrades = 0;
     private int boostUpgrades = 0;
     private int heartPurchases = 0;
-    private int coins = 2000;
+    private int coins = 0;
     private Koin coinIcon;
     private int dashCapacity;
     private int dashCharges;
@@ -44,7 +45,7 @@ public class GameWorld extends World {
     private static final int SPEED_MAX_LEVEL = 5;
     private static final int BOOST_MAX_LEVEL = 2;
     private static final int HEART_MAX_PURCHASE = 20;
-    private static final int[] SPEED_LEVEL_VALUES = {1, 2, 3, 4, 5, 7};
+    private static final int[] SPEED_LEVEL_VALUES = {2, 3, 4, 5, 6, 7};
     private static final int[] DASH_CAPACITY_VALUES = {3, 5, 7};
 
     private static final Color HUD_TEXT_COLOR = Color.WHITE;
@@ -70,30 +71,45 @@ public class GameWorld extends World {
         
         if (stageNumber == 1) {
             // --- STAGE 1 setup ---
-            bg = new GreenfootImage("24.jpg"); 
-            bg.scale(1152, 648);
             musicFile = "level1.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 40);
+            SoundManager.play(musicFile, 30);
+            SoundManager.stop();
+            SoundManager.play(musicFile, 30);
+            
+            bgFrames = new GreenfootImage[4]; // 4 frame
+            bgFrames[0] = new GreenfootImage("Map1F1.png");//just change the name
+            bgFrames[1] = new GreenfootImage("Map1F2.png");//just change the name
+            bgFrames[2] = new GreenfootImage("Map1F3.png");//just change the name
+            bgFrames[3] = new GreenfootImage("Map1F4.png");//just change the name
+            
+            for (int i = 0; i < bgFrames.length; i++) {
+                bgFrames[i].scale(1152, 648);
+            }
+            setBackground(bgFrames[0]); // Set frame pertama
+            animTimer.mark();
+            
+            // Kita tetap butuh 'bg' untuk 'originalBg' di bawah
+            bg = bgFrames[0]; 
             
             // Add ALL treasures for Stage 1 HERE
             addObject(new Treasure(), 30, 630);
             addObject(new Treasure(), 690, 630);
             addObject(new Treasure(), 1000, 630);
+            addObject(new Treasure(), 309, 630);
         } else if (stageNumber == 2) {
             // --- STAGE 2 setup ---
             musicFile = "level2.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 40);
-                       musicFile = "level2.mp3";
+            SoundManager.play(musicFile, 30);
             SoundManager.stop();
-            SoundManager.play(musicFile, 40);
+            SoundManager.play(musicFile, 30);
             
             bgFrames = new GreenfootImage[4]; // 4 frame
-            bgFrames[0] = new GreenfootImage("Map2F1.png");
-            bgFrames[1] = new GreenfootImage("Map2F2.png");
-            bgFrames[2] = new GreenfootImage("Map2F3.png");
-            bgFrames[3] = new GreenfootImage("Map2F4.png");
+            bgFrames[0] = new GreenfootImage("Map2F1.png");//just change the name
+            bgFrames[1] = new GreenfootImage("Map2F2.png");//just change the name
+            bgFrames[2] = new GreenfootImage("Map2F3.png");//just change the name
+            bgFrames[3] = new GreenfootImage("Map2F4.png");//just change the name
             
             for (int i = 0; i < bgFrames.length; i++) {
                 bgFrames[i].scale(1152, 648);
@@ -110,12 +126,26 @@ public class GameWorld extends World {
             addObject(new Treasure(), 1100, 630);
         } else if (stageNumber == 3) {
             // --- STAGE 3 setup ---
-            bg = new GreenfootImage("26.jpg"); 
-            bg.scale(1152, 648);
-            staticBg = bg;
             musicFile = "level3.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 40);
+            SoundManager.play(musicFile, 50);
+            SoundManager.stop();
+            SoundManager.play(musicFile, 50);
+            
+            bgFrames = new GreenfootImage[4]; // 4 frame
+            bgFrames[0] = new GreenfootImage("Map3F1.png");
+            bgFrames[1] = new GreenfootImage("Map3F2.png");
+            bgFrames[2] = new GreenfootImage("Map3F3.png");
+            bgFrames[3] = new GreenfootImage("Map3F4.png");
+            
+            for (int i = 0; i < bgFrames.length; i++) {
+                bgFrames[i].scale(1152, 648);
+            }
+            setBackground(bgFrames[0]); // Set frame pertama
+            animTimer.mark();
+            
+            // Kita tetap butuh 'bg' untuk 'originalBg' di bawah
+            bg = bgFrames[0];
             
             // Add ALL treasures for Stage 3 HERE
             addObject(new Treasure(), 30, 630);
@@ -136,10 +166,8 @@ public class GameWorld extends World {
 
         originalBg = new GreenfootImage(getBackground()); 
 
-        keyItemIcon = new GreenfootImage("key_item.png"); // You need to create this image
-        keyItemIcon.scale(50, 25); // Scale it for the HUD
-        dashIcon = new GreenfootImage("key_item.png");
-        dashIcon.scale(50, 25);
+        statDisplay = new StatDisplay();
+        addObject(statDisplay, 100, 110);
 
         menuButton = new MenuGameplay();
         addObject(menuButton, getWidth() - 55, 70);
@@ -168,7 +196,7 @@ public class GameWorld extends World {
         hook = new Kail(boat);           // hook “terikat” ke boat
         addObject(hook, boatX + 20, 250 + 180); // Posisi kail di bawah boat
 
-        startTimer(121);
+        startTimer(150);
     }
 
     public void act() {
@@ -204,7 +232,7 @@ public class GameWorld extends World {
             }
         }
 
-        if (fishSpawnTimer.hasElapsed(1200)) {
+        if (fishSpawnTimer.hasElapsed(1210)) {
             spawnFish();
             fishSpawnTimer.mark();
         }
@@ -214,7 +242,7 @@ public class GameWorld extends World {
             triggerGameOver("You Died!");
         }
 
-        if (!goldFishGuaranteedSpawn && timeLeft <= 180) {
+        if (!goldFishGuaranteedSpawn && timeLeft <= 120) {
             spawnGoldFish();
             goldFishGuaranteedSpawn = true; // Set flag agar tidak spawn lagi
         }
@@ -297,17 +325,11 @@ public class GameWorld extends World {
         if (hud != null) {
             hud.update(score, life, timeLeft);
         }
-
-        getBackground().drawImage(keyItemIcon, 20, 50);
-        GreenfootImage keyLabel = new GreenfootImage(keyItems + " / " + keysNeeded, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
-        getBackground().drawImage(keyLabel, 80, 65 - keyLabel.getHeight() / 2);
-
-        GreenfootImage coinLabel = new GreenfootImage(coins + "$", 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
-        getBackground().drawImage(coinLabel, 80, 115 - coinLabel.getHeight() / 2);
-
-        getBackground().drawImage(dashIcon, 20, 145);
-        GreenfootImage dashLabel = new GreenfootImage("Sisa Dash: " + dashCharges + "/" + dashCapacity, 20, HUD_TEXT_COLOR, HUD_TEXT_BG);
-        getBackground().drawImage(dashLabel, 80, 165 - dashLabel.getHeight() / 2);
+        
+        if (statDisplay != null) {
+            statDisplay.update(keyItems, keysNeeded, coins, dashCharges, dashCapacity);
+        }
+        
     }
 
     public void reduceTimer(int seconds) {
@@ -452,7 +474,7 @@ public class GameWorld extends World {
 
         // --- SHARK SPAWNING (NOW CORRECT) ---
         int sharkRoll = Greenfoot.getRandomNumber(100);
-        if (sharkRoll < 8) { 
+        if (sharkRoll < 10) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx];
             enemyShark shark = new enemyShark(health);
             int yHiu = 320;
@@ -471,7 +493,7 @@ public class GameWorld extends World {
 
         // --- PUFFER SPAWNING (NOW CORRECT) ---
         int pufferRoll = Greenfoot.getRandomNumber(100);
-        if (pufferRoll < 5) { 
+        if (pufferRoll < 6) { 
             int health = GameSettings.EnemyHealth[d_idx][s_idx]; 
             EnemyPuffer puffer = new EnemyPuffer(health);
             int yPuffer = Greenfoot.getRandomNumber(getHeight() - 200) + 300;
@@ -484,6 +506,11 @@ public class GameWorld extends World {
                 addObject(puffer, getWidth() + 50, yPuffer);
             }
         } 
+        
+        int goldFishRoll = Greenfoot.getRandomNumber(100);
+        if (goldFishRoll < 1) { // 1 out of 100 chance (1% probability)
+            spawnGoldFish();
+        }
     }
 
     public boolean addKeyItem() { // <--- Changed from void to boolean
@@ -512,7 +539,7 @@ public class GameWorld extends World {
         GoldFish goldie = new GoldFish();
 
         int waterTop = 300; // Supaya tidak spawn di atas HUD/boat
-        int waterBottom = getHeight() - 60; // Hindari spawn terlalu bawah sampai tidak terlihat
+        int waterBottom = getHeight() - 70; // Hindari spawn terlalu bawah sampai tidak terlihat
         int range = Math.max(1, waterBottom - waterTop);
         int yPos = Greenfoot.getRandomNumber(getHeight() - 200) + 300; // Area air
 
@@ -651,10 +678,10 @@ public class GameWorld extends World {
             BossHealthBar healthBar = new BossHealthBar(croc);
 
             // 3. Add the health bar to the top of the screen
-            addObject(healthBar, getWidth() / 2, 40);
+            addObject(healthBar, getWidth() / 2, 70);
 
             // 4. Add the boss off-screen to the left
-            addObject(croc, -100, 230); // (Adjust 350 Y-coordinate as needed)
+            addObject(croc, -100, 430); // (Adjust 350 Y-coordinate as needed)
 
         }
         else if (stageNumber == 3) {

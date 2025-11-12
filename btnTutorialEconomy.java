@@ -4,7 +4,7 @@ import greenfoot.*;
  * Button for the "Economy" section.
  * Opens the slideshow from slide 6 to 10.
  */
-public class btnTutorialEconomy extends Actor
+public class btnTutorialEconomy extends btnAnimation
 {
     private boolean mouseWasDown = true; 
 
@@ -16,6 +16,7 @@ public class btnTutorialEconomy extends Actor
     
     public void act() 
     {
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

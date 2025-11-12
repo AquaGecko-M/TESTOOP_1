@@ -6,13 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class btnMainmenucomplete extends Actor
+public class btnMainmenucomplete extends btnAnimation
 {
     private boolean readyToClick = false;
     public btnMainmenucomplete() {
         GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
         // You can scale it if you need to
-        img.scale(200, 120);
+        img.scale(200, 100);
         setImage(img);
     }
     

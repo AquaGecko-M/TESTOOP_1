@@ -3,7 +3,7 @@ import greenfoot.*;
 /**
  * Button to save progress and proceed to the next stage.
  */
-public class btnNextStage extends Actor
+public class btnNextStage extends btnAnimation
 {
     private int levelToUnlock;
     private boolean mouseWasDown = true; 
@@ -18,7 +18,7 @@ public class btnNextStage extends Actor
         this.levelToUnlock = stageJustCompleted; 
         
         GreenfootImage img = new GreenfootImage("btnNextStage.png");
-        img.scale(300, 250); // Your scale code
+        img.scale(200, 100); // Your scale code
         setImage(img);
     }
     
