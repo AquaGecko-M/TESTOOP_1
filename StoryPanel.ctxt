@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=StoryPanel
+comment0.text=\r\n\ StoryPanel\:\ A\ visual\ panel\ that\ fades\ in\ when\ added\ to\ the\ world.\r\n
+comment1.params=imageName
+comment1.target=StoryPanel(java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+numComments=3

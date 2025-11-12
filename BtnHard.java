@@ -25,7 +25,7 @@ public class BtnHard extends btnAnimation
             if (Greenfoot.mouseClicked(this)) 
         {
             GameSettings.difficulty = "Hard";
-            Greenfoot.setWorld(new LevelSelectWorld());
+            Greenfoot.setWorld(new StoryWorld("Hard"));
         }
     }
 }

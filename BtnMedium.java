@@ -25,7 +25,7 @@ public class BtnMedium extends btnAnimation
         if (Greenfoot.mouseClicked(this)) 
         {
             GameSettings.difficulty = "Medium";
-            Greenfoot.setWorld(new LevelSelectWorld());
+            Greenfoot.setWorld(new  StoryWorld("Medium"));
         }
     }
 }
