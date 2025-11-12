@@ -10,7 +10,7 @@ public class Boat extends Actor {
     private boolean moving = false;
     private SimpleTimer animTimer = new SimpleTimer();
     private int frameMs = 100;
-    private int speed = 3;
+    private int speed = 1;
     
     private final SimpleTimer hurtTimer = new SimpleTimer();
     private int invincibleMs = 2000; // 2.0 detik
@@ -51,6 +51,7 @@ public class Boat extends Actor {
     
     public Boat(GameWorld world) {
         this.gameWorld = world;
+
         right = new GreenfootImage[4]; // ubah 4 sesuai jumlah frame animasi kamu
         left = new GreenfootImage[4];
 
@@ -173,14 +174,14 @@ public class Boat extends Actor {
     private void loadRightFrames() {
         for (int i = 0; i < right.length; i++) {
             right[i] = new GreenfootImage("Boat_Kiri_Frame_" + i + ".png");
-            right[i].scale(120, 100);
+            right[i].scale(100, 80);
         }
     }
 
     private void loadLeftFrames() {
         for (int i = 0; i < left.length; i++) {
             left[i] = new GreenfootImage("Boat_Animation_Frame_" + i + ".png");
-            left[i].scale(120, 100);
+            left[i].scale(100, 80);
         }
     }
     

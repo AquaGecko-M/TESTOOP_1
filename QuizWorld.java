@@ -207,7 +207,7 @@ public class QuizWorld extends World
             }
         } else {
             // --- UBAHAN 7: Teks "Incorrect" Rata Tengah (CARA BARU) ---
-            String s = "Incorrect! -20s";
+            String s = "Incorrect! -10s";
             GreenfootImage textImg = new GreenfootImage(s, 60, Color.WHITE, new Color(0,0,0,0));
             bg.drawImage(textImg, (getWidth() - textImg.getWidth()) / 2, getHeight() / 2 - 50);
             // --- BATAS PERUBAHAN ---

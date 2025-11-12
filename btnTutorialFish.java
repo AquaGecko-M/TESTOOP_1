@@ -4,7 +4,7 @@ import greenfoot.*;
  * Button for the "Fish & Enemy" section.
  * Opens the slideshow from slide 11 to 17.
  */
-public class btnTutorialFish extends Actor
+public class btnTutorialFish extends btnAnimation
 {
     private boolean mouseWasDown = true; 
 
@@ -16,6 +16,7 @@ public class btnTutorialFish extends Actor
     
     public void act() 
     {
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

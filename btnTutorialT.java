@@ -4,7 +4,7 @@ import greenfoot.*;
  * Button for the "Tutorial" section.
  * Opens the slideshow from slide 1 to 5.
  */
-public class btnTutorialT extends Actor
+public class btnTutorialT extends btnAnimation
 {
     private boolean mouseWasDown = true; // Fixes click-through
 
@@ -17,7 +17,7 @@ public class btnTutorialT extends Actor
     
     public void act() 
     {
-        // Fix for click-through bug
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

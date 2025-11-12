@@ -4,19 +4,19 @@ import greenfoot.*;
  * The "Next" button for the tutorial slideshow.
  * Calls the nextSlide() method in the world.
  */
-public class btnTutorialNext extends Actor
+public class btnTutorialNext extends btnAnimation
 {
     private boolean mouseWasDown = true; // Fixes click-through
 
     public btnTutorialNext()
     {
         setImage("btnTutorialNext.png"); // Uses your 'next.png' image
-        getImage().scale(150, 100);
+        getImage().scale(150, 75);
     }
     
     public void act() 
     {
-        // Fix for click-through bug
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;

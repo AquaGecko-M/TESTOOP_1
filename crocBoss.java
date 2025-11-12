@@ -51,16 +51,16 @@ public class crocBoss extends Actor implements IBoss
     {
         this.health = initialHealth;
         this.maxHealth = initialHealth;
-        this.yPos = 230; // (Adjust this Y-coordinate to your liking)
+        this.yPos = 300; // (Adjust this Y-coordinate to your liking)
         
         // --- Load ALL images ---
         imgIdleRight = new GreenfootImage("crocClose.png");
-        imgIdleRight.scale(300, 250); // Your scale
+        imgIdleRight.scale(300, 125); // Your scale
         imgIdleLeft = new GreenfootImage(imgIdleRight);
         imgIdleLeft.mirrorHorizontally();
         
         imgTiredRight = new GreenfootImage("crocTired.png");
-        imgTiredRight.scale(300, 250); // Your scale
+        imgTiredRight.scale(300, 125); // Your scale
         imgTiredLeft = new GreenfootImage(imgTiredRight);
         imgTiredLeft.mirrorHorizontally();
 
@@ -79,8 +79,8 @@ public class crocBoss extends Actor implements IBoss
         // Create mirrored versions of walk and chomp
         for (int i = 0; i < 4; i++) {
             // --- Apply your scale to ALL animations ---
-            imgWalkRight[i].scale(300, 250);
-            chompAnimRight[i].scale(400, 400);
+            imgWalkRight[i].scale(300, 125);
+            chompAnimRight[i].scale(400, 150);
             
             imgWalkLeft[i] = new GreenfootImage(imgWalkRight[i]);
             imgWalkLeft[i].mirrorHorizontally();

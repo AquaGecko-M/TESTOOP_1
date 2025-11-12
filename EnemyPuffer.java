@@ -26,9 +26,9 @@ public class EnemyPuffer extends Actor implements Damageable {
         attackCooldown.mark();
 
         imgKempes = new GreenfootImage("Kempes.png");
-        imgKempes.scale(70, 70);
+        imgKempes.scale(45, 30);
         imgKembung = new GreenfootImage("Kembung.png");
-        imgKembung.scale(70, 70);
+        imgKembung.scale(60, 55);
         setImage(imgKempes);
     }
 
@@ -51,9 +51,9 @@ public class EnemyPuffer extends Actor implements Damageable {
     private void mirrorImages(boolean toRight) {
         // load ulang gambar biar nggak ke-mirror dobel
         imgKempes = new GreenfootImage("Kempes.png");
-        imgKempes.scale(70, 70);
+        imgKempes.scale(45, 30);
         imgKembung = new GreenfootImage("Kembung.png");
-        imgKembung.scale(70, 70);
+        imgKembung.scale(60, 55);
 
         if (toRight) { // kalau ke kanan → mirror sekali aja
             imgKempes.mirrorHorizontally();

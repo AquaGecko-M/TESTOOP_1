@@ -4,7 +4,7 @@ import greenfoot.*;
  * The "Previous" button for the tutorial slideshow.
  * Calls the prevSlide() method in the world.
  */
-public class btnTutorialPrev extends Actor
+public class btnTutorialPrev extends btnAnimation
 {
     private boolean mouseWasDown = true; // Fixes click-through
 
@@ -12,12 +12,12 @@ public class btnTutorialPrev extends Actor
     {
         setImage("btnTutorialPrev.png"); // Uses your 'prev.png' image
         // You can scale it if needed:
-        getImage().scale(150, 100);
+        getImage().scale(150, 75);
     }
     
     public void act() 
     {
-        // Fix for click-through bug
+        super.act();
         if (mouseWasDown) {
             if (Greenfoot.mousePressed(null)) return;
             else mouseWasDown = false;
