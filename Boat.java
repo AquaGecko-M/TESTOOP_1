@@ -21,7 +21,7 @@ public class Boat extends Actor {
     private int dashCharges = 3;
     private boolean isDashing = false;
     private int dashFramesRemaining = 0;
-    private final int dashDurationFrames = 12;
+    private final int dashDurationFrames = 15;
     private final int dashSpeed = 14;
     private final SimpleTimer dashCooldownTimer = new SimpleTimer();
     private int dashCooldownMs = 500;
@@ -197,6 +197,7 @@ public class Boat extends Actor {
     }
     
     public void takeDamage(int dmg) {
+        if (isDashing) return;     // dash memberi invincibility singkat
         if (!canBeHit()) return;   // i-frame aktif → abaikan
         Greenfoot.playSound("Takedamage.mp3");
         GameWorld gw = (GameWorld) getWorld();
@@ -376,3 +377,6 @@ public class Boat extends Actor {
         slashH           = PlayerStats.WPN_SLASH_H[t];
     }
 }
+
+
+

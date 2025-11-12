@@ -9,9 +9,9 @@ public class GameSettings
     public static String difficulty = "Easy";
     
     public static final int[][] EnemyHealth = {
-        {3, 5, 7}, // Easy (Lvl 1=3, Lvl 2=5, Lvl 3=7)
-        {5, 7, 9}, // Medium (Lvl 1=5, Lvl 2=7, Lvl 3=9)
-        {7, 9, 11}  // Hard (Lvl 1=7, Lvl 2=9, Lvl 3=11)
+        {2, 3, 3}, // Easy (Lvl 1=2, Lvl 2=4, Lvl 3=5)
+        {3, 4, 4}, // Medium (Lvl 1=5, Lvl 2=7, Lvl 3=9)
+        {4, 4, 4}  // Hard (Lvl 1=7, Lvl 2=9, Lvl 3=11)
     };
     
     // Ukuran ikan berdasarkan level
@@ -54,9 +54,9 @@ public class GameSettings
     
     public static int[][] BossHealth = {
       // Stage 1, Stage 2, Stage 3
-        { 0,        20,    200 }, // Easy (Stage 1 has no boss, so 0 health)
-        { 0,        30,    300 }, // Medium
-        { 0,        50,    400 }  // Hard
+        { 0,        17,    17 }, // Easy (Stage 1 has no boss, so 0 health)
+        { 0,        23,    23 }, // Medium
+        { 0,        25,    26 }  // Hard
     };
 
     /**

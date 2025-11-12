@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class itemBoost extends ShopItem {
-    private static final int BASE_COST = 150;
+    private static final int BASE_COST = 100;
     private static final int COST_INCREMENT = 100;
     private static final int MAX_LEVEL = 2;
 

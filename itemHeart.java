@@ -1,8 +1,8 @@
 import greenfoot.*;
 
 public class itemHeart extends ShopItem {
-    private static final int MAX_PURCHASE = 20;
-    private static final int COST = 100;
+    private static final int MAX_PURCHASE = 15;
+    private static final int COST = 75;
 
     public itemHeart() {
         setImage(new GreenfootImage("btnItemHeart.png"));

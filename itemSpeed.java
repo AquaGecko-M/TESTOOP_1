@@ -1,8 +1,8 @@
 import greenfoot.*;
 
 public class itemSpeed extends ShopItem {
-    private static final int BASE_COST = 100;
-    private static final int COST_INCREMENT = 50;
+    private static final int BASE_COST = 65;
+    private static final int COST_INCREMENT = 60;
     private static final int MAX_LEVEL = 5;
 
     public itemSpeed() {
