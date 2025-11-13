@@ -73,9 +73,7 @@ public class GameWorld extends World {
             // --- STAGE 1 setup ---
             musicFile = "level1.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 30);
-            SoundManager.stop();
-            SoundManager.play(musicFile, 30);
+            SoundManager.play(musicFile, 20);
             
             bgFrames = new GreenfootImage[4]; // 4 frame
             bgFrames[0] = new GreenfootImage("Map1F1.png");//just change the name
@@ -101,9 +99,7 @@ public class GameWorld extends World {
             // --- STAGE 2 setup ---
             musicFile = "level2.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 30);
-            SoundManager.stop();
-            SoundManager.play(musicFile, 30);
+            SoundManager.play(musicFile, 20);
             
             bgFrames = new GreenfootImage[4]; // 4 frame
             bgFrames[0] = new GreenfootImage("Map2F1.png");//just change the name
@@ -128,9 +124,7 @@ public class GameWorld extends World {
             // --- STAGE 3 setup ---
             musicFile = "level3.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 50);
-            SoundManager.stop();
-            SoundManager.play(musicFile, 50);
+            SoundManager.play(musicFile, 30);
             
             bgFrames = new GreenfootImage[4]; // 4 frame
             bgFrames[0] = new GreenfootImage("Map3F1.png");
