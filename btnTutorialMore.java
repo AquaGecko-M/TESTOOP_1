@@ -25,7 +25,7 @@ public class btnTutorialMore extends btnAnimation
         if (Greenfoot.mouseClicked(this))
         {
             // Open the slideshow at slides 18-19
-            Greenfoot.setWorld(new TutorialSlideWorld(18, 19));
+            Greenfoot.setWorld(new TutorialSlideWorld(18, 20));
         }
     }
 }

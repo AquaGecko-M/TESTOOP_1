@@ -11,7 +11,7 @@ public class prevbut extends Actor
     public prevbut()
     {
         // 1. Ambil gambar asli dari tombolnya
-        GreenfootImage image = new GreenfootImage("prev.png");;
+        GreenfootImage image = new GreenfootImage("prev.png");
         
         image.scale(150, 100); 
         
