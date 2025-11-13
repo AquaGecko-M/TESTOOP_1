@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class StoryWorld4 extends World {
     private ClickIndicator indicator = new ClickIndicator();
 
+
     // The order must match the sequence P1, P2, P3, P4, P5, P6
     private final String[] PANEL_IMAGES = {
         "story4_panel1.png", // P1: Left Top
@@ -57,6 +58,7 @@ public class StoryWorld4 extends World {
         GameSettings.difficulty = difficulty; 
         addObject(indicator, getWidth() / 2, 600);
         clickCooldown.mark();
+        SoundManager.play("WINNER.mp3", 80);
     }
 
     public void act() {

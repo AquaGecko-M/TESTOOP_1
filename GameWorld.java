@@ -73,10 +73,8 @@ public class GameWorld extends World {
             // --- STAGE 1 setup ---
             musicFile = "level1.mp3";
             SoundManager.stop();
-            SoundManager.play(musicFile, 30);
-            SoundManager.stop();
-            SoundManager.play(musicFile, 30);
-            
+            SoundManager.play(musicFile, 20);
+ 
             bgFrames = new GreenfootImage[4]; // 4 frame
             bgFrames[0] = new GreenfootImage("Map1F1.png");//just change the name
             bgFrames[1] = new GreenfootImage("Map1F2.png");//just change the name

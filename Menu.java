@@ -49,7 +49,9 @@ public class Menu extends World
         // --- END FIX ---
         
         // (This line is from your project, it should be SettingsManager)
-        SoundManager.play("Menu_Awal.mp3", 60);
+ 
+
+        SoundManager.play("Menu_Awal.mp3", 20);
         
         // Panggil method untuk menambahkan tombol
         ButtonMenu();
