@@ -1,37 +1,29 @@
 import greenfoot.*;
-import java.util.Arrays;
-
-/**
- * StoryWorld2: Displays sequential narrative panels upon mouse clicks,
- * initiated by a level select button.
- */
 public class StoryWorld2 extends World {
     private ClickIndicator indicator = new ClickIndicator();
 
-    private final String[] PANEL_IMAGES = {
-        "story2_panel1.png", // Large Left Panel
-        "story2_panel2.png", // Top-Left of Right Group
-        "story2_panel4.png", // Top-Right of Right Group
-        "story2_panel3.png", // Bottom-Left of Right Group
-        "story2_panel5.png"  // Bottom-Right of Right Group
+    private final String[] PanelImages = {
+        "story2_panel1.png", 
+        "story2_panel2.png", 
+        "story2_panel4.png", 
+        "story2_panel3.png", 
+        "story2_panel5.png"  
     };
 
-    // ✅ ADJUSTED Coordinates (X, Y) for the 1-Large, 4-Small layout
-    private final int[][] PANEL_LOCATIONS = {
-        {310, 280},    // Panel 1 (Large Left, centered vertically)
-        {700, 160},    // Panel 2 (Right Side, Top-Left)
-        {980, 160},    // Panel 3 (Right Side, Top-Right)
-        {700, 405},    // Panel 4 (Right Side, Bottom-Left)
-        {980, 405}     // Panel 5 (Right Side, Bottom-Right)
+    private final int[][] PanelLocations = {
+        {310, 280},    
+        {700, 160},    
+        {980, 160},    
+        {700, 405},    
+        {980, 405}     
     };
 
-    // ✅ ADJUSTED Scale settings (Width, Height) for each panel
-    private final int[][] PANEL_SCALES = {
-        {480, 500},    // panel 1: Large size
-        {250, 240},    // panel 2: Small size
-        {250, 240},    // panel 3: Small size
-        {250, 240},    // panel 4: Small size
-        {250, 240}     // panel 5: Small size
+    private final int[][] PanelScales = {
+        {480, 500},    
+        {250, 240},    
+        {250, 240},    
+        {250, 240},    
+        {250, 240}     
     };
     
     private int panelIndex = 0;
@@ -44,9 +36,8 @@ public class StoryWorld2 extends World {
         super(1152, 648, 1, false); 
         this.nextStageNumber = stageNum;
         
-        // Background
         GreenfootImage bg = new GreenfootImage(getWidth(), getHeight());
-        bg.setColor(Color.BLACK); // Use Greenfoot.Color for safety
+        bg.setColor(Color.BLACK); 
         bg.fill();
         setBackground(bg);
         
@@ -61,7 +52,7 @@ public class StoryWorld2 extends World {
         if (Greenfoot.mouseClicked(null) && clickCooldown.millisElapsed() > 300) {
             clickCooldown.mark();
             
-            if (panelIndex < PANEL_IMAGES.length) {
+            if (panelIndex < PanelImages.length) {
                 showNextPanel();
             } else if (!panelsDone) {
                 removeObject(indicator);
@@ -72,23 +63,18 @@ public class StoryWorld2 extends World {
     }
     
     private void showNextPanel() {
-        String imageName = PANEL_IMAGES[panelIndex];
-        int x = PANEL_LOCATIONS[panelIndex][0];
-        int y = PANEL_LOCATIONS[panelIndex][1];
-        int width = PANEL_SCALES[panelIndex][0];
-        int height = PANEL_SCALES[panelIndex][1];
+        String imageName = PanelImages[panelIndex];
+        int x = PanelLocations[panelIndex][0];
+        int y = PanelLocations[panelIndex][1];
+        int width = PanelScales[panelIndex][0];
+        int height = PanelScales[panelIndex][1];
         
-        // Load the image and scale it BEFORE creating the StoryPanel actor
         GreenfootImage scaledImage = new GreenfootImage(imageName);
         scaledImage.scale(width, height); 
         
-        // Pass the scaled image to a modified StoryPanel constructor, 
-        // OR rely on the default StoryPanel constructor and update the image
         StoryPanel panel = new StoryPanel(imageName);
         
-        // --- RELYING ON StoryPanel's default constructor: MUST use setImage() ---
         panel.setImage(scaledImage);
-        // ------------------------------------------------------------------------
 
         addObject(panel, x, y);
         panelIndex++;

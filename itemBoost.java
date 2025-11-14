@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class itemBoost extends ShopItem {
-    private static final int BASE_COST = 100;
-    private static final int COST_INCREMENT = 100;
-    private static final int MAX_LEVEL = 2;
+    private static final int BaseCost = 100;
+    private static final int CostIncrement = 100;
+    private static final int MaxLevel = 2;
 
     public itemBoost() {
         setImage(new GreenfootImage("btnItemBoost.png"));
@@ -23,7 +23,7 @@ public class itemBoost extends ShopItem {
                 return;
             }
 
-            if (gw.getBoostUpgrades() >= MAX_LEVEL) {
+            if (gw.getBoostUpgrades() >= MaxLevel) {
                 showMessage("Boost sudah MAX");
                 updateLabel();
                 return;
@@ -32,11 +32,11 @@ public class itemBoost extends ShopItem {
             int cost = nextCost(gw);
             ShopPurchaseResult result = gw.tryPurchaseBoost(cost);
 
-            if (result == ShopPurchaseResult.NOT_ENOUGH_COINS) {
+            if (result == ShopPurchaseResult.NotEnoughCoins) {
                 showMessage("Koin tidak cukup (butuh $" + cost + ", saldo $" + gw.getCoins() + ")");
-            } else if (result == ShopPurchaseResult.MAXED_OUT) {
+            } else if (result == ShopPurchaseResult.MaxedOut) {
                 showMessage("Boost sudah MAX");
-            } else if (result == ShopPurchaseResult.PURCHASED) {
+            } else if (result == ShopPurchaseResult.Purchased) {
                 int newLevel = gw.getBoostUpgrades();
                 showMessage("Dash max jadi " + gw.getDashCapacity() + " (upgrade Lv " + newLevel + ", bayar $" + cost + ", saldo $" + gw.getCoins() + ")");
             }
@@ -46,7 +46,7 @@ public class itemBoost extends ShopItem {
     }
 
     private int nextCost(GameWorld gw) {
-        return BASE_COST + (gw.getBoostUpgrades() * COST_INCREMENT);
+        return BaseCost + (gw.getBoostUpgrades() * CostIncrement);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class itemBoost extends ShopItem {
         }
 
         int level = gw.getBoostUpgrades();
-        if (level >= MAX_LEVEL) {
+        if (level >= MaxLevel) {
             return "MAX LEVEL";
         }
 

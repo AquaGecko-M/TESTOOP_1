@@ -13,11 +13,11 @@ public class crocBoss extends Actor implements IBoss
     
     // --- State Machine ---
     private enum State {
-        ENTERING,           // 1. Moving onto the screen
-        INDICATING,         // 2. Showing the 2-second attack indicator
-        ATTACKING,          // 3. Chomping and dealing damage
-        VULNERABLE,         // 4. Pausing for 5 seconds (player can hit)
-        LEAVING             // 5. Moving off-screen to reposition
+        Entering,           // 1. Moving onto the screen
+        Indicating,         // 2. Showing the 2-second attack indicator
+        Attacking,          // 3. Chomping and dealing damage
+        Vulnerable,         // 4. Pausing for 5 seconds (player can hit)
+        Leaving             // 5. Moving off-screen to reposition
     }
     private State currentState;
     private int direction = -1; // 1 = faces right (moves right), -1 = faces left (moves left)
@@ -97,7 +97,7 @@ public class crocBoss extends Actor implements IBoss
         
         // --- SETSTATE FIX ---
         // We must call setState *first* so the image is set correctly
-        setState(State.ENTERING);
+        setState(State.Entering);
         // setImage(imgLeft); // This line is now in setState
     }
 
@@ -112,7 +112,7 @@ public class crocBoss extends Actor implements IBoss
 
         switch (currentState)
         {
-            case ENTERING:
+            case Entering:
                 // --- 1. Animate Walking ---
                 if (animTimer.hasElapsed(150)) { // 150ms per walk frame
                     animFrame = (animFrame + 1) % 4; // Loop frames 0-3
@@ -124,24 +124,24 @@ public class crocBoss extends Actor implements IBoss
                 setLocation(getX() + (speed * direction), yPos);
                 
                 // --- 3. Check for arrival (This is your correct logic) ---
-                int stopX_Right = getWorld().getWidth() - 100;
-                int stopX_Left = 100;
+                int stopXRight = getWorld().getWidth() - 100;
+                int stopXLeft = 100;
                 
-                if ( (direction == -1 && getX() <= stopX_Right) || (direction == 1 && getX() >= stopX_Left) ) {
+                if ( (direction == -1 && getX() <= stopXRight) || (direction == 1 && getX() >= stopXLeft) ) {
                     // We've arrived. Stop moving.
-                    int finalX = (direction == -1) ? stopX_Right : stopX_Left;
+                    int finalX = (direction == -1) ? stopXRight : stopXLeft;
                     setLocation(finalX, yPos); 
-                    setState(State.INDICATING);
+                    setState(State.Indicating);
                 }
                 break;
                 
-            case INDICATING:
+            case Indicating:
                 if (stateTimer.hasElapsed(800)) { // Your timer
-                    setState(State.ATTACKING);
+                    setState(State.Attacking);
                 }
                 break;
                 
-            case ATTACKING:
+            case Attacking:
                 if (animTimer.hasElapsed(400)) { // Your timer
                     setImage(direction == 1 ? chompAnimRight[animFrame] : chompAnimLeft[animFrame]);
                     
@@ -154,19 +154,19 @@ public class crocBoss extends Actor implements IBoss
                 }
                 
                 if (animFrame >= 4) {
-                    setState(State.VULNERABLE);
+                    setState(State.Vulnerable);
                 }
                 break;
                 
-            case VULNERABLE:
+            case Vulnerable:
                 // The image is already "crocTired.png"
                 // We are just waiting for the timer
                 if (stateTimer.hasElapsed(3800)) { // Your timer
-                    setState(State.LEAVING);
+                    setState(State.Leaving);
                 }
                 break;
                 
-            case LEAVING:
+            case Leaving:
                 // --- 1. Animate Walking ---
                 if (animTimer.hasElapsed(150)) { 
                     animFrame = (animFrame + 1) % 4; 
@@ -187,7 +187,7 @@ public class crocBoss extends Actor implements IBoss
                         direction = -1; 
                         setLocation(getWorld().getWidth() + 300, yPos);
                     }
-                    setState(State.ENTERING); 
+                    setState(State.Entering); 
                 }
                 break;
         }
@@ -202,11 +202,11 @@ public class crocBoss extends Actor implements IBoss
         animFrame = 0;     // Reset animation frame for all states
         animTimer.mark();  // Reset animation timer
         
-        if (newState == State.ENTERING) {
+        if (newState == State.Entering) {
             // Set first frame of walk animation
             setImage(direction == 1 ? imgWalkRight[0] : imgWalkLeft[0]);
         }
-        else if (newState == State.INDICATING) {
+        else if (newState == State.Indicating) {
             // Set idle image while indicating
             setImage(direction == 1 ? imgIdleRight : imgIdleLeft);
             
@@ -220,22 +220,22 @@ public class crocBoss extends Actor implements IBoss
                 currentIndicator = new AttackIndicator();
                 getWorld().addObject(currentIndicator, boat.getX(), boat.getY());
             } else {
-                setState(State.VULNERABLE); // No boat? Skip attack
+                setState(State.Vulnerable); // No boat? Skip attack
                 return;
             }
         }
-        else if (newState == State.ATTACKING) {
+        else if (newState == State.Attacking) {
             // Set first frame of chomp animation
             setImage(direction == 1 ? chompAnimRight[0] : chompAnimLeft[0]);
         }
-        else if (newState == State.VULNERABLE) {
+        else if (newState == State.Vulnerable) {
             // --- SET TIRED IMAGE ---
             setImage(direction == 1 ? imgTiredRight : imgTiredLeft);
             
             // Start the vulnerable timer
             stateTimer.mark();
         }
-        else if (newState == State.LEAVING) {
+        else if (newState == State.Leaving) {
             direction *= -1; // Reverse direction
             
             // Set first frame of walk animation
@@ -261,7 +261,7 @@ public class crocBoss extends Actor implements IBoss
     public void takeDamage(int amount)
     {
         Greenfoot.playSound("Takedamage.mp3");
-        if (currentState != State.VULNERABLE) {
+        if (currentState != State.Vulnerable) {
             return;
         }
         
@@ -300,3 +300,4 @@ public class crocBoss extends Actor implements IBoss
         return getWorld() != null;
     }
 }
+

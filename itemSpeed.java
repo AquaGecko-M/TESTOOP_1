@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class itemSpeed extends ShopItem {
-    private static final int BASE_COST = 65;
-    private static final int COST_INCREMENT = 60;
-    private static final int MAX_LEVEL = 5;
+    private static final int BaseCost = 65;
+    private static final int CostIncrement = 60;
+    private static final int MaxLevel = 5;
 
     public itemSpeed() {
         setImage(new GreenfootImage("btnItemSpeed.png"));
@@ -23,7 +23,7 @@ public class itemSpeed extends ShopItem {
                 return;
             }
 
-            if (gw.getSpeedUpgrades() >= MAX_LEVEL) {
+            if (gw.getSpeedUpgrades() >= MaxLevel) {
                 showMessage("Speed sudah MAX");
                 updateLabel();
                 return;
@@ -32,11 +32,11 @@ public class itemSpeed extends ShopItem {
             int cost = nextCost(gw);
             ShopPurchaseResult result = gw.tryPurchaseSpeed(cost);
 
-            if (result == ShopPurchaseResult.NOT_ENOUGH_COINS) {
+            if (result == ShopPurchaseResult.NotEnoughCoins) {
                 showMessage("Koin tidak cukup (butuh $" + cost + ", saldo $" + gw.getCoins() + ")");
-            } else if (result == ShopPurchaseResult.MAXED_OUT) {
+            } else if (result == ShopPurchaseResult.MaxedOut) {
                 showMessage("Speed sudah MAX");
-            } else if (result == ShopPurchaseResult.PURCHASED) {
+            } else if (result == ShopPurchaseResult.Purchased) {
                 int newLevel = gw.getSpeedUpgrades();
                 showMessage("Upgrade Speed Lv " + newLevel + " dibeli seharga $" + cost + " (saldo $" + gw.getCoins() + ")");
             }
@@ -46,7 +46,7 @@ public class itemSpeed extends ShopItem {
     }
 
     private int nextCost(GameWorld gw) {
-        return BASE_COST + (gw.getSpeedUpgrades() * COST_INCREMENT);
+        return BaseCost + (gw.getSpeedUpgrades() * CostIncrement);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class itemSpeed extends ShopItem {
             return "";
         }
 
-        if (gw.getSpeedUpgrades() >= MAX_LEVEL) {
+        if (gw.getSpeedUpgrades() >= MaxLevel) {
             return "MAX LEVEL";
         }
 

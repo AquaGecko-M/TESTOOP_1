@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=OptionWorld
-comment0.text=\r\n\ The\ new,\ simplified\ Options\ screen.\r\n\ It\ ONLY\ shows\ Reset\ Progress\ and\ a\ Back\ button.\r\n
 comment1.params=returnTo
 comment1.target=OptionWorld(greenfoot.World)
 numComments=2

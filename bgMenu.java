@@ -1,8 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/**
- * Pause overlay world yang menampilkan menu sementara permainan dihentikan.
- */
+import greenfoot.*; 
 public class bgMenu extends World {
     private final GameWorld pausedWorld;
 

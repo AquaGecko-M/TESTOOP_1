@@ -4,7 +4,7 @@ public class ClickIndicator extends Actor {
     private GreenfootImage baseImage;
     private int transparency = 255;
     private int fadeSpeed = -5;
-    private static final int TEXT_Y_POSITION = 600;
+    private static final int TextYPosition = 600;
 
     public ClickIndicator() {
         baseImage = new GreenfootImage("CLICK ANYWHERE", 32, Color.WHITE, new Color(0, 0, 0, 0)); 

@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=bgMenu
-comment0.text=\r\n\ Pause\ overlay\ world\ yang\ menampilkan\ menu\ sementara\ permainan\ dihentikan.\r\n
 comment1.params=pausedWorld
 comment1.target=bgMenu(GameWorld)
 comment2.params=

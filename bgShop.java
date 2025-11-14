@@ -1,8 +1,8 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
 public class bgShop extends World {
-    private static final int DEFAULT_WIDTH = 960;
-    private static final int DEFAULT_HEIGHT = 540;
+    private static final int DefaultWidth = 960;
+    private static final int DefaultHeight = 540;
 
     private final GameWorld pausedWorld;
 
@@ -11,8 +11,8 @@ public class bgShop extends World {
     }
 
     public bgShop(GameWorld pausedWorld) {
-        super(pausedWorld != null ? pausedWorld.getWidth() : DEFAULT_WIDTH,
-              pausedWorld != null ? pausedWorld.getHeight() : DEFAULT_HEIGHT, 1);
+        super(pausedWorld != null ? pausedWorld.getWidth() : DefaultWidth,
+              pausedWorld != null ? pausedWorld.getHeight() : DefaultHeight, 1);
         this.pausedWorld = pausedWorld;
 
         drawBackground();
@@ -25,7 +25,7 @@ public class bgShop extends World {
         if (pausedWorld != null) {
             base = new GreenfootImage(pausedWorld.getBackground());
         } else {
-            base = new GreenfootImage("24.jpg");
+            base = new GreenfootImage("Map1F1.png");
             base.scale(getWidth(), getHeight());
         }
 

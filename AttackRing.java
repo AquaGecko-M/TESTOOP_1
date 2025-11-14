@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class AttackRing extends Actor {
-    private int life;        // berapa frame hidup
+    private int life;     
     private int radius;
-    private int growPerFrame = 0; // 0 = fix; >0 = membesar tiap frame (opsional)
+    private int growPerFrame = 0; 
 
     public AttackRing(int radius, int lifeFrames) {
         this.radius = radius;
@@ -15,7 +15,6 @@ public class AttackRing extends Actor {
         int d = r * 2;
         GreenfootImage img = new GreenfootImage(d, d);
 
-        // fill transparan + outline (ubah warna sesuka hati)
         img.setColor(new Color(255, 215, 0, 70));
         img.fillOval(0, 0, d-1, d-1);
         img.setColor(new Color(255, 215, 0, 160));
@@ -33,5 +32,5 @@ public class AttackRing extends Actor {
         if (life <= 0) getWorld().removeObject(this);
     }
 
-    public int getRadius() { return radius; } // kalau mau dicek di luar
+    public int getRadius() { return radius; } 
 }

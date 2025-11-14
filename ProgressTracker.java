@@ -8,7 +8,7 @@ import greenfoot.*;
  */
 public class ProgressTracker  
 {
-    private static final int SAVE_KEY = 1;
+    private static final int SaveKey = 1;
 
     /**
      * Gets the highest level the player has currently unlocked.
@@ -17,7 +17,7 @@ public class ProgressTracker
     public static int getHighestLevelUnlocked() {
         if (UserInfo.isStorageAvailable()) {
             UserInfo storage = UserInfo.getMyInfo();
-            String savedLevel = storage.getString(SAVE_KEY); 
+            String savedLevel = storage.getString(SaveKey); 
             
             // --- THIS IS THE FIX ---
             // Check if the saved value is null OR if it's an empty string ""
@@ -45,7 +45,7 @@ public class ProgressTracker
         if (newHighestLevel > currentHighest) {
             if (UserInfo.isStorageAvailable()) {
                 UserInfo storage = UserInfo.getMyInfo();
-                storage.setString(SAVE_KEY, String.valueOf(newHighestLevel));
+                storage.setString(SaveKey, String.valueOf(newHighestLevel));
                 storage.store(); 
             }
         }
@@ -58,7 +58,7 @@ public class ProgressTracker
         if (UserInfo.isStorageAvailable()) {
             UserInfo storage = UserInfo.getMyInfo();
             // Set the saved value back to "1"
-            storage.setString(SAVE_KEY, "1");
+            storage.setString(SaveKey, "1");
             storage.store();
         }
     }

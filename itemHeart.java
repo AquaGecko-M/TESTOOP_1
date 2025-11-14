@@ -1,8 +1,8 @@
 import greenfoot.*;
 
 public class itemHeart extends ShopItem {
-    private static final int MAX_PURCHASE = 15;
-    private static final int COST = 75;
+    private static final int MaxPurchase = 15;
+    private static final int Cost = 75;
 
     public itemHeart() {
         setImage(new GreenfootImage("btnItemHeart.png"));
@@ -22,15 +22,15 @@ public class itemHeart extends ShopItem {
                 return;
             }
 
-            ShopPurchaseResult result = gw.tryPurchaseHeart(COST);
+            ShopPurchaseResult result = gw.tryPurchaseHeart(Cost);
 
-            if (result == ShopPurchaseResult.MAXED_OUT) {
+            if (result == ShopPurchaseResult.MaxedOut) {
                 showMessage("Heart stok habis");
-            } else if (result == ShopPurchaseResult.NOT_ENOUGH_COINS) {
-                showMessage("Koin tidak cukup (butuh $" + COST + ", saldo $" + gw.getCoins() + ")");
-            } else if (result == ShopPurchaseResult.PURCHASED) {
+            } else if (result == ShopPurchaseResult.NotEnoughCoins) {
+                showMessage("Koin tidak cukup (butuh $" + Cost + ", saldo $" + gw.getCoins() + ")");
+            } else if (result == ShopPurchaseResult.Purchased) {
                 int count = gw.getHeartPurchases();
-                showMessage("+2 Heart dibeli (" + count + "/" + MAX_PURCHASE + ") (saldo $" + gw.getCoins() + ")");
+                showMessage("+2 Heart dibeli (" + count + "/" + MaxPurchase + ") (saldo $" + gw.getCoins() + ")");
             }
             updateLabel();
         }
@@ -40,13 +40,13 @@ public class itemHeart extends ShopItem {
     protected String getLabelText() {
         GameWorld gw = getGameWorld();
         if (gw == null) {
-            return "$" + COST + " +2 Heart";
+            return "$" + Cost + " +2 Heart";
         }
 
-        if (gw.getHeartPurchases() >= MAX_PURCHASE) {
+        if (gw.getHeartPurchases() >= MaxPurchase) {
             return "STOK HABIS";
         }
 
-        return "$" + COST + " +2 Heart\nSisa " + (MAX_PURCHASE - gw.getHeartPurchases());
+        return "$" + Cost + " +2 Heart\nSisa " + (MaxPurchase - gw.getHeartPurchases());
     }
 }

@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 public class ItemLongSpear extends ShopItem {
-    private static final int BASE_COST = 350;
-    private static final int COST_INCREMENT = 250;
-    private static final int MAX_LEVEL = 2;
+    private static final int BaseCost = 350;
+    private static final int CostIncrement = 250;
+    private static final int MaxLevel = 2;
 
     public ItemLongSpear() {
         setImage(new GreenfootImage("btnItemLongSpear.png"));
@@ -23,7 +23,7 @@ public class ItemLongSpear extends ShopItem {
                 return;
             }
 
-            if (gw.getLongSpearUpgrades() >= MAX_LEVEL) {
+            if (gw.getLongSpearUpgrades() >= MaxLevel) {
                 showMessage("Long Spear sudah MAX");
                 updateLabel();
                 return;
@@ -32,11 +32,11 @@ public class ItemLongSpear extends ShopItem {
             int cost = nextCost(gw);
             ShopPurchaseResult result = gw.tryPurchaseLongSpear(cost);
 
-            if (result == ShopPurchaseResult.NOT_ENOUGH_COINS) {
+            if (result == ShopPurchaseResult.NotEnoughCoins) {
                 showMessage("Koin tidak cukup (butuh $" + cost + ", saldo $" + gw.getCoins() + ")");
-            } else if (result == ShopPurchaseResult.MAXED_OUT) {
+            } else if (result == ShopPurchaseResult.MaxedOut) {
                 showMessage("Long Spear sudah MAX");
-            } else if (result == ShopPurchaseResult.PURCHASED) {
+            } else if (result == ShopPurchaseResult.Purchased) {
                 int newLevel = gw.getLongSpearUpgrades();
                 showMessage("Upgrade Long Spear Lv " + newLevel + " dibeli sebesar $" + cost + " (saldo $" + gw.getCoins() + ")");
 
@@ -47,7 +47,7 @@ public class ItemLongSpear extends ShopItem {
     }
     
     private int nextCost(GameWorld gw) {
-        return BASE_COST + (gw.getLongSpearUpgrades() * COST_INCREMENT);
+        return BaseCost + (gw.getLongSpearUpgrades() * CostIncrement);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ItemLongSpear extends ShopItem {
             return "";
         }
 
-        if (gw.getLongSpearUpgrades() >= MAX_LEVEL) {
+        if (gw.getLongSpearUpgrades() >= MaxLevel) {
             return "MAX LEVEL";
         }
 
@@ -65,3 +65,4 @@ public class ItemLongSpear extends ShopItem {
         return "$" + nextCost(gw) + " Long damage\nLevel " + nextLevel;
     }
 }
+

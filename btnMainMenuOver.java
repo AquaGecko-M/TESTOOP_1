@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class btnMainMenuOver extends Actor {
-    private static final int TARGET_WIDTH = 240;
+    private static final int TargetWidth = 240;
     private boolean mouseWasDown = true; // Click-fix
     public btnMainMenuOver() {
         applyImage();
@@ -20,8 +20,8 @@ public class btnMainMenuOver extends Actor {
 
     private void applyImage() {
         GreenfootImage img = new GreenfootImage("btnMainmenucomplete.png");
-        int targetHeight = img.getHeight() * TARGET_WIDTH / img.getWidth();
-        img.scale(TARGET_WIDTH, targetHeight);
+        int targetHeight = img.getHeight() * TargetWidth / img.getWidth();
+        img.scale(TargetWidth, targetHeight);
         setImage(img);
     }
 

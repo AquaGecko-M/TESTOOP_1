@@ -1,12 +1,9 @@
 #BlueJ class context
 comment0.target=BossHealthBar
-comment0.text=\r\n\ A\ GENERIC\ health\ bar\ that\ can\ track\ ANY\ boss.\r\n\ It\ now\ tracks\ an\ 'IBoss'\ instead\ of\ just\ a\ 'crocBoss'.\r\n
 comment1.params=bossToTrack
 comment1.target=BossHealthBar(IBoss)
-comment1.text=\r\n\ The\ constructor\ now\ accepts\ any\ object\ that\ implements\ IBoss.\r\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ updateBar()
-comment3.text=\r\n\ Redraws\ the\ health\ bar\ based\ on\ the\ boss's\ current\ health.\r\n
 numComments=4

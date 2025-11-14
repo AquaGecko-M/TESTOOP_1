@@ -13,8 +13,8 @@ public class StatDisplay extends Actor
     private GreenfootImage iconDash;
     
     // --- Text Settings ---
-    private static final Color TEXT_COLOR = Color.WHITE;
-    private static final Color TEXT_BG = new Color(0, 0, 0, 0); // Transparent
+    private static final Color TextColor = Color.WHITE;
+    private static final Color TextBg = new Color(0, 0, 0, 0); // Transparent
     private Font textFont = new Font(true, false, 20); // Bold, not italic, size 20
 
     public StatDisplay()
@@ -46,19 +46,19 @@ public class StatDisplay extends Actor
         
         // --- 2. Draw Keys ---
         img.drawImage(iconKey, 10, 15); // Icon at (0, 0) in this actor's image
-        GreenfootImage keyLabel = new GreenfootImage(keys + " / " + keysNeeded, 24, TEXT_COLOR, TEXT_BG, Color.BLACK);
+        GreenfootImage keyLabel = new GreenfootImage(keys + " / " + keysNeeded, 24, TextColor, TextBg, Color.BLACK);
         keyLabel.setFont(textFont);
         img.drawImage(keyLabel, 70, 15); // Text next to icon
 
         // --- 3. Draw Coins ---
         img.drawImage(iconCoin, -50, 65); // Icon at (0, 50)
-        GreenfootImage coinLabel = new GreenfootImage(coins + "$", 24, TEXT_COLOR, TEXT_BG, Color.BLACK);
+        GreenfootImage coinLabel = new GreenfootImage(coins + "$", 24, TextColor, TextBg, Color.BLACK);
         coinLabel.setFont(textFont);
         img.drawImage(coinLabel, 70, 65);
 
         // --- 4. Draw Dash ---
         img.drawImage(iconDash, 5, 90); // Icon at (0, 100)
-        GreenfootImage dashLabel = new GreenfootImage(dashCharges + "/" + dashCapacity, 24, TEXT_COLOR, TEXT_BG, Color.BLACK);
+        GreenfootImage dashLabel = new GreenfootImage(dashCharges + "/" + dashCapacity, 24, TextColor, TextBg, Color.BLACK);
         dashLabel.setFont(textFont);
         img.drawImage(dashLabel, 70, 115);
     }

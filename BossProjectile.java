@@ -24,7 +24,7 @@ public class BossProjectile extends Actor
         // Move straight up
         move(speed);
         
-        // Check for collision with the boat
+        // Check for collision with the boat    
         Boat boat = (Boat) getOneIntersectingObject(Boat.class);
         if (boat != null) {
             boat.takeDamage(damage);
